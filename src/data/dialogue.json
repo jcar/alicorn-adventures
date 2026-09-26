@@ -1,0 +1,30 @@
+{
+  "title": { "speaker": "narrator", "text": "Welcome to Alicorn Adventures!" },
+  "pick-name": { "speaker": "narrator", "text": "What is your alicorn's name?" },
+  "glade-hello": { "speaker": "narrator", "text": "This is your Home Glade. Walk to a glowing door to go on an adventure!" },
+  "door-locked": { "speaker": "narrator", "text": "This door is sleepy. Help a friend to wake it up!" },
+  "mirror": { "speaker": "narrator", "text": "Press down at the mirror to dress up!" },
+  "tree": { "speaker": "narrator", "text": "Press down at the sticker tree to see your stickers!" },
+  "cloud-catch": { "speaker": "narrator", "text": "Whoops! A cloud caught you!" },
+  "new-unlock": { "speaker": "narrator", "text": "Yay! You got something new!" },
+  "fetch-done": { "speaker": "narrator", "text": "You found them all! Go back to your friend!" },
+  "friend-moved": { "speaker": "narrator", "text": "Your friend is moving to your Glade!" },
+
+  "bunny-ask": { "speaker": "bunny", "text": "Oh no! I lost my 3 carrots. Can you find them?" },
+  "bunny-progress": { "speaker": "bunny", "text": "Keep looking! You can do it!" },
+  "bunny-thanks": { "speaker": "bunny", "text": "My carrots! Thank you, friend!" },
+
+  "fox-ask": { "speaker": "fox", "text": "I am so hungry. Can you find 4 berries for me?" },
+  "fox-progress": { "speaker": "fox", "text": "Yum, berries! Are there more?" },
+  "fox-thanks": { "speaker": "fox", "text": "Yummy! Thank you so much!" },
+
+  "owl-ask": { "speaker": "owl", "text": "Zzz... Zzz..." },
+  "owl-hint": { "speaker": "narrator", "text": "Owl is asleep. Press down to use your horn magic!" },
+  "owl-thanks": { "speaker": "owl", "text": "Hoo! I was asleep all day! Thank you for waking me!" },
+
+  "dragon-ask": { "speaker": "dragon", "text": "I want to see a rainbow! Can you make the flowers bloom?" },
+  "dragon-progress": { "speaker": "dragon", "text": "So pretty! More flowers, please!" },
+  "dragon-thanks": { "speaker": "dragon", "text": "A rainbow! You are the best friend ever!" },
+
+  "glade-friend": { "speaker": "narrator", "text": "Your friends love living here!" }
+}

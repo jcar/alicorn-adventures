@@ -1,0 +1,242 @@
+{
+  "images": [
+    {
+      "key": "acc-bow",
+      "url": "assets/images/acc-bow.png"
+    },
+    {
+      "key": "acc-crown",
+      "url": "assets/images/acc-crown.png"
+    },
+    {
+      "key": "acc-saddle",
+      "url": "assets/images/acc-saddle.png"
+    },
+    {
+      "key": "alicorn-blue",
+      "url": "assets/images/alicorn-blue.png"
+    },
+    {
+      "key": "alicorn-gold",
+      "url": "assets/images/alicorn-gold.png"
+    },
+    {
+      "key": "alicorn-mint",
+      "url": "assets/images/alicorn-mint.png"
+    },
+    {
+      "key": "alicorn-pink",
+      "url": "assets/images/alicorn-pink.png"
+    },
+    {
+      "key": "alicorn-purple",
+      "url": "assets/images/alicorn-purple.png"
+    },
+    {
+      "key": "alicorn-rainbow",
+      "url": "assets/images/alicorn-rainbow.png"
+    },
+    {
+      "key": "bg-clouds-far",
+      "url": "assets/images/bg-clouds-far.png"
+    },
+    {
+      "key": "bg-glade-far",
+      "url": "assets/images/bg-glade-far.png"
+    },
+    {
+      "key": "bg-meadow-far",
+      "url": "assets/images/bg-meadow-far.png"
+    },
+    {
+      "key": "bg-waterfall-far",
+      "url": "assets/images/bg-waterfall-far.png"
+    },
+    {
+      "key": "bg-woods-far",
+      "url": "assets/images/bg-woods-far.png"
+    },
+    {
+      "key": "bloom-bud",
+      "url": "assets/images/bloom-bud.png"
+    },
+    {
+      "key": "bloom-flower",
+      "url": "assets/images/bloom-flower.png"
+    },
+    {
+      "key": "bouncer",
+      "url": "assets/images/bouncer.png"
+    },
+    {
+      "key": "cloud",
+      "url": "assets/images/cloud.png"
+    },
+    {
+      "key": "deco-flowers",
+      "url": "assets/images/deco-flowers.png"
+    },
+    {
+      "key": "deco-lanterns",
+      "url": "assets/images/deco-lanterns.png"
+    },
+    {
+      "key": "friend-bunny",
+      "url": "assets/images/friend-bunny.png"
+    },
+    {
+      "key": "friend-dragon",
+      "url": "assets/images/friend-dragon.png"
+    },
+    {
+      "key": "friend-fox",
+      "url": "assets/images/friend-fox.png"
+    },
+    {
+      "key": "friend-owl",
+      "url": "assets/images/friend-owl.png"
+    },
+    {
+      "key": "item-berry",
+      "url": "assets/images/item-berry.png"
+    },
+    {
+      "key": "item-carrot",
+      "url": "assets/images/item-carrot.png"
+    },
+    {
+      "key": "portal",
+      "url": "assets/images/portal.png"
+    },
+    {
+      "key": "rainbow",
+      "url": "assets/images/rainbow.png"
+    },
+    {
+      "key": "stardust",
+      "url": "assets/images/stardust.png"
+    },
+    {
+      "key": "station-mirror",
+      "url": "assets/images/station-mirror.png"
+    },
+    {
+      "key": "station-tree",
+      "url": "assets/images/station-tree.png"
+    }
+  ],
+  "audio": [
+    {
+      "key": "music-clouds",
+      "url": "assets/audio/music-clouds.mp3"
+    },
+    {
+      "key": "music-glade",
+      "url": "assets/audio/music-glade.mp3"
+    },
+    {
+      "key": "music-meadow",
+      "url": "assets/audio/music-meadow.mp3"
+    },
+    {
+      "key": "music-waterfall",
+      "url": "assets/audio/music-waterfall.mp3"
+    },
+    {
+      "key": "music-woods",
+      "url": "assets/audio/music-woods.mp3"
+    },
+    {
+      "key": "vo-bunny-ask",
+      "url": "assets/audio/vo-bunny-ask.wav"
+    },
+    {
+      "key": "vo-bunny-progress",
+      "url": "assets/audio/vo-bunny-progress.wav"
+    },
+    {
+      "key": "vo-bunny-thanks",
+      "url": "assets/audio/vo-bunny-thanks.wav"
+    },
+    {
+      "key": "vo-cloud-catch",
+      "url": "assets/audio/vo-cloud-catch.wav"
+    },
+    {
+      "key": "vo-door-locked",
+      "url": "assets/audio/vo-door-locked.wav"
+    },
+    {
+      "key": "vo-dragon-ask",
+      "url": "assets/audio/vo-dragon-ask.wav"
+    },
+    {
+      "key": "vo-dragon-progress",
+      "url": "assets/audio/vo-dragon-progress.wav"
+    },
+    {
+      "key": "vo-dragon-thanks",
+      "url": "assets/audio/vo-dragon-thanks.wav"
+    },
+    {
+      "key": "vo-fetch-done",
+      "url": "assets/audio/vo-fetch-done.wav"
+    },
+    {
+      "key": "vo-fox-ask",
+      "url": "assets/audio/vo-fox-ask.wav"
+    },
+    {
+      "key": "vo-fox-progress",
+      "url": "assets/audio/vo-fox-progress.wav"
+    },
+    {
+      "key": "vo-fox-thanks",
+      "url": "assets/audio/vo-fox-thanks.wav"
+    },
+    {
+      "key": "vo-friend-moved",
+      "url": "assets/audio/vo-friend-moved.wav"
+    },
+    {
+      "key": "vo-glade-friend",
+      "url": "assets/audio/vo-glade-friend.wav"
+    },
+    {
+      "key": "vo-glade-hello",
+      "url": "assets/audio/vo-glade-hello.wav"
+    },
+    {
+      "key": "vo-mirror",
+      "url": "assets/audio/vo-mirror.wav"
+    },
+    {
+      "key": "vo-new-unlock",
+      "url": "assets/audio/vo-new-unlock.wav"
+    },
+    {
+      "key": "vo-owl-ask",
+      "url": "assets/audio/vo-owl-ask.wav"
+    },
+    {
+      "key": "vo-owl-hint",
+      "url": "assets/audio/vo-owl-hint.wav"
+    },
+    {
+      "key": "vo-owl-thanks",
+      "url": "assets/audio/vo-owl-thanks.wav"
+    },
+    {
+      "key": "vo-pick-name",
+      "url": "assets/audio/vo-pick-name.wav"
+    },
+    {
+      "key": "vo-title",
+      "url": "assets/audio/vo-title.wav"
+    },
+    {
+      "key": "vo-tree",
+      "url": "assets/audio/vo-tree.wav"
+    }
+  ]
+}
