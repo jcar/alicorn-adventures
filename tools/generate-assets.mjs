@@ -9,6 +9,7 @@
  *   npm run assets -- --dry-run          show what would be generated
  *   npm run assets -- --list-models      list models this API key can use
  *   npm run assets -- --index            only rebuild public/assets/assets.json
+ *   npm run assets -- --verify           transcribe voice clips and flag any that don't match the script
  *   npm run assets -- --rekey            redo the cut-out/resize from saved originals (no API calls)
  *
  * Reads GEMINI_API_KEY from .env. Writes to public/assets/{images,audio}/ and
@@ -20,7 +21,7 @@ import 'dotenv/config';
 import { GoogleGenAI } from '@google/genai';
 import sharp from 'sharp';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,6 +34,7 @@ const MODELS = {
   image: process.env.GEMINI_IMAGE_MODEL || 'gemini-3.1-flash-image',
   tts: process.env.GEMINI_TTS_MODEL || 'gemini-3.8-flash-tts',
   music: process.env.GEMINI_MUSIC_MODEL || 'lyria-3-clip-preview',
+  check: process.env.GEMINI_CHECK_MODEL || 'gemini-3.8-flash', // listens to voice clips to check them
 };
 
 // ------------------------------------------------------------------ cli
@@ -316,13 +318,13 @@ async function processImage(asset, raw) {
   await writeFile(path.join(IMG_DIR, `${asset.id}.png`), png);
 }
 
-async function generateVoice(id, line, manifest) {
-  const v = manifest.voices[line.speaker] ?? manifest.voices.narrator;
-  const res = await withRetry(id, () =>
+async function speakOnce(line, v) {
+  const res = await withRetry('tts', () =>
     client().models.generateContent({
       model: MODELS.tts,
-      // Keep the style short ("Say sweetly: ..."): long descriptions make clips drag on.
-      contents: [{ role: 'user', parts: [{ text: `Say ${v.style}: "${line.text}"` }] }],
+      // Only the line itself. This TTS model reads any instructions out loud
+      // ("Say sweetly: ..."), so each character's personality comes from its voice.
+      contents: [{ role: 'user', parts: [{ text: line.text }] }],
       config: {
         responseModalities: ['AUDIO'],
         speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: v.voice } } },
@@ -334,8 +336,82 @@ async function generateVoice(id, line, manifest) {
   const data = Buffer.from(a.inlineData.data, 'base64');
   const mime = a.inlineData.mimeType ?? '';
   const rate = Number(/rate=(\d+)/.exec(mime)?.[1] ?? 24000);
-  const wav = /L16|pcm/i.test(mime) || !mime ? pcmToWav(data, rate) : data;
-  await writeFile(path.join(AUDIO_DIR, `vo-${id}.wav`), trimWav(wav));
+  return trimWav(/L16|pcm/i.test(mime) || !mime ? pcmToWav(data, rate) : data);
+}
+
+/** Ask Gemini what words are actually spoken in a clip. */
+async function transcribe(wav) {
+  const res = await withRetry('transcribe', () =>
+    client().models.generateContent({
+      model: MODELS.check,
+      contents: [{
+        role: 'user',
+        parts: [
+          { inlineData: { mimeType: 'audio/wav', data: wav.toString('base64') } },
+          { text: 'Transcribe exactly the words spoken in this audio, word for word. Reply with only those words and nothing else.' },
+        ],
+      }],
+    }),
+  );
+  return (res.text ?? '').trim();
+}
+
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+const words = (t) =>
+  t.toLowerCase()
+    .replace(/\b(\d+)\b/g, (_, d) => NUMBER_WORDS[Number(d)] ?? d)
+    .replace(/[^a-z' ]+/g, ' ')
+    .split(/\s+/)
+    .filter((w) => w && !/^z+$/.test(w) && !/^h+m+$/.test(w)); // snores and hums are free-form
+
+function editDistance(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+
+/** Does the clip say the line, and only the line? Small transcription slips are fine. */
+function matchesLine(transcript, text) {
+  const want = words(text);
+  const got = words(transcript);
+  if (!want.length) return got.length <= 2;
+  return editDistance(want, got) <= Math.max(1, Math.floor(want.length * 0.15));
+}
+
+async function generateVoice(id, line, manifest) {
+  const v = manifest.voices[line.speaker] ?? manifest.voices.narrator;
+  const file = path.join(AUDIO_DIR, `vo-${id}.wav`);
+  let heard = '';
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const wav = await speakOnce(line, v);
+    heard = await transcribe(wav);
+    if (matchesLine(heard, line.text)) {
+      await writeFile(file, wav);
+      return;
+    }
+    process.stdout.write(`(retry: heard "${heard.slice(0, 60)}") `);
+  }
+  // A clip that says the wrong thing is worse than none; the game falls back to browser speech.
+  await rm(file, { force: true });
+  throw new Error(`kept saying the wrong thing: "${heard}"`);
+}
+
+/** Check existing voice clips against the script, without generating anything. */
+async function verifyVoices(dialogue) {
+  const bad = [];
+  for (const [id, line] of Object.entries(dialogue)) {
+    const file = path.join(AUDIO_DIR, `vo-${id}.wav`);
+    if (!wanted(`vo-${id}`, 'voice') || !existsSync(file)) continue;
+    const heard = await transcribe(await readFile(file));
+    const ok = matchesLine(heard, line.text);
+    console.log(`${ok ? 'ok ' : 'BAD'} vo-${id}: "${heard}"`);
+    if (!ok) bad.push(`vo-${id}`);
+  }
+  console.log(bad.length ? `\n${bad.length} clip(s) don't match the script: ${bad.join(', ')}` : '\nAll voice clips match the script.');
+  if (bad.length) process.exitCode = 1;
 }
 
 async function generateMusic(track) {
@@ -387,6 +463,8 @@ async function main() {
 
   const manifest = JSON.parse(await readFile(path.join(ROOT, 'tools/assets/manifest.json'), 'utf8'));
   const dialogue = JSON.parse(await readFile(path.join(ROOT, 'src/data/dialogue.json'), 'utf8'));
+
+  if (flag('verify')) return verifyVoices(dialogue);
 
   if (flag('rekey')) {
     // Re-run cut-out and resize on the saved originals. No API calls.
