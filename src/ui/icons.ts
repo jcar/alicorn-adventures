@@ -12,5 +12,7 @@ export function iconFor(u: Unlock): { texture: string; tint?: number; scale: num
     case 'accessory': return { texture: `acc-${u.target}`, scale: 1.6 };
     case 'area': return { texture: 'portal', scale: 0.45 };
     case 'decoration': return { texture: `deco-${u.target}`, scale: 0.55 };
+    case 'power': return { texture: `power-${u.target}`, scale: 1.2 };
+    case 'sticker': return { texture: u.target, scale: 1.4 };
   }
 }

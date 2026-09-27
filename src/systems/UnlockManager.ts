@@ -1,11 +1,17 @@
 import { UNLOCKS, type Unlock, type UnlockKind } from '../data/unlocks';
 import type { SaveData } from './SaveManager';
 
+export const goldCount = (save: SaveData) => save.flags.filter((f) => f.startsWith('gold:')).length;
+
 export function meetsRequirements(u: Unlock, save: SaveData): boolean {
   if (u.stardust !== undefined && save.stardust < u.stardust) return false;
   if (u.friends && !u.friends.every((f) => save.friendsHelped.includes(f))) return false;
+  if (u.gold !== undefined && goldCount(save) < u.gold) return false;
+  if (u.flags && !u.flags.every((f) => save.flags.includes(f))) return false;
   return true;
 }
+
+const isStarter = (u: Unlock) => u.stardust === undefined && !u.friends && u.gold === undefined && !u.flags;
 
 /**
  * Grants every unlock whose goal has been reached. Returns only the new ones.
@@ -16,8 +22,7 @@ export function grantUnlocks(save: SaveData, all: Unlock[] = UNLOCKS): Unlock[] 
   for (const u of all) {
     if (save.unlocked.includes(u.id) || !meetsRequirements(u, save)) continue;
     save.unlocked.push(u.id);
-    const isStarter = u.stardust === undefined && !u.friends;
-    if (!isStarter) {
+    if (!isStarter(u)) {
       fresh.push(u);
       save.pendingCelebrations.push(u.id);
     }

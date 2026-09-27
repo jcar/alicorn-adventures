@@ -17,27 +17,43 @@ npm run dev        # open http://localhost:5173
 | --- | --- |
 | ← → | Walk (hold to trot faster) |
 | Space or ↑ | Flap wings. Tap again and again to fly as high as you like |
-| ↓ | Horn magic: makes flowers bloom and wakes sleepy friends. At a door, mirror or tree it goes in |
-| Esc | Sticker Book |
+| ↓ or Enter | Do things: go through doors, read notes, open chests, talk, play crystals. Anywhere else it's horn magic, which uses her powers |
+| Esc | Adventure Book (stickers, map, clues) |
+
+An on-screen "Press ⬇ to …" prompt appears whenever there's something to do.
 
 Grown-up keys on the title screen: **M** turns sound on/off, **V** turns voice on/off, and holding **R** for 3 seconds starts a fresh game.
 
 ## How it plays
 
-- **Home Glade** is the hub. It has doors to each area, the Magic Mirror (dress up) and the Sticker Tree.
-- Each area has a friend who needs help:
+Nothing hurts and nothing is timed. If she falls, a smiling cloud floats her back. The challenge comes from exploring and thinking.
 
-  | Area | Friend | What they need |
-  | --- | --- | --- |
-  | Whispering Woods | Bunny | 3 carrots |
-  | Mushroom Meadow | Fox | 4 berries |
-  | Crystal Waterfall | Owl | Wake them with horn magic |
-  | Rainbow Cloud Kingdom | Baby Dragon | Bloom every flower to make a rainbow |
+**Friends and powers.** Each area has a friend to help. Helping them opens the next area, and the friend moves into the Home Glade and teaches a power:
 
-- Helping a friend opens the next area, and that friend moves into your Glade.
-- **Stardust is never spent.** It fills a jar, and new manes, trails and hats pop out at goals. Nothing a child earns can be lost.
-- Falling off a ledge? A smiling cloud floats you back.
-- Progress saves automatically in the browser (localStorage).
+| Area | Friend | Their request | Power they teach |
+| --- | --- | --- | --- |
+| Whispering Woods | Bunny | Find 3 carrots | **Sniff**: reveals hidden things (look for twinkles) |
+| Mushroom Meadow | Fox | Find 4 berries (one is hidden!) | **Dash**: zoom through strong wind |
+| Crystal Waterfall | Owl | Wake them with horn magic | **Glow**: see inside dark caves |
+| Rainbow Cloud Kingdom | Baby Dragon | Bloom every flower | **Warm Breath**: melt ice walls |
+| Frosty Peaks | ??? | Follow the clues | — |
+
+Each area's main path only needs powers she already has. Every area also hides secrets behind **later** powers, so going back to old places pays off.
+
+**Secrets.** Each door shows `✨ secrets found  ⭐ golden stars found`, plus 💎 once that area's color spark is found. Hidden things include:
+- Treasure chests
+- Clue notes signed "P"
+- Golden stars at the end of bouncy-cloud tunnels
+- A color spark in every area
+
+**Puzzles.** These get harder area by area:
+- **Number-lock gates:** addition, then "how many more", multiplication, subtraction, and finally counting the snowmen in Frosty Peaks.
+- **Pattern crystals:** they chime a tune and she repeats it. The tunes grow from 3 notes to 6.
+- **Riddles and favors:** friends in the Glade ask for help. Fox has a berry sum. Fox also wants Owl's lantern, but Owl has a riddle first. Dragon wants a Moon Shell, and Bunny knows where it is if she solves a riddle.
+
+**The mystery.** The Heart Crystal in the Glade has lost its colors. The eight clue notes tell the story of Pip, a tiny star who fell from the sky and is hiding in Frosty Peaks. She solves the mystery by bringing home all five color sparks and finding Pip.
+
+**Unlocks.** Stardust is never spent. It fills a jar, and new manes, trails and hats pop out at goals. Golden stars unlock special trails and the Starlight mane, and solving the mystery unlocks the Star Tiara. Nothing she earns can be lost. Progress saves automatically in the browser (localStorage).
 
 ## Art, voice and music (Gemini)
 
@@ -65,8 +81,9 @@ npm run assets -- --list-models  # which models your key can use
 ## Code map
 
 ```
-src/data/        levels, friends, unlocks, cosmetics, dialogue  ← most changes happen here
-src/scenes/      Title, NamePicker, World (every level), UI (HUD), Wardrobe, StickerBook
+src/data/        levels, friends, powers, puzzles, favors, unlocks, cosmetics, dialogue  ← most changes happen here
+src/scenes/      Title, NamePicker, World (every level), UI (HUD), Wardrobe, StickerBook (Adventure Book), Puzzle
+src/world/       barriers (wind, ice, gates, bumpers), darkness, secrets, pattern crystals, favors, Heart Crystal
 src/objects/     Alicorn (movement/flight/magic), Friend
 src/systems/     Controls, SaveManager, UnlockManager, GameState
 src/art/         placeholder art drawn in code
@@ -74,7 +91,7 @@ src/audio/       synthesized sound effects, generated music box, voice playback
 tools/           Gemini asset pipeline
 ```
 
-To add a new area, add a level in `src/data/levels.ts`, a friend in `friends.ts`, an `area-…` unlock in `unlocks.ts`, and a door in the Glade's `portals`.
+To add a new area, add a level in `src/data/levels.ts`, a friend in `friends.ts`, an `area-…` unlock in `unlocks.ts`, and a door in the Glade's `portals`. Levels can also hold `winds`, `ice`, `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. Puzzles live in `puzzles.ts`, favors in `favors.ts`, and powers in `powers.ts`. The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)

@@ -6,6 +6,7 @@ import { FRIENDS } from '../src/data/friends';
 import { AREA_ORDER, LEVELS } from '../src/data/levels';
 import { ACCESSORIES, MANES, TRAILS } from '../src/data/cosmetics';
 import dialogue from '../src/data/dialogue.json';
+import { FAVORS } from '../src/data/favors';
 
 describe('UnlockManager', () => {
   it('grants the starter kit silently', () => {
@@ -39,10 +40,15 @@ describe('UnlockManager', () => {
     }
   });
 
-  it('has no dead ends: everything is reachable by helping everyone and collecting stardust', () => {
+  it('has no dead ends: everything unlocks by helping everyone, finding everything and collecting stardust', () => {
     const s = freshSave();
     s.friendsHelped = FRIENDS.map((f) => f.id);
     s.stardust = Math.max(...UNLOCKS.map((u) => u.stardust ?? 0));
+    s.flags = [
+      ...Object.values(LEVELS).flatMap((L) => (L.golds ?? []).map((g) => `gold:${g.id}`)),
+      ...FAVORS.map((f) => `favor:${f.id}`),
+      'mystery:solved',
+    ];
     grantUnlocks(s);
     expect(s.unlocked.sort()).toEqual(UNLOCKS.map((u) => u.id).sort());
     expect(nextStardustGoal(s)).toBeUndefined();
@@ -62,12 +68,18 @@ describe('game data', () => {
     for (const u of UNLOCKS.filter((u) => u.kind === 'area')) expect(LEVELS[u.target]).toBeDefined();
   });
 
+  it('there are enough golden stars for every golden unlock', () => {
+    const total = Object.values(LEVELS).reduce((n, L) => n + (L.golds?.length ?? 0), 0);
+    for (const u of UNLOCKS) if (u.gold) expect(total).toBeGreaterThanOrEqual(u.gold);
+  });
+
   it('fetch quests have enough items, and bloom quests have flowers', () => {
     for (const id of AREA_ORDER) {
       const L = LEVELS[id];
       const f = FRIENDS.find((x) => x.id === L.friend?.id)!;
       if (f.request.kind === 'fetch') expect(L.items.length).toBeGreaterThanOrEqual(f.request.count);
       if (f.request.kind === 'bloom') expect(L.blooms.length).toBeGreaterThan(0);
+      if (f.request.kind === 'found') expect(L.friend).toBeDefined();
     }
   });
 

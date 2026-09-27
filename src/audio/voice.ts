@@ -6,7 +6,7 @@ export type LineId = keyof typeof dialogue;
 export const LINES: Record<string, { speaker: string; text: string }> = dialogue;
 
 /** Pitch for the browser's built-in voice, used when no generated voice file exists. */
-const PITCH: Record<string, number> = { narrator: 1.15, bunny: 1.7, fox: 1.3, owl: 0.8, dragon: 1.5 };
+const PITCH: Record<string, number> = { narrator: 1.15, bunny: 1.7, fox: 1.3, owl: 0.8, dragon: 1.5, pip: 1.9 };
 
 let current: Phaser.Sound.BaseSound | undefined;
 let voiceOn = true;

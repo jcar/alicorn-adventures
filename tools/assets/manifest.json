@@ -15,7 +15,7 @@
     {"id": "acc-bow", "kind": "sprite", "w": 48, "h": 32, "prompt": "A big shiny pink hair bow."},
     {"id": "acc-crown", "kind": "sprite", "w": 60, "h": 30, "prompt": "A small flower crown made of pink, yellow, purple and blue flowers, seen from the side."},
     {"id": "acc-saddle", "kind": "sprite", "w": 64, "h": 30, "prompt": "A small purple pony saddle blanket decorated with yellow stars, seen from the side."},
-    {"id": "stardust", "kind": "sprite", "w": 44, "h": 44, "prompt": "A glowing golden cartoon star with a happy sparkle, very simple."},
+    {"id": "stardust", "kind": "sprite", "w": 44, "h": 44, "prompt": "A glowing golden cartoon star with a happy sparkle, very simple.", "key": "strong"},
     {"id": "item-carrot", "kind": "sprite", "w": 44, "h": 60, "prompt": "One cartoon orange carrot with green leafy top, standing upright."},
     {"id": "item-berry", "kind": "sprite", "w": 48, "h": 48, "prompt": "A small cluster of three shiny purple-blue berries with a green leaf."},
     {"id": "bloom-bud", "kind": "sprite", "w": 50, "h": 50, "prompt": "A small green flower bud on a short stem with one leaf, closed."},
@@ -32,20 +32,47 @@
     {"id": "bg-woods-far", "kind": "background", "w": 1280, "h": 720, "prompt": "An enchanted forest at dusk: tall purple and dark-teal trees, soft violet sky, glowing fireflies, gentle and cozy not spooky. Wide side-scrolling game background, nothing in the bottom sixth."},
     {"id": "bg-meadow-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A mushroom meadow at sunset: giant cute mushrooms with pink, orange and purple spotted caps, pink hills, peach and cream sky. Wide side-scrolling game background, nothing in the bottom sixth."},
     {"id": "bg-waterfall-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A sparkling crystal waterfall valley: gentle waterfalls, glowing blue, lilac and mint crystals, bright sky blue sky. Wide side-scrolling game background, nothing in the bottom sixth."},
-    {"id": "bg-clouds-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A kingdom in the sky: huge fluffy white clouds, little cloud castles far away, pink to light blue sky, twinkly stars. Wide side-scrolling game background, nothing in the bottom sixth."}
+    {"id": "bg-clouds-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A kingdom in the sky: huge fluffy white clouds, little cloud castles far away, pink to light blue sky, twinkly stars. Wide side-scrolling game background, nothing in the bottom sixth."},
+    {"id": "alicorn-starlight", "kind": "recolor", "w": 160, "h": 128, "from": "alicorn-pink", "hue": 215, "sat": 0.35, "val": 1.06},
+    {"id": "friend-pip", "kind": "sprite", "w": 90, "h": 96, "prompt": "Pip, a tiny shy baby star creature: a soft glowing pale-yellow five-pointed star with a sweet little face, big shiny eyes, rosy cheeks, and two tiny see-through fairy wings. Floating. Match the art style of the reference image.", "ref": "alicorn-pink", "key": "strong"},
+    {"id": "chest", "kind": "sprite", "w": 90, "h": 84, "prompt": "A small closed wooden treasure chest with golden trim and a golden clasp, cute and rounded."},
+    {"id": "chest-open", "kind": "sprite", "w": 90, "h": 84, "prompt": "Exactly the same treasure chest, but open, with golden stars and sparkles spilling out of it.", "ref": "chest", "key": "strong"},
+    {"id": "note", "kind": "sprite", "w": 60, "h": 90, "prompt": "A small rolled-open paper note pinned to a short wooden stick stuck in the ground. The paper has only a few wavy pencil scribble lines on it, with no letters or words at all, and a tiny purple star doodle in the corner."},
+    {"id": "sign", "kind": "sprite", "w": 90, "h": 100, "prompt": "A small friendly wooden signpost with a blank rectangular board on one post."},
+    {"id": "gate-sign", "kind": "sprite", "w": 90, "h": 110, "prompt": "A small wooden signpost with the numbers 1 2 3 painted on its board and a tiny golden padlock hanging from it."},
+    {"id": "gold-star", "kind": "sprite", "w": 64, "h": 64, "prompt": "A shiny golden star with a bright glow and a sparkle, extra special and magical.", "key": "strong"},
+    {"id": "spark", "kind": "sprite", "w": 70, "h": 90, "prompt": "A single faceted crystal gem shaped like a tall diamond, pure clear white and glassy, with soft sparkles. No color, just white and clear.", "key": "strong"},
+    {"id": "station-crystal", "kind": "sprite", "w": 200, "h": 280, "prompt": "A big magical crystal on a small lavender stone base, clear and white like glass, tall and pointed, softly glowing. No strong colors, mostly white and clear.", "key": "strong"},
+    {"id": "ice-wall", "kind": "sprite", "w": 200, "h": 720, "prompt": "A tall narrow wall of thick blue-white ice, taller than it is wide, with frosty edges and shiny highlights. Front view, fills the frame top to bottom."},
+    {"id": "gate", "kind": "sprite", "w": 200, "h": 720, "prompt": "A tall narrow stone gate made of stacked lavender-grey bricks with a round golden lock in the lower half. Front view, fills the frame top to bottom."},
+    {"id": "cave", "kind": "sprite", "w": 600, "h": 480, "prompt": "The rocky arched entrance of a cozy cave, purple-grey stones around a dark opening, seen from the front."},
+    {"id": "pedestal", "kind": "sprite", "w": 90, "h": 90, "prompt": "A small lavender stone pedestal with a golden star carved on it."},
+    {"id": "crystal", "kind": "sprite", "w": 56, "h": 80, "prompt": "A single tall pointed crystal, clear and pure white like glass, standing upright. No color, just white and clear.", "key": "strong"},
+    {"id": "item-lantern", "kind": "sprite", "w": 50, "h": 70, "prompt": "A small cute lantern with a golden glowing light inside and a brown handle on top."},
+    {"id": "item-shell", "kind": "sprite", "w": 60, "h": 50, "prompt": "A pretty pearly white and lavender seashell shaped like a fan, shimmering like moonlight."},
+    {"id": "acc-tiara", "kind": "sprite", "w": 60, "h": 34, "prompt": "A small golden tiara with a white star in the middle and two tiny gems, seen from the front."},
+    {"id": "deco-snowman", "kind": "sprite", "w": 90, "h": 130, "prompt": "A friendly little snowman with a carrot nose, a pink scarf and a purple top hat, smiling."},
+    {"id": "deco-tall-crystal", "kind": "sprite", "w": 90, "h": 260, "prompt": "One very tall, thin pale-blue ice crystal standing upright, shiny and glassy."},
+    {"id": "power-sniff", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a cute pink bunny nose and little sparkles around it."},
+    {"id": "power-dash", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a bright golden lightning bolt and speed lines."},
+    {"id": "power-glow", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round dark-purple badge icon with a glowing pale-yellow sun-like light in the middle."},
+    {"id": "power-warmth", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a friendly little orange and yellow flame shaped like a heart."},
+    {"id": "bg-frost-far", "kind": "background", "w": 1280, "h": 720, "prompt": "Snowy mountain peaks at a gentle winter morning: soft blue and white mountains, snow-covered pine trees, falling snowflakes, pale blue sky, cozy not cold. Wide side-scrolling game background, nothing in the bottom sixth."}
   ],
   "voices": {
     "narrator": {"voice": "Aoede", "style": "warmly and cheerfully"},
     "bunny": {"voice": "Leda", "style": "sweetly, in a tiny voice"},
     "fox": {"voice": "Puck", "style": "playfully"},
     "owl": {"voice": "Charon", "style": "sleepily and kindly"},
-    "dragon": {"voice": "Zephyr", "style": "excitedly"}
+    "dragon": {"voice": "Zephyr", "style": "excitedly"},
+    "pip": {"voice": "Achernar", "style": "softly"}
   },
   "music": [
     {"id": "music-glade", "prompt": "Gentle, happy music-box and soft marimba lullaby for a children's game hub, calm, looping, 84 bpm, C major, no vocals."},
     {"id": "music-woods", "prompt": "Soft magical forest music for young children, twinkly celesta, harp and gentle flute, cozy and curious, 76 bpm, A major, no vocals."},
     {"id": "music-meadow", "prompt": "Bouncy playful music for kids, ukulele, xylophone and light hand percussion, cheerful, 96 bpm, D major, no vocals."},
     {"id": "music-waterfall", "prompt": "Sparkly peaceful music, harp arpeggios, glockenspiel and soft strings, like water and crystals, 80 bpm, E major, no vocals."},
-    {"id": "music-clouds", "prompt": "Dreamy floaty music in the sky for young children, soft synth pads, bells and gentle choir oohs, 88 bpm, F major, no vocals."}
+    {"id": "music-clouds", "prompt": "Dreamy floaty music in the sky for young children, soft synth pads, bells and gentle choir oohs, 88 bpm, F major, no vocals."},
+    {"id": "music-frost", "prompt": "Gentle, cozy winter music for young children, soft music box and celesta with warm strings, sparkly and calm like falling snow, 72 bpm, G major, no vocals."}
   ]
 }

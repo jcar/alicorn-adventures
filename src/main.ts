@@ -7,6 +7,7 @@ import { WorldScene } from './scenes/WorldScene';
 import { UIScene } from './scenes/UIScene';
 import { WardrobeScene } from './scenes/WardrobeScene';
 import { StickerBookScene } from './scenes/StickerBookScene';
+import { PuzzleScene } from './scenes/PuzzleScene';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -16,7 +17,7 @@ const game = new Phaser.Game({
   backgroundColor: '#2b1f4a',
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
   physics: { default: 'arcade', arcade: { gravity: { x: 0, y: 900 }, debug: false } },
-  scene: [BootScene, PreloadScene, TitleScene, NamePickerScene, WorldScene, UIScene, WardrobeScene, StickerBookScene],
+  scene: [BootScene, PreloadScene, TitleScene, NamePickerScene, WorldScene, UIScene, WardrobeScene, StickerBookScene, PuzzleScene],
 });
 
 // Handy for poking at the game from the browser console while developing.

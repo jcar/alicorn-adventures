@@ -13,6 +13,10 @@
       "url": "assets/images/acc-saddle.png"
     },
     {
+      "key": "acc-tiara",
+      "url": "assets/images/acc-tiara.png"
+    },
+    {
       "key": "alicorn-blue",
       "url": "assets/images/alicorn-blue.png"
     },
@@ -37,8 +41,16 @@
       "url": "assets/images/alicorn-rainbow.png"
     },
     {
+      "key": "alicorn-starlight",
+      "url": "assets/images/alicorn-starlight.png"
+    },
+    {
       "key": "bg-clouds-far",
       "url": "assets/images/bg-clouds-far.png"
+    },
+    {
+      "key": "bg-frost-far",
+      "url": "assets/images/bg-frost-far.png"
     },
     {
       "key": "bg-glade-far",
@@ -69,8 +81,24 @@
       "url": "assets/images/bouncer.png"
     },
     {
+      "key": "cave",
+      "url": "assets/images/cave.png"
+    },
+    {
+      "key": "chest-open",
+      "url": "assets/images/chest-open.png"
+    },
+    {
+      "key": "chest",
+      "url": "assets/images/chest.png"
+    },
+    {
       "key": "cloud",
       "url": "assets/images/cloud.png"
+    },
+    {
+      "key": "crystal",
+      "url": "assets/images/crystal.png"
     },
     {
       "key": "deco-flowers",
@@ -79,6 +107,14 @@
     {
       "key": "deco-lanterns",
       "url": "assets/images/deco-lanterns.png"
+    },
+    {
+      "key": "deco-snowman",
+      "url": "assets/images/deco-snowman.png"
+    },
+    {
+      "key": "deco-tall-crystal",
+      "url": "assets/images/deco-tall-crystal.png"
     },
     {
       "key": "friend-bunny",
@@ -97,6 +133,26 @@
       "url": "assets/images/friend-owl.png"
     },
     {
+      "key": "friend-pip",
+      "url": "assets/images/friend-pip.png"
+    },
+    {
+      "key": "gate-sign",
+      "url": "assets/images/gate-sign.png"
+    },
+    {
+      "key": "gate",
+      "url": "assets/images/gate.png"
+    },
+    {
+      "key": "gold-star",
+      "url": "assets/images/gold-star.png"
+    },
+    {
+      "key": "ice-wall",
+      "url": "assets/images/ice-wall.png"
+    },
+    {
       "key": "item-berry",
       "url": "assets/images/item-berry.png"
     },
@@ -105,16 +161,60 @@
       "url": "assets/images/item-carrot.png"
     },
     {
+      "key": "item-lantern",
+      "url": "assets/images/item-lantern.png"
+    },
+    {
+      "key": "item-shell",
+      "url": "assets/images/item-shell.png"
+    },
+    {
+      "key": "note",
+      "url": "assets/images/note.png"
+    },
+    {
+      "key": "pedestal",
+      "url": "assets/images/pedestal.png"
+    },
+    {
       "key": "portal",
       "url": "assets/images/portal.png"
+    },
+    {
+      "key": "power-dash",
+      "url": "assets/images/power-dash.png"
+    },
+    {
+      "key": "power-glow",
+      "url": "assets/images/power-glow.png"
+    },
+    {
+      "key": "power-sniff",
+      "url": "assets/images/power-sniff.png"
+    },
+    {
+      "key": "power-warmth",
+      "url": "assets/images/power-warmth.png"
     },
     {
       "key": "rainbow",
       "url": "assets/images/rainbow.png"
     },
     {
+      "key": "sign",
+      "url": "assets/images/sign.png"
+    },
+    {
+      "key": "spark",
+      "url": "assets/images/spark.png"
+    },
+    {
       "key": "stardust",
       "url": "assets/images/stardust.png"
+    },
+    {
+      "key": "station-crystal",
+      "url": "assets/images/station-crystal.png"
     },
     {
       "key": "station-mirror",
@@ -129,6 +229,10 @@
     {
       "key": "music-clouds",
       "url": "assets/audio/music-clouds.mp3"
+    },
+    {
+      "key": "music-frost",
+      "url": "assets/audio/music-frost.mp3"
     },
     {
       "key": "music-glade",
@@ -151,16 +255,76 @@
       "url": "assets/audio/vo-bunny-ask.wav"
     },
     {
+      "key": "vo-bunny-favor-ask",
+      "url": "assets/audio/vo-bunny-favor-ask.wav"
+    },
+    {
+      "key": "vo-bunny-favor-hint",
+      "url": "assets/audio/vo-bunny-favor-hint.wav"
+    },
+    {
       "key": "vo-bunny-progress",
       "url": "assets/audio/vo-bunny-progress.wav"
+    },
+    {
+      "key": "vo-bunny-riddle",
+      "url": "assets/audio/vo-bunny-riddle.wav"
     },
     {
       "key": "vo-bunny-thanks",
       "url": "assets/audio/vo-bunny-thanks.wav"
     },
     {
+      "key": "vo-chest-open",
+      "url": "assets/audio/vo-chest-open.wav"
+    },
+    {
       "key": "vo-cloud-catch",
       "url": "assets/audio/vo-cloud-catch.wav"
+    },
+    {
+      "key": "vo-clouds-lock",
+      "url": "assets/audio/vo-clouds-lock.wav"
+    },
+    {
+      "key": "vo-crystal-0",
+      "url": "assets/audio/vo-crystal-0.wav"
+    },
+    {
+      "key": "vo-crystal-1",
+      "url": "assets/audio/vo-crystal-1.wav"
+    },
+    {
+      "key": "vo-crystal-2",
+      "url": "assets/audio/vo-crystal-2.wav"
+    },
+    {
+      "key": "vo-crystal-3",
+      "url": "assets/audio/vo-crystal-3.wav"
+    },
+    {
+      "key": "vo-crystal-4",
+      "url": "assets/audio/vo-crystal-4.wav"
+    },
+    {
+      "key": "vo-crystal-done",
+      "url": "assets/audio/vo-crystal-done.wav"
+    },
+    {
+      "key": "vo-crystal-finale",
+      "url": "assets/audio/vo-crystal-finale.wav"
+    },
+    {
+      "key": "vo-crystal-need-pip",
+      "url": "assets/audio/vo-crystal-need-pip.wav"
+    },
+    {
+      "key": "vo-dark-blocked",
+      "url": "assets/audio/vo-dark-blocked.wav"
+    },
+    {
+      "key": "vo-dark-glow",
+      "url": "assets/audio/vo-dark-glow.wav"
     },
     {
       "key": "vo-door-locked",
@@ -169,6 +333,18 @@
     {
       "key": "vo-dragon-ask",
       "url": "assets/audio/vo-dragon-ask.wav"
+    },
+    {
+      "key": "vo-dragon-favor-ask",
+      "url": "assets/audio/vo-dragon-favor-ask.wav"
+    },
+    {
+      "key": "vo-dragon-favor-thanks",
+      "url": "assets/audio/vo-dragon-favor-thanks.wav"
+    },
+    {
+      "key": "vo-dragon-favor-wait",
+      "url": "assets/audio/vo-dragon-favor-wait.wav"
     },
     {
       "key": "vo-dragon-progress",
@@ -187,6 +363,30 @@
       "url": "assets/audio/vo-fox-ask.wav"
     },
     {
+      "key": "vo-fox-favor-ask",
+      "url": "assets/audio/vo-fox-favor-ask.wav"
+    },
+    {
+      "key": "vo-fox-favor-thanks",
+      "url": "assets/audio/vo-fox-favor-thanks.wav"
+    },
+    {
+      "key": "vo-fox-favor-wait",
+      "url": "assets/audio/vo-fox-favor-wait.wav"
+    },
+    {
+      "key": "vo-fox-math-ask",
+      "url": "assets/audio/vo-fox-math-ask.wav"
+    },
+    {
+      "key": "vo-fox-math-thanks",
+      "url": "assets/audio/vo-fox-math-thanks.wav"
+    },
+    {
+      "key": "vo-fox-math",
+      "url": "assets/audio/vo-fox-math.wav"
+    },
+    {
       "key": "vo-fox-progress",
       "url": "assets/audio/vo-fox-progress.wav"
     },
@@ -195,8 +395,28 @@
       "url": "assets/audio/vo-fox-thanks.wav"
     },
     {
+      "key": "vo-friend-has-favor",
+      "url": "assets/audio/vo-friend-has-favor.wav"
+    },
+    {
       "key": "vo-friend-moved",
       "url": "assets/audio/vo-friend-moved.wav"
+    },
+    {
+      "key": "vo-frost-lock",
+      "url": "assets/audio/vo-frost-lock.wav"
+    },
+    {
+      "key": "vo-gate-hint",
+      "url": "assets/audio/vo-gate-hint.wav"
+    },
+    {
+      "key": "vo-gate-right",
+      "url": "assets/audio/vo-gate-right.wav"
+    },
+    {
+      "key": "vo-gate-wrong",
+      "url": "assets/audio/vo-gate-wrong.wav"
     },
     {
       "key": "vo-glade-friend",
@@ -207,28 +427,156 @@
       "url": "assets/audio/vo-glade-hello.wav"
     },
     {
+      "key": "vo-gold-star",
+      "url": "assets/audio/vo-gold-star.wav"
+    },
+    {
+      "key": "vo-ice-blocked",
+      "url": "assets/audio/vo-ice-blocked.wav"
+    },
+    {
+      "key": "vo-ice-melt",
+      "url": "assets/audio/vo-ice-melt.wav"
+    },
+    {
+      "key": "vo-item-found",
+      "url": "assets/audio/vo-item-found.wav"
+    },
+    {
+      "key": "vo-meadow-lock",
+      "url": "assets/audio/vo-meadow-lock.wav"
+    },
+    {
+      "key": "vo-meadow-sign",
+      "url": "assets/audio/vo-meadow-sign.wav"
+    },
+    {
       "key": "vo-mirror",
       "url": "assets/audio/vo-mirror.wav"
+    },
+    {
+      "key": "vo-new-clue",
+      "url": "assets/audio/vo-new-clue.wav"
     },
     {
       "key": "vo-new-unlock",
       "url": "assets/audio/vo-new-unlock.wav"
     },
     {
+      "key": "vo-note-1",
+      "url": "assets/audio/vo-note-1.wav"
+    },
+    {
+      "key": "vo-note-2",
+      "url": "assets/audio/vo-note-2.wav"
+    },
+    {
+      "key": "vo-note-3",
+      "url": "assets/audio/vo-note-3.wav"
+    },
+    {
+      "key": "vo-note-4",
+      "url": "assets/audio/vo-note-4.wav"
+    },
+    {
+      "key": "vo-note-5",
+      "url": "assets/audio/vo-note-5.wav"
+    },
+    {
+      "key": "vo-note-6",
+      "url": "assets/audio/vo-note-6.wav"
+    },
+    {
+      "key": "vo-note-7",
+      "url": "assets/audio/vo-note-7.wav"
+    },
+    {
+      "key": "vo-note-8",
+      "url": "assets/audio/vo-note-8.wav"
+    },
+    {
       "key": "vo-owl-ask",
       "url": "assets/audio/vo-owl-ask.wav"
+    },
+    {
+      "key": "vo-owl-favor-ask",
+      "url": "assets/audio/vo-owl-favor-ask.wav"
+    },
+    {
+      "key": "vo-owl-favor-give",
+      "url": "assets/audio/vo-owl-favor-give.wav"
     },
     {
       "key": "vo-owl-hint",
       "url": "assets/audio/vo-owl-hint.wav"
     },
     {
+      "key": "vo-owl-riddle",
+      "url": "assets/audio/vo-owl-riddle.wav"
+    },
+    {
       "key": "vo-owl-thanks",
       "url": "assets/audio/vo-owl-thanks.wav"
     },
     {
+      "key": "vo-pattern-oops",
+      "url": "assets/audio/vo-pattern-oops.wav"
+    },
+    {
+      "key": "vo-pattern-start",
+      "url": "assets/audio/vo-pattern-start.wav"
+    },
+    {
+      "key": "vo-pattern-turn",
+      "url": "assets/audio/vo-pattern-turn.wav"
+    },
+    {
+      "key": "vo-pattern-win",
+      "url": "assets/audio/vo-pattern-win.wav"
+    },
+    {
       "key": "vo-pick-name",
       "url": "assets/audio/vo-pick-name.wav"
+    },
+    {
+      "key": "vo-pip-found",
+      "url": "assets/audio/vo-pip-found.wav"
+    },
+    {
+      "key": "vo-pip-glade",
+      "url": "assets/audio/vo-pip-glade.wav"
+    },
+    {
+      "key": "vo-pip-thanks",
+      "url": "assets/audio/vo-pip-thanks.wav"
+    },
+    {
+      "key": "vo-power-dash",
+      "url": "assets/audio/vo-power-dash.wav"
+    },
+    {
+      "key": "vo-power-glow",
+      "url": "assets/audio/vo-power-glow.wav"
+    },
+    {
+      "key": "vo-power-sniff",
+      "url": "assets/audio/vo-power-sniff.wav"
+    },
+    {
+      "key": "vo-power-warmth",
+      "url": "assets/audio/vo-power-warmth.wav"
+    },
+    {
+      "key": "vo-puzzle-wrong-friend",
+      "url": "assets/audio/vo-puzzle-wrong-friend.wav"
+    },
+    {
+      "key": "vo-sniff-hint",
+      "url": "assets/audio/vo-sniff-hint.wav"
+    },
+    {
+      "key": "vo-spark-found",
+      "url": "assets/audio/vo-spark-found.wav"
     },
     {
       "key": "vo-title",
@@ -237,6 +585,26 @@
     {
       "key": "vo-tree",
       "url": "assets/audio/vo-tree.wav"
+    },
+    {
+      "key": "vo-waterfall-lock",
+      "url": "assets/audio/vo-waterfall-lock.wav"
+    },
+    {
+      "key": "vo-waterfall-sign",
+      "url": "assets/audio/vo-waterfall-sign.wav"
+    },
+    {
+      "key": "vo-wind-blocked",
+      "url": "assets/audio/vo-wind-blocked.wav"
+    },
+    {
+      "key": "vo-wind-dash",
+      "url": "assets/audio/vo-wind-dash.wav"
+    },
+    {
+      "key": "vo-woods-lock",
+      "url": "assets/audio/vo-woods-lock.wav"
     }
   ]
 }

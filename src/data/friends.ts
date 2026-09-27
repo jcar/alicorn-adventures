@@ -1,7 +1,9 @@
 export type FriendRequest =
   | { kind: 'fetch'; item: 'carrot' | 'berry'; count: number }
   | { kind: 'wake' }
-  | { kind: 'bloom' };
+  | { kind: 'bloom' }
+  /** Just find them. (Pip is hiding.) */
+  | { kind: 'found' };
 
 export interface FriendDef {
   id: string;
@@ -20,7 +22,7 @@ export const FRIENDS: FriendDef[] = [
     texture: 'friend-bunny',
     request: { kind: 'fetch', item: 'carrot', count: 3 },
     lines: { ask: 'bunny-ask', progress: 'bunny-progress', thanks: 'bunny-thanks' },
-    gladeX: 620,
+    gladeX: 640,
   },
   {
     id: 'fox',
@@ -36,7 +38,7 @@ export const FRIENDS: FriendDef[] = [
     texture: 'friend-owl',
     request: { kind: 'wake' },
     lines: { ask: 'owl-ask', hint: 'owl-hint', thanks: 'owl-thanks' },
-    gladeX: 1300,
+    gladeX: 1280,
   },
   {
     id: 'dragon',
@@ -44,7 +46,15 @@ export const FRIENDS: FriendDef[] = [
     texture: 'friend-dragon',
     request: { kind: 'bloom' },
     lines: { ask: 'dragon-ask', progress: 'dragon-progress', thanks: 'dragon-thanks' },
-    gladeX: 1640,
+    gladeX: 1600,
+  },
+  {
+    id: 'pip',
+    name: 'Pip',
+    texture: 'friend-pip',
+    request: { kind: 'found' },
+    lines: { ask: 'pip-found', thanks: 'pip-thanks' },
+    gladeX: 2730,
   },
 ];
 

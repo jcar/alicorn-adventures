@@ -97,25 +97,48 @@ function closestAspect(w, h) {
   return Object.entries(options).sort((a, b) => Math.abs(Math.log(a[1] / r)) - Math.abs(Math.log(b[1] / r)))[0][0];
 }
 
+/** Average color of the four corners: the backdrop the model actually painted. */
+function cornerColor(data, w, h) {
+  const sum = [0, 0, 0];
+  let n = 0;
+  for (const [cx, cy] of [[0, 0], [w - 8, 0], [0, h - 8], [w - 8, h - 8]])
+    for (let y = cy; y < cy + 8; y++)
+      for (let x = cx; x < cx + 8; x++) {
+        const i = (y * w + x) * 4;
+        sum[0] += data[i]; sum[1] += data[i + 1]; sum[2] += data[i + 2];
+        n++;
+      }
+  return sum.map((v) => v / n);
+}
+
 /**
  * Turn the magenta backdrop transparent, with soft edges and the pink fringe
  * removed, then trim and fit into exactly w×h (so physics offsets in the game
  * still line up with the art).
  */
-async function keyOutMagenta(buf, w, h) {
+async function keyOutMagenta(buf, w, h, strong = false) {
   const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  // Pink manes sit around 50 and the backdrop around 200, so normally only the
+  // far end is keyed. "strong" is for glowing things whose soft glow picks up
+  // the magenta and would otherwise leave a pink halo.
+  const [lo, hi] = strong ? [35, 120] : [90, 160];
+  // The model's "magenta" isn't always pure, so also key out whatever color
+  // the corners actually are.
+  const bg = cornerColor(data, info.width, info.height);
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i], g = data[i + 1], b = data[i + 2];
     // How "magenta" is this pixel? High red+blue, low green.
     const m = Math.min(r, b) - g;
-    // Pink manes sit around 50, the backdrop around 200, so only key the far end.
-    if (m > 160) {
+    const near = Math.hypot(r - bg[0], g - bg[1], b - bg[2]);
+    const aMagenta = m > hi ? 0 : m > lo ? 1 - (m - lo) / (hi - lo) : 1;
+    const aBackdrop = Math.min(1, Math.max(0, (near - 30) / 45));
+    const a = Math.min(aMagenta, aBackdrop);
+    if (a <= 0) {
       data[i + 3] = 0;
-    } else if (m > 90) {
-      const a = 1 - (m - 90) / 70;
+    } else if (a < 1) {
       data[i + 3] = Math.round(data[i + 3] * a);
       // Despill: pull the leftover magenta tint out of edge pixels.
-      const cap = Math.max(g, Math.round((r + b) / 2 - (m - 90)));
+      const cap = Math.max(g, Math.round((r + b) / 2 - (m - lo)));
       data[i] = Math.min(r, cap);
       data[i + 2] = Math.min(b, cap);
     }
@@ -313,7 +336,7 @@ async function generateImage(asset, manifest) {
 
 async function processImage(asset, raw) {
   const png = asset.kind === 'sprite'
-    ? await keyOutMagenta(raw, asset.w, asset.h)
+    ? await keyOutMagenta(raw, asset.w, asset.h, asset.key === 'strong')
     : await sharp(raw).resize(asset.w, asset.h, { fit: 'cover' }).png().toBuffer();
   await writeFile(path.join(IMG_DIR, `${asset.id}.png`), png);
 }
@@ -360,6 +383,7 @@ const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'sev
 const words = (t) =>
   t.toLowerCase()
     .replace(/\b(\d+)\b/g, (_, d) => NUMBER_WORDS[Number(d)] ?? d)
+    .replace(/\bcan not\b/g, 'cannot') // same words, spoken the same
     .replace(/[^a-z' ]+/g, ' ')
     .split(/\s+/)
     .filter((w) => w && !/^z+$/.test(w) && !/^h+m+$/.test(w)); // snores and hums are free-form

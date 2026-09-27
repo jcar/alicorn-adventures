@@ -10,6 +10,9 @@ const TROT_AFTER_MS = 700;
 const FLAP_VELOCITY = -430;
 const MAX_FALL = 280; // wings make every fall a gentle float
 const MAGIC_COOLDOWN = 450;
+const DASH_SPEED = 980;
+const DASH_MS = 380;
+const DASH_MAX_MS = 2000;
 
 /**
  * The hero. One sprite carries the physics body. The accessory, trail and
@@ -28,6 +31,10 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
   /** Last place we stood on solid ground, for the cloud to bring us back to. */
   safeSpot = new Phaser.Math.Vector2();
   frozen = false;
+  dashing = false;
+  private dashStart = 0;
+  private dashKeepGoing: () => boolean = () => false;
+  private dashTrail?: Phaser.GameObjects.Particles.ParticleEmitter;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, `alicorn-${GameState.data.equipped.mane}`);
@@ -87,6 +94,12 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
       return false;
     }
     const b = this.body;
+    if (this.dashing) {
+      c.flap();
+      this.updateDash();
+      this.syncAttachments();
+      return false;
+    }
     const onGround = b.blocked.down || b.touching.down;
     if (onGround) this.safeSpot.set(this.x, this.y - 10);
 
@@ -135,6 +148,36 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
     this.body.setVelocityY(power);
     sfx.bounce();
     this.scene.tweens.add({ targets: this, scaleY: 1.2, scaleX: 0.85, duration: 140, yoyo: true });
+  }
+
+  /**
+   * Fox's power: a straight, fast zoom that even strong wind can't stop.
+   * It keeps going while `keepGoing()` is true (inside wind), so a dash
+   * started at the edge of the wind always makes it through.
+   */
+  dash(keepGoing: () => boolean = () => false) {
+    if (this.dashing) return;
+    this.dashing = true;
+    this.dashStart = this.scene.time.now;
+    this.dashKeepGoing = keepGoing;
+    this.body.setAllowGravity(false);
+    sfx.whoosh();
+    this.dashTrail = this.scene.add.particles(0, 0, 'fx-star', {
+      follow: this, frequency: 20, lifespan: 420, speed: { min: 10, max: 60 }, alpha: { start: 1, end: 0 },
+      scale: { start: 1.2, end: 0 }, tint: [0xfff6a0, 0xffffff, 0xffc2de],
+    }).setDepth(9);
+  }
+
+  private updateDash() {
+    this.body.setVelocity(DASH_SPEED * this.facing, 0);
+    const t = this.scene.time.now - this.dashStart;
+    if (t < DASH_MS || (this.dashKeepGoing() && t < DASH_MAX_MS)) return;
+    this.dashing = false;
+    if (!this.frozen) this.body.setAllowGravity(true);
+    this.body.setVelocityX(DASH_SPEED * this.facing * 0.3);
+    const trail = this.dashTrail;
+    trail?.stop();
+    this.scene.time.delayedCall(400, () => trail?.destroy());
   }
 
   hornTip() {

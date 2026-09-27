@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { GameState } from '../systems/GameState';
-import { nextStardustGoal } from '../systems/UnlockManager';
+import { goldCount, nextStardustGoal } from '../systems/UnlockManager';
+import { POWERS } from '../data/powers';
 import { UNLOCKS, type Unlock } from '../data/unlocks';
 import { iconFor } from '../ui/icons';
 import { COLORS, textStyle, titleStyle } from '../ui/style';
@@ -17,6 +18,8 @@ export class UIScene extends Phaser.Scene {
   private banner!: Phaser.GameObjects.Text;
   private hintBox!: Phaser.GameObjects.Container;
   private hintText!: Phaser.GameObjects.Text;
+  private goldText!: Phaser.GameObjects.Text;
+  private powerIcons: Phaser.GameObjects.Image[] = [];
   private toastQueue: Unlock[] = [];
   private toasting = false;
 
@@ -35,6 +38,13 @@ export class UIScene extends Phaser.Scene {
     this.bar = this.add.rectangle(92, 82, 0, 14, 0xffc93c).setOrigin(0, 0.5);
     this.goalIcon = this.add.image(310, 58, 'fx-dot');
 
+    // Golden stars and powers, under the jar.
+    const row = this.add.graphics();
+    row.fillStyle(COLORS.paper, 0.92).lineStyle(4, COLORS.paperEdge).fillRoundedRect(16, 108, 330, 58, 20).strokeRoundedRect(16, 108, 330, 58, 20);
+    this.add.image(46, 137, 'gold-star').setScale(0.7);
+    this.goldText = this.add.text(70, 118, '0', textStyle(28));
+    this.powerIcons = POWERS.map((pw, i) => this.add.image(160 + i * 50, 137, pw.icon).setDisplaySize(40, 40));
+
     this.questBox = this.add.container(width - 16, 16);
     this.banner = this.add.text(width / 2, 140, '', titleStyle(64)).setOrigin(0.5).setAlpha(0);
 
@@ -44,18 +54,23 @@ export class UIScene extends Phaser.Scene {
     this.hintBox.setData('bg', hintBg);
 
     this.refreshStardust();
+    this.refreshFinds();
     this.showQuest(this.registry.get('quest'));
     const lvl = this.registry.get('levelName');
     if (lvl) this.showBanner(lvl.name);
 
     GameState.events.on('stardust', this.refreshStardust, this);
     GameState.events.on('unlock', this.queueToast, this);
+    GameState.events.on('flag', this.refreshFinds, this);
+    GameState.events.on('unlock', this.refreshFinds, this);
     this.registry.events.on('changedata-quest', this.onQuest, this);
     this.registry.events.on('changedata-levelName', this.onLevel, this);
     this.registry.events.on('changedata-hint', this.onHint, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       GameState.events.off('stardust', this.refreshStardust, this);
       GameState.events.off('unlock', this.queueToast, this);
+      GameState.events.off('flag', this.refreshFinds, this);
+      GameState.events.off('unlock', this.refreshFinds, this);
       this.registry.events.off('changedata-quest', this.onQuest, this);
       this.registry.events.off('changedata-levelName', this.onLevel, this);
       this.registry.events.off('changedata-hint', this.onHint, this);
@@ -86,6 +101,15 @@ export class UIScene extends Phaser.Scene {
     this.goalIcon.setTexture(icon.texture).setTintFill(0x8f86a8).setAlpha(0.8); // a mystery silhouette
     const s = 52 / Math.max(this.goalIcon.frame.width, this.goalIcon.frame.height);
     this.goalIcon.setScale(s);
+  }
+
+  private refreshFinds() {
+    this.goldText.setText(String(goldCount(GameState.data)));
+    POWERS.forEach((pw, i) => {
+      const icon = this.powerIcons[i];
+      if (GameState.hasPower(pw.id)) icon.clearTint().setAlpha(1);
+      else icon.setTintFill(0xd9d2e8).setAlpha(0.6);
+    });
   }
 
   private showQuest(q: Quest | null | undefined) {

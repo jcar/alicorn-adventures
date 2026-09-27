@@ -266,6 +266,30 @@ function drawBackground(c: Ctx, t: Theme, layer: 'far' | 'near', w: number, h: n
       if (layer === 'near') for (let i = 0; i < 30; i++) star(c, rnd.between(0, w), rnd.between(40, base - 150), 6, 2.5, hex(0xfff6a0, 0.9));
       break;
     }
+    case 'frost': {
+      if (layer === 'far') {
+        // Snowy mountains.
+        for (let i = 0; i < 5; i++) {
+          const x = i * 300 + rnd.between(-40, 40);
+          const top = rnd.between(120, 220);
+          poly(c, [x - 260, base + 40, x, top, x + 260, base + 40], hex(0xb9cdf0, 0.9));
+          poly(c, [x - 70, top + 70, x, top, x + 70, top + 70, x + 30, top + 60, x, top + 80, x - 30, top + 60], hex(0xffffff));
+        }
+      } else {
+        for (let i = 0; i < 8; i++) {
+          const x = (i + 0.5) * (w / 8) + rnd.between(-40, 40);
+          const h = rnd.between(160, 260);
+          roundRect(c, x - 8, base - 20, 16, 60, 4, hex(0x6b5a4a));
+          for (let k = 0; k < 3; k++) {
+            const y = base - 20 - k * (h / 3.2);
+            const r = 70 - k * 18;
+            poly(c, [x - r, y, x, y - h / 2.4, x + r, y], hex(0x5f9e8f));
+            poly(c, [x - r * 0.6, y - h / 6, x, y - h / 2.4, x + r * 0.6, y - h / 6], hex(0xffffff, 0.95));
+          }
+        }
+      }
+      break;
+    }
   }
 }
 
@@ -424,6 +448,163 @@ export function makePlaceholders(scene: Phaser.Scene) {
       for (let k = 0; k < 5; k++) circle(c, x + Math.cos((k * Math.PI * 2) / 5) * 7, y + Math.sin((k * Math.PI * 2) / 5) * 7, 6, hex(RAINBOW[i % 6]));
       circle(c, x, y, 4, '#fff3c4');
     }
+  });
+
+
+  // ---------------------------------------------------------- secrets & powers
+  make(scene, 'fx-light', 256, 256, (c) => {
+    const g = c.createRadialGradient(128, 128, 0, 128, 128, 128);
+    g.addColorStop(0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.55, 'rgba(255,255,255,0.85)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, 256, 256);
+  });
+  make(scene, 'power-sniff', 64, 64, (c) => {
+    circle(c, 32, 32, 30, '#ffe6f4', '#ff7eb9', 3);
+    ellipse(c, 32, 36, 12, 9, '#ff8fb8');
+    circle(c, 27, 36, 3, '#c93a73'); circle(c, 37, 36, 3, '#c93a73');
+    star(c, 48, 16, 8, 3, '#ffe14c'); star(c, 16, 18, 5, 2, '#ffe14c');
+  });
+  make(scene, 'power-dash', 64, 64, (c) => {
+    circle(c, 32, 32, 30, '#fff3e0', '#ff9a4c', 3);
+    poly(c, [36, 8, 18, 36, 30, 36, 26, 56, 46, 26, 34, 26], '#ffc93c', '#e08a1a', 2);
+  });
+  make(scene, 'power-glow', 64, 64, (c) => {
+    circle(c, 32, 32, 30, '#2b1f4a', '#a77bff', 3);
+    circle(c, 32, 32, 18, 'rgba(255,246,160,0.35)');
+    circle(c, 32, 32, 11, '#fff6a0');
+    for (let k = 0; k < 8; k++) {
+      const a = (k * Math.PI) / 4;
+      c.strokeStyle = '#fff6a0'; c.lineWidth = 3;
+      c.beginPath(); c.moveTo(32 + Math.cos(a) * 16, 32 + Math.sin(a) * 16); c.lineTo(32 + Math.cos(a) * 24, 32 + Math.sin(a) * 24); c.stroke();
+    }
+  });
+  make(scene, 'power-warmth', 64, 64, (c) => {
+    circle(c, 32, 32, 30, '#e8fff3', '#5fcf6a', 3);
+    c.beginPath(); c.moveTo(32, 10); c.bezierCurveTo(50, 28, 48, 50, 32, 54); c.bezierCurveTo(16, 50, 14, 28, 32, 10);
+    c.fillStyle = '#ff7a3c'; c.fill();
+    c.beginPath(); c.moveTo(32, 26); c.bezierCurveTo(42, 36, 40, 48, 32, 50); c.bezierCurveTo(24, 48, 22, 36, 32, 26);
+    c.fillStyle = '#ffd23c'; c.fill();
+  });
+  const chest = (c: Ctx, open: boolean) => {
+    roundRect(c, 8, 36, 74, 44, 8, '#b5763f', '#7a4a22');
+    if (open) {
+      poly(c, [8, 36, 14, 6, 76, 6, 82, 36], '#9a6232', '#7a4a22');
+      for (let i = 0; i < 6; i++) star(c, 20 + i * 10, 34 - (i % 2) * 6, 7, 3, '#ffe14c');
+    } else {
+      roundRect(c, 8, 18, 74, 26, 10, '#c4854a', '#7a4a22');
+    }
+    roundRect(c, 38, 40, 14, 18, 4, '#ffd23c', '#c9961a');
+    roundRect(c, 8, 44, 74, 6, 2, '#ffd23c');
+  };
+  make(scene, 'chest', 90, 84, (c) => chest(c, false));
+  make(scene, 'chest-open', 90, 84, (c) => chest(c, true));
+  make(scene, 'note', 60, 90, (c) => {
+    roundRect(c, 27, 40, 6, 50, 3, '#8a5a3c');
+    roundRect(c, 6, 6, 48, 44, 6, '#fff7e0', '#d9b27a');
+    for (let i = 0; i < 4; i++) roundRect(c, 13, 15 + i * 8, 34 - (i % 2) * 8, 3, 1, '#c9a46a');
+    star(c, 46, 42, 7, 3, '#a77bff');
+  });
+  make(scene, 'sign', 90, 100, (c) => {
+    roundRect(c, 40, 40, 10, 60, 4, '#8a5a3c');
+    roundRect(c, 4, 8, 82, 48, 8, '#c4854a', '#7a4a22');
+    for (let i = 0; i < 3; i++) roundRect(c, 14, 20 + i * 11, 62 - i * 10, 4, 2, '#7a4a22');
+  });
+  make(scene, 'gate-sign', 90, 110, (c) => {
+    roundRect(c, 40, 50, 10, 60, 4, '#8a5a3c');
+    roundRect(c, 4, 6, 82, 60, 8, '#c4854a', '#7a4a22');
+    c.fillStyle = '#fff3c4'; c.font = 'bold 30px sans-serif'; c.textAlign = 'center'; c.fillText('1 2 3', 45, 46);
+  });
+  make(scene, 'gold-star', 64, 64, (c) => {
+    circle(c, 32, 32, 30, 'rgba(255,210,60,0.3)');
+    star(c, 32, 33, 27, 12, '#ffd23c', '#e09a10', 3);
+    circle(c, 25, 25, 4, '#ffffff');
+  });
+  make(scene, 'spark', 70, 90, (c) => {
+    poly(c, [35, 4, 64, 34, 35, 86, 6, 34], '#ffffff', '#d6d0ea', 3);
+    poly(c, [35, 4, 50, 34, 35, 86, 20, 34], 'rgba(230,230,255,0.9)');
+    poly(c, [6, 34, 64, 34, 35, 44], 'rgba(255,255,255,0.8)');
+  });
+  make(scene, 'station-crystal', 200, 280, (c) => {
+    roundRect(c, 40, 230, 120, 50, 14, '#b69ad6', '#8f76b8');
+    poly(c, [100, 10, 160, 110, 130, 230, 70, 230, 40, 110], '#f4f0ff', '#c9b6e4', 4);
+    poly(c, [100, 10, 120, 110, 100, 230, 80, 110], 'rgba(220,210,255,0.9)');
+    poly(c, [40, 110, 160, 110, 100, 130], 'rgba(255,255,255,0.8)');
+  });
+  make(scene, 'ice-wall', 110, 720, (c) => {
+    const g = c.createLinearGradient(0, 0, 110, 0);
+    g.addColorStop(0, '#bfeaff'); g.addColorStop(0.5, '#e8f8ff'); g.addColorStop(1, '#a8dcf5');
+    roundRect(c, 10, 0, 90, 720, 24, 'rgba(255,255,255,0)');
+    c.fillStyle = g; c.beginPath(); c.roundRect(10, 0, 90, 720, 30); c.fill();
+    c.strokeStyle = '#8fcdee'; c.lineWidth = 4; c.stroke();
+    for (let i = 0; i < 14; i++) roundRect(c, 24 + (i % 3) * 18, 20 + i * 50, 8, 30, 4, 'rgba(255,255,255,0.8)');
+  });
+  make(scene, 'gate', 110, 720, (c) => {
+    roundRect(c, 10, 0, 90, 720, 12, '#9a92b0', '#6d6485');
+    for (let y = 30; y < 720; y += 60) {
+      roundRect(c, 18, y, 36, 50, 8, '#aaa3c0');
+      roundRect(c, 58, y + 30, 36, 50, 8, '#aaa3c0');
+    }
+    circle(c, 55, 520, 22, '#ffd23c', '#c9961a');
+    roundRect(c, 49, 518, 12, 20, 3, '#6d4a1a');
+  });
+  make(scene, 'cave', 600, 480, (c) => {
+    c.fillStyle = '#5a4a6e';
+    c.beginPath(); c.moveTo(0, 480); c.lineTo(0, 200); c.quadraticCurveTo(0, 0, 300, 0); c.quadraticCurveTo(600, 0, 600, 200); c.lineTo(600, 480); c.closePath(); c.fill();
+    c.fillStyle = '#2e2440';
+    c.beginPath(); c.moveTo(70, 480); c.lineTo(70, 230); c.quadraticCurveTo(70, 70, 300, 70); c.quadraticCurveTo(530, 70, 530, 230); c.lineTo(530, 480); c.closePath(); c.fill();
+    for (let i = 0; i < 10; i++) circle(c, 30 + i * 60, 40 + ((i * 53) % 120), 14, '#6b5a82');
+  });
+  make(scene, 'pedestal', 90, 90, (c) => {
+    roundRect(c, 10, 60, 70, 30, 8, '#b69ad6', '#8f76b8');
+    roundRect(c, 25, 20, 40, 44, 8, '#d9c6ff', '#8f76b8');
+    star(c, 45, 30, 10, 4, '#ffe14c');
+  });
+  make(scene, 'crystal', 56, 80, (c) => {
+    poly(c, [28, 2, 52, 26, 40, 78, 16, 78, 4, 26], '#ffffff', '#d6d0ea', 3);
+    poly(c, [28, 2, 36, 26, 28, 78, 20, 26], 'rgba(235,235,255,0.9)');
+  });
+  make(scene, 'item-lantern', 50, 70, (c) => {
+    c.strokeStyle = '#8a5a3c'; c.lineWidth = 3; c.beginPath(); c.arc(25, 12, 9, Math.PI, 0); c.stroke();
+    roundRect(c, 10, 14, 30, 8, 3, '#8a5a3c');
+    roundRect(c, 12, 22, 26, 36, 8, '#fff0b3', '#d9a441');
+    circle(c, 25, 40, 8, '#ffd23c');
+    roundRect(c, 10, 58, 30, 8, 3, '#8a5a3c');
+  });
+  make(scene, 'item-shell', 60, 50, (c) => {
+    c.beginPath(); c.moveTo(30, 46); c.lineTo(4, 22); c.quadraticCurveTo(30, -8, 56, 22); c.closePath();
+    c.fillStyle = '#f4ecff'; c.fill(); c.strokeStyle = '#b69ad6'; c.lineWidth = 3; c.stroke();
+    for (const a of [-0.9, -0.45, 0, 0.45, 0.9]) {
+      c.beginPath(); c.moveTo(30, 44); c.lineTo(30 + Math.sin(a) * 24, 44 - Math.cos(a) * 34); c.stroke();
+    }
+    circle(c, 44, 16, 3, '#ffffff');
+  });
+  make(scene, 'acc-tiara', 60, 34, (c) => {
+    poly(c, [4, 30, 10, 12, 20, 22, 30, 4, 40, 22, 50, 12, 56, 30], '#ffd23c', '#c9961a', 2);
+    star(c, 30, 16, 7, 3, '#ffffff');
+    circle(c, 13, 24, 3, '#ff7eb9'); circle(c, 47, 24, 3, '#5ec8ff');
+  });
+  make(scene, 'friend-pip', 90, 96, (c) => {
+    circle(c, 45, 56, 38, 'rgba(255,246,160,0.35)');
+    star(c, 45, 56, 34, 20, '#fff6c8', '#e0c46a', 3);
+    eye(c, 37, 52, 0.9); eye(c, 53, 52, 0.9);
+    circle(c, 30, 62, 4, 'rgba(255,140,180,0.5)'); circle(c, 60, 62, 4, 'rgba(255,140,180,0.5)');
+    c.strokeStyle = '#8a6a2a'; c.lineWidth = 2; c.beginPath(); c.arc(45, 62, 5, 0.2, Math.PI - 0.2); c.stroke();
+    ellipse(c, 22, 20, 10, 6, 'rgba(220,235,255,0.9)', '#b9cdf0', 2, -0.5);
+    ellipse(c, 68, 20, 10, 6, 'rgba(220,235,255,0.9)', '#b9cdf0', 2, 0.5);
+  });
+  make(scene, 'deco-snowman', 90, 130, (c) => {
+    circle(c, 45, 98, 30, '#ffffff', '#c9d8ef');
+    circle(c, 45, 50, 22, '#ffffff', '#c9d8ef');
+    circle(c, 38, 46, 3, '#2b1f4a'); circle(c, 52, 46, 3, '#2b1f4a');
+    poly(c, [45, 52, 62, 56, 45, 58], '#ff8a3c');
+    roundRect(c, 24, 66, 42, 8, 4, '#ff7eb9');
+    roundRect(c, 30, 14, 30, 18, 3, '#5e4a7a'); roundRect(c, 24, 30, 42, 6, 3, '#5e4a7a');
+  });
+  make(scene, 'deco-tall-crystal', 90, 260, (c) => {
+    poly(c, [45, 4, 80, 80, 66, 260, 24, 260, 10, 80], 'rgba(190,240,255,0.95)', '#8fcdee', 4);
+    poly(c, [45, 4, 55, 80, 45, 260, 35, 80], 'rgba(255,255,255,0.7)');
   });
 
   // Per-level scenery

@@ -1,5 +1,5 @@
 export const SAVE_KEY = 'alicorn-adventures-save';
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2;
 
 export interface SaveData {
   version: number;
@@ -11,6 +11,16 @@ export interface SaveData {
   equipped: { mane: string; trail: string; accessory: string };
   /** Unlocks earned but not yet celebrated on screen. */
   pendingCelebrations: string[];
+  /**
+   * Everything found or solved, as short tags:
+   *   secret:<id> gold:<id> spark:<area> puzzle:<id> melted:<id>
+   *   has:<item> favor:<id> mystery:solved
+   */
+  flags: string[];
+  /** Which step each favor is on. */
+  favors: Record<string, number>;
+  /** Areas visited at least once (for the map). */
+  visited: string[];
 }
 
 export function freshSave(): SaveData {
@@ -22,6 +32,9 @@ export function freshSave(): SaveData {
     unlocked: [],
     equipped: { mane: 'pink', trail: 'sparkle', accessory: 'none' },
     pendingCelebrations: [],
+    flags: [],
+    favors: {},
+    visited: [],
   };
 }
 
@@ -37,6 +50,9 @@ function defaultStorage(): StorageLike | undefined {
 
 const isStringArray = (v: unknown): v is string[] =>
   Array.isArray(v) && v.every((x) => typeof x === 'string');
+
+const isNumberRecord = (v: unknown): v is Record<string, number> =>
+  !!v && typeof v === 'object' && !Array.isArray(v) && Object.values(v).every((x) => typeof x === 'number' && x >= 0);
 
 /** Upgrade older saves and repair anything missing, keeping all progress we can. */
 export function migrate(raw: unknown): SaveData {
@@ -56,6 +72,10 @@ export function migrate(raw: unknown): SaveData {
       accessory: typeof eq.accessory === 'string' ? eq.accessory : base.equipped.accessory,
     },
     pendingCelebrations: isStringArray(r.pendingCelebrations) ? r.pendingCelebrations : [],
+    // Added in version 2; version 1 saves simply start with none.
+    flags: isStringArray(r.flags) ? [...new Set(r.flags)] : [],
+    favors: isNumberRecord(r.favors) ? { ...r.favors } : {},
+    visited: isStringArray(r.visited) ? [...new Set(r.visited)] : [],
   };
 }
 

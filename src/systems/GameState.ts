@@ -2,10 +2,11 @@ import Phaser from 'phaser';
 import { SaveManager } from './SaveManager';
 import { grantUnlocks, isUnlocked } from './UnlockManager';
 import type { Unlock, UnlockKind } from '../data/unlocks';
+import type { PowerId } from '../data/powers';
 
 /**
  * One shared game state for every scene. Scenes listen to `events`:
- *   'stardust' (total), 'unlock' (Unlock), 'friend' (id), 'equip'
+ *   'stardust' (total), 'unlock' (Unlock), 'friend' (id), 'equip', 'flag' (flag)
  */
 class GameStateImpl {
   readonly store = new SaveManager();
@@ -37,6 +38,38 @@ class GameStateImpl {
   }
 
   hasHelped(id: string) { return this.data.friendsHelped.includes(id); }
+  hasPower(id: PowerId) { return this.has('power', id); }
+
+  hasFlag(flag: string) { return this.data.flags.includes(flag); }
+  countFlags(prefix: string) { return this.data.flags.filter((f) => f.startsWith(prefix)).length; }
+
+  /** Remember something found or solved. Returns false if it was already set. */
+  setFlag(flag: string): boolean {
+    if (this.hasFlag(flag)) return false;
+    this.data.flags.push(flag);
+    this.events.emit('flag', flag);
+    this.checkUnlocks();
+    return true;
+  }
+
+  clearFlag(flag: string) {
+    this.data.flags = this.data.flags.filter((f) => f !== flag);
+    this.store.save();
+    this.events.emit('flag', flag);
+  }
+
+  favorStep(id: string) { return this.data.favors[id] ?? 0; }
+
+  advanceFavor(id: string) {
+    this.data.favors[id] = this.favorStep(id) + 1;
+    this.store.save();
+  }
+
+  visit(areaId: string) {
+    if (this.data.visited.includes(areaId)) return;
+    this.data.visited.push(areaId);
+    this.store.save();
+  }
   has(kind: UnlockKind, target: string) { return isUnlocked(this.data, kind, target); }
 
   equip(slot: 'mane' | 'trail' | 'accessory', id: string) {

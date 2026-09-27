@@ -28,7 +28,8 @@ export class Controls {
 
   /** Call these once per frame each; they consume the press. */
   flap() { return this.just('space', 'up', 'w'); }
-  magic() { return this.just('down', 's'); }
+  /** ↓ (or Enter): horn magic, powers, and "go in / open / read / talk". */
+  action() { return this.just('down', 's', 'enter'); }
   menuUp() { return this.just('up', 'w'); }
   menuDown() { return this.just('down', 's'); }
   menuLeft() { return this.just('left', 'a'); }
