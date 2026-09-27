@@ -4,6 +4,10 @@ A gentle side-scrolling game for 5–6 year olds. You play a little alicorn expl
 
 ## Play
 
+**Play online:** https://jcar.github.io/alicorn-adventures/ (it redeploys automatically on every push to `main`)
+
+Or run it locally:
+
 ```bash
 npm install
 npm run dev        # open http://localhost:5173
