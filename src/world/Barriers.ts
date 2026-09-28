@@ -8,6 +8,8 @@ const WIND_PUSH = -320;
 const DASH_REACH = 220;
 const MELT_REACH = 280;
 const BUMP_SPEED = 520;
+/** While she stays stuck at a barrier, remind her every so often. */
+const REPEAT_HINT_MS = 15000;
 
 interface IceWall { id: string; x: number; art: Phaser.GameObjects.Image; body: Phaser.Physics.Arcade.StaticBody; melted: boolean }
 interface Bumper { img: Phaser.GameObjects.Image; lastHit: number }
@@ -130,11 +132,11 @@ export class Barriers {
       const inside = p.x >= wd.x && p.x <= wd.x + wd.w;
       if (inside && !p.dashing && !p.frozen) p.body.setVelocityX(Math.min(p.body.velocity.x, WIND_PUSH));
       if (p.x >= wd.x - 120 && p.x <= wd.x + wd.w)
-        this.w.hintOnce(`wind-${wd.x}`, GameState.hasPower('dash') ? 'wind-dash' : 'wind-blocked');
+        this.w.hintOnce(`wind-${wd.x}`, GameState.hasPower('dash') ? 'wind-dash' : 'wind-blocked', REPEAT_HINT_MS);
     }
     for (const wall of this.ice)
       if (!wall.melted && Math.abs(p.x - wall.x) < 150)
-        this.w.hintOnce(`ice-${wall.id}`, GameState.hasPower('warmth') ? 'ice-melt' : 'ice-blocked');
+        this.w.hintOnce(`ice-${wall.id}`, GameState.hasPower('warmth') ? 'ice-melt' : 'ice-blocked', REPEAT_HINT_MS);
     for (const g of this.w.level.gates ?? [])
       if (!GameState.hasFlag(`puzzle:${g.id}`) && Math.abs(p.x - g.x) < 240) this.w.hintOnce(`gate-${g.id}`, 'gate-hint');
 

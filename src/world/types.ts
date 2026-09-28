@@ -36,8 +36,8 @@ export interface World {
   isHiddenByDark(x: number, y: number): boolean;
   /** A narrator line at the bottom of the screen, read aloud. */
   hint(lineId: string): void;
-  /** Once per visit to this area. */
-  hintOnce(key: string, lineId: string): void;
+  /** Once per visit to this area, or again after `repeatMs` if given. */
+  hintOnce(key: string, lineId: string, repeatMs?: number): void;
   /** A speech bubble at a spot, read aloud. */
   say(lineId: string, x: number, y: number, ms?: number): void;
   giveStardust(n: number, x: number, y: number): void;

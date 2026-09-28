@@ -52,7 +52,7 @@ export class WorldScene extends Phaser.Scene implements World {
   private bouncers: Phaser.GameObjects.Image[] = [];
   private spots: Spot[] = [];
   private hidden: HiddenThing[] = [];
-  private shownHints = new Set<string>();
+  private shownHints = new Map<string, number>();
   private lastShimmer = 0;
   private friend?: Friend;
   private gladeFriends: Friend[] = [];
@@ -78,7 +78,7 @@ export class WorldScene extends Phaser.Scene implements World {
     this.bouncers = [];
     this.spots = [];
     this.hidden = [];
-    this.shownHints = new Set();
+    this.shownHints = new Map();
     this.friend = undefined;
     this.gladeFriends = [];
     this.favors = undefined;
@@ -159,9 +159,10 @@ export class WorldScene extends Phaser.Scene implements World {
     speak(this, lineId, GameState.data.name);
   }
 
-  hintOnce(key: string, lineId: string) {
-    if (this.shownHints.has(key)) return;
-    this.shownHints.add(key);
+  hintOnce(key: string, lineId: string, repeatMs?: number) {
+    const last = this.shownHints.get(key);
+    if (last !== undefined && (repeatMs === undefined || this.time.now - last < repeatMs)) return;
+    this.shownHints.set(key, this.time.now);
     this.hint(lineId);
   }
 

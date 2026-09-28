@@ -55,7 +55,7 @@ export class Darkness {
       const inside = p.x >= z.x && p.x <= z.x + z.w && p.y >= z.y && p.y <= z.y + z.h;
       if (inside) {
         inAny = true;
-        this.w.hintOnce(`dark-${z.x}`, glow ? 'dark-glow' : 'dark-blocked');
+        this.w.hintOnce(`dark-${z.x}`, glow ? 'dark-glow' : 'dark-blocked', glow ? undefined : 15000);
       }
       z.rt.clear().fill(DARK, 0.95);
       this.brush.setScale(glow ? this.light : SMALL_LIGHT);

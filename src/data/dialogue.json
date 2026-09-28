@@ -109,7 +109,7 @@
   },
   "wind-blocked": {
     "speaker": "narrator",
-    "text": "Whoosh! The wind is too strong. A fast friend could teach you to dash."
+    "text": "Whoosh! The wind is too strong. Fox can teach you to dash through it. Come back later!"
   },
   "wind-dash": {
     "speaker": "narrator",
@@ -117,7 +117,7 @@
   },
   "ice-blocked": {
     "speaker": "narrator",
-    "text": "Brrr! This ice is too thick. A warm friend could help melt it."
+    "text": "Brrr! This ice is too thick. Baby Dragon can teach you to melt it. Come back later!"
   },
   "ice-melt": {
     "speaker": "narrator",
@@ -125,7 +125,7 @@
   },
   "dark-blocked": {
     "speaker": "narrator",
-    "text": "It is too dark to see in here. A friend with big eyes might help."
+    "text": "It is too dark in here. Owl can teach you to glow. Come back later!"
   },
   "dark-glow": {
     "speaker": "narrator",
