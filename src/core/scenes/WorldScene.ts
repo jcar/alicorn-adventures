@@ -58,6 +58,8 @@ export class WorldScene extends Phaser.Scene implements World {
   private bouncers: Phaser.GameObjects.Image[] = [];
   private spots: Spot[] = [];
   private hidden: HiddenThing[] = [];
+  /** Quest items that start hidden (e.g. Marina's fourth pearl). */
+  private questHidden: HiddenThing[] = [];
   private shownHints = new Map<string, number>();
   private lastShimmer = 0;
   private solvers: { x: number; solve: () => void; info?: () => Record<string, unknown> }[] = [];
@@ -86,6 +88,7 @@ export class WorldScene extends Phaser.Scene implements World {
     this.bouncers = [];
     this.spots = [];
     this.hidden = [];
+    this.questHidden = [];
     this.solvers = [];
     this.music = undefined;
     this.overlayGfx = undefined;
@@ -402,7 +405,7 @@ export class WorldScene extends Phaser.Scene implements World {
         const it = items.create(p.x, p.y, `item-${def.request.item}`) as Phaser.Physics.Arcade.Image;
         it.setDepth(7);
         this.tweens.add({ targets: it, angle: { from: -10, to: 10 }, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
-        if (p.hidden) this.hideThing(it, p);
+        if (p.hidden) this.questHidden.push(this.hideThing(it, p));
         else this.add.particles(p.x, p.y, 'fx-star', { lifespan: 900, frequency: 250, speed: 30, scale: { start: 0.6, end: 0 }, tint: 0xfff6a0 }).setDepth(6);
       }
       this.physics.add.overlap(this.player, items, (_p, it) => this.collectItem(it as Phaser.Physics.Arcade.Image, def));
@@ -422,16 +425,26 @@ export class WorldScene extends Phaser.Scene implements World {
   }
 
   /** Hide a physics pickup until Sniff finds it. */
-  private hideThing(obj: Phaser.Physics.Arcade.Image, p: Hideable) {
+  private hideThing(obj: Phaser.Physics.Arcade.Image, p: Hideable): HiddenThing {
     obj.setAlpha(0);
     (obj.body as Phaser.Physics.Arcade.StaticBody).enable = false;
-    this.addHidden({
+    const thing: HiddenThing = {
       x: p.x, y: p.y, revealed: false,
       reveal: () => {
         (obj.body as Phaser.Physics.Arcade.StaticBody).enable = true;
         this.popIn(obj);
       },
-    });
+    };
+    this.addHidden(thing);
+    return thing;
+  }
+
+  /** True when every quest item still missing is hidden (so she needs to sniff, not keep going). */
+  private onlyHiddenLeft() {
+    const r = this.friend?.def.request;
+    if (!r || r.kind !== 'fetch' || this.friend?.helped) return false;
+    const missing = r.count - this.questHave;
+    return missing > 0 && missing <= this.questHidden.filter((h) => !h.revealed).length;
   }
 
   private popIn(obj: Phaser.GameObjects.Image) {
@@ -604,6 +617,8 @@ export class WorldScene extends Phaser.Scene implements World {
     this.tweens.add({ targets: it, y: it.y - 80, scale: 2, alpha: 0, duration: 500, onComplete: () => it.destroy() });
     if (this.friend && def.request.kind === 'fetch' && this.questHave >= def.request.count)
       this.time.delayedCall(700, () => this.hint('fetch-done'));
+    else if (this.onlyHiddenLeft() && GameState.hasPower('sniff'))
+      this.time.delayedCall(700, () => this.hintOnce('only-hidden', 'last-one-hiding', 30000));
   }
 
   private setQuest(def: FriendDef) {
@@ -659,7 +674,7 @@ export class WorldScene extends Phaser.Scene implements World {
         x: { min: -30, max: 30 }, y: { min: -30, max: 20 }, speedY: { min: -40, max: -10 }, lifespan: 1000,
         scale: { start: 0.5, end: 0 }, alpha: { start: 0.9, end: 0 }, tint: 0xfff6a0, emitting: false,
       }).setDepth(8).explode(4);
-      if (Math.abs(h.x - this.player.x) < 400) this.hintOnce(`sniff-${h.x}`, 'sniff-hint');
+      if (Math.abs(h.x - this.player.x) < 400) this.hintOnce(`sniff-${h.x}`, 'sniff-hint', 20000);
     }
   }
 

@@ -848,6 +848,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-help-friend-first",
+      "url": "assets/audio/vo-help-friend-first.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-ice-blocked",
       "url": "assets/audio/vo-ice-blocked.mp3",
       "kind": "voice"
@@ -860,6 +865,11 @@
     {
       "key": "vo-item-found",
       "url": "assets/audio/vo-item-found.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-last-one-hiding",
+      "url": "assets/audio/vo-last-one-hiding.mp3",
       "kind": "voice"
     },
     {

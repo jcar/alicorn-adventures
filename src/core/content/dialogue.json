@@ -126,5 +126,13 @@
   "swim-hint": {
     "speaker": "narrator",
     "text": "You can swim! Press space to swim up, and left or right to glide."
+  },
+  "last-one-hiding": {
+    "speaker": "narrator",
+    "text": "The last one is hiding somewhere you have already been! Look for twinkles and press down to sniff."
+  },
+  "help-friend-first": {
+    "speaker": "narrator",
+    "text": "You can't get through yet. Finish helping the friend here first, and they will teach you how!"
   }
 }

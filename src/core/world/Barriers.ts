@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { GROUND_Y, WORLD_HEIGHT } from '../content';
+import { GROUND_Y, POWERS, WORLD_HEIGHT, type PowerId } from '../content';
 import { GameState } from '../systems/GameState';
 import { sfx } from '../audio/sfx';
 import type { World } from './types';
@@ -117,6 +117,17 @@ export class Barriers {
     }
   }
 
+  /**
+   * What to say at a barrier she can't pass yet. If the friend who teaches
+   * that power lives in this very area and is still waiting for help, point
+   * her back to them ("come back later" would send her the wrong way).
+   */
+  private blockedLine(power: PowerId, otherwise: string) {
+    const teacher = POWERS.find((p) => p.id === power)?.friend;
+    const friendHere = this.w.level.friend?.id;
+    return teacher && teacher === friendHere && !GameState.hasHelped(teacher) ? 'help-friend-first' : otherwise;
+  }
+
   /** The wind or current the hero is at (or inside), where ↓ should dash. */
   nearWind(): WindDef | undefined {
     const x = this.w.player.x;
@@ -171,17 +182,18 @@ export class Barriers {
       const inside = p.x >= wd.x && p.x <= wd.x + wd.w;
       if (inside && !p.dashing && !p.frozen) p.body.setVelocityX(Math.min(p.body.velocity.x, WIND_PUSH));
       if (p.x >= wd.x - 120 && p.x <= wd.x + wd.w) {
-        const can = GameState.hasPower(wd.power ?? 'dash');
+        const power = wd.power ?? 'dash';
+        const can = GameState.hasPower(power);
         const kind = wd.style === 'current' ? 'current' : 'wind';
-        this.w.hintOnce(`wind-${wd.x}`, `${kind}-${can ? 'dash' : 'blocked'}`, REPEAT_HINT_MS);
+        this.w.hintOnce(`wind-${wd.x}`, can ? `${kind}-dash` : this.blockedLine(power, `${kind}-blocked`), REPEAT_HINT_MS);
       }
     }
     for (const wall of this.ice)
       if (!wall.melted && Math.abs(p.x - wall.x) < 150)
-        this.w.hintOnce(`ice-${wall.id}`, GameState.hasPower('warmth') ? 'ice-melt' : 'ice-blocked', REPEAT_HINT_MS);
+        this.w.hintOnce(`ice-${wall.id}`, GameState.hasPower('warmth') ? 'ice-melt' : this.blockedLine('warmth', 'ice-blocked'), REPEAT_HINT_MS);
     for (const wall of this.walls)
       if (!wall.open && Math.abs(p.x - wall.def.x) < 150)
-        this.w.hintOnce(`wall-${wall.def.id}`, GameState.hasPower(wall.def.power) ? wall.def.can : wall.def.blocked, REPEAT_HINT_MS);
+        this.w.hintOnce(`wall-${wall.def.id}`, GameState.hasPower(wall.def.power) ? wall.def.can : this.blockedLine(wall.def.power, wall.def.blocked), REPEAT_HINT_MS);
     for (const g of this.w.level.gates ?? [])
       if (!GameState.hasFlag(`puzzle:${g.id}`) && Math.abs(p.x - g.x) < 240) this.w.hintOnce(`gate-${g.id}`, 'gate-hint');
 
