@@ -3,9 +3,10 @@ import { Controls } from '../systems/Controls';
 import { GameState } from '../systems/GameState';
 import { addBackdrop } from '../ui/backdrop';
 import { COLORS, textStyle, titleStyle } from '../ui/style';
-import { audio, isMuted, setMuted, sfx } from '../audio/sfx';
+import { audio, sfx } from '../audio/sfx';
+import { toggleSound, toggleVoice } from '../systems/Settings';
 import { playGeneratedMusic } from '../audio/music';
-import { isVoiceOn, setVoiceOn, speak } from '../audio/voice';
+import { speak } from '../audio/voice';
 import { downloadBackup, pickBackupFile } from '../systems/Backup';
 import type { Profile } from '../systems/SaveManager';
 
@@ -18,6 +19,9 @@ interface Card { profile?: Profile; box: Phaser.GameObjects.Rectangle }
 export class TitleScene extends Phaser.Scene {
   private controls!: Controls;
   private resetHold = 0;
+  private gearHold = 0;
+  private gearPressed = false;
+  private gearRing!: Phaser.GameObjects.Arc;
   private resetText!: Phaser.GameObjects.Text;
   private cards: Card[] = [];
   private sel = 0;
@@ -39,13 +43,14 @@ export class TitleScene extends Phaser.Scene {
     if (profiles.length) this.buildCards(profiles);
     else this.buildFirstTime();
 
-    this.add.text(16, height - 34, 'Grown-ups: M sound · V voice · B save a backup · L load a backup · hold R to start over',
+    this.add.text(16, height - 34, 'Grown-ups: hold ⚙ (or G) for the Grown-up Corner · M sound · V voice · B backup · L load',
       textStyle(18, { color: '#ffffff', stroke: '#2b1f4a', strokeThickness: 4 }));
+    this.buildGear();
     this.resetText = this.add.text(width / 2, 640, '', titleStyle(28)).setOrigin(0.5);
 
     const kb = this.input.keyboard!;
-    kb.on('keydown-M', () => setMuted(!isMuted()));
-    kb.on('keydown-V', () => setVoiceOn(!isVoiceOn()));
+    kb.on('keydown-M', () => this.flash(toggleSound() ? 'Sound on' : 'Sound off'));
+    kb.on('keydown-V', () => this.flash(toggleVoice() ? 'Voice on' : 'Voice off'));
     kb.on('keydown-B', () => {
       const p = this.selectedProfile();
       if (!p) return this.flash('Pick a player first.');
@@ -64,6 +69,19 @@ export class TitleScene extends Phaser.Scene {
         })
         .catch(() => this.flash("That file isn't an Alicorn Adventures backup."));
     });
+  }
+
+  /** ⚙ in the corner: hold it for 2 seconds to open the Grown-up Corner. */
+  private buildGear() {
+    const { width } = this.scale;
+    const x = width - 56;
+    const y = 56;
+    this.gearRing = this.add.circle(x, y, 38, 0xffffff, 0.25).setStrokeStyle(4, 0xffffff, 0.8);
+    this.add.text(x, y, '⚙', titleStyle(40)).setOrigin(0.5);
+    this.gearRing.setInteractive({ useHandCursor: true })
+      .on('pointerdown', () => { this.gearPressed = true; })
+      .on('pointerup', () => { this.gearPressed = false; })
+      .on('pointerout', () => { this.gearPressed = false; });
   }
 
   /** First time on this device: one big friendly alicorn and "press space". */
@@ -153,6 +171,22 @@ export class TitleScene extends Phaser.Scene {
 
   update(_t: number, dt: number) {
     if (this.leaving) return;
+    const g = this.input.keyboard!.addKey('G');
+    if (g.isDown || this.gearPressed) {
+      this.gearHold += dt;
+      this.gearRing.setScale(1 + Math.min(1, this.gearHold / 2000) * 0.5);
+      if (this.gearHold >= 2000) {
+        this.gearHold = 0;
+        this.gearPressed = false;
+        this.gearRing.setScale(1);
+        this.scene.launch('GrownUps');
+        this.scene.pause();
+        return;
+      }
+    } else if (this.gearHold) {
+      this.gearHold = 0;
+      this.gearRing.setScale(1);
+    }
     const r = this.input.keyboard!.addKey('R');
     const p = this.selectedProfile();
     if (r.isDown && p) {

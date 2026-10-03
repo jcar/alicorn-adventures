@@ -22,12 +22,15 @@ npm run dev        # open http://localhost:5173
 
 An on-screen "Press ⬇ to …" prompt appears whenever there's something to do.
 
-Grown-up keys on the title screen:
-- **M**: sound on/off
-- **V**: voice on/off
-- **B**: save a backup (downloads a file)
-- **L**: load a backup
-- Hold **R** for 3 seconds: start a fresh game
+**Tablets:** touch buttons appear as soon as someone touches the screen. ◀ ▶ walk, ★ flies (and means OK in menus), ⬇ does things, ▲ moves up in menus, and ✕ opens the book or goes back. Every screen works with them.
+
+**Grown-up Corner:** on the title screen, hold the ⚙ button (or the **G** key) for 2 seconds. It has:
+- Choose a player
+- Save or load a backup file
+- Start a player over, or remove a player (both must be held, so a tap can't do it)
+- Sound and read-aloud voice on/off (remembered on this device)
+
+Keyboard shortcuts on the title screen: **M** sound, **V** voice, **B** backup, **L** load, hold **R** to start over.
 
 Up to 4 players can each have their own alicorn and save. Pick one on the title screen with ← →. The B, L and R keys act on the selected player. Saves live only in this browser on this device. A backup file is how you keep a copy or move a player to another device.
 

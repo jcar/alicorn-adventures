@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { makePlaceholders } from '../art/placeholders';
 import { GameState } from '../systems/GameState';
+import { loadSettings } from '../systems/Settings';
 import { titleStyle } from '../ui/style';
 import { lateImageKeys, queueBundle, setAssetIndex, type AssetIndex } from '../assets';
 
@@ -30,7 +31,9 @@ export class PreloadScene extends Phaser.Scene {
 
   create() {
     makePlaceholders(this, lateImageKeys());
+    loadSettings();
     GameState.init();
+    this.scene.launch('Touch'); // on-screen buttons, always on top
     this.scene.start('Title');
   }
 }

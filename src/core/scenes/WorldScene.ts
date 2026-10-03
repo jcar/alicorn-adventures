@@ -152,7 +152,10 @@ export class WorldScene extends Phaser.Scene implements World {
       this.time.delayedCall(1200, () => this.hint('star-gate-hint'));
     }
 
-    this.events.on(Phaser.Scenes.Events.RESUME, () => this.input.keyboard?.resetKeys());
+    this.events.on(Phaser.Scenes.Events.RESUME, () => {
+      this.input.keyboard?.resetKeys();
+      this.controls.reset();
+    });
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.music?.stop();
       this.music?.destroy();

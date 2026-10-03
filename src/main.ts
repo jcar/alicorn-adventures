@@ -9,6 +9,8 @@ import { WardrobeScene } from './core/scenes/WardrobeScene';
 import { StickerBookScene } from './core/scenes/StickerBookScene';
 import { PuzzleScene } from './core/scenes/PuzzleScene';
 import { SkyMapScene } from './core/scenes/SkyMapScene';
+import { TouchScene } from './core/scenes/TouchScene';
+import { GrownUpsScene } from './core/scenes/GrownUpsScene';
 import { installDebug } from './core/debug/debug';
 
 const game = new Phaser.Game({
@@ -19,7 +21,8 @@ const game = new Phaser.Game({
   backgroundColor: '#2b1f4a',
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
   physics: { default: 'arcade', arcade: { gravity: { x: 0, y: 900 }, debug: false } },
-  scene: [BootScene, PreloadScene, TitleScene, NamePickerScene, WorldScene, UIScene, WardrobeScene, StickerBookScene, PuzzleScene, SkyMapScene],
+  scene: [BootScene, PreloadScene, TitleScene, NamePickerScene, WorldScene, UIScene, WardrobeScene, StickerBookScene, PuzzleScene, SkyMapScene, GrownUpsScene, TouchScene],
+  input: { activePointers: 4 },
 });
 
 installDebug(game);

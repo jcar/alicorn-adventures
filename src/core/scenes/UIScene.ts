@@ -5,8 +5,9 @@ import { POWERS } from '../content';
 import { UNLOCKS, type Unlock } from '../content';
 import { iconFor } from '../ui/icons';
 import { COLORS, textStyle, titleStyle } from '../ui/style';
-import { isMuted, setMuted, sfx } from '../audio/sfx';
-import { isVoiceOn, setVoiceOn, speak } from '../audio/voice';
+import { sfx } from '../audio/sfx';
+import { toggleSound, toggleVoice } from '../systems/Settings';
+import { speak } from '../audio/voice';
 import type { Quest } from './WorldScene';
 
 /** The heads-up display over the world: stardust jar, quest, hints and celebrations. */
@@ -77,8 +78,8 @@ export class UIScene extends Phaser.Scene {
     });
 
     const kb = this.input.keyboard!;
-    kb.on('keydown-M', () => { setMuted(!isMuted()); this.showHint(isMuted() ? 'Sound off' : 'Sound on'); });
-    kb.on('keydown-V', () => { setVoiceOn(!isVoiceOn()); this.showHint(isVoiceOn() ? 'Voice on' : 'Voice off'); });
+    kb.on('keydown-M', () => this.showHint(toggleSound() ? 'Sound on' : 'Sound off'));
+    kb.on('keydown-V', () => this.showHint(toggleVoice() ? 'Voice on' : 'Voice off'));
   }
 
   private onQuest(_p: unknown, q: Quest | null) { this.showQuest(q); }
@@ -141,6 +142,9 @@ export class UIScene extends Phaser.Scene {
   }
 
   private showHint(text: string) {
+    // Narrower on tablets, so the hint sits between the on-screen buttons.
+    const touch = (this.scene.get('Touch') as unknown as { layer?: Phaser.GameObjects.Container })?.layer?.visible;
+    this.hintText.setWordWrapWidth(touch ? 540 : 900);
     this.hintText.setText(text);
     const g = this.hintBox.getData('bg') as Phaser.GameObjects.Graphics;
     const w = this.hintText.width + 60;
