@@ -49,7 +49,7 @@ export function installDebug(game: Phaser.Game) {
     /** Jump to a level; optionally to a named marker or an x position. */
     go(levelId: string, where?: string | number) {
       if (!LEVELS[levelId]) throw new Error(`Unknown level. Try: ${Object.keys(LEVELS).join(', ')}`);
-      for (const k of ['Title', 'NamePicker', 'Wardrobe', 'StickerBook', 'Puzzle']) if (running(k)) game.scene.stop(k);
+      for (const k of ['Title', 'NamePicker', 'Wardrobe', 'StickerBook', 'Puzzle', 'SkyMap', 'GrownUps']) if (running(k)) game.scene.stop(k);
       const w = world();
       w.events.once(Phaser.Scenes.Events.CREATE, () => {
         if (where !== undefined) setTimeout(() => api.teleport(where), 50);

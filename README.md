@@ -82,7 +82,7 @@ npm run assets -- --convert      # one-time: turn old PNG/WAV files into WebP/MP
 npm run assets -- --list-models  # which models your key can use
 ```
 
-- Prompts live in `tools/assets/manifest.json`. They share one style block so the art looks consistent.
+- Prompts live in `tools/assets/manifest.json`. They share one style block, **and every new picture should list `styleRefs`**: two or three existing pictures whose style the model must match (line weight, colors, watercolor shading) without copying their subjects. The style text alone isn't enough, and the model drifts without them. `ref` is different: it means "this is the same character", as with the alicorn manes.
 - Only `alicorn-pink` is generated. The other manes (`"kind": "recolor"`) are made from it by changing the color of just the mane and tail, so it's always the same pony. To try a new shade, edit its `hue`/`sat`/`val` and run `npm run assets -- --rekey --only alicorn-*`. That's free and instant. If you ever regenerate `alicorn-pink`, run that same command afterwards.
 - Sprites are generated on magenta, which is then cut out. The untouched originals are kept in `tools/assets/raw/`.
 - **Small and lazy.** Pictures ship as WebP and sound as MP3 (a bundled ffmpeg does the encoding). Only "core" pictures load at start-up, about 0.7 MB. A kingdom's own pictures (`"bundle": "forest"` in the manifest) load when she flies there. Voices and music load the first time they play, and the music box covers the moment while a track loads.

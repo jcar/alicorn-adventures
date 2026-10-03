@@ -61,7 +61,8 @@ export class SkyMapScene extends Phaser.Scene {
       const img = this.add.image(px, py, texture);
       img.setScale(Math.min(1, 230 / img.width));
       this.tweens.add({ targets: img, y: py - 10, duration: 1800 + Math.random() * 600, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
-      if (o.locked || !o.target) img.setTint(0xb8b0d0);
+      // Kingdoms that are still locked look faded; mystery islands' own art already says "mystery".
+      if (o.locked && o.target) img.setAlpha(0.75);
       this.add.text(px, py + img.displayHeight / 2 + 8, o.name, titleStyle(24, { align: 'center', wordWrap: { width: 230 } })).setOrigin(0.5, 0);
       const island: Island = { ...o, x: px, y: py, img };
       img.setInteractive({ useHandCursor: true }).on('pointerdown', () => {

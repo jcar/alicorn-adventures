@@ -3,3 +3,4 @@ dist/
 .env
 *.log
 tools/assets/raw/
+tools/assets/review/

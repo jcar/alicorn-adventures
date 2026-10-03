@@ -325,18 +325,31 @@ const AUDIO_EXT = { 'audio/mpeg': 'mp3', 'audio/mp3': 'mp3', 'audio/wav': 'wav',
 
 // ------------------------------------------------------------------ generators
 
+/** An existing picture as model input: the untouched original if we have it, else the game image on magenta. */
+async function imageInput(id) {
+  const rawRef = path.join(ROOT, 'tools/assets/raw', `${id}.png`);
+  const gameRef = path.join(IMG_DIR, `${id}.webp`);
+  if (!existsSync(rawRef) && !existsSync(gameRef)) throw new Error(`needs ${id} first (run it with --only ${id})`);
+  const buf = existsSync(rawRef) ? await readFile(rawRef) : await sharp(gameRef).flatten({ background: '#ff00ff' }).png().toBuffer();
+  return { inlineData: { mimeType: 'image/png', data: buf.toString('base64') } };
+}
+
+/**
+ * ref:       the SAME character (e.g. every mane colour is the same alicorn).
+ * styleRefs: existing pictures whose STYLE to match, never their subject.
+ *            Every new picture should have these, so the whole game looks
+ *            like one artist drew it. (Without them the model drifts, and a
+ *            single character as the style ref can get copied outright.)
+ */
 async function generateImage(asset, manifest) {
   const parts = [];
-  if (asset.ref) {
-    // Prefer the untouched original (already on magenta); otherwise flatten the game image onto magenta.
-    const rawRef = path.join(ROOT, 'tools/assets/raw', `${asset.ref}.png`);
-    const gameRef = path.join(IMG_DIR, `${asset.ref}.webp`);
-    if (!existsSync(rawRef) && !existsSync(gameRef)) throw new Error(`needs ${asset.ref} first (run it with --only ${asset.ref})`);
-    const ref = existsSync(rawRef) ? await readFile(rawRef) : await sharp(gameRef).flatten({ background: '#ff00ff' }).png().toBuffer();
-    parts.push({ inlineData: { mimeType: 'image/png', data: ref.toString('base64') } });
-  }
+  if (asset.ref) parts.push(await imageInput(asset.ref));
+  for (const id of asset.styleRefs ?? []) parts.push(await imageInput(id));
   const rules = asset.kind === 'sprite' ? manifest.spriteRules : 'Full-bleed painting that fills the whole frame, no text, no characters, no border.';
-  parts.push({ text: `${asset.prompt}\n\nStyle: ${manifest.style}\n\n${rules}` });
+  const styleNote = asset.styleRefs?.length
+    ? `The ${asset.ref ? 'last ' : ''}${asset.styleRefs.length} reference image(s) show the exact art style to match: the same line weight, the same soft colors, the same watercolor shading and texture, the same level of detail. Do NOT draw their subjects. Draw only this:\n\n`
+    : '';
+  parts.push({ text: `${styleNote}${asset.prompt}\n\nStyle: ${manifest.style}\n\n${rules}` });
 
   const res = await withRetry(asset.id, () =>
     client().models.generateContent({
