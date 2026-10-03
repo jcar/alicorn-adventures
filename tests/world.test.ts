@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { AREA_ORDER, LEVELS, GROUND_Y } from '../src/data/levels';
-import { FRIENDS } from '../src/data/friends';
-import { FAVORS } from '../src/data/favors';
-import { NUMBER_MAX, PUZZLES } from '../src/data/puzzles';
-import { POWERS } from '../src/data/powers';
-import { allClues, goldIds, powersNeeded, powersOnArrival, secretIds } from '../src/data/logic';
-import dialogue from '../src/data/dialogue.json';
+import { AREA_ORDER, LEVELS, GROUND_Y } from '../src/core/content';
+import { FRIENDS } from '../src/core/content';
+import { FAVORS } from '../src/core/content';
+import { NUMBER_MAX, PUZZLES } from '../src/core/content';
+import { POWERS } from '../src/core/content';
+import { allClues, goldIds, powersNeeded, powersOnArrival, secretIds } from '../src/core/content';
+import { DIALOGUE as dialogue } from '../src/core/content';
 
 const lines = dialogue as Record<string, unknown>;
 const subset = (a: Set<string>, b: Set<string>) => [...a].filter((x) => !b.has(x));

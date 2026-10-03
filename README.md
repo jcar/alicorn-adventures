@@ -88,17 +88,14 @@ npm run assets -- --list-models  # which models your key can use
 ## Code map
 
 ```
-src/data/        levels, friends, powers, puzzles, favors, unlocks, cosmetics, dialogue  ← most changes happen here
-src/scenes/      Title, NamePicker, World (every level), UI (HUD), Wardrobe, StickerBook (Adventure Book), Puzzle
-src/world/       barriers (wind, ice, gates, bumpers), darkness, secrets, pattern crystals, favors, Heart Crystal
-src/objects/     Alicorn (movement/flight/magic), Friend
-src/systems/     Controls, SaveManager, UnlockManager, GameState
-src/art/         placeholder art drawn in code
-src/audio/       synthesized sound effects, generated music box, voice playback
-tools/           Gemini asset pipeline
+src/core/             the engine: scenes, world mechanics, objects, systems, UI, audio, placeholder art, debug kit
+src/core/content/     shared content types (types.ts), the kingdom registry, cosmetics, rules (logic.ts), core lines
+src/home/             Home (the Glade): its level, lines, and the Heart Crystal's sparks
+src/kingdoms/forest/  The Enchanted Forest pack: areas, friends, powers, puzzles, favors, unlocks, dialogue
+tools/                Gemini asset pipeline, headless playtests
 ```
 
-To add a new area, add a level in `src/data/levels.ts`, a friend in `friends.ts`, an `area-…` unlock in `unlocks.ts`, and a door in the Glade's `portals`. Levels can also hold `winds`, `ice`, `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. Puzzles live in `puzzles.ts`, favors in `favors.ts`, and powers in `powers.ts`. The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
+**Adding a kingdom:** make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds`, `ice`, `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)

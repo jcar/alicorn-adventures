@@ -1,0 +1,110 @@
+import Phaser from 'phaser';
+import { SAVE_KEY, SaveManager, type SaveData } from './SaveManager';
+import { grantUnlocks, isUnlocked } from './UnlockManager';
+import type { Unlock, UnlockKind } from '../content';
+import type { PowerId } from '../content';
+
+/**
+ * One shared game state for every scene. Scenes listen to `events`:
+ *   'stardust' (total), 'unlock' (Unlock), 'friend' (id), 'equip', 'flag' (flag)
+ */
+class GameStateImpl {
+  readonly store = new SaveManager();
+  readonly events = new Phaser.Events.EventEmitter();
+
+  get data() { return this.store.data; }
+
+  init() {
+    grantUnlocks(this.data); // starter kit, plus anything new added since the last save
+    this.store.save();
+  }
+
+  setName(name: string) {
+    this.data.name = name;
+    this.store.save();
+  }
+
+  addStardust(n = 1) {
+    this.data.stardust += n;
+    this.events.emit('stardust', this.data.stardust);
+    this.checkUnlocks();
+  }
+
+  helpFriend(id: string) {
+    if (this.data.friendsHelped.includes(id)) return;
+    this.data.friendsHelped.push(id);
+    this.events.emit('friend', id);
+    this.checkUnlocks();
+  }
+
+  hasHelped(id: string) { return this.data.friendsHelped.includes(id); }
+  hasPower(id: PowerId) { return this.has('power', id); }
+
+  hasFlag(flag: string) { return this.data.flags.includes(flag); }
+  countFlags(prefix: string) { return this.data.flags.filter((f) => f.startsWith(prefix)).length; }
+
+  /** Remember something found or solved. Returns false if it was already set. */
+  setFlag(flag: string): boolean {
+    if (this.hasFlag(flag)) return false;
+    this.data.flags.push(flag);
+    this.events.emit('flag', flag);
+    this.checkUnlocks();
+    return true;
+  }
+
+  clearFlag(flag: string) {
+    this.data.flags = this.data.flags.filter((f) => f !== flag);
+    this.store.save();
+    this.events.emit('flag', flag);
+  }
+
+  favorStep(id: string) { return this.data.favors[id] ?? 0; }
+
+  advanceFavor(id: string) {
+    this.data.favors[id] = this.favorStep(id) + 1;
+    this.store.save();
+  }
+
+  visit(areaId: string) {
+    if (this.data.visited.includes(areaId)) return;
+    this.data.visited.push(areaId);
+    this.store.save();
+  }
+  has(kind: UnlockKind, target: string) { return isUnlocked(this.data, kind, target); }
+
+  equip(slot: 'mane' | 'trail' | 'accessory', id: string) {
+    this.data.equipped[slot] = id;
+    this.store.save();
+    this.events.emit('equip');
+  }
+
+  /** Pops the next unlock waiting to be celebrated, if any. */
+  takeCelebration(): string | undefined {
+    const id = this.data.pendingCelebrations.shift();
+    this.store.save();
+    return id;
+  }
+
+  private checkUnlocks() {
+    const fresh: Unlock[] = grantUnlocks(this.data);
+    this.store.save();
+    fresh.forEach((u) => this.events.emit('unlock', u));
+  }
+
+  /** Replace the whole save with a restored backup (the old one is kept aside, just in case). */
+  restore(save: SaveData) {
+    try {
+      const current = localStorage.getItem(SAVE_KEY);
+      if (current) localStorage.setItem(`${SAVE_KEY}-before-restore`, current);
+    } catch { /* storage blocked */ }
+    this.store.data = save;
+    this.init();
+  }
+
+  resetAll() {
+    this.store.reset();
+    this.init();
+  }
+}
+
+export const GameState = new GameStateImpl();

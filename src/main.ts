@@ -1,14 +1,14 @@
 import Phaser from 'phaser';
-import { BootScene } from './scenes/BootScene';
-import { PreloadScene } from './scenes/PreloadScene';
-import { TitleScene } from './scenes/TitleScene';
-import { NamePickerScene } from './scenes/NamePickerScene';
-import { WorldScene } from './scenes/WorldScene';
-import { UIScene } from './scenes/UIScene';
-import { WardrobeScene } from './scenes/WardrobeScene';
-import { StickerBookScene } from './scenes/StickerBookScene';
-import { PuzzleScene } from './scenes/PuzzleScene';
-import { installDebug } from './debug/debug';
+import { BootScene } from './core/scenes/BootScene';
+import { PreloadScene } from './core/scenes/PreloadScene';
+import { TitleScene } from './core/scenes/TitleScene';
+import { NamePickerScene } from './core/scenes/NamePickerScene';
+import { WorldScene } from './core/scenes/WorldScene';
+import { UIScene } from './core/scenes/UIScene';
+import { WardrobeScene } from './core/scenes/WardrobeScene';
+import { StickerBookScene } from './core/scenes/StickerBookScene';
+import { PuzzleScene } from './core/scenes/PuzzleScene';
+import { installDebug } from './core/debug/debug';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,

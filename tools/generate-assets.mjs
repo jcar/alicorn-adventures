@@ -470,6 +470,17 @@ async function writeIndex() {
   console.log(`assets.json: ${index.images.length} images, ${index.audio.length} sounds`);
 }
 
+/** Every line in the game: core, Home, and each kingdom pack's dialogue.json. */
+async function loadDialogue() {
+  const files = ['src/core/content/dialogue.json', 'src/home/dialogue.json'];
+  const kingdoms = path.join(ROOT, 'src/kingdoms');
+  for (const k of existsSync(kingdoms) ? await readdir(kingdoms) : [])
+    if (existsSync(path.join(kingdoms, k, 'dialogue.json'))) files.push(`src/kingdoms/${k}/dialogue.json`);
+  const all = {};
+  for (const f of files) Object.assign(all, JSON.parse(await readFile(path.join(ROOT, f), 'utf8')));
+  return all;
+}
+
 // ------------------------------------------------------------------ main
 
 async function main() {
@@ -486,7 +497,7 @@ async function main() {
   if (flag('index')) return writeIndex();
 
   const manifest = JSON.parse(await readFile(path.join(ROOT, 'tools/assets/manifest.json'), 'utf8'));
-  const dialogue = JSON.parse(await readFile(path.join(ROOT, 'src/data/dialogue.json'), 'utf8'));
+  const dialogue = await loadDialogue();
 
   if (flag('verify')) return verifyVoices(dialogue);
 

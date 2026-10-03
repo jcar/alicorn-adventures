@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { freshSave } from '../src/systems/SaveManager';
-import { grantUnlocks, isUnlocked, nextStardustGoal } from '../src/systems/UnlockManager';
-import { UNLOCKS } from '../src/data/unlocks';
-import { FRIENDS } from '../src/data/friends';
-import { AREA_ORDER, LEVELS } from '../src/data/levels';
-import { ACCESSORIES, MANES, TRAILS } from '../src/data/cosmetics';
-import dialogue from '../src/data/dialogue.json';
-import { FAVORS } from '../src/data/favors';
+import { freshSave } from '../src/core/systems/SaveManager';
+import { grantUnlocks, isUnlocked, nextStardustGoal } from '../src/core/systems/UnlockManager';
+import { UNLOCKS } from '../src/core/content';
+import { FRIENDS } from '../src/core/content';
+import { AREA_ORDER, LEVELS } from '../src/core/content';
+import { ACCESSORIES, MANES, TRAILS } from '../src/core/content';
+import { DIALOGUE as dialogue } from '../src/core/content';
+import { FAVORS } from '../src/core/content';
 
 describe('UnlockManager', () => {
   it('grants the starter kit silently', () => {

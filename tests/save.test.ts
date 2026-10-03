@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SAVE_KEY, SaveManager, freshSave, migrate } from '../src/systems/SaveManager';
+import { SAVE_KEY, SaveManager, freshSave, migrate } from '../src/core/systems/SaveManager';
 
 function memoryStorage(initial: Record<string, string> = {}) {
   const m = new Map(Object.entries(initial));

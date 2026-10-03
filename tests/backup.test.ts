@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { backupFileName, makeBackup, readBackup } from '../src/systems/Backup';
-import { freshSave } from '../src/systems/SaveManager';
+import { backupFileName, makeBackup, readBackup } from '../src/core/systems/Backup';
+import { freshSave } from '../src/core/systems/SaveManager';
 
 const finished = () => ({
   ...freshSave(),

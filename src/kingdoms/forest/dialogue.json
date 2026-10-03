@@ -1,0 +1,198 @@
+{
+  "bunny-ask": {
+    "speaker": "bunny",
+    "text": "Oh no! I lost my 3 carrots. Can you find them?"
+  },
+  "bunny-progress": {
+    "speaker": "bunny",
+    "text": "Keep looking! You can do it!"
+  },
+  "bunny-thanks": {
+    "speaker": "bunny",
+    "text": "My carrots! Thank you, friend!"
+  },
+  "fox-ask": {
+    "speaker": "fox",
+    "text": "I am so hungry. Can you find 4 berries for me?"
+  },
+  "fox-progress": {
+    "speaker": "fox",
+    "text": "Yum, berries! Are there more?"
+  },
+  "fox-thanks": {
+    "speaker": "fox",
+    "text": "Yummy! Thank you so much!"
+  },
+  "owl-ask": {
+    "speaker": "owl",
+    "text": "Zzz... Zzz..."
+  },
+  "owl-hint": {
+    "speaker": "narrator",
+    "text": "Owl is asleep. Press down to use your horn magic!"
+  },
+  "owl-thanks": {
+    "speaker": "owl",
+    "text": "Hoo! I was asleep all day! Thank you for waking me!"
+  },
+  "dragon-ask": {
+    "speaker": "dragon",
+    "text": "I want to see a rainbow! Can you make the flowers bloom?"
+  },
+  "dragon-progress": {
+    "speaker": "dragon",
+    "text": "So pretty! More flowers, please!"
+  },
+  "dragon-thanks": {
+    "speaker": "dragon",
+    "text": "A rainbow! You are the best friend ever!"
+  },
+  "power-sniff": {
+    "speaker": "narrator",
+    "text": "Bunny taught you Sniff! When you see sparkles, press down to sniff out hidden things."
+  },
+  "power-dash": {
+    "speaker": "narrator",
+    "text": "Fox taught you Dash! In strong wind, press down to zoom right through it."
+  },
+  "power-glow": {
+    "speaker": "narrator",
+    "text": "Owl taught you Glow! Now your horn shines in dark places."
+  },
+  "power-warmth": {
+    "speaker": "narrator",
+    "text": "Dragon taught you Warm Breath! Press down near ice to melt it."
+  },
+  "woods-lock": {
+    "speaker": "narrator",
+    "text": "Bunny planted 2 carrots. Then she planted 3 more. How many carrots in all?"
+  },
+  "meadow-lock": {
+    "speaker": "narrator",
+    "text": "Fox has 4 berries. Fox wants 9 berries. How many more does Fox need?"
+  },
+  "waterfall-lock": {
+    "speaker": "narrator",
+    "text": "There are 3 nests. Each nest has 2 eggs. How many eggs are there?"
+  },
+  "clouds-lock": {
+    "speaker": "narrator",
+    "text": "There were 12 stars. 5 stars flew away. How many stars are left?"
+  },
+  "frost-lock": {
+    "speaker": "narrator",
+    "text": "How many snowmen did you see in Frosty Peaks? Go back and count if you need to!"
+  },
+  "meadow-sign": {
+    "speaker": "narrator",
+    "text": "Something smells like berries here! Press down to sniff."
+  },
+  "waterfall-sign": {
+    "speaker": "narrator",
+    "text": "Strong wind ahead! Fox's dash can zoom right through."
+  },
+  "note-1": {
+    "speaker": "pip",
+    "text": "Hello. I am very small and very shy. I fell from the sky. From, P."
+  },
+  "note-2": {
+    "speaker": "pip",
+    "text": "I borrowed the colors of the Heart Crystal to keep warm. I am sorry. From, P."
+  },
+  "note-3": {
+    "speaker": "pip",
+    "text": "I found a cold, quiet place far away. Snow falls there all day. From, P."
+  },
+  "note-4": {
+    "speaker": "pip",
+    "text": "Only a warm friend can melt the ice. From, P."
+  },
+  "note-5": {
+    "speaker": "pip",
+    "text": "Each color spark is one lost color. Please bring them all home. From, P."
+  },
+  "note-6": {
+    "speaker": "pip",
+    "text": "I can hear the wind blowing near my hiding place. From, P."
+  },
+  "note-7": {
+    "speaker": "pip",
+    "text": "Look for a door of ice in your Home Glade. That is the way to me. From, P."
+  },
+  "note-8": {
+    "speaker": "pip",
+    "text": "You are so close now! Look in the dark ice cave. From, P."
+  },
+  "pip-found": {
+    "speaker": "pip",
+    "text": "Oh! You found me! I am Pip. I was scared, but you are so kind."
+  },
+  "pip-thanks": {
+    "speaker": "pip",
+    "text": "Here is the last color spark. Let's fix the Heart Crystal together!"
+  },
+  "pip-glade": {
+    "speaker": "pip",
+    "text": "I love my new home! Thank you for finding me."
+  },
+  "fox-math-ask": {
+    "speaker": "fox",
+    "text": "I love counting berries! Can you help me with a berry sum?"
+  },
+  "fox-math-thanks": {
+    "speaker": "fox",
+    "text": "Yes! 5 berries left. You are so good at numbers!"
+  },
+  "fox-favor-ask": {
+    "speaker": "fox",
+    "text": "My den is so dark at night. Owl has a lantern. Can you ask Owl for me?"
+  },
+  "owl-favor-ask": {
+    "speaker": "owl",
+    "text": "Hoo! Answer my riddle, and my lantern is yours."
+  },
+  "owl-riddle": {
+    "speaker": "owl",
+    "text": "I have keys, but I cannot open doors. What am I?"
+  },
+  "owl-favor-give": {
+    "speaker": "owl",
+    "text": "A piano! Very clever. Here is my lantern. Take it to Fox."
+  },
+  "fox-favor-wait": {
+    "speaker": "fox",
+    "text": "Did you get Owl's lantern yet?"
+  },
+  "fox-favor-thanks": {
+    "speaker": "fox",
+    "text": "My lantern! Now my den is cozy and bright. Thank you!"
+  },
+  "dragon-favor-ask": {
+    "speaker": "dragon",
+    "text": "I want a Moon Shell for my nest. Bunny knows where they hide!"
+  },
+  "bunny-favor-ask": {
+    "speaker": "bunny",
+    "text": "I will tell you where the Moon Shell is. But first, a riddle!"
+  },
+  "bunny-riddle": {
+    "speaker": "bunny",
+    "text": "I follow you all day, but I hide in the dark. What am I?"
+  },
+  "bunny-favor-hint": {
+    "speaker": "bunny",
+    "text": "A shadow! Moon Shells hide at the Crystal Waterfall. Sniff near the tallest crystal!"
+  },
+  "dragon-favor-wait": {
+    "speaker": "dragon",
+    "text": "Did you find a Moon Shell yet?"
+  },
+  "dragon-favor-thanks": {
+    "speaker": "dragon",
+    "text": "A Moon Shell! My nest is perfect now. Thank you!"
+  },
+  "fox-math": {
+    "speaker": "fox",
+    "text": "I had 9 berries. I ate 4. How many berries do I have now?"
+  }
+}

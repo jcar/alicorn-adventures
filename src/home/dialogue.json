@@ -1,0 +1,50 @@
+{
+  "glade-hello": {
+    "speaker": "narrator",
+    "text": "This is your Home Glade. Walk to a glowing door to go on an adventure!"
+  },
+  "mirror": {
+    "speaker": "narrator",
+    "text": "Press down at the mirror to dress up!"
+  },
+  "tree": {
+    "speaker": "narrator",
+    "text": "Press down at the sticker tree to see your stickers!"
+  },
+  "glade-friend": {
+    "speaker": "narrator",
+    "text": "Your friends love living here!"
+  },
+  "crystal-0": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal has lost all its colors. Where did they go?"
+  },
+  "crystal-1": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal has 1 color back. 4 more to find!"
+  },
+  "crystal-2": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal has 2 colors back. 3 more to find!"
+  },
+  "crystal-3": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal has 3 colors back. 2 more to find!"
+  },
+  "crystal-4": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal has 4 colors back. Just 1 more!"
+  },
+  "crystal-need-pip": {
+    "speaker": "narrator",
+    "text": "All the colors are home! But the crystal feels lonely. Who is still missing?"
+  },
+  "crystal-finale": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal shines with every color! You solved the mystery!"
+  },
+  "crystal-done": {
+    "speaker": "narrator",
+    "text": "The Heart Crystal is shining bright, thanks to you!"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "title": {
+    "speaker": "narrator",
+    "text": "Welcome to Alicorn Adventures!"
+  },
+  "pick-name": {
+    "speaker": "narrator",
+    "text": "What is your alicorn's name?"
+  },
+  "door-locked": {
+    "speaker": "narrator",
+    "text": "This door is sleepy. Helping your friends will wake it up!"
+  },
+  "cloud-catch": {
+    "speaker": "narrator",
+    "text": "Whoops! A cloud caught you!"
+  },
+  "new-unlock": {
+    "speaker": "narrator",
+    "text": "Yay! You got something new!"
+  },
+  "fetch-done": {
+    "speaker": "narrator",
+    "text": "You found them all! Go back to your friend!"
+  },
+  "friend-moved": {
+    "speaker": "narrator",
+    "text": "Your friend is moving to your Glade!"
+  },
+  "wind-blocked": {
+    "speaker": "narrator",
+    "text": "Whoosh! The wind is too strong. Fox can teach you to dash through it. Come back later!"
+  },
+  "wind-dash": {
+    "speaker": "narrator",
+    "text": "Press down to dash through the wind!"
+  },
+  "ice-blocked": {
+    "speaker": "narrator",
+    "text": "Brrr! This ice is too thick. Baby Dragon can teach you to melt it. Come back later!"
+  },
+  "ice-melt": {
+    "speaker": "narrator",
+    "text": "Press down to melt the ice with your warm breath!"
+  },
+  "dark-blocked": {
+    "speaker": "narrator",
+    "text": "It is too dark in here. Owl can teach you to glow. Come back later!"
+  },
+  "dark-glow": {
+    "speaker": "narrator",
+    "text": "Your horn glows! Look around. What is hiding in the dark?"
+  },
+  "sniff-hint": {
+    "speaker": "narrator",
+    "text": "Something sparkly is hidden near here. Press down to sniff!"
+  },
+  "gate-hint": {
+    "speaker": "narrator",
+    "text": "A gate with a number lock! Press down to try it."
+  },
+  "gate-right": {
+    "speaker": "narrator",
+    "text": "That's right! The gate is opening."
+  },
+  "gate-wrong": {
+    "speaker": "narrator",
+    "text": "Not quite. Try again!"
+  },
+  "pattern-start": {
+    "speaker": "narrator",
+    "text": "Watch the crystals. Then press down at each one in the same order!"
+  },
+  "pattern-turn": {
+    "speaker": "narrator",
+    "text": "Your turn!"
+  },
+  "pattern-oops": {
+    "speaker": "narrator",
+    "text": "Oops! Let's watch again."
+  },
+  "pattern-win": {
+    "speaker": "narrator",
+    "text": "You did it! Something appeared!"
+  },
+  "chest-open": {
+    "speaker": "narrator",
+    "text": "You found a secret treasure!"
+  },
+  "gold-star": {
+    "speaker": "narrator",
+    "text": "A golden star! That was tricky!"
+  },
+  "spark-found": {
+    "speaker": "narrator",
+    "text": "You found a color spark! Bring it home to the Heart Crystal."
+  },
+  "new-clue": {
+    "speaker": "narrator",
+    "text": "A new clue! Read it again in your Adventure Book."
+  },
+  "item-found": {
+    "speaker": "narrator",
+    "text": "You found something special! Who needs it?"
+  },
+  "friend-has-favor": {
+    "speaker": "narrator",
+    "text": "A friend wants to talk. Press down near them!"
+  },
+  "puzzle-wrong-friend": {
+    "speaker": "narrator",
+    "text": "Hmm, not that one. Think again!"
+  }
+}
