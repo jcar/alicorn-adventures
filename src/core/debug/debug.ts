@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { LEVELS } from '../content';
+import { AREA_ORDER, FAVORS, FRIENDS, LEVELS, SPARK_AREAS, goldIds, secretIds } from '../content';
+import { activeFavorFor } from '../world/Favors';
 import { GameState } from '../systems/GameState';
 import { migrate } from '../systems/SaveManager';
 import { stopVoice } from '../audio/voice';
@@ -109,6 +110,31 @@ export function installDebug(game: Phaser.Game) {
     flag(...flags: string[]) {
       flags.forEach((f) => GameState.setFlag(f));
       return GameState.data.flags.length;
+    },
+
+    /** Every area, in story order. */
+    areas() {
+      return AREA_ORDER;
+    },
+
+    /** Friends at Home waiting to talk about a favor, and where they stand. */
+    favorsTodo() {
+      return FRIENDS.filter((f) => GameState.hasHelped(f.id) && activeFavorFor(f.id)).map((f) => ({ id: f.id, x: f.gladeX }));
+    },
+
+    /** How much of everything has been found. */
+    progress() {
+      const d = GameState.data;
+      const count = (ids: string[], prefix: string) => `${ids.filter((id) => d.flags.includes(`${prefix}${id}`)).length}/${ids.length}`;
+      const areas = AREA_ORDER.map((a) => LEVELS[a]);
+      return {
+        friends: `${d.friendsHelped.length}/${FRIENDS.length}`,
+        secrets: count(areas.flatMap(secretIds), 'secret:'),
+        golds: count(areas.flatMap(goldIds), 'gold:'),
+        sparks: count(SPARK_AREAS, 'spark:'),
+        favors: count(FAVORS.map((f) => f.id), 'favor:'),
+        mystery: d.flags.includes('mystery:solved'),
+      };
     },
 
     state() {

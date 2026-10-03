@@ -105,5 +105,6 @@ tools/                Gemini asset pipeline, headless playtests
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)
 npm run playtest   # headless-browser playtests against the dev server (start it with npm run dev)
+npm run bot        # the playthrough bot: a new player finishes the whole Enchanted Forest (~10 min)
 npm run build      # type-check and production build into dist/
 ```
