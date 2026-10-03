@@ -6,6 +6,7 @@ import { textStyle, titleStyle } from '../ui/style';
 import { audio, isMuted, setMuted, sfx } from '../audio/sfx';
 import { playGeneratedMusic } from '../audio/music';
 import { isVoiceOn, setVoiceOn, speak } from '../audio/voice';
+import { downloadBackup, pickBackupFile } from '../systems/Backup';
 
 export class TitleScene extends Phaser.Scene {
   private controls!: Controls;
@@ -34,13 +35,32 @@ export class TitleScene extends Phaser.Scene {
       titleStyle(44, { align: 'center' })).setOrigin(0.5);
     this.tweens.add({ targets: prompt, scale: 1.06, duration: 700, yoyo: true, repeat: -1 });
 
-    this.add.text(16, height - 34, 'Grown-ups: M = sound on/off · V = voice on/off · hold R to start over',
+    this.add.text(16, height - 34, 'Grown-ups: M sound · V voice · B save a backup · L load a backup · hold R to start over',
       textStyle(18, { color: '#ffffff', stroke: '#2b1f4a', strokeThickness: 4 }));
     this.resetText = this.add.text(width / 2, 680, '', titleStyle(28)).setOrigin(0.5);
 
     const kb = this.input.keyboard!;
     kb.on('keydown-M', () => setMuted(!isMuted()));
     kb.on('keydown-V', () => setVoiceOn(!isVoiceOn()));
+    kb.on('keydown-B', () => {
+      downloadBackup(GameState.data);
+      this.flash('Backup saved to your downloads!');
+    });
+    kb.on('keydown-L', () => {
+      pickBackupFile()
+        .then((save) => {
+          if (!save) return;
+          GameState.restore(save);
+          this.flash(`Loaded ${save.name || 'the'} backup!`);
+          this.time.delayedCall(1200, () => this.scene.restart());
+        })
+        .catch(() => this.flash("That file isn't an Alicorn Adventures backup."));
+    });
+  }
+
+  private flash(msg: string) {
+    this.resetText.setText(msg);
+    this.time.delayedCall(3000, () => { if (this.resetText.text === msg) this.resetText.setText(''); });
   }
 
   update(_t: number, dt: number) {

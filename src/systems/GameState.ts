@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { SaveManager } from './SaveManager';
+import { SAVE_KEY, SaveManager, type SaveData } from './SaveManager';
 import { grantUnlocks, isUnlocked } from './UnlockManager';
 import type { Unlock, UnlockKind } from '../data/unlocks';
 import type { PowerId } from '../data/powers';
@@ -89,6 +89,16 @@ class GameStateImpl {
     const fresh: Unlock[] = grantUnlocks(this.data);
     this.store.save();
     fresh.forEach((u) => this.events.emit('unlock', u));
+  }
+
+  /** Replace the whole save with a restored backup (the old one is kept aside, just in case). */
+  restore(save: SaveData) {
+    try {
+      const current = localStorage.getItem(SAVE_KEY);
+      if (current) localStorage.setItem(`${SAVE_KEY}-before-restore`, current);
+    } catch { /* storage blocked */ }
+    this.store.data = save;
+    this.init();
   }
 
   resetAll() {

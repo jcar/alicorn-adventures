@@ -22,7 +22,14 @@ npm run dev        # open http://localhost:5173
 
 An on-screen "Press ⬇ to …" prompt appears whenever there's something to do.
 
-Grown-up keys on the title screen: **M** turns sound on/off, **V** turns voice on/off, and holding **R** for 3 seconds starts a fresh game.
+Grown-up keys on the title screen:
+- **M**: sound on/off
+- **V**: voice on/off
+- **B**: save a backup (downloads a file)
+- **L**: load a backup
+- Hold **R** for 3 seconds: start a fresh game
+
+Saves live only in this browser on this device. A backup file is how you keep a copy or move progress to another device.
 
 ## How it plays
 
@@ -95,5 +102,6 @@ To add a new area, add a level in `src/data/levels.ts`, a friend in `friends.ts`
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)
+npm run playtest   # headless-browser playtests against the dev server (start it with npm run dev)
 npm run build      # type-check and production build into dist/
 ```
