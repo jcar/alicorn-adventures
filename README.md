@@ -75,15 +75,17 @@ npm run assets -- --only alicorn-*            # prefix match
 npm run assets -- --kind voice   # images | voice | music
 npm run assets -- --rekey        # redo the cut-out from saved originals (no API calls)
 npm run assets -- --verify       # listen to every voice clip and flag any that go off-script
+npm run assets -- --convert      # one-time: turn old PNG/WAV files into WebP/MP3
 npm run assets -- --list-models  # which models your key can use
 ```
 
 - Prompts live in `tools/assets/manifest.json`. They share one style block so the art looks consistent.
 - Only `alicorn-pink` is generated. The other manes (`"kind": "recolor"`) are made from it by changing the color of just the mane and tail, so it's always the same pony. To try a new shade, edit its `hue`/`sat`/`val` and run `npm run assets -- --rekey --only alicorn-*`. That's free and instant. If you ever regenerate `alicorn-pink`, run that same command afterwards.
 - Sprites are generated on magenta, which is then cut out. The untouched originals are kept in `tools/assets/raw/`.
+- **Small and lazy.** Pictures ship as WebP and sound as MP3 (a bundled ffmpeg does the encoding). Only "core" pictures load at start-up, about 0.7 MB. A kingdom's own pictures (`"bundle": "forest"` in the manifest) load when she flies there. Voices and music load the first time they play, and the music box covers the moment while a track loads.
 - Voice lines come from `src/data/dialogue.json`. Only the line itself is sent to the voice model, because it reads any instructions aloud; each character's personality comes from its voice in the manifest. Gemini then transcribes every new clip and checks it against the script, retrying up to 3 times. `npm run assets -- --verify` re-checks all clips without generating anything. If a voice file is missing, the browser's built-in speech reads the line instead.
 - Only the prompts and dialogue text are sent to Google. Your child's chosen name is never sent.
-- **Your own art works too.** Drop a PNG named after a texture key (e.g. `friend-bunny.png`) into `public/assets/images/`, then run `npm run assets -- --index`. Kids' drawings make great friends.
+- **Your own art works too.** Drop a PNG or WebP named after a texture key (e.g. `friend-bunny.png`) into `public/assets/images/`, then run `npm run assets -- --index`. Kids' drawings make great friends.
 
 ## Code map
 

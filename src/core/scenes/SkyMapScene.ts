@@ -6,6 +6,7 @@ import { textStyle, titleStyle } from '../ui/style';
 import { sfx } from '../audio/sfx';
 import { playGeneratedMusic, stopGeneratedMusic } from '../audio/music';
 import { speak } from '../audio/voice';
+import { loadAudio } from '../assets';
 
 interface Island {
   id: string;
@@ -41,6 +42,7 @@ export class SkyMapScene extends Phaser.Scene {
     this.from = data?.from ?? 'glade';
     this.islands = [];
     this.leaving = false;
+    this.music = undefined;
   }
 
   create() {
@@ -127,11 +129,14 @@ export class SkyMapScene extends Phaser.Scene {
   }
 
   private startMusic() {
-    if (this.cache.audio.exists('music-skymap')) {
+    const play = () => {
       stopGeneratedMusic();
       this.music = this.sound.add('music-skymap', { loop: true, volume: 0.35 });
       this.music.play();
-    } else playGeneratedMusic(70, 65);
+    };
+    if (this.cache.audio.exists('music-skymap')) return play();
+    playGeneratedMusic(70, 65);
+    loadAudio(this, 'music-skymap').then((ok) => { if (ok && this.scene.isActive() && !this.music) play(); });
   }
 
   private choose(i: number) {

@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
-import { LEVELS, GROUND_Y, SKY_MAP, WORLD_HEIGHT, kingdomOfArea, type Hideable, type LevelDef } from '../content';
+import { LEVELS, GROUND_Y, SKY_MAP, WORLD_HEIGHT, kingdomOfArea, kingdomOfLevel, type Hideable, type LevelDef } from '../content';
+import { imagesIn, lateImageKeys, loadAudio, queueBundle } from '../assets';
+import { makePlaceholders } from '../art/placeholders';
 import { FRIENDS, findFriend, type FriendDef } from '../content';
 import { powerFromFriend } from '../content';
 import { goldIds, secretIds } from '../content';
@@ -81,6 +83,7 @@ export class WorldScene extends Phaser.Scene implements World {
     this.spots = [];
     this.hidden = [];
     this.solvers = [];
+    this.music = undefined;
     this.overlayGfx = undefined;
     this.shownHints = new Map();
     this.friend = undefined;
@@ -93,7 +96,17 @@ export class WorldScene extends Phaser.Scene implements World {
     this.leaving = false;
   }
 
+  /** Fly-in loading: this kingdom's pictures, if they aren't loaded yet. */
+  preload() {
+    const kingdom = kingdomOfLevel(this.level.id);
+    if (kingdom) queueBundle(this, kingdom.id);
+  }
+
   create() {
+    // Fill in anything that still has no art (or failed to load), but leave other
+    // kingdoms' pictures alone: their real art loads when she flies there.
+    const here = kingdomOfLevel(this.level.id)?.id;
+    makePlaceholders(this, new Set([...lateImageKeys()].filter((k) => !imagesIn(here ?? '').some((a) => a.key === k))));
     const L = this.level;
     this.controls = new Controls(this);
     this.physics.world.setBounds(0, 0, L.width, WORLD_HEIGHT);
@@ -428,15 +441,20 @@ export class WorldScene extends Phaser.Scene implements World {
     }).setScrollFactor(0).setDepth(-5);
   }
 
+  /** The music box plays right away; the real track takes over once it has loaded. */
   private startMusic() {
     const key = `music-${this.level.id}`;
-    if (this.cache.audio.exists(key)) {
+    const play = () => {
       stopGeneratedMusic();
       this.music = this.sound.add(key, { loop: true, volume: 0.35 });
       this.music.play();
-    } else {
-      playGeneratedMusic(this.level.music.bpm, this.level.music.root);
-    }
+    };
+    if (this.cache.audio.exists(key)) return play();
+    playGeneratedMusic(this.level.music.bpm, this.level.music.root);
+    const levelAtStart = this.level.id;
+    loadAudio(this, key).then((ok) => {
+      if (ok && this.scene.isActive() && this.level.id === levelAtStart && !this.music) play();
+    });
   }
 
   // ------------------------------------------------------------ play

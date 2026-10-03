@@ -14,8 +14,11 @@ const hex = (n: number, a = 1) =>
 
 const RAINBOW = [0xff5e5e, 0xffa24c, 0xffe14c, 0x6fe36f, 0x5ec8ff, 0xa77bff];
 
+/** Keys to leave alone this time (their real art loads later). */
+let skip = new Set<string>();
+
 function make(scene: Phaser.Scene, key: string, w: number, h: number, draw: (c: Ctx) => void) {
-  if (scene.textures.exists(key)) return;
+  if (scene.textures.exists(key) || skip.has(key)) return;
   const tex = scene.textures.createCanvas(key, w, h);
   if (!tex) return;
   const c = tex.getContext();
@@ -306,7 +309,8 @@ function drawGround(c: Ctx, t: Theme, w: number, h: number) {
 
 // ---------------------------------------------------------------- entry point
 
-export function makePlaceholders(scene: Phaser.Scene) {
+export function makePlaceholders(scene: Phaser.Scene, later: Set<string> = new Set()) {
+  skip = later;
   for (const m of MANES) {
     const colors = m.id === 'rainbow' ? RAINBOW.map((n) => hex(n)) : [hex(m.color), hex(m.accent)];
     make(scene, `alicorn-${m.id}`, 160, 128, (c) => drawAlicorn(c, colors));

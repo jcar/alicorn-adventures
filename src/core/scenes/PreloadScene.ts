@@ -2,15 +2,12 @@ import Phaser from 'phaser';
 import { makePlaceholders } from '../art/placeholders';
 import { GameState } from '../systems/GameState';
 import { titleStyle } from '../ui/style';
-
-interface AssetList {
-  images: { key: string; url: string }[];
-  audio: { key: string; url: string }[];
-}
+import { lateImageKeys, queueBundle, setAssetIndex, type AssetIndex } from '../assets';
 
 /**
- * Loads whatever generated art/audio exists (listed in public/assets/assets.json
- * by the Gemini pipeline), then fills every gap with placeholder art.
+ * Loads the asset index and the core pictures (listed in public/assets/assets.json
+ * by the Gemini pipeline), then fills every gap with placeholder art. Kingdom
+ * pictures, voices and music load later, when they're needed.
  */
 export class PreloadScene extends Phaser.Scene {
   constructor() { super('Preload'); }
@@ -24,16 +21,15 @@ export class PreloadScene extends Phaser.Scene {
 
     this.load.json('assetList', 'assets/assets.json');
     this.load.once('filecomplete-json-assetList', () => {
-      const list = this.cache.json.get('assetList') as AssetList | undefined;
-      list?.images?.forEach((a) => this.load.image(a.key, a.url));
-      list?.audio?.forEach((a) => this.load.audio(a.key, a.url));
+      setAssetIndex(this.cache.json.get('assetList') as AssetIndex | undefined);
+      queueBundle(this, 'core');
     });
     // A missing or broken file just means that thing uses placeholder art.
     this.load.on('loaderror', (f: Phaser.Loader.File) => console.warn('Asset not loaded, using placeholder:', f.key));
   }
 
   create() {
-    makePlaceholders(this);
+    makePlaceholders(this, lateImageKeys());
     GameState.init();
     this.scene.start('Title');
   }

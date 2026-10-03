@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { DIALOGUE } from '../content';
 import { isMuted } from './sfx';
+import { hasAudioFile, loadAudio } from '../assets';
 
 export const LINES = DIALOGUE;
 
@@ -8,6 +9,8 @@ export const LINES = DIALOGUE;
 const PITCH: Record<string, number> = { narrator: 1.15, bunny: 1.7, fox: 1.3, owl: 0.8, dragon: 1.5, pip: 1.9 };
 
 let current: Phaser.Sound.BaseSound | undefined;
+/** Bumped on every new line, so a clip that finishes loading late doesn't talk over a newer one. */
+let request = 0;
 let voiceOn = true;
 
 export const setVoiceOn = (on: boolean) => { voiceOn = on; if (!on) stopVoice(); };
@@ -18,6 +21,7 @@ export function lineText(id: string, name = ''): string {
 }
 
 export function stopVoice() {
+  request++;
   current?.stop();
   current = undefined;
   try { speechSynthesis.cancel(); } catch { /* not supported */ }
@@ -28,11 +32,24 @@ export function speak(scene: Phaser.Scene, id: string, name = '') {
   if (!voiceOn || isMuted()) return;
   stopVoice();
   const key = `vo-${id}`;
-  if (scene.cache.audio.exists(key)) {
+  const play = () => {
     current = scene.sound.add(key, { volume: 0.9 });
     current.play();
+  };
+  if (scene.cache.audio.exists(key)) return play();
+  if (hasAudioFile(key)) {
+    const mine = ++request;
+    loadAudio(scene, key).then((ok) => {
+      if (mine !== request) return; // something newer was said meanwhile
+      if (ok) play();
+      else browserSpeak(id, name);
+    });
     return;
   }
+  browserSpeak(id, name);
+}
+
+function browserSpeak(id: string, name: string) {
   try {
     const u = new SpeechSynthesisUtterance(lineText(id, name));
     u.pitch = PITCH[LINES[id]?.speaker ?? 'narrator'] ?? 1.1;

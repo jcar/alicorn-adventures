@@ -9,6 +9,7 @@
  *   npm run assets -- --dry-run          show what would be generated
  *   npm run assets -- --list-models      list models this API key can use
  *   npm run assets -- --index            only rebuild public/assets/assets.json
+ *   npm run assets -- --convert          one-time: existing PNG → WebP, WAV → MP3
  *   npm run assets -- --verify           transcribe voice clips and flag any that don't match the script
  *   npm run assets -- --rekey            redo the cut-out/resize from saved originals (no API calls)
  *
@@ -20,8 +21,12 @@
 import 'dotenv/config';
 import { GoogleGenAI } from '@google/genai';
 import sharp from 'sharp';
+import ffmpegPath from 'ffmpeg-static';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -301,6 +306,21 @@ async function recolorFrom(asset) {
   await processImage({ ...asset, kind: 'sprite' }, png);
 }
 
+/** WAV (or anything ffmpeg reads) → MP3. About 10× smaller, and plays everywhere (iPad too). */
+async function toMp3(buf, quality = 4) {
+  const tmp = await mkdtemp(path.join(os.tmpdir(), 'alicorn-'));
+  const src = path.join(tmp, 'in.wav');
+  const dst = path.join(tmp, 'out.mp3');
+  await writeFile(src, buf);
+  await promisify(execFile)(ffmpegPath, ['-hide_banner', '-loglevel', 'error', '-y', '-i', src, '-codec:a', 'libmp3lame', '-q:a', String(quality), dst]);
+  const out = await readFile(dst);
+  await rm(tmp, { recursive: true, force: true });
+  return out;
+}
+
+/** Images ship as WebP: much smaller than PNG, and transparency still works. */
+const toWebp = (buf) => sharp(buf).webp({ quality: 88, alphaQuality: 92, effort: 5 }).toBuffer();
+
 const AUDIO_EXT = { 'audio/mpeg': 'mp3', 'audio/mp3': 'mp3', 'audio/wav': 'wav', 'audio/x-wav': 'wav', 'audio/ogg': 'ogg' };
 
 // ------------------------------------------------------------------ generators
@@ -308,10 +328,11 @@ const AUDIO_EXT = { 'audio/mpeg': 'mp3', 'audio/mp3': 'mp3', 'audio/wav': 'wav',
 async function generateImage(asset, manifest) {
   const parts = [];
   if (asset.ref) {
-    const refPath = path.join(IMG_DIR, `${asset.ref}.png`);
-    if (!existsSync(refPath)) throw new Error(`needs ${asset.ref}.png first (run it with --only ${asset.ref})`);
-    // Flatten the reference onto magenta so the model keeps the same backdrop.
-    const ref = await sharp(refPath).flatten({ background: '#ff00ff' }).png().toBuffer();
+    // Prefer the untouched original (already on magenta); otherwise flatten the game image onto magenta.
+    const rawRef = path.join(ROOT, 'tools/assets/raw', `${asset.ref}.png`);
+    const gameRef = path.join(IMG_DIR, `${asset.ref}.webp`);
+    if (!existsSync(rawRef) && !existsSync(gameRef)) throw new Error(`needs ${asset.ref} first (run it with --only ${asset.ref})`);
+    const ref = existsSync(rawRef) ? await readFile(rawRef) : await sharp(gameRef).flatten({ background: '#ff00ff' }).png().toBuffer();
     parts.push({ inlineData: { mimeType: 'image/png', data: ref.toString('base64') } });
   }
   const rules = asset.kind === 'sprite' ? manifest.spriteRules : 'Full-bleed painting that fills the whole frame, no text, no characters, no border.';
@@ -338,7 +359,8 @@ async function processImage(asset, raw) {
   const png = asset.kind === 'sprite'
     ? await keyOutMagenta(raw, asset.w, asset.h, asset.key === 'strong')
     : await sharp(raw).resize(asset.w, asset.h, { fit: 'cover' }).png().toBuffer();
-  await writeFile(path.join(IMG_DIR, `${asset.id}.png`), png);
+  await writeFile(path.join(IMG_DIR, `${asset.id}.webp`), await toWebp(png));
+  await rm(path.join(IMG_DIR, `${asset.id}.png`), { force: true }); // older PNG version
 }
 
 async function speakOnce(line, v) {
@@ -363,14 +385,14 @@ async function speakOnce(line, v) {
 }
 
 /** Ask Gemini what words are actually spoken in a clip. */
-async function transcribe(wav) {
+async function transcribe(buf, mimeType = 'audio/wav') {
   const res = await withRetry('transcribe', () =>
     client().models.generateContent({
       model: MODELS.check,
       contents: [{
         role: 'user',
         parts: [
-          { inlineData: { mimeType: 'audio/wav', data: wav.toString('base64') } },
+          { inlineData: { mimeType, data: buf.toString('base64') } },
           { text: 'Transcribe exactly the words spoken in this audio, word for word. Reply with only those words and nothing else.' },
         ],
       }],
@@ -402,18 +424,21 @@ function matchesLine(transcript, text) {
   const want = words(text);
   const got = words(transcript);
   if (!want.length) return got.length <= 2;
+  // "Star Gate" vs "Stargate": same words, just spaced differently.
+  if (want.join('') === got.join('')) return true;
   return editDistance(want, got) <= Math.max(1, Math.floor(want.length * 0.15));
 }
 
 async function generateVoice(id, line, manifest) {
   const v = manifest.voices[line.speaker] ?? manifest.voices.narrator;
-  const file = path.join(AUDIO_DIR, `vo-${id}.wav`);
+  const file = path.join(AUDIO_DIR, `vo-${id}.mp3`);
   let heard = '';
   for (let attempt = 1; attempt <= 3; attempt++) {
     const wav = await speakOnce(line, v);
     heard = await transcribe(wav);
     if (matchesLine(heard, line.text)) {
-      await writeFile(file, wav);
+      await writeFile(file, await toMp3(wav));
+      await rm(path.join(AUDIO_DIR, `vo-${id}.wav`), { force: true }); // older WAV version
       return;
     }
     process.stdout.write(`(retry: heard "${heard.slice(0, 60)}") `);
@@ -427,9 +452,10 @@ async function generateVoice(id, line, manifest) {
 async function verifyVoices(dialogue) {
   const bad = [];
   for (const [id, line] of Object.entries(dialogue)) {
-    const file = path.join(AUDIO_DIR, `vo-${id}.wav`);
+    const mp3 = path.join(AUDIO_DIR, `vo-${id}.mp3`);
+    const file = existsSync(mp3) ? mp3 : path.join(AUDIO_DIR, `vo-${id}.wav`);
     if (!wanted(`vo-${id}`, 'voice') || !existsSync(file)) continue;
-    const heard = await transcribe(await readFile(file));
+    const heard = await transcribe(await readFile(file), file.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav');
     const ok = matchesLine(heard, line.text);
     console.log(`${ok ? 'ok ' : 'BAD'} vo-${id}: "${heard}"`);
     if (!ok) bad.push(`vo-${id}`);
@@ -451,23 +477,54 @@ async function generateMusic(track) {
   const mime = (a.inlineData.mimeType ?? 'audio/wav').split(';')[0];
   const data = Buffer.from(a.inlineData.data, 'base64');
   const ext = AUDIO_EXT[mime] ?? 'wav';
-  await writeFile(path.join(AUDIO_DIR, `${track.id}.${ext}`), ext === 'wav' && /L16|pcm/i.test(a.inlineData.mimeType) ? pcmToWav(data) : data);
+  const audio = ext === 'mp3' ? data : await toMp3(ext === 'wav' && /L16|pcm/i.test(a.inlineData.mimeType) ? pcmToWav(data) : data);
+  await writeFile(path.join(AUDIO_DIR, `${track.id}.mp3`), audio);
 }
 
 // ------------------------------------------------------------------ index
 
-async function writeIndex() {
-  const list = async (dir, exts) =>
-    (existsSync(dir) ? await readdir(dir) : [])
-      .filter((f) => exts.includes(path.extname(f).toLowerCase()))
-      .sort()
-      .map((f) => ({ key: path.basename(f, path.extname(f)), url: `assets/${path.basename(dir)}/${f}` }));
+/**
+ * public/assets/assets.json: every file the game can load, with a bundle tag.
+ *   images: "core" loads at start; a kingdom id loads when you fly there.
+ *   audio:  "voice" and "music" load the first time they're needed.
+ * Any file dropped into the folders by hand (named after a texture key) is picked up too.
+ */
+async function writeIndex(manifest) {
+  manifest ??= JSON.parse(await readFile(path.join(ROOT, 'tools/assets/manifest.json'), 'utf8'));
+  const bundleOf = new Map(manifest.images.map((a) => [a.id, a.bundle ?? 'core']));
+  const pick = async (dir, exts) => {
+    const files = (existsSync(dir) ? await readdir(dir) : []).filter((f) => exts.includes(path.extname(f).toLowerCase())).sort();
+    // One file per key, preferring the first extension listed (webp over png, mp3 over wav).
+    const byKey = new Map();
+    for (const ext of exts) for (const f of files) if (path.extname(f).toLowerCase() === ext && !byKey.has(path.basename(f, ext))) byKey.set(path.basename(f, ext), f);
+    return [...byKey.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([key, f]) => ({ key, url: `assets/${path.basename(dir)}/${f}` }));
+  };
   const index = {
-    images: await list(IMG_DIR, ['.png', '.jpg', '.jpeg', '.webp']),
-    audio: await list(AUDIO_DIR, ['.wav', '.mp3', '.ogg']),
+    images: (await pick(IMG_DIR, ['.webp', '.png', '.jpg', '.jpeg'])).map((x) => ({ ...x, bundle: bundleOf.get(x.key) ?? 'core' })),
+    audio: (await pick(AUDIO_DIR, ['.mp3', '.ogg', '.wav'])).map((x) => ({ ...x, kind: x.key.startsWith('vo-') ? 'voice' : x.key.startsWith('music-') ? 'music' : 'sfx' })),
   };
   await writeFile(INDEX, JSON.stringify(index, null, 2) + '\n');
   console.log(`assets.json: ${index.images.length} images, ${index.audio.length} sounds`);
+}
+
+/** One-time: turn existing PNGs into WebP and WAVs into MP3 (originals are removed). */
+async function convertAll() {
+  let n = 0;
+  for (const f of await readdir(IMG_DIR)) {
+    if (!f.endsWith('.png')) continue;
+    const src = path.join(IMG_DIR, f);
+    await writeFile(src.replace(/\.png$/, '.webp'), await toWebp(await readFile(src)));
+    await rm(src);
+    n++;
+  }
+  for (const f of await readdir(AUDIO_DIR)) {
+    if (!f.endsWith('.wav')) continue;
+    const src = path.join(AUDIO_DIR, f);
+    await writeFile(src.replace(/\.wav$/, '.mp3'), await toMp3(await readFile(src)));
+    await rm(src);
+    n++;
+  }
+  console.log(`converted ${n} files`);
 }
 
 /** Every line in the game: core, Home, and each kingdom pack's dialogue.json. */
@@ -495,6 +552,7 @@ async function main() {
     return;
   }
   if (flag('index')) return writeIndex();
+  if (flag('convert')) { await convertAll(); return writeIndex(); }
 
   const manifest = JSON.parse(await readFile(path.join(ROOT, 'tools/assets/manifest.json'), 'utf8'));
   const dialogue = await loadDialogue();
@@ -519,13 +577,13 @@ async function main() {
 
   const jobs = [];
   for (const a of manifest.images)
-    if (wanted(a.id, 'images') && (force || !existsSync(path.join(IMG_DIR, `${a.id}.png`))))
+    if (wanted(a.id, 'images') && (force || !existsSync(path.join(IMG_DIR, `${a.id}.webp`))))
       jobs.push({ label: a.id, kind: 'image', run: () => (a.kind === 'recolor' ? recolorFrom(a) : generateImage(a, manifest)) });
   for (const [id, line] of Object.entries(dialogue))
-    if (wanted(`vo-${id}`, 'voice') && (force || !existsSync(path.join(AUDIO_DIR, `vo-${id}.wav`))))
+    if (wanted(`vo-${id}`, 'voice') && (force || !existsSync(path.join(AUDIO_DIR, `vo-${id}.mp3`))))
       jobs.push({ label: `vo-${id}`, kind: 'voice', run: () => generateVoice(id, line, manifest) });
   for (const t of manifest.music)
-    if (wanted(t.id, 'music') && (force || !['wav', 'mp3', 'ogg'].some((e) => existsSync(path.join(AUDIO_DIR, `${t.id}.${e}`)))))
+    if (wanted(t.id, 'music') && (force || !existsSync(path.join(AUDIO_DIR, `${t.id}.mp3`))))
       jobs.push({ label: t.id, kind: 'music', run: () => generateMusic(t) });
 
   if (!jobs.length) {

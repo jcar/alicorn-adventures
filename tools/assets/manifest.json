@@ -29,10 +29,10 @@
     {"id": "deco-lanterns", "kind": "sprite", "w": 120, "h": 140, "prompt": "A string with three small glowing paper lanterns in pink, yellow and mint hanging from it."},
     {"id": "deco-flowers", "kind": "sprite", "w": 200, "h": 70, "prompt": "A low wide row of little colorful flowers in rainbow colors, like a garden border."},
     {"id": "bg-glade-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A sunny magical forest glade with soft rolling green hills, round fluffy trees with little pink and yellow flowers, blue sky with a pink glow near the horizon. Wide side-scrolling game background, nothing in the bottom sixth (that area is plain grass)."},
-    {"id": "bg-woods-far", "kind": "background", "w": 1280, "h": 720, "prompt": "An enchanted forest at dusk: tall purple and dark-teal trees, soft violet sky, glowing fireflies, gentle and cozy not spooky. Wide side-scrolling game background, nothing in the bottom sixth."},
-    {"id": "bg-meadow-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A mushroom meadow at sunset: giant cute mushrooms with pink, orange and purple spotted caps, pink hills, peach and cream sky. Wide side-scrolling game background, nothing in the bottom sixth."},
-    {"id": "bg-waterfall-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A sparkling crystal waterfall valley: gentle waterfalls, glowing blue, lilac and mint crystals, bright sky blue sky. Wide side-scrolling game background, nothing in the bottom sixth."},
-    {"id": "bg-clouds-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A kingdom in the sky: huge fluffy white clouds, little cloud castles far away, pink to light blue sky, twinkly stars. Wide side-scrolling game background, nothing in the bottom sixth."},
+    {"id": "bg-woods-far", "kind": "background", "w": 1280, "h": 720, "prompt": "An enchanted forest at dusk: tall purple and dark-teal trees, soft violet sky, glowing fireflies, gentle and cozy not spooky. Wide side-scrolling game background, nothing in the bottom sixth.", "bundle": "forest"},
+    {"id": "bg-meadow-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A mushroom meadow at sunset: giant cute mushrooms with pink, orange and purple spotted caps, pink hills, peach and cream sky. Wide side-scrolling game background, nothing in the bottom sixth.", "bundle": "forest"},
+    {"id": "bg-waterfall-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A sparkling crystal waterfall valley: gentle waterfalls, glowing blue, lilac and mint crystals, bright sky blue sky. Wide side-scrolling game background, nothing in the bottom sixth.", "bundle": "forest"},
+    {"id": "bg-clouds-far", "kind": "background", "w": 1280, "h": 720, "prompt": "A kingdom in the sky: huge fluffy white clouds, little cloud castles far away, pink to light blue sky, twinkly stars. Wide side-scrolling game background, nothing in the bottom sixth.", "bundle": "forest"},
     {"id": "alicorn-starlight", "kind": "recolor", "w": 160, "h": 128, "from": "alicorn-pink", "hue": 215, "sat": 0.35, "val": 1.06},
     {"id": "friend-pip", "kind": "sprite", "w": 90, "h": 96, "prompt": "Pip, a tiny shy baby star creature: a soft glowing pale-yellow five-pointed star with a sweet little face, big shiny eyes, rosy cheeks, and two tiny see-through fairy wings. Floating. Match the art style of the reference image.", "ref": "alicorn-pink", "key": "strong"},
     {"id": "chest", "kind": "sprite", "w": 90, "h": 84, "prompt": "A small closed wooden treasure chest with golden trim and a golden clasp, cute and rounded."},
@@ -51,13 +51,19 @@
     {"id": "item-lantern", "kind": "sprite", "w": 50, "h": 70, "prompt": "A small cute lantern with a golden glowing light inside and a brown handle on top."},
     {"id": "item-shell", "kind": "sprite", "w": 60, "h": 50, "prompt": "A pretty pearly white and lavender seashell shaped like a fan, shimmering like moonlight."},
     {"id": "acc-tiara", "kind": "sprite", "w": 60, "h": 34, "prompt": "A small golden tiara with a white star in the middle and two tiny gems, seen from the front."},
-    {"id": "deco-snowman", "kind": "sprite", "w": 90, "h": 130, "prompt": "A friendly little snowman with a carrot nose, a pink scarf and a purple top hat, smiling."},
-    {"id": "deco-tall-crystal", "kind": "sprite", "w": 90, "h": 260, "prompt": "One very tall, thin pale-blue ice crystal standing upright, shiny and glassy."},
+    {"id": "deco-snowman", "kind": "sprite", "w": 90, "h": 130, "prompt": "A friendly little snowman with a carrot nose, a pink scarf and a purple top hat, smiling.", "bundle": "forest"},
+    {"id": "deco-tall-crystal", "kind": "sprite", "w": 90, "h": 260, "prompt": "One very tall, thin pale-blue ice crystal standing upright, shiny and glassy.", "bundle": "forest"},
     {"id": "power-sniff", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a cute pink bunny nose and little sparkles around it."},
     {"id": "power-dash", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a bright golden lightning bolt and speed lines."},
     {"id": "power-glow", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round dark-purple badge icon with a glowing pale-yellow sun-like light in the middle."},
     {"id": "power-warmth", "kind": "sprite", "w": 64, "h": 64, "prompt": "A round badge icon with a friendly little orange and yellow flame shaped like a heart."},
-    {"id": "bg-frost-far", "kind": "background", "w": 1280, "h": 720, "prompt": "Snowy mountain peaks at a gentle winter morning: soft blue and white mountains, snow-covered pine trees, falling snowflakes, pale blue sky, cozy not cold. Wide side-scrolling game background, nothing in the bottom sixth."}
+    {"id": "bg-frost-far", "kind": "background", "w": 1280, "h": 720, "prompt": "Snowy mountain peaks at a gentle winter morning: soft blue and white mountains, snow-covered pine trees, falling snowflakes, pale blue sky, cozy not cold. Wide side-scrolling game background, nothing in the bottom sixth.", "bundle": "forest"},
+    {"id": "island-home", "kind": "sprite", "w": 260, "h": 200, "prompt": "A small floating sky island seen from the side: a grassy top with a tiny cozy cottage with a pink roof, two round bushes and a little golden star above the roof; the underside is a rounded chunk of brown earth and stones hanging in the air."},
+    {"id": "island-forest", "kind": "sprite", "w": 260, "h": 200, "prompt": "A small floating sky island seen from the side, covered in a cluster of round green fairy-tale trees with tiny glowing fireflies; the underside is a rounded chunk of brown earth, roots and stones hanging in the air."},
+    {"id": "island-mystery", "kind": "sprite", "w": 260, "h": 200, "prompt": "A small floating sky island seen from the side, wrapped in soft lavender-grey mist so you can't see what's on top; the underside is a rounded chunk of grey stone hanging in the air. Mysterious but friendly."},
+    {"id": "star-gate", "kind": "sprite", "w": 150, "h": 220, "prompt": "A magical arched gateway made of golden stone, the inside a deep night sky full of twinkling stars, with a big golden star on top of the arch. Front view."},
+    {"id": "bg-forest-hub-far", "kind": "background", "w": 1280, "h": 720, "bundle": "forest", "prompt": "A sunny clearing in the middle of an enchanted forest: soft green grass, big friendly round trees all around, wildflowers, gentle light beams through the leaves, a few fireflies. Wide side-scrolling game background, nothing in the bottom sixth."},
+    {"id": "bg-skymap", "kind": "background", "w": 1280, "h": 720, "prompt": "A dreamy magical sky at twilight seen from high above the clouds: soft purple and pink gradient sky, fluffy pastel clouds far below, twinkling stars and a few faint constellations. Plenty of empty sky, no islands, no land, no characters."}
   ],
   "voices": {
     "narrator": {"voice": "Aoede", "style": "warmly and cheerfully"},
@@ -73,6 +79,8 @@
     {"id": "music-meadow", "prompt": "Bouncy playful music for kids, ukulele, xylophone and light hand percussion, cheerful, 96 bpm, D major, no vocals."},
     {"id": "music-waterfall", "prompt": "Sparkly peaceful music, harp arpeggios, glockenspiel and soft strings, like water and crystals, 80 bpm, E major, no vocals."},
     {"id": "music-clouds", "prompt": "Dreamy floaty music in the sky for young children, soft synth pads, bells and gentle choir oohs, 88 bpm, F major, no vocals."},
-    {"id": "music-frost", "prompt": "Gentle, cozy winter music for young children, soft music box and celesta with warm strings, sparkly and calm like falling snow, 72 bpm, G major, no vocals."}
+    {"id": "music-frost", "prompt": "Gentle, cozy winter music for young children, soft music box and celesta with warm strings, sparkly and calm like falling snow, 72 bpm, G major, no vocals."},
+    {"id": "music-skymap", "prompt": "Soaring, dreamy music for flying over the clouds in a children's game: soft harp glissandos, warm strings and twinkling bells, wonder and adventure, calm, 70 bpm, F major, no vocals."},
+    {"id": "music-forest-hub", "prompt": "Warm, welcoming music for a sunny forest clearing in a children's game: acoustic guitar, flute and light glockenspiel, cheerful and cozy, 80 bpm, D major, no vocals."}
   ]
 }
