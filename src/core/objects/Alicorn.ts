@@ -9,6 +9,9 @@ const TROT = 360;
 const TROT_AFTER_MS = 700;
 const FLAP_VELOCITY = -430;
 const MAX_FALL = 280; // wings make every fall a gentle float
+
+/** Underwater: the same keys, just floatier. Space swims up, she drifts down slowly. */
+const SWIM = { gravityOffset: -620, stroke: -270, maxSink: 110, walk: 190, glide: 270 };
 const MAGIC_COOLDOWN = 450;
 const DASH_SPEED = 980;
 const DASH_MS = 380;
@@ -27,6 +30,7 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
   private accessory?: Phaser.GameObjects.Image;
   private trail?: Phaser.GameObjects.Particles.ParticleEmitter;
   private feathers: Phaser.GameObjects.Particles.ParticleEmitter;
+  private bubbles: Phaser.GameObjects.Particles.ParticleEmitter;
   private magicFx: Phaser.GameObjects.Particles.ParticleEmitter;
   /** Last place we stood on solid ground, for the cloud to bring us back to. */
   safeSpot = new Phaser.Math.Vector2();
@@ -50,6 +54,10 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
     this.feathers = scene.add.particles(0, 0, 'fx-feather', {
       speed: { min: 40, max: 120 }, angle: { min: 60, max: 120 }, lifespan: 700,
       alpha: { start: 1, end: 0 }, rotate: { min: 0, max: 360 }, gravityY: 60, emitting: false,
+    }).setDepth(9);
+    this.bubbles = scene.add.particles(0, 0, 'fx-bubble', {
+      speedY: { min: -120, max: -60 }, speedX: { min: -30, max: 30 }, lifespan: 1100, scale: { start: 0.9, end: 0.4 },
+      alpha: { start: 0.9, end: 0 }, emitting: false,
     }).setDepth(9);
     this.magicFx = scene.add.particles(0, 0, 'fx-star', {
       speed: { min: 120, max: 320 }, lifespan: 700, scale: { start: 1, end: 0 },
@@ -86,6 +94,18 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  /** True in underwater areas. */
+  swimming = false;
+
+  setSwimming(on: boolean) {
+    this.swimming = on;
+    this.body.setGravityY(on ? SWIM.gravityOffset : 0);
+    if (on) {
+      // A gentle bob while floating still.
+      this.scene.tweens.add({ targets: this, angle: { from: -3, to: 3 }, duration: 1600, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
+    }
+  }
+
   /** Returns true on the frame horn magic is cast. */
   control(c: Controls, dt: number, magicPressed: boolean): boolean {
     if (this.frozen) {
@@ -107,23 +127,25 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
     if (dir !== 0) {
       this.holdMs += dt;
       this.facing = dir as 1 | -1;
-      const speed = this.holdMs > TROT_AFTER_MS ? TROT : WALK;
+      const speed = this.swimming ? (this.holdMs > TROT_AFTER_MS ? SWIM.glide : SWIM.walk) : this.holdMs > TROT_AFTER_MS ? TROT : WALK;
       b.setVelocityX(Phaser.Math.Linear(b.velocity.x, dir * speed, 0.2));
     } else {
       this.holdMs = 0;
-      b.setVelocityX(b.velocity.x * 0.8);
+      b.setVelocityX(b.velocity.x * (this.swimming ? 0.92 : 0.8)); // water glides to a stop
     }
     this.setFlipX(this.facing < 0);
 
     if (c.flap()) this.flap();
 
     // Floaty fall. Holding flap floats down even slower.
-    const maxFall = c.flapHeld ? MAX_FALL * 0.5 : MAX_FALL;
+    const maxFall = this.swimming ? SWIM.maxSink : c.flapHeld ? MAX_FALL * 0.5 : MAX_FALL;
     if (b.velocity.y > maxFall) b.setVelocityY(maxFall);
 
     // Tilt into flight and trot bob, for life without extra frames.
-    const targetAngle = onGround ? 0 : Phaser.Math.Clamp(b.velocity.y / 30, -10, 10) * this.facing;
-    this.angle = Phaser.Math.Linear(this.angle, targetAngle, 0.15);
+    if (!this.swimming) {
+      const targetAngle = onGround ? 0 : Phaser.Math.Clamp(b.velocity.y / 30, -10, 10) * this.facing;
+      this.angle = Phaser.Math.Linear(this.angle, targetAngle, 0.15);
+    }
 
     this.trail && (this.trail.emitting = Math.abs(b.velocity.x) > 40 || !onGround);
 
@@ -138,6 +160,13 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
   }
 
   flap() {
+    if (this.swimming) {
+      this.body.setVelocityY(SWIM.stroke);
+      sfx.bubble();
+      this.bubbles.explode(5, this.x + 50 * this.facing, this.y - 40);
+      this.scene.tweens.add({ targets: this, scaleY: 0.9, scaleX: 1.06, duration: 140, yoyo: true, ease: 'Sine.out' });
+      return;
+    }
     this.body.setVelocityY(FLAP_VELOCITY);
     sfx.flap();
     this.feathers.explode(3, this.x - 10 * this.facing, this.y - 10);

@@ -611,6 +611,78 @@ export function makePlaceholders(scene: Phaser.Scene, later: Set<string> = new S
     poly(c, [45, 4, 55, 80, 45, 260, 35, 80], 'rgba(255,255,255,0.7)');
   });
 
+  // ---------------------------------------------------------- Coral Kingdom
+  const critter = (c: Ctx, body: string, line: string, extra: (c: Ctx) => void) => {
+    ellipse(c, 50, 64, 32, 28, body, line);
+    eye(c, 40, 58); eye(c, 60, 58);
+    circle(c, 34, 70, 4, 'rgba(255,140,180,0.45)'); circle(c, 66, 70, 4, 'rgba(255,140,180,0.45)');
+    extra(c);
+  };
+  make(scene, 'friend-marina', 100, 110, (c) => critter(c, '#7fe0d6', '#3aa7a3', (c) => {
+    ellipse(c, 50, 30, 18, 14, '#7fe0d6', '#3aa7a3'); for (let i = 0; i < 4; i++) circle(c, 38 + i * 8, 18, 6, '#ff9ecf');
+    poly(c, [70, 90, 92, 104, 76, 80], '#5ec8c0', '#3aa7a3', 2);
+  }));
+  make(scene, 'friend-otto', 100, 110, (c) => critter(c, '#b5835a', '#7a5236', (c) => {
+    ellipse(c, 50, 74, 18, 16, '#f0d9bd'); circle(c, 30, 38, 7, '#b5835a', '#7a5236'); circle(c, 70, 38, 7, '#b5835a', '#7a5236');
+    ellipse(c, 50, 66, 4, 3, '#2b1f4a');
+  }));
+  make(scene, 'friend-crab', 110, 100, (c) => critter(c, '#ff7a5c', '#c94f3a', (c) => {
+    circle(c, 14, 50, 12, '#ff7a5c', '#c94f3a'); circle(c, 86, 50, 12, '#ff7a5c', '#c94f3a');
+    poly(c, [36, 30, 50, 14, 64, 30], '#2b1f4a'); star(c, 50, 26, 5, 2, '#ffd23c');
+  }));
+  make(scene, 'friend-tide', 200, 130, (c) => {
+    ellipse(c, 100, 76, 90, 46, '#7a8fd6', '#4f5fa8'); ellipse(c, 100, 92, 70, 24, '#dfe6ff');
+    poly(c, [180, 60, 200, 40, 196, 80], '#7a8fd6', '#4f5fa8'); eye(c, 50, 66, 1.2);
+    circle(c, 40, 80, 5, 'rgba(255,140,180,0.45)');
+  });
+  make(scene, 'item-pearl', 44, 44, (c) => { circle(c, 22, 22, 16, '#f6f2ff', '#c9b6e4', 3); circle(c, 16, 16, 4, '#ffffff'); });
+  make(scene, 'item-key', 60, 40, (c) => { circle(c, 14, 20, 11, 'rgba(0,0,0,0)', '#ffd23c', 6); roundRect(c, 24, 16, 32, 8, 3, '#ffd23c'); roundRect(c, 46, 22, 6, 10, 2, '#ffd23c'); });
+  make(scene, 'item-treasure-map', 60, 50, (c) => { roundRect(c, 4, 6, 52, 38, 4, '#f6e3b4', '#c9a46a'); c.strokeStyle = '#c94f3a'; c.lineWidth = 4; c.beginPath(); c.moveTo(34, 18); c.lineTo(44, 30); c.moveTo(44, 18); c.lineTo(34, 30); c.stroke(); });
+  make(scene, 'sea-glass', 110, 720, (c) => {
+    const g = c.createLinearGradient(0, 0, 110, 0); g.addColorStop(0, '#9be7d6'); g.addColorStop(0.5, '#e6fff8'); g.addColorStop(1, '#8fd3e6');
+    c.fillStyle = g; c.beginPath(); c.roundRect(10, 0, 90, 720, 30); c.fill(); c.strokeStyle = '#6fc4c0'; c.lineWidth = 4; c.stroke();
+    for (let i = 0; i < 12; i++) star(c, 30 + (i % 3) * 25, 40 + i * 58, 6, 2.5, 'rgba(255,255,255,0.8)');
+  });
+  make(scene, 'big-bubble', 200, 160, (c) => { circle(c, 100, 80, 74, 'rgba(190,234,255,0.35)', '#ffffff', 4); ellipse(c, 70, 50, 18, 10, 'rgba(255,255,255,0.8)', undefined, 0, -0.5); });
+  make(scene, 'jelly', 110, 110, (c) => {
+    c.beginPath(); c.arc(55, 50, 40, Math.PI, 0); c.closePath(); c.fillStyle = '#ffb3d9'; c.fill(); c.strokeStyle = '#d97aa8'; c.lineWidth = 3; c.stroke();
+    for (let i = 0; i < 5; i++) roundRect(c, 25 + i * 14, 52, 5, 34 + (i % 2) * 10, 3, '#ffb3d9');
+    eye(c, 44, 40, 0.8); eye(c, 66, 40, 0.8);
+  });
+  make(scene, 'shell-chime', 60, 70, (c) => {
+    c.beginPath(); c.moveTo(30, 66); c.lineTo(4, 30); c.quadraticCurveTo(30, -6, 56, 30); c.closePath();
+    c.fillStyle = '#ffffff'; c.fill(); c.strokeStyle = '#d6d0ea'; c.lineWidth = 3; c.stroke();
+    for (const a of [-0.7, -0.35, 0, 0.35, 0.7]) { c.beginPath(); c.moveTo(30, 64); c.lineTo(30 + Math.sin(a) * 24, 64 - Math.cos(a) * 44); c.stroke(); }
+  });
+  make(scene, 'anemone-bud', 60, 50, (c) => { ellipse(c, 30, 34, 18, 14, '#c97ab8', '#8f4f86'); for (let i = 0; i < 5; i++) circle(c, 18 + i * 6, 22, 4, '#e8a8d8'); });
+  make(scene, 'anemone', 90, 90, (c) => {
+    ellipse(c, 45, 74, 20, 14, '#ff9ecf', '#c96f9e');
+    for (let i = 0; i < 9; i++) { const a = Math.PI + (i * Math.PI) / 8; roundRect(c, 43 + Math.cos(a) * 26, 50 + Math.sin(a) * 34, 6, 30, 3, ['#ff7eb9', '#ffc93c', '#7fe0d6'][i % 3]); }
+  });
+  make(scene, 'altar-coral', 200, 260, (c) => {
+    roundRect(c, 30, 200, 140, 60, 16, '#9be7d6', '#6fc4c0');
+    c.beginPath(); c.moveTo(100, 210); c.lineTo(20, 120); c.quadraticCurveTo(100, 20, 180, 120); c.closePath();
+    c.fillStyle = '#f6f2ff'; c.fill(); c.strokeStyle = '#c9b6e4'; c.lineWidth = 4; c.stroke();
+    star(c, 100, 110, 26, 11, '#fff6a0', '#e0c46a', 3);
+  });
+  make(scene, 'power-jet', 64, 64, (c) => { circle(c, 32, 32, 30, '#e6f7ff', '#5ec8ff', 3); circle(c, 28, 34, 12, 'rgba(190,234,255,0.6)', '#5ec8ff', 2); circle(c, 44, 22, 6, 'rgba(190,234,255,0.6)', '#5ec8ff', 2); circle(c, 46, 42, 4, '#5ec8ff'); });
+  make(scene, 'power-song', 64, 64, (c) => { circle(c, 32, 32, 30, '#f6f2ff', '#a77bff', 3); c.fillStyle = '#a77bff'; c.font = 'bold 34px sans-serif'; c.textAlign = 'center'; c.fillText('♪', 32, 44); });
+  make(scene, 'acc-shellcrown', 60, 34, (c) => { poly(c, [4, 30, 10, 12, 20, 22, 30, 4, 40, 22, 50, 12, 56, 30], '#ffd1e8', '#d97aa8', 2); circle(c, 30, 16, 5, '#ffffff'); circle(c, 13, 24, 3, '#7fe0d6'); circle(c, 47, 24, 3, '#7fe0d6'); });
+  make(scene, 'deco-coral', 100, 120, (c) => { for (const [x, h, col] of [[30, 90, '#ff7eb9'], [55, 110, '#ffa24c'], [78, 80, '#c97ab8']] as const) { roundRect(c, x - 6, 120 - h, 12, h, 6, col); circle(c, x - 10, 120 - h * 0.7, 8, col); circle(c, x + 10, 120 - h * 0.5, 8, col); } });
+  make(scene, 'deco-seaweed', 70, 200, (c) => { c.strokeStyle = '#3f9a5a'; c.lineWidth = 10; for (const off of [20, 45]) { c.beginPath(); c.moveTo(off, 200); for (let y = 200; y > 10; y -= 30) c.quadraticCurveTo(off + (y % 60 ? 14 : -14), y - 15, off, y - 30); c.stroke(); } });
+  make(scene, 'deco-anchor', 110, 140, (c) => { c.strokeStyle = '#6b6f8a'; c.lineWidth = 10; c.beginPath(); c.moveTo(55, 20); c.lineTo(55, 120); c.moveTo(25, 40); c.lineTo(85, 40); c.stroke(); c.beginPath(); c.arc(55, 100, 40, 0.2, Math.PI - 0.2); c.stroke(); circle(c, 55, 14, 10, 'rgba(0,0,0,0)', '#6b6f8a', 6); });
+  make(scene, 'deco-barrel', 80, 90, (c) => { roundRect(c, 8, 6, 64, 80, 20, '#b5763f', '#7a4a22'); roundRect(c, 8, 26, 64, 6, 2, '#6b6f8a'); roundRect(c, 8, 60, 64, 6, 2, '#6b6f8a'); });
+  make(scene, 'sea-cave', 600, 480, (c) => {
+    c.fillStyle = '#4a6a8a'; c.beginPath(); c.moveTo(0, 480); c.lineTo(0, 200); c.quadraticCurveTo(300, -40, 600, 200); c.lineTo(600, 480); c.closePath(); c.fill();
+    c.fillStyle = '#1f2f4a'; c.beginPath(); c.moveTo(80, 480); c.lineTo(80, 240); c.quadraticCurveTo(300, 60, 520, 240); c.lineTo(520, 480); c.closePath(); c.fill();
+  });
+  make(scene, 'ship-cabin', 600, 480, (c) => {
+    roundRect(c, 0, 40, 600, 440, 20, '#8a5a3c', '#5a3d2b');
+    roundRect(c, 90, 120, 420, 360, 12, '#2b1f2a');
+    for (let x = 0; x < 600; x += 60) roundRect(c, x, 40, 6, 80, 2, '#6b4229');
+  });
+  make(scene, 'deco-beach-hut', 180, 200, (c) => { roundRect(c, 30, 90, 120, 110, 6, '#fff3e0', '#c9a46a'); poly(c, [16, 96, 90, 20, 164, 96], '#ff9ecf', '#d97aa8'); roundRect(c, 76, 140, 30, 60, 6, '#7fd0ff', '#5ea8c8'); });
+
   // ---------------------------------------------------------- Sky Map & Star Gate
   const island = (c: Ctx, top: string, side: string, extra: (c: Ctx) => void) => {
     c.fillStyle = side;
@@ -632,6 +704,10 @@ export function makePlaceholders(scene: Phaser.Scene, later: Set<string> = new S
       circle(c, x, 62 - r * 0.4, r, '#3f8f5a', '#2f6b55', 3);
     }
     for (let i = 0; i < 6; i++) circle(c, 50 + i * 30, 40 + (i % 3) * 10, 3, '#fff6a0');
+  }));
+  make(scene, 'island-coral', 260, 200, (c) => island(c, '#f6e3b4', '#9a8a6a', (c) => {
+    for (const [x, col] of [[70, '#ff7eb9'], [120, '#ffa24c'], [170, '#7fe0d6']] as const) { roundRect(c, x - 6, 50, 12, 40, 6, col); circle(c, x, 50, 12, col); }
+    ellipse(c, 210, 84, 30, 10, '#5ec8ff');
   }));
   make(scene, 'island-mystery', 260, 200, (c) => island(c, '#c9c2dc', '#8f86a8', () => undefined));
   make(scene, 'star-gate', 150, 220, (c) => {

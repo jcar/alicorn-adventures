@@ -48,6 +48,17 @@ Nothing hurts and nothing is timed. If she falls, a smiling cloud floats her bac
 | Rainbow Cloud Kingdom | Baby Dragon | Bloom every flower | **Warm Breath**: melt ice walls |
 | Frosty Peaks | ??? | Follow the clues | — |
 
+**The Coral Kingdom** opens on the Sky Map once the forest mystery is solved. Pip explains that the Guardian Stars are Pip's family, and that big sister Luma fell into the sea and broke into four shards. Its hub is **Coral Cove**, a beach village with Luma's altar. The four areas are underwater, so she **swims**: Space swims up, she drifts down slowly, ← → glide, and ↓ still does things.
+
+| Area | Friend | Their request | Power they teach |
+| --- | --- | --- | --- |
+| Sunny Shallows | Marina the sea pony | Find 4 pearls (one hidden) | **Bubble Jet**: zoom through strong water currents |
+| Kelp Forest | Otto the otter | Make the sea anemones bloom (one in the dark) | — |
+| Sunken Ship | Captain Crab | Find his key in the dark cabin, behind a lock | — |
+| Moonlit Trench | Grandma Tide the whale | Wake her (currents on the way need Bubble Jet) | **Shell Song**: sings sea-glass walls open |
+
+Sea-glass walls in every Coral area hide treasure, golden stars and Luma's shards, so Shell Song sends her back through the sea. Bring all four shards to the altar to restore Luma. That unlocks the Sea Shell Crown and the Ocean mane. Marina and Otto have favors at Home too.
+
 Each area's main path only needs powers she already has. Every area also hides secrets behind **later** powers, so going back to old places pays off.
 
 **Secrets.** Each door shows `✨ secrets found  ⭐ golden stars found`, plus 💎 once that area's color spark is found. Hidden things include:
@@ -111,11 +122,11 @@ src/kingdoms/forest/  The Enchanted Forest pack: areas, friends, powers, puzzles
 tools/                Gemini asset pipeline, headless playtests
 ```
 
-**Adding a kingdom:** make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds`, `ice`, `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
+**Adding a kingdom:** copy the shape of `src/kingdoms/coral/` (the best example). Make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds` (wind or water `current`, each needing a power), `ice`, `walls` (any power opens them, like sea-glass and Shell Song), `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. `mode: 'swim'` makes an area underwater, and `art` swaps the shared flower, crystal, bumper or catch-you-cloud pictures for the area's own. A kingdom's `saga` gives its hub a Guardian Star altar (one shard per area). The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)
 npm run playtest   # headless-browser playtests against the dev server (start it with npm run dev)
-npm run bot        # the playthrough bot: a new player finishes the whole Enchanted Forest (~10 min)
+npm run bot        # the playthrough bot: a new player finishes every kingdom (~15 min)
 npm run build      # type-check and production build into dist/
 ```

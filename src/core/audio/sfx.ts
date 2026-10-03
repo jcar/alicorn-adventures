@@ -78,6 +78,22 @@ export const sfx = {
     src.connect(f).connect(g).connect(a.out);
     src.start(t);
   },
+  /** A soft "bloop" for swim strokes. */
+  bubble() {
+    const a = audio();
+    if (!a) return;
+    const t = a.ctx.currentTime;
+    const osc = a.ctx.createOscillator();
+    const g = a.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(320, t);
+    osc.frequency.exponentialRampToValueAtTime(900, t + 0.12);
+    g.gain.setValueAtTime(0.12, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+    osc.connect(g).connect(a.out);
+    osc.start(t);
+    osc.stop(t + 0.2);
+  },
   magic() {
     [0, 4, 7, 12, 16].forEach((s, i) => tone(84 + s, i * 0.05, 0.4, 'triangle', 0.1));
   },

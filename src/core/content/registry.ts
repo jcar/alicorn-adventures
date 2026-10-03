@@ -36,8 +36,10 @@ export const kingdomOfArea = (areaId: string) => KINGDOMS.find((k) => areaId in 
 export const kingdomOfLevel = (levelId: string) => KINGDOMS.find((k) => k.hub.id === levelId || levelId in k.areas);
 
 /** Kingdoms still being imagined: mystery islands on the Sky Map. */
-export const UPCOMING: Teaser[] = [
+const ALL_TEASERS: Teaser[] = [
   { id: 'coral', name: 'Coral Kingdom', map: { x: 0.6, y: 0.68 } },
   { id: 'sweets', name: 'Sweet Treat Valley', map: { x: 0.7, y: 0.3 } },
   { id: 'moonbeam', name: 'Moonbeam Kingdom', map: { x: 0.87, y: 0.6 } },
 ];
+/** Mystery islands, minus any kingdom that has arrived since. */
+export const UPCOMING: Teaser[] = ALL_TEASERS.filter((t) => !KINGDOMS.some((k) => k.id === t.id));

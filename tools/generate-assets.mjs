@@ -121,7 +121,7 @@ function cornerColor(data, w, h) {
  * removed, then trim and fit into exactly w×h (so physics offsets in the game
  * still line up with the art).
  */
-async function keyOutMagenta(buf, w, h, strong = false) {
+async function keyOutMagenta(buf, w, h, strong = false, fit = 'contain') {
   const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   // Pink manes sit around 50 and the backdrop around 200, so normally only the
   // far end is keyed. "strong" is for glowing things whose soft glow picks up
@@ -150,7 +150,7 @@ async function keyOutMagenta(buf, w, h, strong = false) {
   }
   return sharp(data, { raw: info })
     .trim({ threshold: 1 })
-    .resize(w, h, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 }, kernel: 'lanczos3' })
+    .resize(w, h, { fit, background: { r: 0, g: 0, b: 0, alpha: 0 }, kernel: 'lanczos3' })
     .png()
     .toBuffer();
 }
@@ -370,7 +370,7 @@ async function generateImage(asset, manifest) {
 
 async function processImage(asset, raw) {
   const png = asset.kind === 'sprite'
-    ? await keyOutMagenta(raw, asset.w, asset.h, asset.key === 'strong')
+    ? await keyOutMagenta(raw, asset.w, asset.h, asset.key === 'strong', asset.fit ?? 'contain')
     : await sharp(raw).resize(asset.w, asset.h, { fit: 'cover' }).png().toBuffer();
   await writeFile(path.join(IMG_DIR, `${asset.id}.webp`), await toWebp(png));
   await rm(path.join(IMG_DIR, `${asset.id}.png`), { force: true }); // older PNG version

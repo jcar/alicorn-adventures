@@ -114,5 +114,17 @@
   "skymap-hello": {
     "speaker": "narrator",
     "text": "This is the Sky Map! Fly to an island and press down to land."
+  },
+  "current-blocked": {
+    "speaker": "narrator",
+    "text": "Whoosh! This water current is too strong. Marina the sea pony can teach you to jet through it. Come back later!"
+  },
+  "current-dash": {
+    "speaker": "narrator",
+    "text": "Press down to jet through the current with a big bubble!"
+  },
+  "swim-hint": {
+    "speaker": "narrator",
+    "text": "You can swim! Press space to swim up, and left or right to glide."
   }
 }

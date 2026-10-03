@@ -21,6 +21,7 @@ import { Secrets } from '../world/Secrets';
 import { Patterns } from '../world/Patterns';
 import { Favors } from '../world/Favors';
 import { HeartCrystal } from '../world/HeartCrystal';
+import { GuardianAltar } from '../world/GuardianAltar';
 import type { HiddenThing, Spot, World } from '../world/types';
 import type { Question } from '../puzzles/engine';
 import type { PuzzleResult } from './PuzzleScene';
@@ -127,6 +128,13 @@ export class WorldScene extends Phaser.Scene implements World {
     const startX = this.from ? (L.portals.find((p) => p.target === this.from)?.x ?? L.start.x) : L.start.x;
     this.player = new Alicorn(this, startX, this.from ? GROUND_Y - 80 : L.start.y);
     this.physics.add.collider(this.player, this.solids);
+    if (L.mode === 'swim') {
+      this.player.setSwimming(true);
+      if (!GameState.data.seen.includes('swim')) {
+        GameState.markSeen('swim');
+        this.time.delayedCall(1000, () => this.hint('swim-hint'));
+      }
+    }
 
     this.barriers = new Barriers(this);
     this.barriers.build();
@@ -336,7 +344,7 @@ export class WorldScene extends Phaser.Scene implements World {
       });
     }
     for (const s of L.stations) {
-      if (s.kind === 'crystal') continue; // HeartCrystal builds its own
+      if (s.kind === 'crystal' || s.kind === 'altar') continue; // HeartCrystal / GuardianAltar build their own
       const art = this.add.image(s.x, GROUND_Y + 4, `station-${s.kind}`).setOrigin(0.5, 1).setDepth(4);
       const top = GROUND_Y - art.height;
       this.add.text(s.x, top - 6, s.kind === 'mirror' ? 'Dress Up' : 'Adventure Book', titleStyle(28)).setOrigin(0.5, 1).setDepth(4);
@@ -401,7 +409,7 @@ export class WorldScene extends Phaser.Scene implements World {
     }
 
     for (const b of L.blooms) {
-      const img = this.add.image(b.x, b.y + 4, 'bloom-bud').setOrigin(0.5, 1).setDepth(6);
+      const img = this.add.image(b.x, b.y + 4, L.art?.bud ?? 'bloom-bud').setOrigin(0.5, 1).setDepth(6);
       this.tweens.add({ targets: img, angle: { from: -4, to: 4 }, duration: 1200, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
       const bloom: Bloom = { img, open: false, available: !b.hidden };
       if (b.hidden) {
@@ -441,6 +449,8 @@ export class WorldScene extends Phaser.Scene implements World {
       new HeartCrystal(this, this.gladeFriends).build();
       return;
     }
+    const kingdom = kingdomOfLevel(L.id);
+    if (kingdom && L.id === kingdom.hub.id) new GuardianAltar(this, kingdom).build();
     const def = L.friend && findFriend(L.friend.id);
     if (!def || GameState.hasHelped(def.id)) return;
     this.friend = new Friend(this, L.friend!.x, L.friend!.y + 4, def);
@@ -456,8 +466,10 @@ export class WorldScene extends Phaser.Scene implements World {
       crystals: { tex: 'fx-star', tint: [0xffffff, 0xbfeaff], scale: 0.5 },
       clouds: { tex: 'fx-star', tint: [0xfff6a0, 0xffffff], scale: 0.6 },
       frost: { tex: 'fx-dot', tint: [0xffffff, 0xe6f4ff], scale: 0.55 },
+      beach: { tex: 'fx-dot', tint: [0xffffff, 0xfff0b3], scale: 0.4 },
     };
-    const a = cfg[this.level.theme.deco];
+    if (this.level.mode === 'swim') return this.addWater();
+    const a = cfg[this.level.theme.deco] ?? cfg.glade;
     const snow = this.level.theme.deco === 'frost';
     this.add.particles(0, 0, a.tex, {
       x: { min: 0, max: 1280 }, y: snow ? { min: -20, max: 0 } : { min: 60, max: 600 }, lifespan: snow ? 7000 : 5000,
@@ -465,6 +477,25 @@ export class WorldScene extends Phaser.Scene implements World {
       speedY: snow ? { min: 50, max: 110 } : { min: -25, max: -5 }, scale: { start: a.scale, end: a.scale * 0.3 },
       alpha: { start: 0.9, end: snow ? 0.4 : 0 }, tint: a.tint,
     }).setScrollFactor(0).setDepth(-5);
+  }
+
+  /** Underwater: a soft blue tint, light rays, rising bubbles and little drifting sparkles like fish. */
+  private addWater() {
+    const { width, height } = this.scale;
+    this.add.rectangle(0, 0, width, height, 0x3fa9ff, 0.12).setOrigin(0).setScrollFactor(0).setDepth(20);
+    for (let i = 0; i < 4; i++) {
+      const ray = this.add.rectangle(200 + i * 300, -40, 90, height * 1.4, 0xffffff, 0.06).setOrigin(0.5, 0).setScrollFactor(0.3, 0).setAngle(12).setDepth(-4);
+      this.tweens.add({ targets: ray, alpha: 0.02, duration: 2400 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
+    }
+    this.add.particles(0, 0, 'fx-bubble', {
+      x: { min: 0, max: width }, y: { min: height - 20, max: height }, lifespan: 6000, frequency: 160,
+      speedY: { min: -90, max: -40 }, speedX: { min: -10, max: 10 }, scale: { start: 0.4, end: 0.9 }, alpha: { start: 0.7, end: 0 },
+    }).setScrollFactor(0).setDepth(-3);
+    this.add.particles(0, 0, 'fx-dot', {
+      x: { min: 0, max: width }, y: { min: 80, max: height - 160 }, lifespan: 6000, frequency: 400,
+      speedX: { min: 20, max: 60 }, scale: { start: 0.5, end: 0.3 }, alpha: { start: 0, end: 0.8 },
+      tint: [0xffc93c, 0xff9a4c, 0x7ed6ff], scaleX: 1.6,
+    }).setScrollFactor(0.6, 1).setDepth(-3);
   }
 
   /** The music box plays right away; the real track takes over once it has loaded. */
@@ -494,7 +525,7 @@ export class WorldScene extends Phaser.Scene implements World {
 
     let cast = false;
     if (pressed && near) near.use();
-    else if (pressed && GameState.hasPower('dash') && this.barriers.nearWind()) this.player.dash(() => this.barriers.inWind());
+    else if (pressed && this.canDashHere()) this.player.dash(() => this.barriers.inWind());
     else cast = pressed;
     if (this.player.control(c, dt, cast)) this.onMagic();
 
@@ -507,6 +538,12 @@ export class WorldScene extends Phaser.Scene implements World {
     this.checkFriendTalk();
 
     if (c.back()) this.openOverlay('StickerBook');
+  }
+
+  /** At a wind (needs Dash) or a water current (needs Bubble Jet) she can zoom through? */
+  private canDashHere() {
+    const wd = this.barriers.nearWind();
+    return !!wd && GameState.hasPower(wd.power ?? 'dash');
   }
 
   private nearestSpot(): Spot | undefined {
@@ -573,7 +610,7 @@ export class WorldScene extends Phaser.Scene implements World {
     const r = def.request;
     const q: Quest | null =
       r.kind === 'fetch' ? { texture: `item-${r.item}`, have: this.questHave, need: r.count }
-        : r.kind === 'bloom' ? { texture: 'bloom-flower', have: this.questHave, need: this.blooms.length }
+        : r.kind === 'bloom' ? { texture: this.level.art?.flower ?? 'bloom-flower', have: this.questHave, need: this.blooms.length }
           : null;
     this.registry.set('quest', q);
   }
@@ -629,7 +666,8 @@ export class WorldScene extends Phaser.Scene implements World {
   private openBloom(b: Bloom) {
     b.open = true;
     this.tweens.killTweensOf(b.img);
-    b.img.setTexture('bloom-flower').setTint(Phaser.Utils.Array.GetRandom(PASTELS)).setScale(0).setAngle(0);
+    b.img.setTexture(this.level.art?.flower ?? 'bloom-flower').setScale(0).setAngle(0);
+    if (!this.level.art?.flower) b.img.setTint(Phaser.Utils.Array.GetRandom(PASTELS)); // the shared flower is white, made for tinting
     this.tweens.add({ targets: b.img, scale: 1, duration: 500, ease: 'Back.out' });
     sfx.bloom();
     this.add.particles(b.img.x, b.img.y - 40, 'fx-heart', {
@@ -697,6 +735,11 @@ export class WorldScene extends Phaser.Scene implements World {
     }
     for (const gf of this.gladeFriends) {
       if (this.favors?.hasFavor(gf.def.id)) continue; // they'll talk when you press ⬇
+      // The big saga begins: once the Heart Crystal shines, Pip has news.
+      if (gf.def.id === 'pip' && Math.abs(p.x - gf.x) < 160 && GameState.hasFlag('mystery:solved') && GameState.setFlag('saga:intro')) {
+        this.friendSay(gf, 'pip-sky-family', 9000);
+        continue;
+      }
       if (Math.abs(p.x - gf.x) < 120 && now - this.lastTalk > TALK_GAP_MS + 3000)
         this.friendSay(gf, gf.def.id === 'pip' ? 'pip-glade' : Math.random() < 0.5 ? gf.def.lines.thanks : 'glade-friend');
     }
@@ -727,7 +770,7 @@ export class WorldScene extends Phaser.Scene implements World {
     p.body.moves = false;
     const safe = p.safeSpot;
     p.setPosition(p.x, WORLD_HEIGHT + 20);
-    const cloud = this.add.image(p.x, WORLD_HEIGHT + 90, 'cloud').setDepth(9);
+    const cloud = this.add.image(p.x, WORLD_HEIGHT + 90, this.level.art?.catcher ?? 'cloud').setDepth(9);
     this.bubble.say('Whoops! A cloud caught you!', safe.x, safe.y - 90, 2200);
     if (!this.caughtOnce) speak(this, 'cloud-catch');
     this.caughtOnce = true;

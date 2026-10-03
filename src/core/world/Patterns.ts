@@ -29,7 +29,7 @@ export class Patterns {
 
     s.add.image(def.x, GROUND_Y + 4, 'pedestal').setOrigin(0.5, 1).setDepth(5);
     const crystals = def.crystals.map((c, i) => {
-      const img = s.add.image(c.x, c.y, 'crystal').setTint(COLORS[i % COLORS.length]).setDepth(6).setAlpha(state === 'done' ? 1 : 0.7);
+      const img = s.add.image(c.x, c.y, this.w.level.art?.crystal ?? 'crystal').setTint(COLORS[i % COLORS.length]).setDepth(6).setAlpha(state === 'done' ? 1 : 0.7);
       s.tweens.add({ targets: img, y: c.y - 8, duration: 1100 + i * 90, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
       return img;
     });

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { AREA_ORDER, FAVORS, FRIENDS, LEVELS, SPARK_AREAS, goldIds, secretIds } from '../content';
+import { AREA_ORDER, FAVORS, FRIENDS, KINGDOMS, LEVELS, goldIds, secretIds } from '../content';
 import { activeFavorFor } from '../world/Favors';
 import type { SkillId } from '../puzzles/engine';
 import { GameState } from '../systems/GameState';
@@ -154,9 +154,10 @@ export function installDebug(game: Phaser.Game) {
         friends: `${d.friendsHelped.length}/${FRIENDS.length}`,
         secrets: count(areas.flatMap(secretIds), 'secret:'),
         golds: count(areas.flatMap(goldIds), 'gold:'),
-        sparks: count(SPARK_AREAS, 'spark:'),
+        sparks: count(AREA_ORDER, 'spark:'),
         favors: count(FAVORS.map((f) => f.id), 'favor:'),
         mystery: d.flags.includes('mystery:solved'),
+        stars: count(KINGDOMS.flatMap((k) => (k.saga ? [k.saga.flag.replace('star:', '')] : [])), 'star:'),
       };
     },
 

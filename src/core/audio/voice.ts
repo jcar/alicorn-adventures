@@ -6,7 +6,7 @@ import { hasAudioFile, loadAudio } from '../assets';
 export const LINES = DIALOGUE;
 
 /** Pitch for the browser's built-in voice, used when no generated voice file exists. */
-const PITCH: Record<string, number> = { narrator: 1.15, bunny: 1.7, fox: 1.3, owl: 0.8, dragon: 1.5, pip: 1.9 };
+const PITCH: Record<string, number> = { narrator: 1.15, bunny: 1.7, fox: 1.3, owl: 0.8, dragon: 1.5, pip: 1.9, marina: 1.5, otto: 1.3, crab: 0.9, tide: 0.7, luma: 1.3 };
 
 let current: Phaser.Sound.BaseSound | undefined;
 /** Bumped on every new line, so a clip that finishes loading late doesn't talk over a newer one. */

@@ -24,8 +24,9 @@ export class Darkness {
     this.brush = s.make.image({ key: 'fx-light', add: false });
     for (const d of this.w.level.darks ?? []) {
       // Rocky cave arch behind, when the dark place sits on the ground.
-      if (d.y + d.h >= GROUND_Y)
-        s.add.image(d.x + d.w / 2, GROUND_Y + 10, 'cave').setOrigin(0.5, 1).setDisplaySize(d.w + 80, d.h + 40).setDepth(1);
+      const cave = this.w.level.art?.cave ?? 'cave';
+      if (d.y + d.h >= GROUND_Y && d.y > 0)
+        s.add.image(d.x + d.w / 2, GROUND_Y + 10, cave).setOrigin(0.5, 1).setDisplaySize(d.w + 80, d.h + 40).setDepth(1);
       const rt = s.add.renderTexture(d.x, d.y, d.w, d.h).setOrigin(0).setDepth(9.6);
       rt.fill(DARK, 0.95);
       this.zones.push({ ...d, rt });

@@ -6,7 +6,7 @@ import { FRIENDS } from '../src/core/content';
 import { AREA_ORDER, LEVELS } from '../src/core/content';
 import { ACCESSORIES, MANES, TRAILS } from '../src/core/content';
 import { DIALOGUE as dialogue } from '../src/core/content';
-import { FAVORS } from '../src/core/content';
+import { FAVORS, KINGDOMS } from '../src/core/content';
 
 describe('UnlockManager', () => {
   it('grants the starter kit silently', () => {
@@ -48,6 +48,7 @@ describe('UnlockManager', () => {
       ...Object.values(LEVELS).flatMap((L) => (L.golds ?? []).map((g) => `gold:${g.id}`)),
       ...FAVORS.map((f) => `favor:${f.id}`),
       'mystery:solved',
+      ...KINGDOMS.flatMap((k) => (k.saga ? [k.saga.flag] : [])),
     ];
     grantUnlocks(s);
     expect(s.unlocked.sort()).toEqual(UNLOCKS.map((u) => u.id).sort());

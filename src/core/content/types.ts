@@ -6,7 +6,7 @@
 export const WORLD_HEIGHT = 720;
 export const GROUND_Y = 620;
 
-export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost';
+export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost' | 'beach' | 'reef' | 'kelp' | 'ship' | 'trench';
 
 export interface Theme {
   skyTop: number;
@@ -48,13 +48,19 @@ export interface LevelDef {
   bouncers: Point[];
   friend?: { id: string; x: number; y: number };
   portals: { x: number; target: string }[];
-  stations: { x: number; kind: 'mirror' | 'tree' | 'crystal' }[];
+  stations: { x: number; kind: 'mirror' | 'tree' | 'crystal' | 'altar' }[];
 
   // ---- secrets & powers (all optional)
   /** Solid on every side: tunnel walls for golden-star challenges. */
   blocks?: { x: number; y: number; w: number; h: number }[];
   /** Full-height wind that pushes back toward the start. Needs Dash. */
-  winds?: { x: number; w: number }[];
+  winds?: { x: number; w: number; power?: PowerId; style?: 'wind' | 'current' }[];
+  /** Full-height walls that open with a power (e.g. sea-glass opens with Shell Song). */
+  walls?: { id: string; x: number; power: PowerId; texture: string; blocked: string; can: string }[];
+  /** 'swim': underwater (floaty, same keys). Default is 'explore'. */
+  mode?: 'explore' | 'swim';
+  /** Swap the shared pictures for this area's own (flower bud, flower, pattern crystal, the catch-you cloud). */
+  art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string };
   /** Full-height ice wall. Needs Warm Breath. */
   ice?: { id: string; x: number }[];
   /** Too dark to see without Glow. */
@@ -113,7 +119,7 @@ export function tunnel(x: number, w: number, starId: string) {
 // ------------------------------------------------------------ friends
 
 export type FriendRequest =
-  | { kind: 'fetch'; item: 'carrot' | 'berry'; count: number }
+  | { kind: 'fetch'; item: string; count: number }
   | { kind: 'wake' }
   | { kind: 'bloom' }
   /** Just find them. (Pip is hiding.) */
@@ -133,7 +139,7 @@ export interface FriendDef {
 
 /** Every friend you help teaches a power. Each one opens up secrets everywhere. */
 export interface PowerDef {
-  id: 'sniff' | 'dash' | 'glow' | 'warmth';
+  id: 'sniff' | 'dash' | 'glow' | 'warmth' | 'jet' | 'song';
   name: string;
   friend: string;
   icon: string;
@@ -236,6 +242,21 @@ export interface KingdomDef {
   favors: FavorDef[];
   unlocks: Unlock[];
   dialogue: Record<string, Line>;
+  /** The kingdom's Guardian Star: restored at the hub's altar from one shard per area. */
+  saga?: Saga;
+}
+
+export interface Saga {
+  /** Flag set when the star is restored, e.g. "star:coral". */
+  flag: string;
+  starName: string;
+  altarTexture: string;
+  /** Areas whose sparks are the star's shards. */
+  shards: string[];
+  /** Status lines: lines.status[n] = n shards found; then ready / done / finale. */
+  lines: { status: string[]; finale: string; done: string };
+  /** Who signs this kingdom's clue notes (shown in the Adventure Book). */
+  clueTitle: string;
 }
 
 /** Home: the player's own place (the Glade). */

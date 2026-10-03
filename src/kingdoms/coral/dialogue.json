@@ -1,0 +1,138 @@
+{
+  "marina-ask": {
+    "speaker": "marina",
+    "text": "Oh, hello! My four pearls rolled away in the waves. Can you find them?"
+  },
+  "marina-progress": {
+    "speaker": "marina",
+    "text": "You found some! Keep looking. One might be hiding!"
+  },
+  "marina-thanks": {
+    "speaker": "marina",
+    "text": "My pearls! You are a true friend of the sea!"
+  },
+  "otto-ask": {
+    "speaker": "otto",
+    "text": "The sea anemones are all closed up. Can you make them bloom again?"
+  },
+  "otto-progress": {
+    "speaker": "otto",
+    "text": "Ooh, so colorful! More, please!"
+  },
+  "otto-thanks": {
+    "speaker": "otto",
+    "text": "The Kelp Forest is bright again! Thank you!"
+  },
+  "crab-ask": {
+    "speaker": "crab",
+    "text": "Ahoy! I lost the key to my treasure chest in the dark cabin. Can you find it?"
+  },
+  "crab-progress": {
+    "speaker": "crab",
+    "text": "Did you find my key yet, matey?"
+  },
+  "crab-thanks": {
+    "speaker": "crab",
+    "text": "My key! Thank you, matey! You are a fine sailor!"
+  },
+  "tide-ask": {
+    "speaker": "tide",
+    "text": "Zzz... Zzz..."
+  },
+  "tide-hint": {
+    "speaker": "narrator",
+    "text": "Grandma Tide is fast asleep. Press down to use your horn magic!"
+  },
+  "tide-thanks": {
+    "speaker": "tide",
+    "text": "Oh my! I have been asleep for a hundred years! Thank you, little one."
+  },
+  "power-jet": {
+    "speaker": "narrator",
+    "text": "Marina taught you Bubble Jet! In a strong water current, press down to zoom right through."
+  },
+  "power-song": {
+    "speaker": "narrator",
+    "text": "Grandma Tide taught you Shell Song! Press down near sea-glass walls to sing them open."
+  },
+  "glass-blocked": {
+    "speaker": "narrator",
+    "text": "This sea-glass wall is shut tight. Grandma Tide can teach you a song to open it. Come back later!"
+  },
+  "glass-sing": {
+    "speaker": "narrator",
+    "text": "Press down to sing the sea-glass open!"
+  },
+  "coral-note-1": {
+    "speaker": "luma",
+    "text": "Hello, little alicorn. I am Luma, Pip's big sister. I fell into the sea and broke into four shining pieces. From, L."
+  },
+  "coral-note-2": {
+    "speaker": "luma",
+    "text": "One piece of me is hiding where the anemones sleep in the dark. From, L."
+  },
+  "coral-note-3": {
+    "speaker": "luma",
+    "text": "The old ship keeps a piece of me. Swim past the strong current to find it. From, L."
+  },
+  "coral-note-4": {
+    "speaker": "luma",
+    "text": "Bring all four pieces to the altar in Coral Cove, and I will shine again. From, L."
+  },
+  "coral-altar-0": {
+    "speaker": "narrator",
+    "text": "The sea altar is waiting for Luma's four shining shards."
+  },
+  "coral-altar-1": {
+    "speaker": "narrator",
+    "text": "One shard is home. Three more to find!"
+  },
+  "coral-altar-2": {
+    "speaker": "narrator",
+    "text": "Two shards are home. Two more to find!"
+  },
+  "coral-altar-3": {
+    "speaker": "narrator",
+    "text": "Three shards are home. Just one more!"
+  },
+  "coral-altar-finale": {
+    "speaker": "narrator",
+    "text": "Luma shines again! Pip's big sister is back in the sky. You did it!"
+  },
+  "coral-altar-done": {
+    "speaker": "narrator",
+    "text": "Luma twinkles happily over the sea."
+  },
+  "marina-favor-ask": {
+    "speaker": "marina",
+    "text": "I love counting my pearls! Will you help me with a pearl sum?"
+  },
+  "marina-favor-thanks": {
+    "speaker": "marina",
+    "text": "Yes! You are so clever!"
+  },
+  "crab-favor-ask": {
+    "speaker": "crab",
+    "text": "I need a treasure map! Otto has an old one. Can you ask Otto for me?"
+  },
+  "otto-favor-ask": {
+    "speaker": "otto",
+    "text": "I will give you my map if you can answer my riddle!"
+  },
+  "otto-riddle": {
+    "speaker": "otto",
+    "text": "I show you where to go, but I cannot walk. An X marks a spot on me. What am I?"
+  },
+  "otto-favor-give": {
+    "speaker": "otto",
+    "text": "A map! You got it. Here, take it to Captain Crab."
+  },
+  "crab-favor-wait": {
+    "speaker": "crab",
+    "text": "Do you have Otto's map yet, matey?"
+  },
+  "crab-favor-thanks": {
+    "speaker": "crab",
+    "text": "A treasure map! Hooray! Let's go treasure hunting someday!"
+  }
+}

@@ -1,4 +1,4 @@
-// The playthrough bot: a brand-new player finishes the whole Enchanted Forest,
+// The playthrough bot: a brand-new player finishes every kingdom (the Enchanted Forest, the Coral Kingdom),
 // every friend, power, gate, pattern, chest, clue, golden star, spark and favor,
 // ending with the Heart Crystal finale. It moves around with the debug kit but
 // does every interaction with real key presses, and checks progress at each step.
@@ -64,8 +64,8 @@ async function sweep(area) {
   const of = (re) => keys.filter((k) => re.test(k));
   for (const k of of(/-gate$/)) { await tp(k); await press(1); await h.wait(800); await solveIfOpen(); }
   for (const k of of(/-pattern$/)) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1600); }
-  for (const k of of(/-ice/)) { await tp(k); await press(2); await h.wait(600); }
-  for (const k of of(/-chest-|^note-|-sign$/)) { await tp(k); await press(2); await h.wait(400); }
+  for (const k of of(/-ice|-glass$/)) { await tp(k); await press(2); await h.wait(600); }
+  for (const k of of(/-chest-|note-|-sign$/)) { await tp(k); await press(2); await h.wait(400); }
   for (const k of of(/-gold-/)) { await tp(m[k].x, m[k].y); await h.wait(500); }
   for (const k of of(/^spark$/)) { await tp(m[k].x, m[k].y); await h.wait(700); }
   for (const k of of(/^moon-shell$/)) { await tp(m[k].x - 40); await press(1); await tp(m[k].x, m[k].y - 20); await h.wait(600); }
@@ -85,9 +85,13 @@ for (let i = 0; i < 20; i++) {
 }
 await h.shot(out, 'bot-1-favors-done');
 
-// ---- pass 5: the Heart Crystal finale
+// ---- pass 5: the Heart Crystal finale, then each kingdom's Guardian Star
 await tp('crystal'); await press(1); await h.wait(4500);
 await h.shot(out, 'bot-2-finale');
+for (const hub of ['coral-hub']) {
+  await go(hub, 'altar'); await press(1); await h.wait(4500);
+  await h.shot(out, `bot-3-${hub}-altar`);
+}
 
 const p = await progress();
 log(JSON.stringify(p));
@@ -98,6 +102,7 @@ check('every golden star found', full(p.golds));
 check('every color spark found', full(p.sparks));
 check('every favor done', full(p.favors));
 check('the mystery is solved', p.mystery === true);
+check("every kingdom's Guardian Star is restored", full(p.stars));
 console.log('screens in', out);
 console.log('ERRORS', h.errors.join('\n') || 'none');
 await h.browser.close();

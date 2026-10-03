@@ -1,5 +1,5 @@
-import { AREA_ORDER, FRIENDS, HOME, LEVELS, POWERS } from './registry';
-import type { Hideable, LevelDef, PowerId } from './types';
+import { AREA_ORDER, FRIENDS, HOME, KINGDOMS, LEVELS, POWERS } from './registry';
+import type { Hideable, KingdomDef, LevelDef, PowerId } from './types';
 
 /**
  * Which powers you need to reach a spot in a level. Winds and ice walls are
@@ -9,7 +9,8 @@ import type { Hideable, LevelDef, PowerId } from './types';
 export function powersNeeded(level: LevelDef, p: Hideable): Set<PowerId> {
   const need = new Set<PowerId>();
   if (p.hidden) need.add('sniff');
-  for (const w of level.winds ?? []) if (p.x >= w.x) need.add('dash');
+  for (const w of level.winds ?? []) if (p.x >= w.x) need.add(w.power ?? 'dash');
+  for (const w of level.walls ?? []) if (p.x >= w.x) need.add(w.power);
   for (const i of level.ice ?? []) if (p.x >= i.x) need.add('warmth');
   for (const d of level.darks ?? [])
     if (p.x >= d.x && p.x <= d.x + d.w && p.y >= d.y && p.y <= d.y + d.h) need.add('glow');
@@ -29,11 +30,12 @@ export function secretIds(level: LevelDef): string[] {
 
 export const goldIds = (level: LevelDef) => (level.golds ?? []).map((g) => g.id);
 
-/** Clue notes in story order, with the area each one hides in. */
-export function allClues(): { id: string; line: string; area: string }[] {
-  return AREA_ORDER.flatMap((a) =>
-    (LEVELS[a].notes ?? []).filter((n) => n.secret).map((n) => ({ id: n.id, line: n.line, area: a })),
-  ).sort((x, y) => Number(x.id.split('-')[1]) - Number(y.id.split('-')[1]));
+/** A kingdom's clue notes in story order (by the number at the end of their id), with the area each one hides in. */
+export function allClues(kingdom: KingdomDef = KINGDOMS[0]): { id: string; line: string; area: string }[] {
+  const num = (id: string) => Number(id.split('-').pop());
+  return kingdom.areaOrder
+    .flatMap((a) => (kingdom.areas[a].notes ?? []).filter((n) => n.secret).map((n) => ({ id: n.id, line: n.line, area: a })))
+    .sort((x, y) => num(x.id) - num(y.id));
 }
 
 /** Areas whose color sparks the Heart Crystal is waiting for. Frosty Peaks' spark comes from Pip. */

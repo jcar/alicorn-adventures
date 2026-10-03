@@ -50,5 +50,9 @@
   "star-gate-hint": {
     "speaker": "narrator",
     "text": "Look! A Star Gate! Step inside to fly to the Sky Map."
+  },
+  "pip-sky-family": {
+    "speaker": "pip",
+    "text": "Look! The Heart Crystal showed me the Sky Map. My family are the Guardian Stars, and they are lost! My big sister Luma fell into the sea. Will you help me find her?"
   }
 }

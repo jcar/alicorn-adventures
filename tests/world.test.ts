@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AREA_ORDER, LEVELS, GROUND_Y } from '../src/core/content';
+import { AREA_ORDER, LEVELS, GROUND_Y, KINGDOMS } from '../src/core/content';
 import { FRIENDS } from '../src/core/content';
 import { FAVORS } from '../src/core/content';
 import { NUMBER_MAX, PUZZLES } from '../src/core/content';
@@ -23,8 +23,14 @@ describe('every area can be finished with the powers you have when you arrive', 
     });
   }
 
-  it('the last area needs every power', () => {
-    expect(powersOnArrival('frost').size).toBe(POWERS.length);
+  it("each kingdom's last area comes with all the powers taught before it", () => {
+    for (const k of KINGDOMS) {
+      const last = k.areaOrder[k.areaOrder.length - 1];
+      const earlier = AREA_ORDER.slice(0, AREA_ORDER.indexOf(last)).map((a) => LEVELS[a].friend?.id);
+      const expected = POWERS.filter((p) => earlier.includes(p.friend)).length;
+      expect(powersOnArrival(last).size, k.id).toBe(expected);
+    }
+    expect(powersOnArrival('frost').size).toBe(4); // the forest's four
   });
 
   it('each area has a secret you can find on your first visit, and one to come back for', () => {
@@ -65,9 +71,11 @@ describe('secrets, puzzles and favors fit together', () => {
     }
   });
 
-  it('tunes get harder (or stay the same) area by area', () => {
-    const offsets = AREA_ORDER.map((a) => LEVELS[a].patterns?.[0]?.offset ?? 0);
-    for (let i = 1; i < offsets.length; i++) expect(offsets[i]).toBeGreaterThanOrEqual(offsets[i - 1]);
+  it('within a kingdom, tunes get harder (or stay the same) area by area', () => {
+    for (const k of KINGDOMS) {
+      const offsets = k.areaOrder.map((a) => k.areas[a].patterns?.[0]?.offset ?? 0);
+      for (let i = 1; i < offsets.length; i++) expect(offsets[i], k.id).toBeGreaterThanOrEqual(offsets[i - 1]);
+    }
   });
 
   it('every puzzle exists, is spoken, and has a pickable answer', () => {

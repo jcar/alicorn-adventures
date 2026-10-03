@@ -19,6 +19,7 @@ export function markersFor(level: LevelDef): Record<string, Marker> {
   for (const g of level.gates ?? []) m[g.id] = stand(g.x - 90);
   for (const p of level.patterns ?? []) m[p.id] = stand(p.x);
   for (const i of level.ice ?? []) m[i.id] = stand(i.x - 100);
+  for (const w of level.walls ?? []) m[w.id] = stand(w.x - 100);
   for (const w of level.winds ?? []) m[`wind-${w.x}`] = stand(w.x - 120);
   for (const s of level.storyItems ?? []) m[s.id] = { x: s.x, y: s.y };
   (level.items ?? []).forEach((it, i) => { m[`item-${i + 1}`] = { x: it.x, y: it.y }; });

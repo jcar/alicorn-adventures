@@ -3,7 +3,7 @@ import { Controls } from '../systems/Controls';
 import { GameState } from '../systems/GameState';
 import { FRIENDS } from '../content';
 import { UNLOCKS } from '../content';
-import { AREA_COLORS, AREA_ORDER, LEVELS } from '../content';
+import { AREA_COLORS, KINGDOMS, LEVELS, kingdomOfLevel } from '../content';
 import { allClues, goldIds, secretIds, SPARK_AREAS } from '../content';
 import { iconFor } from '../ui/icons';
 import { requirementText } from '../ui/requirement';
@@ -33,6 +33,7 @@ export class StickerBookScene extends Phaser.Scene {
   private tabBoxes: Phaser.GameObjects.Rectangle[] = [];
   private page!: Phaser.GameObjects.Container;
   private caption!: Phaser.GameObjects.Text;
+  private kingdomIdx = 0;
 
   constructor() { super('StickerBook'); }
 
@@ -42,6 +43,9 @@ export class StickerBookScene extends Phaser.Scene {
     this.inGrid = false;
     this.sel = 0;
     this.tabBoxes = [];
+    const world = this.scene.get('World') as unknown as { level?: { id: string } };
+    const here = world?.level && kingdomOfLevel(world.level.id);
+    this.kingdomIdx = Math.max(0, this.kingdoms().findIndex((k) => k.id === here?.id));
 
     this.add.rectangle(0, 0, width, height, 0x2b1f4a, 0.7).setOrigin(0);
     const g = this.add.graphics();
@@ -113,28 +117,35 @@ export class StickerBookScene extends Phaser.Scene {
 
   // ------------------------------------------------------------ map
 
+  /** Kingdoms she can see in the book: any whose friends-needed are met. */
+  private kingdoms() {
+    return KINGDOMS.filter((k) => !k.needs?.some((f) => !GameState.hasHelped(f)));
+  }
+
+  private kingdom() {
+    const list = this.kingdoms();
+    return list[Phaser.Math.Wrap(this.kingdomIdx, 0, list.length)];
+  }
+
   private buildMap() {
     const { width } = this.scale;
+    const k = this.kingdom();
+    const n = k.areaOrder.length;
+    // The hub on the left, then the areas zig-zagging along a path.
     const spots = [
-      { id: 'glade', x: width / 2 - 440, y: 300 },
-      { id: 'woods', x: width / 2 - 220, y: 470 },
-      { id: 'meadow', x: width / 2, y: 300 },
-      { id: 'waterfall', x: width / 2 + 220, y: 470 },
-      { id: 'clouds', x: width / 2 + 440, y: 300 },
-      { id: 'frost', x: width / 2, y: 560 },
+      { id: k.hub.id, x: width / 2 - 440, y: 360 },
+      ...k.areaOrder.map((id, i) => ({ id, x: width / 2 - 220 + (n > 1 ? (660 * i) / (n - 1) : 0), y: i % 2 ? 300 : 470 })),
     ];
+    this.page.add(this.add.text(width / 2, 200, k.name, titleStyle(30)).setOrigin(0.5));
     const path = this.add.graphics().lineStyle(10, 0xe8d6b8);
-    const order = ['glade', ...AREA_ORDER];
-    for (let i = 1; i < order.length; i++) {
-      const a = spots.find((s) => s.id === order[i - 1])!;
-      const b = spots.find((s) => s.id === order[i])!;
-      path.lineBetween(a.x, a.y, b.x, b.y);
-    }
+    for (let i = 1; i < spots.length; i++) path.lineBetween(spots[i - 1].x, spots[i - 1].y, spots[i].x, spots[i].y);
     this.page.add(path);
 
+    const shards = k.saga?.shards ?? (k.id === 'forest' ? SPARK_AREAS : []);
     for (const s of spots) {
       const L = LEVELS[s.id];
-      const open = s.id === 'glade' || GameState.has('area', s.id);
+      const hub = s.id === k.hub.id;
+      const open = hub || GameState.has('area', s.id);
       const card = this.add.rectangle(s.x, s.y, 200, 128, open ? 0xffffff : 0xefe7da).setStrokeStyle(5, open ? COLORS.paperEdge : 0xd9cbb5);
       this.page.add(card);
       this.page.add(this.add.text(s.x, s.y - 40, L.name, textStyle(20, { align: 'center', wordWrap: { width: 190 } })).setOrigin(0.5));
@@ -142,12 +153,13 @@ export class StickerBookScene extends Phaser.Scene {
         this.page.add(this.add.image(s.x, s.y + 16, 'icon-lock').setScale(0.7));
         continue;
       }
-      if (s.id === 'glade') {
-        const colors = SPARK_AREAS.filter((a) => GameState.hasFlag(`spark:${a}`)).length;
-        this.page.add(this.add.text(s.x, s.y, `Heart Crystal\n${colors} of ${SPARK_AREAS.length} colors`, textStyle(18, { align: 'center', color: BROWN })).setOrigin(0.5));
-        SPARK_AREAS.forEach((a, i) => {
-          const gem = this.add.image(s.x - 60 + i * 30, s.y + 44, 'spark').setScale(0.25);
-          if (GameState.hasFlag(`spark:${a}`)) gem.setTint(AREA_COLORS[a]);
+      if (hub) {
+        const star = k.saga?.starName ?? 'Heart Crystal';
+        const got = shards.filter((a) => GameState.hasFlag(`spark:${a}`)).length;
+        this.page.add(this.add.text(s.x, s.y, `${star}\n${got} of ${shards.length} found`, textStyle(18, { align: 'center', color: BROWN })).setOrigin(0.5));
+        shards.forEach((a, i) => {
+          const gem = this.add.image(s.x - ((shards.length - 1) * 30) / 2 + i * 30, s.y + 44, 'spark').setScale(0.25);
+          if (GameState.hasFlag(`spark:${a}`)) gem.setTint(AREA_COLORS[a] ?? 0xffffff);
           else gem.setTintFill(0xd9cbb5);
           this.page.add(gem);
         });
@@ -157,12 +169,14 @@ export class StickerBookScene extends Phaser.Scene {
       const golds = goldIds(L);
       const found = secrets.filter((id) => GameState.hasFlag(`secret:${id}`)).length;
       const gold = golds.filter((id) => GameState.hasFlag(`gold:${id}`)).length;
-      const spark = GameState.hasFlag(`spark:${s.id}`);
+      const spark = !L.spark || GameState.hasFlag(`spark:${s.id}`);
       this.page.add(this.add.text(s.x, s.y, `✨ ${found}/${secrets.length}   ⭐ ${gold}/${golds.length}`, textStyle(22)).setOrigin(0.5));
-      const gem = this.add.image(s.x, s.y + 38, 'spark').setScale(0.3);
-      if (spark) gem.setTint(AREA_COLORS[s.id]);
-      else gem.setTintFill(0xd9cbb5);
-      this.page.add(gem);
+      if (L.spark) {
+        const gem = this.add.image(s.x, s.y + 38, 'spark').setScale(0.3);
+        if (spark) gem.setTint(AREA_COLORS[s.id] ?? 0xffffff);
+        else gem.setTintFill(0xd9cbb5);
+        this.page.add(gem);
+      }
       if (found < secrets.length || gold < golds.length || !spark) {
         const twinkle = this.add.text(s.x + 82, s.y - 58, '✨', textStyle(28)).setOrigin(0.5);
         this.tweens.add({ targets: twinkle, scale: 1.4, duration: 600, yoyo: true, repeat: -1 });
@@ -175,9 +189,12 @@ export class StickerBookScene extends Phaser.Scene {
 
   private buildClues() {
     const { width } = this.scale;
-    this.page.add(this.add.text(width / 2, 200, 'Clues from P', titleStyle(32)).setOrigin(0.5));
-    allClues().forEach((c, i) => {
-      const y = 250 + i * 50;
+    const k = this.kingdom();
+    const clues = allClues(k);
+    this.page.add(this.add.text(width / 2, 200, k.saga?.clueTitle ?? 'Clues from P', titleStyle(32)).setOrigin(0.5));
+    const gap = Math.min(50, 400 / Math.max(1, clues.length));
+    clues.forEach((c, i) => {
+      const y = 250 + i * gap;
       const got = GameState.hasFlag(`secret:${c.id}`);
       const text = got ? lineText(c.line) : `???   (hidden somewhere in ${LEVELS[c.area].name})`;
       this.page.add(this.add.text(120, y, `${i + 1}.`, textStyle(22, { color: BROWN })));
@@ -195,10 +212,10 @@ export class StickerBookScene extends Phaser.Scene {
     } else if (t === 'Stickers') {
       const got = this.stickers.filter((s) => s.got).length;
       this.caption.setText(`${got} of ${this.stickers.length} stickers.  Press ⬇ to look closer.  ← → turn the page.  SPACE closes.`);
-    } else if (t === 'Map') {
-      this.caption.setText('A twinkle ✨ means something is still hiding there!  ← → turn the page.  SPACE closes.');
     } else {
-      this.caption.setText('Read the clues to find where P is hiding.  ← → turn the page.  SPACE closes.');
+      const more = this.kingdoms().length > 1 ? '  ↑ ↓ other kingdoms.' : '';
+      const what = t === 'Map' ? 'A twinkle ✨ means something is still hiding there!' : 'Read the clues to solve the mystery.';
+      this.caption.setText(`${what}  ← → turn the page.${more}  SPACE closes.`);
     }
   }
 
@@ -240,12 +257,22 @@ export class StickerBookScene extends Phaser.Scene {
       sfx.select();
       this.showTab();
     }
-    if (c.menuDown() && TABS[this.tab] === 'Stickers') {
-      this.inGrid = true;
-      this.sel = 0;
+    if (TABS[this.tab] === 'Stickers') {
+      if (c.menuDown()) {
+        this.inGrid = true;
+        this.sel = 0;
+        sfx.select();
+        this.showTab();
+      }
+      c.menuUp();
+      return;
+    }
+    // Map and Clues: ↑ ↓ flip between kingdoms.
+    const dy = (c.menuDown() ? 1 : 0) - (c.menuUp() ? 1 : 0);
+    if (dy && this.kingdoms().length > 1) {
+      this.kingdomIdx += dy;
       sfx.select();
       this.showTab();
     }
-    c.menuUp();
   }
 }
