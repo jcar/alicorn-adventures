@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { SAVE_KEY, SaveManager, type SaveData } from './SaveManager';
+import { MAX_PROFILES, SaveManager, type Profile, type SaveData } from './SaveManager';
 import { grantUnlocks, isUnlocked } from './UnlockManager';
 import type { Unlock, UnlockKind } from '../content';
 import type { PowerId } from '../content';
@@ -91,14 +91,38 @@ class GameStateImpl {
     fresh.forEach((u) => this.events.emit('unlock', u));
   }
 
-  /** Replace the whole save with a restored backup (the old one is kept aside, just in case). */
+  /** Replace the active player's save with a restored backup (the old one is kept aside, just in case). */
   restore(save: SaveData) {
-    try {
-      const current = localStorage.getItem(SAVE_KEY);
-      if (current) localStorage.setItem(`${SAVE_KEY}-before-restore`, current);
-    } catch { /* storage blocked */ }
-    this.store.data = save;
+    const before = this.store.active();
+    if (before) {
+      try {
+        localStorage.setItem(`alicorn-adventures-before-restore-${before.id}`, JSON.stringify(before.save));
+      } catch { /* storage blocked */ }
+    }
+    this.store.replaceActive(save);
     this.init();
+  }
+
+  // ------------------------------------------------------------ profiles
+
+  profiles(): Profile[] { return this.store.profiles(); }
+  activeProfile() { return this.store.active(); }
+  canAddProfile() { return this.store.profiles().length < MAX_PROFILES; }
+
+  selectProfile(id: string) {
+    this.store.select(id);
+    this.init();
+  }
+
+  createProfile(name: string) {
+    const p = this.store.create(name);
+    if (p) this.init();
+    return p;
+  }
+
+  deleteProfile(id: string) {
+    this.store.remove(id);
+    if (this.store.active()) this.init();
   }
 
   resetAll() {

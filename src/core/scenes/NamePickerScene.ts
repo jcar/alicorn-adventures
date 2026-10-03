@@ -28,6 +28,12 @@ export class NamePickerScene extends Phaser.Scene {
 
   constructor() { super('NamePicker'); }
 
+  private newProfile = false;
+
+  init(data: { newProfile?: boolean }) {
+    this.newProfile = !!data?.newProfile;
+  }
+
   create() {
     const { width } = this.scale;
     this.controls = new Controls(this);
@@ -112,7 +118,9 @@ export class NamePickerScene extends Phaser.Scene {
   }
 
   private finish(name: string) {
-    GameState.setName(name);
+    // A brand-new player gets their own profile; otherwise this names the current one.
+    if (this.newProfile || !GameState.activeProfile()) GameState.createProfile(name);
+    else GameState.setName(name);
     sfx.yay();
     this.cameras.main.fadeOut(400, 255, 255, 255);
     this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start('World', { levelId: 'glade', firstTime: true }));

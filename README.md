@@ -29,7 +29,7 @@ Grown-up keys on the title screen:
 - **L**: load a backup
 - Hold **R** for 3 seconds: start a fresh game
 
-Saves live only in this browser on this device. A backup file is how you keep a copy or move progress to another device.
+Up to 4 players can each have their own alicorn and save. Pick one on the title screen with ← →. The B, L and R keys act on the selected player. Saves live only in this browser on this device. A backup file is how you keep a copy or move a player to another device.
 
 ## How it plays
 

@@ -11,7 +11,15 @@ import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 
-export const SAVE_KEY = 'alicorn-adventures-save';
+export const SAVE_KEY = 'alicorn-adventures-save'; // the old single save (seeding it tests the upgrade too)
+export const PROFILES_KEY = 'alicorn-adventures-profiles';
+
+/** In the page: the active player's save (falls back to the old single save). */
+const READ_ACTIVE = `(() => {
+  const store = JSON.parse(localStorage.getItem('${'alicorn-adventures-profiles'}') || 'null');
+  const p = store && store.profiles.find((x) => x.id === store.active);
+  return p ? p.save : JSON.parse(localStorage.getItem('${'alicorn-adventures-save'}') || '{}');
+})()`;
 
 function findChromium() {
   if (process.env.CHROMIUM) return process.env.CHROMIUM;
@@ -23,6 +31,7 @@ function findChromium() {
 }
 
 /** A save in the current format, with sensible defaults. */
+/** An old-style (v2) single save; the game upgrades it into profile 1 on load. */
 export const baseSave = (extra = {}) => ({
   version: 2, name: 'Sparkle', stardust: 0, friendsHelped: [], unlocked: [],
   equipped: { mane: 'pink', trail: 'sparkle', accessory: 'none' },
@@ -54,15 +63,15 @@ export async function start(save, { url = process.env.GAME_URL ?? 'http://localh
   const hold = async (key, ms) => { await page.keyboard.down(key); await wait(ms); await page.keyboard.up(key); };
   const tp = (x, y) => page.evaluate(([x, y]) => window.game.scene.getScene('World').player.body.reset(x, y), [x, y]);
   const face = (dir) => page.evaluate((d) => { window.game.scene.getScene('World').player.facing = d; }, dir);
-  const save_ = () => page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? '{}'), SAVE_KEY);
-  const st = () => page.evaluate((k) => {
+  const save_ = () => page.evaluate(READ_ACTIVE);
+  const st = () => page.evaluate((readActive) => {
     const g = window.game; const w = g.scene.getScene('World'); const p = w?.player;
-    const s = JSON.parse(localStorage.getItem(k) ?? '{}');
+    const s = eval(readActive);
     return {
       active: g.scene.getScenes(true).map((x) => x.scene.key), level: w?.level?.id, p: p && [Math.round(p.x), Math.round(p.y)],
       flags: s.flags, favors: s.favors, helped: s.friendsHelped, stardust: s.stardust, hint: g.registry.get('hint')?.text,
     };
-  }, SAVE_KEY);
+  }, READ_ACTIVE);
   const shot = (dir, name) => page.screenshot({ path: path.join(dir, `${name}.png`) });
   /** Click to focus, then press Space through the title screen. */
   const boot = async () => { await wait(3000); await page.mouse.click(640, 360); await tap('Space'); await wait(1500); };
