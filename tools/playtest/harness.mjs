@@ -38,12 +38,12 @@ export const baseSave = (extra = {}) => ({
   pendingCelebrations: [], flags: [], favors: {}, visited: [], ...extra,
 });
 
-export async function start(save, { url = process.env.GAME_URL ?? 'http://localhost:5173/', touch = false } = {}) {
+export async function start(save, { url = process.env.GAME_URL ?? 'http://localhost:5173/' } = {}) {
   const browser = await chromium.launch({
     executablePath: findChromium(),
     args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required'],
   });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, acceptDownloads: true, hasTouch: touch });
+  const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, acceptDownloads: true });
   const errors = [];
   page.on('pageerror', (e) => errors.push(`[pageerror] ${e.message}\n${(e.stack ?? '').split('\n').slice(0, 4).join('\n')}`));
   page.on('console', (m) => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push(`[console] ${m.text()}`); });

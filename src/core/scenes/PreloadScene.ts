@@ -33,7 +33,6 @@ export class PreloadScene extends Phaser.Scene {
     makePlaceholders(this, lateImageKeys());
     loadSettings();
     GameState.init();
-    this.scene.launch('Touch'); // on-screen buttons, always on top
     this.scene.start('Title');
   }
 }

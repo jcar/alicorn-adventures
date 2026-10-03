@@ -22,7 +22,7 @@ npm run dev        # open http://localhost:5173
 
 An on-screen "Press ⬇ to …" prompt appears whenever there's something to do.
 
-**Tablets:** touch buttons appear as soon as someone touches the screen. ◀ ▶ walk, ★ flies (and means OK in menus), ⬇ does things, ▲ moves up in menus, and ✕ opens the book or goes back. Every screen works with them.
+It's a desktop game: play it on a computer with a keyboard.
 
 **Grown-up Corner:** on the title screen, hold the ⚙ button (or the **G** key) for 2 seconds. It has:
 - Choose a player
