@@ -1,5 +1,5 @@
 import type Phaser from 'phaser';
-import type { LevelDef } from '../content';
+import type { LevelDef, PuzzleSpec } from '../content';
 import type { Alicorn } from '../objects/Alicorn';
 
 /** Something you can walk up to and press ↓ (or Enter) at. */
@@ -42,7 +42,7 @@ export interface World {
   say(lineId: string, x: number, y: number, ms?: number): void;
   giveStardust(n: number, x: number, y: number): void;
   confetti(x: number, y: number, count?: number): void;
-  openPuzzle(puzzleId: string, onSolved: () => void): void;
+  openPuzzle(spec: PuzzleSpec, onSolved: () => void): void;
   /** Debug kit: lets alicorn.solve() finish a puzzle at this x. */
-  registerSolver?(x: number, solve: () => void): void;
+  registerSolver?(x: number, solve: () => void, info?: () => Record<string, unknown>): void;
 }

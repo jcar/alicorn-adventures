@@ -56,10 +56,21 @@ Each area's main path only needs powers she already has. Every area also hides s
 - Golden stars at the end of bouncy-cloud tunnels
 - A color spark in every area
 
-**Puzzles.** These get harder area by area:
-- **Number-lock gates:** addition, then "how many more", multiplication, subtraction, and finally counting the snowmen in Frosty Peaks.
-- **Pattern crystals:** they chime a tune and she repeats it. The tunes grow from 3 notes to 6.
-- **Riddles and favors:** friends in the Glade ask for help. Fox has a berry sum. Fox also wants Owl's lantern, but Owl has a riddle first. Dragon wants a Moon Shell, and Bunny knows where it is if she solves a riddle.
+**Puzzles that adapt to her.** Each player has a level in four skills:
+
+| Skill | Levels | From → to |
+| --- | --- | --- |
+| Math | 1–8 | "2 + 1" → subtraction → "how many more?" → groups → two-step problems → halves and doubles |
+| Reading | 1–6 | "which one is a color?" → rhymes → one-sentence details → inference → riddles → short stories |
+| Logic | 1–6 | simple patterns → number sequences → odd-one-out → skip counting → if-then → who is tallest/shortest |
+| Memory | 1–6 | crystal tunes from 3 notes up to 8 |
+
+- Gates and favors ask questions from the banks at her level. A spot can be a little easier or harder (`offset`). Whispering Woods is math, Mushroom Meadow reading, Crystal Waterfall logic, and Rainbow Cloud Kingdom harder math. The crystals' tune length follows her memory level.
+- **Adapting:** two first-try wins move a skill up a level, and a puzzle that took several tries moves it down. Wrong answers just say "try again", and after two misses on a sum, stars appear to count.
+- **Grown-up dial:** Grown-up Corner → *Puzzle levels* shows and sets each skill's level per player. The game keeps adjusting from there.
+- Story puzzles stay hand-written: Owl's and Bunny's riddles, and counting the snowmen in Frosty Peaks.
+- **Favors:** friends in the Glade ask for help. Fox has a berry sum. Fox also wants Owl's lantern, but Owl has a riddle first. Dragon wants a Moon Shell, and Bunny knows where it is if she solves a riddle.
+- The banks (200 questions, all voiced) are built by `node tools/make-puzzle-banks.mjs`. Edit that file to add questions, then run `npm run assets` to record them.
 
 **The mystery.** The Heart Crystal in the Glade has lost its colors. The eight clue notes tell the story of Pip, a tiny star who fell from the sky and is hiding in Frosty Peaks. She solves the mystery by bringing home all five color sparks and finding Pip.
 

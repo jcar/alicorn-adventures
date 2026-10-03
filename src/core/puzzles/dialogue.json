@@ -1,0 +1,802 @@
+{
+  "pz-math-1-1": {
+    "speaker": "narrator",
+    "text": "Owl has 3 acorns. Then 2 more. How many acorns now?"
+  },
+  "pz-math-1-2": {
+    "speaker": "narrator",
+    "text": "Dragon has 1 acorn. Then 3 more. How many acorns now?"
+  },
+  "pz-math-1-3": {
+    "speaker": "narrator",
+    "text": "Fox has 1 berry. Then 4 more. How many berries now?"
+  },
+  "pz-math-1-4": {
+    "speaker": "narrator",
+    "text": "Pip has 3 carrots. Then 1 more. How many carrots now?"
+  },
+  "pz-math-1-5": {
+    "speaker": "narrator",
+    "text": "Pip has 2 carrots. Then 1 more. How many carrots now?"
+  },
+  "pz-math-1-6": {
+    "speaker": "narrator",
+    "text": "Bunny has 3 berries. Then 1 more. How many berries now?"
+  },
+  "pz-math-1-7": {
+    "speaker": "narrator",
+    "text": "Pip has 2 berries. Then 3 more. How many berries now?"
+  },
+  "pz-math-1-8": {
+    "speaker": "narrator",
+    "text": "Owl has 2 carrots. Then 2 more. How many carrots now?"
+  },
+  "pz-math-1-9": {
+    "speaker": "narrator",
+    "text": "Fox has 1 carrot. Then 1 more. How many carrots now?"
+  },
+  "pz-math-1-10": {
+    "speaker": "narrator",
+    "text": "Owl has 1 carrot. Then 4 more. How many carrots now?"
+  },
+  "pz-math-2-1": {
+    "speaker": "narrator",
+    "text": "Owl found 4 acorns and then 2 more. How many acorns in all?"
+  },
+  "pz-math-2-2": {
+    "speaker": "narrator",
+    "text": "Bunny found 2 berries and then 1 more. How many berries in all?"
+  },
+  "pz-math-2-3": {
+    "speaker": "narrator",
+    "text": "Owl found 2 flowers and then 3 more. How many flowers in all?"
+  },
+  "pz-math-2-4": {
+    "speaker": "narrator",
+    "text": "Bunny found 5 shells and then 2 more. How many shells in all?"
+  },
+  "pz-math-2-5": {
+    "speaker": "narrator",
+    "text": "Dragon found 7 shells and then 1 more. How many shells in all?"
+  },
+  "pz-math-2-6": {
+    "speaker": "narrator",
+    "text": "Bunny found 7 shells and then 1 more. How many shells in all?"
+  },
+  "pz-math-2-7": {
+    "speaker": "narrator",
+    "text": "Owl found 5 stars and then 2 more. How many stars in all?"
+  },
+  "pz-math-2-8": {
+    "speaker": "narrator",
+    "text": "Dragon found 6 shells and then 2 more. How many shells in all?"
+  },
+  "pz-math-2-9": {
+    "speaker": "narrator",
+    "text": "Pip found 3 acorns and then 2 more. How many acorns in all?"
+  },
+  "pz-math-2-10": {
+    "speaker": "narrator",
+    "text": "Owl found 3 carrots and then 5 more. How many carrots in all?"
+  },
+  "pz-math-3-1": {
+    "speaker": "narrator",
+    "text": "Bunny had 7 acorns. Bunny gave away 4. How many are left?"
+  },
+  "pz-math-3-2": {
+    "speaker": "narrator",
+    "text": "Fox had 6 berries. Fox gave away 3. How many are left?"
+  },
+  "pz-math-3-3": {
+    "speaker": "narrator",
+    "text": "Dragon had 5 carrots. Dragon gave away 2. How many are left?"
+  },
+  "pz-math-3-4": {
+    "speaker": "narrator",
+    "text": "Fox had 6 stars. Fox gave away 4. How many are left?"
+  },
+  "pz-math-3-5": {
+    "speaker": "narrator",
+    "text": "Pip had 9 shells. Pip gave away 5. How many are left?"
+  },
+  "pz-math-3-6": {
+    "speaker": "narrator",
+    "text": "Dragon had 5 acorns. Dragon gave away 3. How many are left?"
+  },
+  "pz-math-3-7": {
+    "speaker": "narrator",
+    "text": "Bunny had 8 flowers. Bunny gave away 6. How many are left?"
+  },
+  "pz-math-3-8": {
+    "speaker": "narrator",
+    "text": "Bunny had 5 stars. Bunny gave away 1. How many are left?"
+  },
+  "pz-math-3-9": {
+    "speaker": "narrator",
+    "text": "Dragon had 7 shells. Dragon gave away 6. How many are left?"
+  },
+  "pz-math-3-10": {
+    "speaker": "narrator",
+    "text": "Pip had 5 acorns. Pip gave away 4. How many are left?"
+  },
+  "pz-math-4-1": {
+    "speaker": "narrator",
+    "text": "There were 17 carrots. Dragon took 3. How many are left?"
+  },
+  "pz-math-4-2": {
+    "speaker": "narrator",
+    "text": "Owl has 9 berries. Owl finds 3 more. How many berries now?"
+  },
+  "pz-math-4-3": {
+    "speaker": "narrator",
+    "text": "Fox has 10 shells. Fox finds 8 more. How many shells now?"
+  },
+  "pz-math-4-4": {
+    "speaker": "narrator",
+    "text": "Pip has 9 shells. Pip finds 10 more. How many shells now?"
+  },
+  "pz-math-4-5": {
+    "speaker": "narrator",
+    "text": "There were 20 stars. Bunny took 7. How many are left?"
+  },
+  "pz-math-4-6": {
+    "speaker": "narrator",
+    "text": "Dragon has 12 carrots. Dragon finds 7 more. How many carrots now?"
+  },
+  "pz-math-4-7": {
+    "speaker": "narrator",
+    "text": "Bunny has 12 carrots. Bunny finds 4 more. How many carrots now?"
+  },
+  "pz-math-4-8": {
+    "speaker": "narrator",
+    "text": "Bunny has 8 berries. Bunny finds 11 more. How many berries now?"
+  },
+  "pz-math-4-9": {
+    "speaker": "narrator",
+    "text": "There were 20 berries. Dragon took 6. How many are left?"
+  },
+  "pz-math-4-10": {
+    "speaker": "narrator",
+    "text": "There were 17 stars. Owl took 7. How many are left?"
+  },
+  "pz-math-5-1": {
+    "speaker": "narrator",
+    "text": "Bunny has 3 carrots. Bunny wants 6. How many more does Bunny need?"
+  },
+  "pz-math-5-2": {
+    "speaker": "narrator",
+    "text": "Pip has 8 stars. Pip wants 10. How many more does Pip need?"
+  },
+  "pz-math-5-3": {
+    "speaker": "narrator",
+    "text": "Pip has 9 acorns. Pip wants 12. How many more does Pip need?"
+  },
+  "pz-math-5-4": {
+    "speaker": "narrator",
+    "text": "Owl has 3 acorns. Owl wants 17. How many more does Owl need?"
+  },
+  "pz-math-5-5": {
+    "speaker": "narrator",
+    "text": "Dragon has 10 acorns. Dragon wants 17. How many more does Dragon need?"
+  },
+  "pz-math-5-6": {
+    "speaker": "narrator",
+    "text": "Dragon has 3 acorns. Dragon wants 9. How many more does Dragon need?"
+  },
+  "pz-math-5-7": {
+    "speaker": "narrator",
+    "text": "Dragon has 8 stars. Dragon wants 19. How many more does Dragon need?"
+  },
+  "pz-math-5-8": {
+    "speaker": "narrator",
+    "text": "Pip has 10 shells. Pip wants 20. How many more does Pip need?"
+  },
+  "pz-math-5-9": {
+    "speaker": "narrator",
+    "text": "Owl has 4 berries. Owl wants 20. How many more does Owl need?"
+  },
+  "pz-math-5-10": {
+    "speaker": "narrator",
+    "text": "Pip has 3 berries. Pip wants 12. How many more does Pip need?"
+  },
+  "pz-math-6-1": {
+    "speaker": "narrator",
+    "text": "There are 4 clouds. Each one has 3 raindrops. How many raindrops in all?"
+  },
+  "pz-math-6-2": {
+    "speaker": "narrator",
+    "text": "There are 2 baskets. Each one has 2 apples. How many apples in all?"
+  },
+  "pz-math-6-3": {
+    "speaker": "narrator",
+    "text": "There are 2 nests. Each one has 2 eggs. How many eggs in all?"
+  },
+  "pz-math-6-4": {
+    "speaker": "narrator",
+    "text": "There are 3 clouds. Each one has 3 raindrops. How many raindrops in all?"
+  },
+  "pz-math-6-5": {
+    "speaker": "narrator",
+    "text": "There are 3 nests. Each one has 5 eggs. How many eggs in all?"
+  },
+  "pz-math-6-6": {
+    "speaker": "narrator",
+    "text": "There are 3 trees. Each one has 5 birds. How many birds in all?"
+  },
+  "pz-math-6-7": {
+    "speaker": "narrator",
+    "text": "There are 4 clouds. Each one has 4 raindrops. How many raindrops in all?"
+  },
+  "pz-math-6-8": {
+    "speaker": "narrator",
+    "text": "There are 2 clouds. Each one has 5 raindrops. How many raindrops in all?"
+  },
+  "pz-math-6-9": {
+    "speaker": "narrator",
+    "text": "There are 5 baskets. Each one has 5 apples. How many apples in all?"
+  },
+  "pz-math-6-10": {
+    "speaker": "narrator",
+    "text": "There are 2 clouds. Each one has 4 raindrops. How many raindrops in all?"
+  },
+  "pz-math-7-1": {
+    "speaker": "narrator",
+    "text": "Dragon had 11 flowers, found 2 more, then gave 7 away. How many now?"
+  },
+  "pz-math-7-2": {
+    "speaker": "narrator",
+    "text": "Dragon had 10 stars, found 6 more, then gave 3 away. How many now?"
+  },
+  "pz-math-7-3": {
+    "speaker": "narrator",
+    "text": "Pip had 7 flowers, found 7 more, then gave 4 away. How many now?"
+  },
+  "pz-math-7-4": {
+    "speaker": "narrator",
+    "text": "Owl had 5 berries, found 2 more, then gave 5 away. How many now?"
+  },
+  "pz-math-7-5": {
+    "speaker": "narrator",
+    "text": "Owl had 5 flowers, found 6 more, then gave 4 away. How many now?"
+  },
+  "pz-math-7-6": {
+    "speaker": "narrator",
+    "text": "Bunny had 11 stars, found 7 more, then gave 2 away. How many now?"
+  },
+  "pz-math-7-7": {
+    "speaker": "narrator",
+    "text": "Dragon had 9 acorns, found 4 more, then gave 3 away. How many now?"
+  },
+  "pz-math-7-8": {
+    "speaker": "narrator",
+    "text": "Pip had 11 stars, found 8 more, then gave 4 away. How many now?"
+  },
+  "pz-math-7-9": {
+    "speaker": "narrator",
+    "text": "Bunny had 14 stars, found 8 more, then gave 8 away. How many now?"
+  },
+  "pz-math-7-10": {
+    "speaker": "narrator",
+    "text": "Fox had 8 berries, found 2 more, then gave 5 away. How many now?"
+  },
+  "pz-math-8-1": {
+    "speaker": "narrator",
+    "text": "Fox picked 6 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-2": {
+    "speaker": "narrator",
+    "text": "Bunny picked 15 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-3": {
+    "speaker": "narrator",
+    "text": "Bunny picked 5 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-4": {
+    "speaker": "narrator",
+    "text": "Pip picked 12 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-5": {
+    "speaker": "narrator",
+    "text": "Pip has 10 stars and shares them equally with one friend. How many does each get?"
+  },
+  "pz-math-8-6": {
+    "speaker": "narrator",
+    "text": "Pip picked 14 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-7": {
+    "speaker": "narrator",
+    "text": "Dragon has 10 stars and shares them equally with one friend. How many does each get?"
+  },
+  "pz-math-8-8": {
+    "speaker": "narrator",
+    "text": "Owl picked 6 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-9": {
+    "speaker": "narrator",
+    "text": "Bunny picked 12 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-math-8-10": {
+    "speaker": "narrator",
+    "text": "Dragon picked 13 flowers in the morning and the same number again after lunch. How many flowers in all?"
+  },
+  "pz-reading-1-1": {
+    "speaker": "narrator",
+    "text": "Which one is a color?"
+  },
+  "pz-reading-1-2": {
+    "speaker": "narrator",
+    "text": "Which one is an animal?"
+  },
+  "pz-reading-1-3": {
+    "speaker": "narrator",
+    "text": "Which one can you eat?"
+  },
+  "pz-reading-1-4": {
+    "speaker": "narrator",
+    "text": "Which one is a number?"
+  },
+  "pz-reading-1-5": {
+    "speaker": "narrator",
+    "text": "Which one can fly?"
+  },
+  "pz-reading-1-6": {
+    "speaker": "narrator",
+    "text": "Which one is a shape?"
+  },
+  "pz-reading-1-7": {
+    "speaker": "narrator",
+    "text": "Which one is in the sky?"
+  },
+  "pz-reading-1-8": {
+    "speaker": "narrator",
+    "text": "Which one is a fruit?"
+  },
+  "pz-reading-1-9": {
+    "speaker": "narrator",
+    "text": "Which one makes music?"
+  },
+  "pz-reading-1-10": {
+    "speaker": "narrator",
+    "text": "Which one is hot?"
+  },
+  "pz-reading-2-1": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with star?"
+  },
+  "pz-reading-2-2": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with cat?"
+  },
+  "pz-reading-2-3": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with moon?"
+  },
+  "pz-reading-2-4": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with tree?"
+  },
+  "pz-reading-2-5": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with fox?"
+  },
+  "pz-reading-2-6": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with cake?"
+  },
+  "pz-reading-2-7": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with bed?"
+  },
+  "pz-reading-2-8": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with snow?"
+  },
+  "pz-reading-2-9": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with night?"
+  },
+  "pz-reading-2-10": {
+    "speaker": "narrator",
+    "text": "Which word rhymes with king?"
+  },
+  "pz-reading-3-1": {
+    "speaker": "narrator",
+    "text": "Bunny has a green hat. What color is the hat?"
+  },
+  "pz-reading-3-2": {
+    "speaker": "narrator",
+    "text": "Fox has four berries. How many berries does Fox have?"
+  },
+  "pz-reading-3-3": {
+    "speaker": "narrator",
+    "text": "Owl sits in a tall tree. Where does Owl sit?"
+  },
+  "pz-reading-3-4": {
+    "speaker": "narrator",
+    "text": "Dragon loves warm soup. What does Dragon love?"
+  },
+  "pz-reading-3-5": {
+    "speaker": "narrator",
+    "text": "Pip sleeps on a soft cloud. What does Pip sleep on?"
+  },
+  "pz-reading-3-6": {
+    "speaker": "narrator",
+    "text": "The cake is pink and round. What shape is the cake?"
+  },
+  "pz-reading-3-7": {
+    "speaker": "narrator",
+    "text": "Bunny hops to the river to drink. Why does Bunny go to the river?"
+  },
+  "pz-reading-3-8": {
+    "speaker": "narrator",
+    "text": "The little boat is yellow. What color is the boat?"
+  },
+  "pz-reading-3-9": {
+    "speaker": "narrator",
+    "text": "Fox reads a book about stars. What is the book about?"
+  },
+  "pz-reading-3-10": {
+    "speaker": "narrator",
+    "text": "Owl has three blue eggs. What color are the eggs?"
+  },
+  "pz-reading-4-1": {
+    "speaker": "narrator",
+    "text": "Owl is very sleepy. The sun is up. When does Owl like to be awake?"
+  },
+  "pz-reading-4-2": {
+    "speaker": "narrator",
+    "text": "Fox puts on a coat and a scarf. What is the weather like?"
+  },
+  "pz-reading-4-3": {
+    "speaker": "narrator",
+    "text": "Bunny's tummy rumbles. Bunny looks for carrots. How does Bunny feel?"
+  },
+  "pz-reading-4-4": {
+    "speaker": "narrator",
+    "text": "Dragon opens an umbrella and jumps in puddles. What is the weather?"
+  },
+  "pz-reading-4-5": {
+    "speaker": "narrator",
+    "text": "Pip smiles and claps. Pip got a present. How does Pip feel?"
+  },
+  "pz-reading-4-6": {
+    "speaker": "narrator",
+    "text": "The flowers are drooping. Fox brings a watering can. What do the flowers need?"
+  },
+  "pz-reading-4-7": {
+    "speaker": "narrator",
+    "text": "It is dark. Owl lights a lantern. Why does Owl light the lantern?"
+  },
+  "pz-reading-4-8": {
+    "speaker": "narrator",
+    "text": "Bunny yawns and gets into bed. What will Bunny do next?"
+  },
+  "pz-reading-4-9": {
+    "speaker": "narrator",
+    "text": "The ice cream is melting fast. What is the day like?"
+  },
+  "pz-reading-4-10": {
+    "speaker": "narrator",
+    "text": "Dragon cannot reach the top shelf. Dragon gets a stool. Why?"
+  },
+  "pz-reading-5-1": {
+    "speaker": "narrator",
+    "text": "I am cold and white. I fall from the sky in winter. What am I?"
+  },
+  "pz-reading-5-2": {
+    "speaker": "narrator",
+    "text": "I have a face and two hands, but I cannot clap. What am I?"
+  },
+  "pz-reading-5-3": {
+    "speaker": "narrator",
+    "text": "I am full of holes, but I can hold water. What am I?"
+  },
+  "pz-reading-5-4": {
+    "speaker": "narrator",
+    "text": "I go up when the rain comes down. What am I?"
+  },
+  "pz-reading-5-5": {
+    "speaker": "narrator",
+    "text": "I have pages but I am not a tree. What am I?"
+  },
+  "pz-reading-5-6": {
+    "speaker": "narrator",
+    "text": "I shine in the day and hide at night. What am I?"
+  },
+  "pz-reading-5-7": {
+    "speaker": "narrator",
+    "text": "I have a neck but no head. What am I?"
+  },
+  "pz-reading-5-8": {
+    "speaker": "narrator",
+    "text": "You can catch me, but you cannot throw me. What am I?"
+  },
+  "pz-reading-5-9": {
+    "speaker": "narrator",
+    "text": "I have teeth but I never bite. What am I?"
+  },
+  "pz-reading-5-10": {
+    "speaker": "narrator",
+    "text": "The more you take, the more you leave behind. What are they?"
+  },
+  "pz-reading-6-1": {
+    "speaker": "narrator",
+    "text": "First Fox found a berry. Then Fox ate it. What did Fox do first?"
+  },
+  "pz-reading-6-2": {
+    "speaker": "narrator",
+    "text": "Owl read a book, then had tea, then went to bed. What did Owl do second?"
+  },
+  "pz-reading-6-3": {
+    "speaker": "narrator",
+    "text": "Bunny planted a seed. It rained for days. Now there is a big carrot. Why did the carrot grow?"
+  },
+  "pz-reading-6-4": {
+    "speaker": "narrator",
+    "text": "Dragon is bigger than Fox, but smaller than the old oak tree. What is the biggest?"
+  },
+  "pz-reading-6-5": {
+    "speaker": "narrator",
+    "text": "Pip wanted to fly home, but the wind was too strong. So Pip waited. Why did Pip wait?"
+  },
+  "pz-reading-6-6": {
+    "speaker": "narrator",
+    "text": "Fox shared the last cookie with Bunny. Bunny gave Fox a hug. Why did Bunny hug Fox?"
+  },
+  "pz-reading-6-7": {
+    "speaker": "narrator",
+    "text": "The pond froze. The ducks could not swim, so they skated. What made the ducks skate?"
+  },
+  "pz-reading-6-8": {
+    "speaker": "narrator",
+    "text": "Owl lost her glasses. She looked under the bed and on the shelf, then found them on her head. Where were they?"
+  },
+  "pz-reading-6-9": {
+    "speaker": "narrator",
+    "text": "Bunny had five carrots. She gave one to each of her four friends. How many did Bunny keep?"
+  },
+  "pz-reading-6-10": {
+    "speaker": "narrator",
+    "text": "It was Dragon's birthday. Everyone sang and there was cake. What were they celebrating?"
+  },
+  "pz-logic-1-1": {
+    "speaker": "narrator",
+    "text": "Red, blue, red, blue, red. What comes next?"
+  },
+  "pz-logic-1-2": {
+    "speaker": "narrator",
+    "text": "Star, moon, star, moon, star. What comes next?"
+  },
+  "pz-logic-1-3": {
+    "speaker": "narrator",
+    "text": "Big, small, big, small, big. What comes next?"
+  },
+  "pz-logic-1-4": {
+    "speaker": "narrator",
+    "text": "Hop, hop, jump, hop, hop. What comes next?"
+  },
+  "pz-logic-1-5": {
+    "speaker": "narrator",
+    "text": "Cat, dog, cat, dog, cat. What comes next?"
+  },
+  "pz-logic-1-6": {
+    "speaker": "narrator",
+    "text": "Up, down, up, down, up. What comes next?"
+  },
+  "pz-logic-1-7": {
+    "speaker": "narrator",
+    "text": "One, two, one, two, one. What comes next?"
+  },
+  "pz-logic-1-8": {
+    "speaker": "narrator",
+    "text": "Sun, sun, rain, sun, sun. What comes next?"
+  },
+  "pz-logic-1-9": {
+    "speaker": "narrator",
+    "text": "Pink, pink, blue, pink, pink. What comes next?"
+  },
+  "pz-logic-1-10": {
+    "speaker": "narrator",
+    "text": "Day, night, day, night, day. What comes next?"
+  },
+  "pz-logic-2-1": {
+    "speaker": "narrator",
+    "text": "1, 2, 3, 4. What number comes next?"
+  },
+  "pz-logic-2-2": {
+    "speaker": "narrator",
+    "text": "2, 4, 6, 8. What number comes next?"
+  },
+  "pz-logic-2-3": {
+    "speaker": "narrator",
+    "text": "5, 6, 7, 8. What number comes next?"
+  },
+  "pz-logic-2-4": {
+    "speaker": "narrator",
+    "text": "10, 9, 8, 7. What number comes next?"
+  },
+  "pz-logic-2-5": {
+    "speaker": "narrator",
+    "text": "1, 3, 5, 7. What number comes next?"
+  },
+  "pz-logic-2-6": {
+    "speaker": "narrator",
+    "text": "3, 4, 5, 6. What number comes next?"
+  },
+  "pz-logic-2-7": {
+    "speaker": "narrator",
+    "text": "2, 4, 6, 8, 10. What number comes next?"
+  },
+  "pz-logic-2-8": {
+    "speaker": "narrator",
+    "text": "20, 19, 18, 17. What number comes next?"
+  },
+  "pz-logic-2-9": {
+    "speaker": "narrator",
+    "text": "0, 2, 4, 6. What number comes next?"
+  },
+  "pz-logic-2-10": {
+    "speaker": "narrator",
+    "text": "4, 5, 6, 7. What number comes next?"
+  },
+  "pz-logic-3-1": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? apple, banana, car"
+  },
+  "pz-logic-3-2": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? owl, eagle, fish"
+  },
+  "pz-logic-3-3": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? red, blue, chair"
+  },
+  "pz-logic-3-4": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? snow, ice, fire"
+  },
+  "pz-logic-3-5": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? spoon, fork, sock"
+  },
+  "pz-logic-3-6": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? two, five, dog"
+  },
+  "pz-logic-3-7": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? rose, tulip, rock"
+  },
+  "pz-logic-3-8": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? boat, ship, cloud"
+  },
+  "pz-logic-3-9": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? hat, scarf, carrot"
+  },
+  "pz-logic-3-10": {
+    "speaker": "narrator",
+    "text": "Which one does not belong? sun, moon, shoe"
+  },
+  "pz-logic-4-1": {
+    "speaker": "narrator",
+    "text": "5, 10, 15, 20. What number comes next?"
+  },
+  "pz-logic-4-2": {
+    "speaker": "narrator",
+    "text": "10, 20, 30, 40. What number comes next?"
+  },
+  "pz-logic-4-3": {
+    "speaker": "narrator",
+    "text": "A, B, C, D. What letter comes next?"
+  },
+  "pz-logic-4-4": {
+    "speaker": "narrator",
+    "text": "1, 1, 2, 2, 3, 3. What number comes next?"
+  },
+  "pz-logic-4-5": {
+    "speaker": "narrator",
+    "text": "3, 6, 9, 12. What number comes next?"
+  },
+  "pz-logic-4-6": {
+    "speaker": "narrator",
+    "text": "Monday, Tuesday, Wednesday. What day comes next?"
+  },
+  "pz-logic-4-7": {
+    "speaker": "narrator",
+    "text": "Small, medium, large. If you go back one from large, what is it?"
+  },
+  "pz-logic-4-8": {
+    "speaker": "narrator",
+    "text": "Spring, summer, fall. What season comes next?"
+  },
+  "pz-logic-4-9": {
+    "speaker": "narrator",
+    "text": "100, 90, 80, 70. What number comes next?"
+  },
+  "pz-logic-4-10": {
+    "speaker": "narrator",
+    "text": "Z, Y, X, W. What letter comes next?"
+  },
+  "pz-logic-5-1": {
+    "speaker": "narrator",
+    "text": "If it rains, Fox takes an umbrella. It is raining. What does Fox take?"
+  },
+  "pz-logic-5-2": {
+    "speaker": "narrator",
+    "text": "If the light is red, Bunny stops. The light is red. What does Bunny do?"
+  },
+  "pz-logic-5-3": {
+    "speaker": "narrator",
+    "text": "If Owl is sleepy, Owl goes to bed. Owl is not sleepy. Does Owl go to bed?"
+  },
+  "pz-logic-5-4": {
+    "speaker": "narrator",
+    "text": "All the stars in the jar are gold. Pip takes one star from the jar. What color is it?"
+  },
+  "pz-logic-5-5": {
+    "speaker": "narrator",
+    "text": "If it snows, Dragon builds a snowman. It is sunny. Does Dragon build a snowman?"
+  },
+  "pz-logic-5-6": {
+    "speaker": "narrator",
+    "text": "Every friend who finds a shell gets a sticker. Bunny finds a shell. What does Bunny get?"
+  },
+  "pz-logic-5-7": {
+    "speaker": "narrator",
+    "text": "If the door is blue, it opens to the garden. This door is blue. Where does it open?"
+  },
+  "pz-logic-5-8": {
+    "speaker": "narrator",
+    "text": "If you plant a seed and water it, it grows. Fox plants a seed but never waters it. Does it grow?"
+  },
+  "pz-logic-5-9": {
+    "speaker": "narrator",
+    "text": "When the moon is out, Owl hoots. Owl is hooting. Is the moon out?"
+  },
+  "pz-logic-5-10": {
+    "speaker": "narrator",
+    "text": "Only cats are in the red basket. Is the dog in the red basket?"
+  },
+  "pz-logic-6-1": {
+    "speaker": "narrator",
+    "text": "Bunny is taller than Fox. Fox is taller than Pip. Who is the shortest?"
+  },
+  "pz-logic-6-2": {
+    "speaker": "narrator",
+    "text": "Owl is older than Dragon. Dragon is older than Pip. Who is the oldest?"
+  },
+  "pz-logic-6-3": {
+    "speaker": "narrator",
+    "text": "Fox ran faster than Bunny. Bunny ran faster than Owl walked. Who was the slowest?"
+  },
+  "pz-logic-6-4": {
+    "speaker": "narrator",
+    "text": "The red box is heavier than the blue box. The blue box is heavier than the green box. Which is lightest?"
+  },
+  "pz-logic-6-5": {
+    "speaker": "narrator",
+    "text": "Pip woke before Bunny. Bunny woke before Fox. Who woke up last?"
+  },
+  "pz-logic-6-6": {
+    "speaker": "narrator",
+    "text": "Owl, Fox and Bunny stand in a line. Owl is first. Fox is last. Who is in the middle?"
+  },
+  "pz-logic-6-7": {
+    "speaker": "narrator",
+    "text": "Dragon has more stars than Fox. Fox has more stars than Bunny. Who has the most stars?"
+  },
+  "pz-logic-6-8": {
+    "speaker": "narrator",
+    "text": "The pond is colder than the hill. The cave is colder than the pond. Where is it coldest?"
+  },
+  "pz-logic-6-9": {
+    "speaker": "narrator",
+    "text": "Bunny sits left of Fox. Owl sits right of Fox. Who is in the middle?"
+  },
+  "pz-logic-6-10": {
+    "speaker": "narrator",
+    "text": "A blue bird sang before a red bird. A yellow bird sang after the red bird. Which bird sang first?"
+  }
+}

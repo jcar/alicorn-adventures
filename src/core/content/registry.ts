@@ -1,6 +1,7 @@
 import type { FavorDef, FriendDef, KingdomDef, LevelDef, Line, PowerDef, Puzzle, Teaser, Unlock } from './types';
 import { CORE_UNLOCKS } from './coreUnlocks';
 import coreDialogue from './dialogue.json';
+import puzzleDialogue from '../puzzles/dialogue.json';
 import home from '../../home';
 
 /**
@@ -27,7 +28,7 @@ export const POWERS: PowerDef[] = KINGDOMS.flatMap((k) => k.powers);
 export const PUZZLES: Record<string, Puzzle> = merge((k) => k.puzzles);
 export const FAVORS: FavorDef[] = KINGDOMS.flatMap((k) => k.favors);
 export const UNLOCKS: Unlock[] = [...CORE_UNLOCKS, ...KINGDOMS.flatMap((k) => k.unlocks)];
-export const DIALOGUE: Record<string, Line> = { ...coreDialogue, ...home.dialogue, ...merge((k) => k.dialogue) };
+export const DIALOGUE: Record<string, Line> = { ...coreDialogue, ...puzzleDialogue, ...home.dialogue, ...merge((k) => k.dialogue) };
 
 export const findFriend = (id: string) => FRIENDS.find((f) => f.id === id);
 export const powerFromFriend = (friendId: string) => POWERS.find((p) => p.friend === friendId);

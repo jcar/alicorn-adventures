@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { AREA_ORDER, FAVORS, FRIENDS, LEVELS, SPARK_AREAS, goldIds, secretIds } from '../content';
 import { activeFavorFor } from '../world/Favors';
+import type { SkillId } from '../puzzles/engine';
 import { GameState } from '../systems/GameState';
 import { migrate } from '../systems/SaveManager';
 import { stopVoice } from '../audio/voice';
@@ -107,9 +108,31 @@ export function installDebug(game: Phaser.Game) {
       return GameState.data.friendsHelped;
     },
 
+    /** Forget something was found or solved (so it can be tried again). */
+    unflag(...flags: string[]) {
+      flags.forEach((f) => GameState.clearFlag(f));
+      return GameState.data.flags.length;
+    },
+
+    /** The nearest pattern crystals: their tune length and state. */
+    pattern() {
+      return world().debugPatternInfo();
+    },
+
     flag(...flags: string[]) {
       flags.forEach((f) => GameState.setFlag(f));
       return GameState.data.flags.length;
+    },
+
+    /** Puzzle levels for the current player. */
+    skills() {
+      return Object.fromEntries(Object.entries(GameState.data.skills).map(([k, v]) => [k, v.level]));
+    },
+
+    /** Set a puzzle level, e.g. alicorn.setSkill('math', 5). */
+    setSkill(skill: SkillId, level: number) {
+      GameState.setSkillLevel(skill, level);
+      return api.skills();
     },
 
     /** Every area, in story order. */

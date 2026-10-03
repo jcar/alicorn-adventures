@@ -4,7 +4,7 @@ export const FAVORS: FavorDef[] = [
   {
     id: 'berries',
     needs: ['fox'],
-    steps: [{ npc: 'fox', kind: 'puzzle', puzzle: 'fox-math', line: 'fox-math-ask', done: 'fox-math-thanks' }],
+    steps: [{ npc: 'fox', kind: 'puzzle', skill: 'math', line: 'fox-math-ask', done: 'fox-math-thanks' }],
     stardust: 10,
   },
   {

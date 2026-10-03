@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { GROUND_Y } from '../content';
 import { GameState } from '../systems/GameState';
+import { tuneLength } from '../puzzles/engine';
 import { sfx, tone } from '../audio/sfx';
 import type { World } from './types';
 
@@ -33,13 +34,20 @@ export class Patterns {
       return img;
     });
 
-    // The same tune every time for this puzzle, so it can be practiced.
-    const rnd = new Phaser.Math.RandomDataGenerator([def.id]);
-    const tune: number[] = [];
-    while (tune.length < def.length) {
-      const n = rnd.between(0, crystals.length - 1);
-      if (n !== tune[tune.length - 1]) tune.push(n);
-    }
+    // Tune length follows her memory level. The notes are the same each time for
+    // a given length, so a tune can be practised.
+    let tune: number[] = [];
+    let oops = 0;
+    const makeTune = () => {
+      const length = tuneLength(GameState.skillLevel('memory', def.offset ?? 0));
+      const rnd = new Phaser.Math.RandomDataGenerator([def.id]);
+      tune = [];
+      while (tune.length < length) {
+        const n = rnd.between(0, crystals.length - 1);
+        if (n !== tune[tune.length - 1]) tune.push(n);
+      }
+    };
+    makeTune();
 
     const flash = (i: number) => {
       const img = crystals[i];
@@ -65,6 +73,7 @@ export class Patterns {
     const win = () => {
       if (state === 'done') return;
       state = 'done';
+      GameState.recordPuzzle('memory', { firstTry: oops === 0, misses: oops });
       GameState.setFlag(`puzzle:${def.id}`);
       crystals.forEach((c) => c.setAlpha(1));
       s.time.delayedCall(400, () => {
@@ -74,12 +83,14 @@ export class Patterns {
         this.onSolved(def.id);
       });
     };
-    this.w.registerSolver?.(def.x, win);
+    this.w.registerSolver?.(def.x, win, () => ({ id: def.id, notes: tune.length, state }));
 
     this.w.addSpot({
       x: def.x, y: GROUND_Y, verb: 'to play', promptY: GROUND_Y - 150,
       enabled: () => state === 'idle' || state === 'turn',
       use: () => {
+        makeTune();
+        oops = 0;
         this.w.hint('pattern-start');
         s.time.delayedCall(2400, demo);
         state = 'demo';
@@ -94,6 +105,7 @@ export class Patterns {
         use: () => {
           flash(i);
           if (tune[pos] !== i) {
+            oops++;
             state = 'demo';
             sfx.soft();
             this.w.hint('pattern-oops');

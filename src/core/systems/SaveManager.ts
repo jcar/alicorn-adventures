@@ -5,13 +5,16 @@
  *   v1  single save: name, stardust, friends, unlocks, outfit
  *   v2  + flags, favors, visited                      (secrets & powers update)
  *   v3  profiles: up to 4 players, each with their own save, plus `seen`
+ *   v4  + skills (adaptive puzzle levels) and recently asked questions
  *
  * The old single-save key is never deleted. When v3 first runs it becomes
  * profile 1 and the original stays where it was, as a backup.
  */
+import { SKILLS, defaultSkills, type SkillState, type Skills } from '../puzzles/engine';
+
 export const SAVE_KEY = 'alicorn-adventures-save'; // v1/v2 single save, kept as a backup
 export const PROFILES_KEY = 'alicorn-adventures-profiles';
-export const SAVE_VERSION = 3;
+export const SAVE_VERSION = 4;
 export const MAX_PROFILES = 4;
 
 export interface SaveData {
@@ -36,6 +39,10 @@ export interface SaveData {
   visited: string[];
   /** New things she has already looked at, so their "NEW!" sparkle goes away. */
   seen: string[];
+  /** Adaptive puzzle level in each skill. */
+  skills: Skills;
+  /** Last few questions asked, so they don't repeat right away. */
+  recentQuestions: string[];
 }
 
 export interface Profile { id: string; createdAt: string; save: SaveData }
@@ -54,6 +61,8 @@ export function freshSave(): SaveData {
     favors: {},
     visited: [],
     seen: [],
+    skills: defaultSkills(),
+    recentQuestions: [],
   };
 }
 
@@ -74,6 +83,18 @@ const isNumberRecord = (v: unknown): v is Record<string, number> =>
   !!v && typeof v === 'object' && !Array.isArray(v) && Object.values(v).every((x) => typeof x === 'number' && x >= 0);
 
 const KNOWN = new Set(Object.keys(freshSave()));
+
+function readSkills(raw: unknown, experienced: boolean): Skills {
+  const out = defaultSkills(experienced);
+  if (!raw || typeof raw !== 'object') return out;
+  for (const sk of SKILLS) {
+    const v = (raw as Record<string, unknown>)[sk.id] as Partial<SkillState> | undefined;
+    if (v && typeof v.level === 'number' && v.level >= 1) {
+      out[sk.id] = { level: Math.min(sk.max, Math.floor(v.level)), streak: typeof v.streak === 'number' && v.streak >= 0 ? Math.floor(v.streak) : 0 };
+    }
+  }
+  return out;
+}
 
 /**
  * Upgrade any older save to the current version and repair anything
@@ -105,6 +126,9 @@ export function migrate(raw: unknown): SaveData {
     visited: isStringArray(r.visited) ? [...new Set(r.visited)] : [],
     // v3
     seen: isStringArray(r.seen) ? [...new Set(r.seen)] : [],
+    // v4: someone who has helped most friends starts the puzzles further along.
+    skills: readSkills(r.skills, isStringArray(r.friendsHelped) && r.friendsHelped.length >= 4),
+    recentQuestions: isStringArray(r.recentQuestions) ? r.recentQuestions.slice(-20) : [],
   };
 }
 

@@ -43,9 +43,9 @@ describe('migrating old saves (nothing earned is ever lost)', () => {
   });
 
   it('keeps fields from a newer version it does not know about', () => {
-    const fromTheFuture = { ...V2_FINISHED, version: 9, skills: { math: 4 }, pets: ['comet'] };
+    const fromTheFuture = { ...V2_FINISHED, version: 9, garden: { roses: 4 }, pets: ['comet'] };
     const m = migrate(fromTheFuture) as unknown as Record<string, unknown>;
-    expect(m.skills).toEqual({ math: 4 });
+    expect(m.garden).toEqual({ roses: 4 });
     expect(m.pets).toEqual(['comet']);
     expect(m.name).toBe('Sparkle');
   });

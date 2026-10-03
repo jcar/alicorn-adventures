@@ -1,0 +1,2048 @@
+{
+  "math": {
+    "1": [
+      {
+        "id": "pz-math-1-1",
+        "kind": "number",
+        "text": "Owl has 3 acorns. Then 2 more. How many acorns now?",
+        "answer": 5,
+        "visual": {
+          "a": 3,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-2",
+        "kind": "number",
+        "text": "Dragon has 1 acorn. Then 3 more. How many acorns now?",
+        "answer": 4,
+        "visual": {
+          "a": 1,
+          "b": 3,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-3",
+        "kind": "number",
+        "text": "Fox has 1 berry. Then 4 more. How many berries now?",
+        "answer": 5,
+        "visual": {
+          "a": 1,
+          "b": 4,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-4",
+        "kind": "number",
+        "text": "Pip has 3 carrots. Then 1 more. How many carrots now?",
+        "answer": 4,
+        "visual": {
+          "a": 3,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-5",
+        "kind": "number",
+        "text": "Pip has 2 carrots. Then 1 more. How many carrots now?",
+        "answer": 3,
+        "visual": {
+          "a": 2,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-6",
+        "kind": "number",
+        "text": "Bunny has 3 berries. Then 1 more. How many berries now?",
+        "answer": 4,
+        "visual": {
+          "a": 3,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-7",
+        "kind": "number",
+        "text": "Pip has 2 berries. Then 3 more. How many berries now?",
+        "answer": 5,
+        "visual": {
+          "a": 2,
+          "b": 3,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-8",
+        "kind": "number",
+        "text": "Owl has 2 carrots. Then 2 more. How many carrots now?",
+        "answer": 4,
+        "visual": {
+          "a": 2,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-9",
+        "kind": "number",
+        "text": "Fox has 1 carrot. Then 1 more. How many carrots now?",
+        "answer": 2,
+        "visual": {
+          "a": 1,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-1-10",
+        "kind": "number",
+        "text": "Owl has 1 carrot. Then 4 more. How many carrots now?",
+        "answer": 5,
+        "visual": {
+          "a": 1,
+          "b": 4,
+          "op": "+"
+        }
+      }
+    ],
+    "2": [
+      {
+        "id": "pz-math-2-1",
+        "kind": "number",
+        "text": "Owl found 4 acorns and then 2 more. How many acorns in all?",
+        "answer": 6,
+        "visual": {
+          "a": 4,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-2",
+        "kind": "number",
+        "text": "Bunny found 2 berries and then 1 more. How many berries in all?",
+        "answer": 3,
+        "visual": {
+          "a": 2,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-3",
+        "kind": "number",
+        "text": "Owl found 2 flowers and then 3 more. How many flowers in all?",
+        "answer": 5,
+        "visual": {
+          "a": 2,
+          "b": 3,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-4",
+        "kind": "number",
+        "text": "Bunny found 5 shells and then 2 more. How many shells in all?",
+        "answer": 7,
+        "visual": {
+          "a": 5,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-5",
+        "kind": "number",
+        "text": "Dragon found 7 shells and then 1 more. How many shells in all?",
+        "answer": 8,
+        "visual": {
+          "a": 7,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-6",
+        "kind": "number",
+        "text": "Bunny found 7 shells and then 1 more. How many shells in all?",
+        "answer": 8,
+        "visual": {
+          "a": 7,
+          "b": 1,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-7",
+        "kind": "number",
+        "text": "Owl found 5 stars and then 2 more. How many stars in all?",
+        "answer": 7,
+        "visual": {
+          "a": 5,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-8",
+        "kind": "number",
+        "text": "Dragon found 6 shells and then 2 more. How many shells in all?",
+        "answer": 8,
+        "visual": {
+          "a": 6,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-9",
+        "kind": "number",
+        "text": "Pip found 3 acorns and then 2 more. How many acorns in all?",
+        "answer": 5,
+        "visual": {
+          "a": 3,
+          "b": 2,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-2-10",
+        "kind": "number",
+        "text": "Owl found 3 carrots and then 5 more. How many carrots in all?",
+        "answer": 8,
+        "visual": {
+          "a": 3,
+          "b": 5,
+          "op": "+"
+        }
+      }
+    ],
+    "3": [
+      {
+        "id": "pz-math-3-1",
+        "kind": "number",
+        "text": "Bunny had 7 acorns. Bunny gave away 4. How many are left?",
+        "answer": 3,
+        "visual": {
+          "a": 7,
+          "b": 4,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-2",
+        "kind": "number",
+        "text": "Fox had 6 berries. Fox gave away 3. How many are left?",
+        "answer": 3,
+        "visual": {
+          "a": 6,
+          "b": 3,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-3",
+        "kind": "number",
+        "text": "Dragon had 5 carrots. Dragon gave away 2. How many are left?",
+        "answer": 3,
+        "visual": {
+          "a": 5,
+          "b": 2,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-4",
+        "kind": "number",
+        "text": "Fox had 6 stars. Fox gave away 4. How many are left?",
+        "answer": 2,
+        "visual": {
+          "a": 6,
+          "b": 4,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-5",
+        "kind": "number",
+        "text": "Pip had 9 shells. Pip gave away 5. How many are left?",
+        "answer": 4,
+        "visual": {
+          "a": 9,
+          "b": 5,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-6",
+        "kind": "number",
+        "text": "Dragon had 5 acorns. Dragon gave away 3. How many are left?",
+        "answer": 2,
+        "visual": {
+          "a": 5,
+          "b": 3,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-7",
+        "kind": "number",
+        "text": "Bunny had 8 flowers. Bunny gave away 6. How many are left?",
+        "answer": 2,
+        "visual": {
+          "a": 8,
+          "b": 6,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-8",
+        "kind": "number",
+        "text": "Bunny had 5 stars. Bunny gave away 1. How many are left?",
+        "answer": 4,
+        "visual": {
+          "a": 5,
+          "b": 1,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-9",
+        "kind": "number",
+        "text": "Dragon had 7 shells. Dragon gave away 6. How many are left?",
+        "answer": 1,
+        "visual": {
+          "a": 7,
+          "b": 6,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-3-10",
+        "kind": "number",
+        "text": "Pip had 5 acorns. Pip gave away 4. How many are left?",
+        "answer": 1,
+        "visual": {
+          "a": 5,
+          "b": 4,
+          "op": "-"
+        }
+      }
+    ],
+    "4": [
+      {
+        "id": "pz-math-4-1",
+        "kind": "number",
+        "text": "There were 17 carrots. Dragon took 3. How many are left?",
+        "answer": 14,
+        "visual": {
+          "a": 17,
+          "b": 3,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-4-2",
+        "kind": "number",
+        "text": "Owl has 9 berries. Owl finds 3 more. How many berries now?",
+        "answer": 12,
+        "visual": {
+          "a": 9,
+          "b": 3,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-3",
+        "kind": "number",
+        "text": "Fox has 10 shells. Fox finds 8 more. How many shells now?",
+        "answer": 18,
+        "visual": {
+          "a": 10,
+          "b": 8,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-4",
+        "kind": "number",
+        "text": "Pip has 9 shells. Pip finds 10 more. How many shells now?",
+        "answer": 19,
+        "visual": {
+          "a": 9,
+          "b": 10,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-5",
+        "kind": "number",
+        "text": "There were 20 stars. Bunny took 7. How many are left?",
+        "answer": 13,
+        "visual": {
+          "a": 20,
+          "b": 7,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-4-6",
+        "kind": "number",
+        "text": "Dragon has 12 carrots. Dragon finds 7 more. How many carrots now?",
+        "answer": 19,
+        "visual": {
+          "a": 12,
+          "b": 7,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-7",
+        "kind": "number",
+        "text": "Bunny has 12 carrots. Bunny finds 4 more. How many carrots now?",
+        "answer": 16,
+        "visual": {
+          "a": 12,
+          "b": 4,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-8",
+        "kind": "number",
+        "text": "Bunny has 8 berries. Bunny finds 11 more. How many berries now?",
+        "answer": 19,
+        "visual": {
+          "a": 8,
+          "b": 11,
+          "op": "+"
+        }
+      },
+      {
+        "id": "pz-math-4-9",
+        "kind": "number",
+        "text": "There were 20 berries. Dragon took 6. How many are left?",
+        "answer": 14,
+        "visual": {
+          "a": 20,
+          "b": 6,
+          "op": "-"
+        }
+      },
+      {
+        "id": "pz-math-4-10",
+        "kind": "number",
+        "text": "There were 17 stars. Owl took 7. How many are left?",
+        "answer": 10,
+        "visual": {
+          "a": 17,
+          "b": 7,
+          "op": "-"
+        }
+      }
+    ],
+    "5": [
+      {
+        "id": "pz-math-5-1",
+        "kind": "number",
+        "text": "Bunny has 3 carrots. Bunny wants 6. How many more does Bunny need?",
+        "answer": 3
+      },
+      {
+        "id": "pz-math-5-2",
+        "kind": "number",
+        "text": "Pip has 8 stars. Pip wants 10. How many more does Pip need?",
+        "answer": 2
+      },
+      {
+        "id": "pz-math-5-3",
+        "kind": "number",
+        "text": "Pip has 9 acorns. Pip wants 12. How many more does Pip need?",
+        "answer": 3
+      },
+      {
+        "id": "pz-math-5-4",
+        "kind": "number",
+        "text": "Owl has 3 acorns. Owl wants 17. How many more does Owl need?",
+        "answer": 14
+      },
+      {
+        "id": "pz-math-5-5",
+        "kind": "number",
+        "text": "Dragon has 10 acorns. Dragon wants 17. How many more does Dragon need?",
+        "answer": 7
+      },
+      {
+        "id": "pz-math-5-6",
+        "kind": "number",
+        "text": "Dragon has 3 acorns. Dragon wants 9. How many more does Dragon need?",
+        "answer": 6
+      },
+      {
+        "id": "pz-math-5-7",
+        "kind": "number",
+        "text": "Dragon has 8 stars. Dragon wants 19. How many more does Dragon need?",
+        "answer": 11
+      },
+      {
+        "id": "pz-math-5-8",
+        "kind": "number",
+        "text": "Pip has 10 shells. Pip wants 20. How many more does Pip need?",
+        "answer": 10
+      },
+      {
+        "id": "pz-math-5-9",
+        "kind": "number",
+        "text": "Owl has 4 berries. Owl wants 20. How many more does Owl need?",
+        "answer": 16
+      },
+      {
+        "id": "pz-math-5-10",
+        "kind": "number",
+        "text": "Pip has 3 berries. Pip wants 12. How many more does Pip need?",
+        "answer": 9
+      }
+    ],
+    "6": [
+      {
+        "id": "pz-math-6-1",
+        "kind": "number",
+        "text": "There are 4 clouds. Each one has 3 raindrops. How many raindrops in all?",
+        "answer": 12
+      },
+      {
+        "id": "pz-math-6-2",
+        "kind": "number",
+        "text": "There are 2 baskets. Each one has 2 apples. How many apples in all?",
+        "answer": 4
+      },
+      {
+        "id": "pz-math-6-3",
+        "kind": "number",
+        "text": "There are 2 nests. Each one has 2 eggs. How many eggs in all?",
+        "answer": 4
+      },
+      {
+        "id": "pz-math-6-4",
+        "kind": "number",
+        "text": "There are 3 clouds. Each one has 3 raindrops. How many raindrops in all?",
+        "answer": 9
+      },
+      {
+        "id": "pz-math-6-5",
+        "kind": "number",
+        "text": "There are 3 nests. Each one has 5 eggs. How many eggs in all?",
+        "answer": 15
+      },
+      {
+        "id": "pz-math-6-6",
+        "kind": "number",
+        "text": "There are 3 trees. Each one has 5 birds. How many birds in all?",
+        "answer": 15
+      },
+      {
+        "id": "pz-math-6-7",
+        "kind": "number",
+        "text": "There are 4 clouds. Each one has 4 raindrops. How many raindrops in all?",
+        "answer": 16
+      },
+      {
+        "id": "pz-math-6-8",
+        "kind": "number",
+        "text": "There are 2 clouds. Each one has 5 raindrops. How many raindrops in all?",
+        "answer": 10
+      },
+      {
+        "id": "pz-math-6-9",
+        "kind": "number",
+        "text": "There are 5 baskets. Each one has 5 apples. How many apples in all?",
+        "answer": 25
+      },
+      {
+        "id": "pz-math-6-10",
+        "kind": "number",
+        "text": "There are 2 clouds. Each one has 4 raindrops. How many raindrops in all?",
+        "answer": 8
+      }
+    ],
+    "7": [
+      {
+        "id": "pz-math-7-1",
+        "kind": "number",
+        "text": "Dragon had 11 flowers, found 2 more, then gave 7 away. How many now?",
+        "answer": 6
+      },
+      {
+        "id": "pz-math-7-2",
+        "kind": "number",
+        "text": "Dragon had 10 stars, found 6 more, then gave 3 away. How many now?",
+        "answer": 13
+      },
+      {
+        "id": "pz-math-7-3",
+        "kind": "number",
+        "text": "Pip had 7 flowers, found 7 more, then gave 4 away. How many now?",
+        "answer": 10
+      },
+      {
+        "id": "pz-math-7-4",
+        "kind": "number",
+        "text": "Owl had 5 berries, found 2 more, then gave 5 away. How many now?",
+        "answer": 2
+      },
+      {
+        "id": "pz-math-7-5",
+        "kind": "number",
+        "text": "Owl had 5 flowers, found 6 more, then gave 4 away. How many now?",
+        "answer": 7
+      },
+      {
+        "id": "pz-math-7-6",
+        "kind": "number",
+        "text": "Bunny had 11 stars, found 7 more, then gave 2 away. How many now?",
+        "answer": 16
+      },
+      {
+        "id": "pz-math-7-7",
+        "kind": "number",
+        "text": "Dragon had 9 acorns, found 4 more, then gave 3 away. How many now?",
+        "answer": 10
+      },
+      {
+        "id": "pz-math-7-8",
+        "kind": "number",
+        "text": "Pip had 11 stars, found 8 more, then gave 4 away. How many now?",
+        "answer": 15
+      },
+      {
+        "id": "pz-math-7-9",
+        "kind": "number",
+        "text": "Bunny had 14 stars, found 8 more, then gave 8 away. How many now?",
+        "answer": 14
+      },
+      {
+        "id": "pz-math-7-10",
+        "kind": "number",
+        "text": "Fox had 8 berries, found 2 more, then gave 5 away. How many now?",
+        "answer": 5
+      }
+    ],
+    "8": [
+      {
+        "id": "pz-math-8-1",
+        "kind": "number",
+        "text": "Fox picked 6 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 12
+      },
+      {
+        "id": "pz-math-8-2",
+        "kind": "number",
+        "text": "Bunny picked 15 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 30
+      },
+      {
+        "id": "pz-math-8-3",
+        "kind": "number",
+        "text": "Bunny picked 5 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 10
+      },
+      {
+        "id": "pz-math-8-4",
+        "kind": "number",
+        "text": "Pip picked 12 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 24
+      },
+      {
+        "id": "pz-math-8-5",
+        "kind": "number",
+        "text": "Pip has 10 stars and shares them equally with one friend. How many does each get?",
+        "answer": 5
+      },
+      {
+        "id": "pz-math-8-6",
+        "kind": "number",
+        "text": "Pip picked 14 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 28
+      },
+      {
+        "id": "pz-math-8-7",
+        "kind": "number",
+        "text": "Dragon has 10 stars and shares them equally with one friend. How many does each get?",
+        "answer": 5
+      },
+      {
+        "id": "pz-math-8-8",
+        "kind": "number",
+        "text": "Owl picked 6 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 12
+      },
+      {
+        "id": "pz-math-8-9",
+        "kind": "number",
+        "text": "Bunny picked 12 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 24
+      },
+      {
+        "id": "pz-math-8-10",
+        "kind": "number",
+        "text": "Dragon picked 13 flowers in the morning and the same number again after lunch. How many flowers in all?",
+        "answer": 26
+      }
+    ]
+  },
+  "reading": {
+    "1": [
+      {
+        "id": "pz-reading-1-1",
+        "kind": "choice",
+        "text": "Which one is a color?",
+        "choices": [
+          "frog",
+          "blue",
+          "jump"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-2",
+        "kind": "choice",
+        "text": "Which one is an animal?",
+        "choices": [
+          "green",
+          "owl",
+          "cup"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-3",
+        "kind": "choice",
+        "text": "Which one can you eat?",
+        "choices": [
+          "shoe",
+          "apple",
+          "rock"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-4",
+        "kind": "choice",
+        "text": "Which one is a number?",
+        "choices": [
+          "seven",
+          "happy",
+          "tree"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-1-5",
+        "kind": "choice",
+        "text": "Which one can fly?",
+        "choices": [
+          "fish",
+          "bird",
+          "table"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-6",
+        "kind": "choice",
+        "text": "Which one is a shape?",
+        "choices": [
+          "circle",
+          "river",
+          "cookie"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-1-7",
+        "kind": "choice",
+        "text": "Which one is in the sky?",
+        "choices": [
+          "sock",
+          "carrot",
+          "moon"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-1-8",
+        "kind": "choice",
+        "text": "Which one is a fruit?",
+        "choices": [
+          "pencil",
+          "banana",
+          "snow"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-9",
+        "kind": "choice",
+        "text": "Which one makes music?",
+        "choices": [
+          "leaf",
+          "drum",
+          "bed"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-1-10",
+        "kind": "choice",
+        "text": "Which one is hot?",
+        "choices": [
+          "snow",
+          "ice",
+          "sun"
+        ],
+        "answer": 2
+      }
+    ],
+    "2": [
+      {
+        "id": "pz-reading-2-1",
+        "kind": "choice",
+        "text": "Which word rhymes with star?",
+        "choices": [
+          "car",
+          "sun",
+          "tree"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-2-2",
+        "kind": "choice",
+        "text": "Which word rhymes with cat?",
+        "choices": [
+          "hat",
+          "dog",
+          "cup"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-2-3",
+        "kind": "choice",
+        "text": "Which word rhymes with moon?",
+        "choices": [
+          "cake",
+          "spoon",
+          "star"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-2-4",
+        "kind": "choice",
+        "text": "Which word rhymes with tree?",
+        "choices": [
+          "sky",
+          "bee",
+          "leaf"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-2-5",
+        "kind": "choice",
+        "text": "Which word rhymes with fox?",
+        "choices": [
+          "box",
+          "hen",
+          "fish"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-2-6",
+        "kind": "choice",
+        "text": "Which word rhymes with cake?",
+        "choices": [
+          "pie",
+          "lake",
+          "bun"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-2-7",
+        "kind": "choice",
+        "text": "Which word rhymes with bed?",
+        "choices": [
+          "red",
+          "pillow",
+          "bad"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-2-8",
+        "kind": "choice",
+        "text": "Which word rhymes with snow?",
+        "choices": [
+          "rain",
+          "bow",
+          "cold"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-2-9",
+        "kind": "choice",
+        "text": "Which word rhymes with night?",
+        "choices": [
+          "moon",
+          "light",
+          "dark"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-2-10",
+        "kind": "choice",
+        "text": "Which word rhymes with king?",
+        "choices": [
+          "ring",
+          "queen",
+          "crown"
+        ],
+        "answer": 0
+      }
+    ],
+    "3": [
+      {
+        "id": "pz-reading-3-1",
+        "kind": "choice",
+        "text": "Bunny has a green hat. What color is the hat?",
+        "choices": [
+          "green",
+          "red",
+          "blue"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-3-2",
+        "kind": "choice",
+        "text": "Fox has four berries. How many berries does Fox have?",
+        "choices": [
+          "two",
+          "six",
+          "four"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-3-3",
+        "kind": "choice",
+        "text": "Owl sits in a tall tree. Where does Owl sit?",
+        "choices": [
+          "in a pond",
+          "on a rock",
+          "in a tall tree"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-3-4",
+        "kind": "choice",
+        "text": "Dragon loves warm soup. What does Dragon love?",
+        "choices": [
+          "warm soup",
+          "cold ice",
+          "sand"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-3-5",
+        "kind": "choice",
+        "text": "Pip sleeps on a soft cloud. What does Pip sleep on?",
+        "choices": [
+          "a soft cloud",
+          "a log",
+          "a hard rock"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-3-6",
+        "kind": "choice",
+        "text": "The cake is pink and round. What shape is the cake?",
+        "choices": [
+          "flat",
+          "round",
+          "square"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-3-7",
+        "kind": "choice",
+        "text": "Bunny hops to the river to drink. Why does Bunny go to the river?",
+        "choices": [
+          "to sing",
+          "to drink",
+          "to sleep"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-3-8",
+        "kind": "choice",
+        "text": "The little boat is yellow. What color is the boat?",
+        "choices": [
+          "black",
+          "yellow",
+          "purple"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-3-9",
+        "kind": "choice",
+        "text": "Fox reads a book about stars. What is the book about?",
+        "choices": [
+          "fish",
+          "cars",
+          "stars"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-3-10",
+        "kind": "choice",
+        "text": "Owl has three blue eggs. What color are the eggs?",
+        "choices": [
+          "blue",
+          "green",
+          "white"
+        ],
+        "answer": 0
+      }
+    ],
+    "4": [
+      {
+        "id": "pz-reading-4-1",
+        "kind": "choice",
+        "text": "Owl is very sleepy. The sun is up. When does Owl like to be awake?",
+        "choices": [
+          "at night",
+          "in the morning",
+          "at lunch"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-4-2",
+        "kind": "choice",
+        "text": "Fox puts on a coat and a scarf. What is the weather like?",
+        "choices": [
+          "hot",
+          "cold",
+          "sunny and warm"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-4-3",
+        "kind": "choice",
+        "text": "Bunny's tummy rumbles. Bunny looks for carrots. How does Bunny feel?",
+        "choices": [
+          "sleepy",
+          "hungry",
+          "scared"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-4-4",
+        "kind": "choice",
+        "text": "Dragon opens an umbrella and jumps in puddles. What is the weather?",
+        "choices": [
+          "windy",
+          "rainy",
+          "snowy"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-4-5",
+        "kind": "choice",
+        "text": "Pip smiles and claps. Pip got a present. How does Pip feel?",
+        "choices": [
+          "happy",
+          "angry",
+          "sad"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-4-6",
+        "kind": "choice",
+        "text": "The flowers are drooping. Fox brings a watering can. What do the flowers need?",
+        "choices": [
+          "a hat",
+          "snow",
+          "water"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-4-7",
+        "kind": "choice",
+        "text": "It is dark. Owl lights a lantern. Why does Owl light the lantern?",
+        "choices": [
+          "to see",
+          "to swim",
+          "to cook"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-4-8",
+        "kind": "choice",
+        "text": "Bunny yawns and gets into bed. What will Bunny do next?",
+        "choices": [
+          "go to sleep",
+          "eat lunch",
+          "run a race"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-4-9",
+        "kind": "choice",
+        "text": "The ice cream is melting fast. What is the day like?",
+        "choices": [
+          "hot",
+          "cold",
+          "dark"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-4-10",
+        "kind": "choice",
+        "text": "Dragon cannot reach the top shelf. Dragon gets a stool. Why?",
+        "choices": [
+          "to dance",
+          "to reach higher",
+          "to sit down"
+        ],
+        "answer": 1
+      }
+    ],
+    "5": [
+      {
+        "id": "pz-reading-5-1",
+        "kind": "choice",
+        "text": "I am cold and white. I fall from the sky in winter. What am I?",
+        "choices": [
+          "snow",
+          "rain",
+          "a leaf"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-5-2",
+        "kind": "choice",
+        "text": "I have a face and two hands, but I cannot clap. What am I?",
+        "choices": [
+          "a clock",
+          "a bunny",
+          "a book"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-5-3",
+        "kind": "choice",
+        "text": "I am full of holes, but I can hold water. What am I?",
+        "choices": [
+          "a sponge",
+          "a cup",
+          "a net"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-5-4",
+        "kind": "choice",
+        "text": "I go up when the rain comes down. What am I?",
+        "choices": [
+          "an umbrella",
+          "a kite",
+          "a balloon"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-5-5",
+        "kind": "choice",
+        "text": "I have pages but I am not a tree. What am I?",
+        "choices": [
+          "a leaf",
+          "a book",
+          "a door"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-5-6",
+        "kind": "choice",
+        "text": "I shine in the day and hide at night. What am I?",
+        "choices": [
+          "the sun",
+          "a lamp",
+          "the moon"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-5-7",
+        "kind": "choice",
+        "text": "I have a neck but no head. What am I?",
+        "choices": [
+          "a scarf",
+          "a giraffe",
+          "a bottle"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-5-8",
+        "kind": "choice",
+        "text": "You can catch me, but you cannot throw me. What am I?",
+        "choices": [
+          "a fish",
+          "a cold",
+          "a ball"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-5-9",
+        "kind": "choice",
+        "text": "I have teeth but I never bite. What am I?",
+        "choices": [
+          "a shark",
+          "a comb",
+          "a dragon"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-5-10",
+        "kind": "choice",
+        "text": "The more you take, the more you leave behind. What are they?",
+        "choices": [
+          "footsteps",
+          "pebbles",
+          "cookies"
+        ],
+        "answer": 0
+      }
+    ],
+    "6": [
+      {
+        "id": "pz-reading-6-1",
+        "kind": "choice",
+        "text": "First Fox found a berry. Then Fox ate it. What did Fox do first?",
+        "choices": [
+          "found a berry",
+          "ate a berry",
+          "went to sleep"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-6-2",
+        "kind": "choice",
+        "text": "Owl read a book, then had tea, then went to bed. What did Owl do second?",
+        "choices": [
+          "read a book",
+          "had tea",
+          "went to bed"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-6-3",
+        "kind": "choice",
+        "text": "Bunny planted a seed. It rained for days. Now there is a big carrot. Why did the carrot grow?",
+        "choices": [
+          "the rain watered it",
+          "Bunny painted it",
+          "the wind blew it"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-6-4",
+        "kind": "choice",
+        "text": "Dragon is bigger than Fox, but smaller than the old oak tree. What is the biggest?",
+        "choices": [
+          "Dragon",
+          "the old oak tree",
+          "Fox"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-6-5",
+        "kind": "choice",
+        "text": "Pip wanted to fly home, but the wind was too strong. So Pip waited. Why did Pip wait?",
+        "choices": [
+          "Pip was hungry",
+          "it was snowing",
+          "the wind was too strong"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-6-6",
+        "kind": "choice",
+        "text": "Fox shared the last cookie with Bunny. Bunny gave Fox a hug. Why did Bunny hug Fox?",
+        "choices": [
+          "because Fox was cold",
+          "to play tag",
+          "to say thank you"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-6-7",
+        "kind": "choice",
+        "text": "The pond froze. The ducks could not swim, so they skated. What made the ducks skate?",
+        "choices": [
+          "the hot sun",
+          "the frozen pond",
+          "a big boat"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-6-8",
+        "kind": "choice",
+        "text": "Owl lost her glasses. She looked under the bed and on the shelf, then found them on her head. Where were they?",
+        "choices": [
+          "on her head",
+          "on the shelf",
+          "under the bed"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-6-9",
+        "kind": "choice",
+        "text": "Bunny had five carrots. She gave one to each of her four friends. How many did Bunny keep?",
+        "choices": [
+          "one",
+          "five",
+          "none"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-6-10",
+        "kind": "choice",
+        "text": "It was Dragon's birthday. Everyone sang and there was cake. What were they celebrating?",
+        "choices": [
+          "a new house",
+          "the first snow",
+          "Dragon's birthday"
+        ],
+        "answer": 2
+      }
+    ]
+  },
+  "logic": {
+    "1": [
+      {
+        "id": "pz-logic-1-1",
+        "kind": "choice",
+        "text": "Red, blue, red, blue, red. What comes next?",
+        "choices": [
+          "red",
+          "blue",
+          "green"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-1-2",
+        "kind": "choice",
+        "text": "Star, moon, star, moon, star. What comes next?",
+        "choices": [
+          "star",
+          "moon",
+          "sun"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-1-3",
+        "kind": "choice",
+        "text": "Big, small, big, small, big. What comes next?",
+        "choices": [
+          "small",
+          "tall",
+          "big"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-1-4",
+        "kind": "choice",
+        "text": "Hop, hop, jump, hop, hop. What comes next?",
+        "choices": [
+          "run",
+          "hop",
+          "jump"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-1-5",
+        "kind": "choice",
+        "text": "Cat, dog, cat, dog, cat. What comes next?",
+        "choices": [
+          "cat",
+          "dog",
+          "fish"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-1-6",
+        "kind": "choice",
+        "text": "Up, down, up, down, up. What comes next?",
+        "choices": [
+          "left",
+          "down",
+          "up"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-1-7",
+        "kind": "choice",
+        "text": "One, two, one, two, one. What comes next?",
+        "choices": [
+          "one",
+          "two",
+          "three"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-1-8",
+        "kind": "choice",
+        "text": "Sun, sun, rain, sun, sun. What comes next?",
+        "choices": [
+          "sun",
+          "snow",
+          "rain"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-1-9",
+        "kind": "choice",
+        "text": "Pink, pink, blue, pink, pink. What comes next?",
+        "choices": [
+          "blue",
+          "yellow",
+          "pink"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-1-10",
+        "kind": "choice",
+        "text": "Day, night, day, night, day. What comes next?",
+        "choices": [
+          "noon",
+          "night",
+          "day"
+        ],
+        "answer": 1
+      }
+    ],
+    "2": [
+      {
+        "id": "pz-logic-2-1",
+        "kind": "choice",
+        "text": "1, 2, 3, 4. What number comes next?",
+        "choices": [
+          "6",
+          "3",
+          "5"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-2-2",
+        "kind": "choice",
+        "text": "2, 4, 6, 8. What number comes next?",
+        "choices": [
+          "12",
+          "9",
+          "10"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-2-3",
+        "kind": "choice",
+        "text": "5, 6, 7, 8. What number comes next?",
+        "choices": [
+          "9",
+          "10",
+          "6"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-2-4",
+        "kind": "choice",
+        "text": "10, 9, 8, 7. What number comes next?",
+        "choices": [
+          "5",
+          "8",
+          "6"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-2-5",
+        "kind": "choice",
+        "text": "1, 3, 5, 7. What number comes next?",
+        "choices": [
+          "8",
+          "10",
+          "9"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-2-6",
+        "kind": "choice",
+        "text": "3, 4, 5, 6. What number comes next?",
+        "choices": [
+          "5",
+          "7",
+          "8"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-2-7",
+        "kind": "choice",
+        "text": "2, 4, 6, 8, 10. What number comes next?",
+        "choices": [
+          "12",
+          "11",
+          "14"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-2-8",
+        "kind": "choice",
+        "text": "20, 19, 18, 17. What number comes next?",
+        "choices": [
+          "15",
+          "18",
+          "16"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-2-9",
+        "kind": "choice",
+        "text": "0, 2, 4, 6. What number comes next?",
+        "choices": [
+          "8",
+          "7",
+          "10"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-2-10",
+        "kind": "choice",
+        "text": "4, 5, 6, 7. What number comes next?",
+        "choices": [
+          "6",
+          "9",
+          "8"
+        ],
+        "answer": 2
+      }
+    ],
+    "3": [
+      {
+        "id": "pz-logic-3-1",
+        "kind": "choice",
+        "text": "Which one does not belong? apple, banana, car",
+        "choices": [
+          "apple",
+          "banana",
+          "car"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-3-2",
+        "kind": "choice",
+        "text": "Which one does not belong? owl, eagle, fish",
+        "choices": [
+          "eagle",
+          "owl",
+          "fish"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-3-3",
+        "kind": "choice",
+        "text": "Which one does not belong? red, blue, chair",
+        "choices": [
+          "chair",
+          "blue",
+          "red"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-3-4",
+        "kind": "choice",
+        "text": "Which one does not belong? snow, ice, fire",
+        "choices": [
+          "fire",
+          "snow",
+          "ice"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-3-5",
+        "kind": "choice",
+        "text": "Which one does not belong? spoon, fork, sock",
+        "choices": [
+          "sock",
+          "spoon",
+          "fork"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-3-6",
+        "kind": "choice",
+        "text": "Which one does not belong? two, five, dog",
+        "choices": [
+          "two",
+          "dog",
+          "five"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-3-7",
+        "kind": "choice",
+        "text": "Which one does not belong? rose, tulip, rock",
+        "choices": [
+          "tulip",
+          "rose",
+          "rock"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-3-8",
+        "kind": "choice",
+        "text": "Which one does not belong? boat, ship, cloud",
+        "choices": [
+          "ship",
+          "cloud",
+          "boat"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-3-9",
+        "kind": "choice",
+        "text": "Which one does not belong? hat, scarf, carrot",
+        "choices": [
+          "hat",
+          "scarf",
+          "carrot"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-3-10",
+        "kind": "choice",
+        "text": "Which one does not belong? sun, moon, shoe",
+        "choices": [
+          "sun",
+          "moon",
+          "shoe"
+        ],
+        "answer": 2
+      }
+    ],
+    "4": [
+      {
+        "id": "pz-logic-4-1",
+        "kind": "choice",
+        "text": "5, 10, 15, 20. What number comes next?",
+        "choices": [
+          "21",
+          "25",
+          "30"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-4-2",
+        "kind": "choice",
+        "text": "10, 20, 30, 40. What number comes next?",
+        "choices": [
+          "50",
+          "60",
+          "45"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-4-3",
+        "kind": "choice",
+        "text": "A, B, C, D. What letter comes next?",
+        "choices": [
+          "E",
+          "A",
+          "F"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-4-4",
+        "kind": "choice",
+        "text": "1, 1, 2, 2, 3, 3. What number comes next?",
+        "choices": [
+          "5",
+          "4",
+          "3"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-4-5",
+        "kind": "choice",
+        "text": "3, 6, 9, 12. What number comes next?",
+        "choices": [
+          "13",
+          "18",
+          "15"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-4-6",
+        "kind": "choice",
+        "text": "Monday, Tuesday, Wednesday. What day comes next?",
+        "choices": [
+          "Sunday",
+          "Friday",
+          "Thursday"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-4-7",
+        "kind": "choice",
+        "text": "Small, medium, large. If you go back one from large, what is it?",
+        "choices": [
+          "medium",
+          "tiny",
+          "small"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-4-8",
+        "kind": "choice",
+        "text": "Spring, summer, fall. What season comes next?",
+        "choices": [
+          "summer",
+          "spring",
+          "winter"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-4-9",
+        "kind": "choice",
+        "text": "100, 90, 80, 70. What number comes next?",
+        "choices": [
+          "65",
+          "60",
+          "50"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-4-10",
+        "kind": "choice",
+        "text": "Z, Y, X, W. What letter comes next?",
+        "choices": [
+          "U",
+          "A",
+          "V"
+        ],
+        "answer": 2
+      }
+    ],
+    "5": [
+      {
+        "id": "pz-logic-5-1",
+        "kind": "choice",
+        "text": "If it rains, Fox takes an umbrella. It is raining. What does Fox take?",
+        "choices": [
+          "an umbrella",
+          "a kite",
+          "a bucket"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-5-2",
+        "kind": "choice",
+        "text": "If the light is red, Bunny stops. The light is red. What does Bunny do?",
+        "choices": [
+          "runs",
+          "stops",
+          "jumps"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-5-3",
+        "kind": "choice",
+        "text": "If Owl is sleepy, Owl goes to bed. Owl is not sleepy. Does Owl go to bed?",
+        "choices": [
+          "no",
+          "yes",
+          "maybe"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-5-4",
+        "kind": "choice",
+        "text": "All the stars in the jar are gold. Pip takes one star from the jar. What color is it?",
+        "choices": [
+          "silver",
+          "gold",
+          "blue"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-5-5",
+        "kind": "choice",
+        "text": "If it snows, Dragon builds a snowman. It is sunny. Does Dragon build a snowman?",
+        "choices": [
+          "yes",
+          "two of them",
+          "no"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-5-6",
+        "kind": "choice",
+        "text": "Every friend who finds a shell gets a sticker. Bunny finds a shell. What does Bunny get?",
+        "choices": [
+          "a sticker",
+          "nothing",
+          "a shell"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-5-7",
+        "kind": "choice",
+        "text": "If the door is blue, it opens to the garden. This door is blue. Where does it open?",
+        "choices": [
+          "to the garden",
+          "to the sky",
+          "to the kitchen"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-5-8",
+        "kind": "choice",
+        "text": "If you plant a seed and water it, it grows. Fox plants a seed but never waters it. Does it grow?",
+        "choices": [
+          "it flies",
+          "yes",
+          "no"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-5-9",
+        "kind": "choice",
+        "text": "When the moon is out, Owl hoots. Owl is hooting. Is the moon out?",
+        "choices": [
+          "it is noon",
+          "yes",
+          "no"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-5-10",
+        "kind": "choice",
+        "text": "Only cats are in the red basket. Is the dog in the red basket?",
+        "choices": [
+          "half of it",
+          "no",
+          "yes"
+        ],
+        "answer": 1
+      }
+    ],
+    "6": [
+      {
+        "id": "pz-logic-6-1",
+        "kind": "choice",
+        "text": "Bunny is taller than Fox. Fox is taller than Pip. Who is the shortest?",
+        "choices": [
+          "Bunny",
+          "Pip",
+          "Fox"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-6-2",
+        "kind": "choice",
+        "text": "Owl is older than Dragon. Dragon is older than Pip. Who is the oldest?",
+        "choices": [
+          "Dragon",
+          "Pip",
+          "Owl"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-6-3",
+        "kind": "choice",
+        "text": "Fox ran faster than Bunny. Bunny ran faster than Owl walked. Who was the slowest?",
+        "choices": [
+          "Owl",
+          "Fox",
+          "Bunny"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-6-4",
+        "kind": "choice",
+        "text": "The red box is heavier than the blue box. The blue box is heavier than the green box. Which is lightest?",
+        "choices": [
+          "the red box",
+          "the green box",
+          "the blue box"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-6-5",
+        "kind": "choice",
+        "text": "Pip woke before Bunny. Bunny woke before Fox. Who woke up last?",
+        "choices": [
+          "Fox",
+          "Pip",
+          "Bunny"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-6-6",
+        "kind": "choice",
+        "text": "Owl, Fox and Bunny stand in a line. Owl is first. Fox is last. Who is in the middle?",
+        "choices": [
+          "Fox",
+          "Owl",
+          "Bunny"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-6-7",
+        "kind": "choice",
+        "text": "Dragon has more stars than Fox. Fox has more stars than Bunny. Who has the most stars?",
+        "choices": [
+          "Fox",
+          "Bunny",
+          "Dragon"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-6-8",
+        "kind": "choice",
+        "text": "The pond is colder than the hill. The cave is colder than the pond. Where is it coldest?",
+        "choices": [
+          "the cave",
+          "the hill",
+          "the pond"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-6-9",
+        "kind": "choice",
+        "text": "Bunny sits left of Fox. Owl sits right of Fox. Who is in the middle?",
+        "choices": [
+          "Owl",
+          "Bunny",
+          "Fox"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-6-10",
+        "kind": "choice",
+        "text": "A blue bird sang before a red bird. A yellow bird sang after the red bird. Which bird sang first?",
+        "choices": [
+          "the red bird",
+          "the yellow bird",
+          "the blue bird"
+        ],
+        "answer": 2
+      }
+    ]
+  }
+}

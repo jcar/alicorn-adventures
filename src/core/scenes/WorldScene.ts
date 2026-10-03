@@ -22,6 +22,9 @@ import { Patterns } from '../world/Patterns';
 import { Favors } from '../world/Favors';
 import { HeartCrystal } from '../world/HeartCrystal';
 import type { HiddenThing, Spot, World } from '../world/types';
+import type { Question } from '../puzzles/engine';
+import type { PuzzleResult } from './PuzzleScene';
+import { PUZZLES, type PuzzleSpec } from '../content';
 
 interface WorldData { levelId: string; from?: string; firstTime?: boolean }
 
@@ -56,7 +59,7 @@ export class WorldScene extends Phaser.Scene implements World {
   private hidden: HiddenThing[] = [];
   private shownHints = new Map<string, number>();
   private lastShimmer = 0;
-  private solvers: { x: number; solve: () => void }[] = [];
+  private solvers: { x: number; solve: () => void; info?: () => Record<string, unknown> }[] = [];
   private overlayGfx?: Phaser.GameObjects.Graphics;
   private friend?: Friend;
   private gladeFriends: Friend[] = [];
@@ -211,16 +214,36 @@ export class WorldScene extends Phaser.Scene implements World {
     }).setDepth(40).explode(count);
   }
 
-  openPuzzle(puzzleId: string, onSolved: () => void) {
+  /** A gate's or favor's puzzle: a question from the adaptive bank, or a hand-written one. */
+  openPuzzle(spec: PuzzleSpec, onSolved: () => void) {
+    let question: Question;
+    if (spec.skill) question = GameState.question(spec.skill, spec.offset ?? 0);
+    else {
+      const p = PUZZLES[spec.puzzle!];
+      const base = { id: spec.puzzle!, text: lineText(p.line, GameState.data.name), line: p.line };
+      question = p.kind === 'number' ? { ...base, kind: 'number', answer: p.answer } : { ...base, kind: 'choice', choices: p.choices, answer: p.answer };
+    }
     sfx.whoosh();
     this.scene.pause();
-    this.scene.launch('Puzzle', { puzzleId, onSolved: () => this.time.delayedCall(50, onSolved) });
+    this.scene.launch('Puzzle', {
+      question,
+      onSolved: (r: PuzzleResult) => {
+        if (spec.skill) GameState.recordPuzzle(spec.skill, r);
+        this.time.delayedCall(50, onSolved);
+      },
+    });
   }
 
   // ------------------------------------------------------------ debug kit (see src/debug/debug.ts)
 
-  registerSolver(x: number, solve: () => void) {
-    this.solvers.push({ x, solve });
+  registerSolver(x: number, solve: () => void, info?: () => Record<string, unknown>) {
+    this.solvers.push({ x, solve, info });
+  }
+
+  /** Debug kit: what the nearest pattern is doing. */
+  debugPatternInfo() {
+    const near = [...this.solvers].sort((a, b) => Math.abs(a.x - this.player.x) - Math.abs(b.x - this.player.x))[0];
+    return near?.info?.();
   }
 
   debugSolvePattern() {

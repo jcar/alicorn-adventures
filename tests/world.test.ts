@@ -61,20 +61,22 @@ describe('secrets, puzzles and favors fit together', () => {
     for (const L of Object.values(LEVELS)) {
       const patterns = new Set((L.patterns ?? []).map((p) => p.id));
       for (const c of L.chests ?? []) if (c.byPattern) expect(patterns.has(c.byPattern), c.id).toBe(true);
-      for (const p of L.patterns ?? []) {
-        expect(p.length).toBeGreaterThanOrEqual(3);
-        expect(p.crystals.length).toBeGreaterThanOrEqual(3);
-      }
+      for (const p of L.patterns ?? []) expect(p.crystals.length).toBeGreaterThanOrEqual(3);
     }
   });
 
-  it('tunes get longer (or stay the same) area by area', () => {
-    const lengths = AREA_ORDER.map((a) => LEVELS[a].patterns?.[0]?.length ?? 0);
-    for (let i = 1; i < lengths.length; i++) expect(lengths[i]).toBeGreaterThanOrEqual(lengths[i - 1]);
+  it('tunes get harder (or stay the same) area by area', () => {
+    const offsets = AREA_ORDER.map((a) => LEVELS[a].patterns?.[0]?.offset ?? 0);
+    for (let i = 1; i < offsets.length; i++) expect(offsets[i]).toBeGreaterThanOrEqual(offsets[i - 1]);
   });
 
   it('every puzzle exists, is spoken, and has a pickable answer', () => {
-    for (const L of Object.values(LEVELS)) for (const g of L.gates ?? []) expect(PUZZLES[g.puzzle], g.id).toBeDefined();
+    // Each gate asks either a hand-written puzzle or an adaptive skill question, not both.
+    for (const L of Object.values(LEVELS))
+      for (const g of L.gates ?? []) {
+        expect(!!g.puzzle !== !!g.skill, g.id).toBe(true);
+        if (g.puzzle) expect(PUZZLES[g.puzzle], g.id).toBeDefined();
+      }
     for (const [id, p] of Object.entries(PUZZLES)) {
       expect(lines, id).toHaveProperty(p.line);
       if (p.kind === 'number') expect(p.answer).toBeLessThanOrEqual(NUMBER_MAX);
@@ -101,7 +103,7 @@ describe('secrets, puzzles and favors fit together', () => {
         expect(f.needs, `${f.id}: ${s.npc} lives in the Glade`).toContain(s.npc);
         const ids = s.kind === 'talk' ? [s.line] : s.kind === 'puzzle' ? [s.line, s.done] : [s.wait, s.done];
         for (const l of ids) expect(lines, `${f.id}`).toHaveProperty(l);
-        if (s.kind === 'puzzle') expect(PUZZLES[s.puzzle]).toBeDefined();
+        if (s.kind === 'puzzle') expect(s.skill ? true : !!PUZZLES[s.puzzle!], `${f.id} puzzle`).toBe(true);
         if (s.kind === 'bring') expect(obtainable.has(s.item), `${f.id} needs ${s.item}`).toBe(true);
       }
     }

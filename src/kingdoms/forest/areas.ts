@@ -44,8 +44,8 @@ export const AREAS: Record<string, LevelDef> = {
     blocks: woodsTunnel.blocks,
     bumpers: woodsTunnel.bumpers,
     golds: [woodsTunnel.gold, { id: 'woods-gold-2', x: 5020, y: 300 }],
-    gates: [{ id: 'woods-gate', x: 3300, puzzle: 'woods-lock' }],
-    patterns: [{ id: 'woods-pattern', x: 1850, crystals: [{ x: 1960, y: 500 }, { x: 2070, y: 440 }, { x: 2180, y: 500 }], length: 3 }],
+    gates: [{ id: 'woods-gate', x: 3300, skill: 'math', offset: -1 }],
+    patterns: [{ id: 'woods-pattern', x: 1850, crystals: [{ x: 1960, y: 500 }, { x: 2070, y: 440 }, { x: 2180, y: 500 }], offset: -1 }],
     chests: [
       { id: 'woods-chest-pattern', x: 2330, y: G, reward: { stardust: 10 }, byPattern: 'woods-pattern' },
       { id: 'woods-chest-cave', x: 4110, y: G, reward: { stardust: 15 } },
@@ -92,11 +92,11 @@ export const AREAS: Record<string, LevelDef> = {
     blocks: meadowTunnel.blocks,
     bumpers: meadowTunnel.bumpers,
     golds: [{ id: 'meadow-gold-1', x: 5350, y: 150 }, meadowTunnel.gold],
-    gates: [{ id: 'meadow-gate', x: 2950, puzzle: 'meadow-lock' }],
+    gates: [{ id: 'meadow-gate', x: 2950, skill: 'reading' }],
     patterns: [{
       id: 'meadow-pattern', x: 3600,
       crystals: [{ x: 3700, y: 480 }, { x: 3810, y: 420 }, { x: 3920, y: 480 }, { x: 4030, y: 420 }],
-      length: 4,
+      offset: 0,
     }],
     chests: [
       { id: 'meadow-chest-pattern', x: 4150, y: G, reward: { stardust: 10 }, byPattern: 'meadow-pattern' },
@@ -146,11 +146,11 @@ export const AREAS: Record<string, LevelDef> = {
     blocks: waterfallTunnel.blocks,
     bumpers: waterfallTunnel.bumpers,
     golds: [{ id: 'waterfall-gold-1', x: 5100, y: 200 }, waterfallTunnel.gold],
-    gates: [{ id: 'waterfall-gate', x: 3330, puzzle: 'waterfall-lock' }],
+    gates: [{ id: 'waterfall-gate', x: 3330, skill: 'logic' }],
     patterns: [{
       id: 'waterfall-pattern', x: 2500,
       crystals: [{ x: 2600, y: 480 }, { x: 2710, y: 420 }, { x: 2820, y: 480 }, { x: 2930, y: 420 }, { x: 3040, y: 480 }],
-      length: 5,
+      offset: 0,
     }],
     chests: [
       { id: 'waterfall-chest-cave', x: 880, y: G, reward: { stardust: 15 } },
@@ -210,11 +210,11 @@ export const AREAS: Record<string, LevelDef> = {
     blocks: cloudsTunnel.blocks,
     bumpers: cloudsTunnel.bumpers,
     golds: [cloudsTunnel.gold, { id: 'clouds-gold-2', x: 3950, y: 300 }],
-    gates: [{ id: 'clouds-gate', x: 2650, puzzle: 'clouds-lock' }],
+    gates: [{ id: 'clouds-gate', x: 2650, skill: 'math', offset: 1 }],
     patterns: [{
       id: 'clouds-pattern', x: 5200,
       crystals: [{ x: 5300, y: 480 }, { x: 5410, y: 420 }, { x: 5520, y: 480 }, { x: 5630, y: 420 }, { x: 5740, y: 480 }],
-      length: 5,
+      offset: 1,
     }],
     chests: [
       { id: 'clouds-chest-pattern', x: 5860, y: G, reward: { stardust: 10 }, byPattern: 'clouds-pattern' },
@@ -262,7 +262,7 @@ export const AREAS: Record<string, LevelDef> = {
     patterns: [{
       id: 'frost-pattern', x: 3700,
       crystals: [{ x: 3800, y: 480 }, { x: 3910, y: 420 }, { x: 4020, y: 480 }, { x: 4130, y: 420 }, { x: 4240, y: 480 }, { x: 4350, y: 420 }],
-      length: 6,
+      offset: 1,
     }],
     chests: [
       { id: 'frost-chest-pattern', x: 4500, y: G, reward: { stardust: 15 }, byPattern: 'frost-pattern' },

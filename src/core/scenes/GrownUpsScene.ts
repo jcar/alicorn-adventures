@@ -56,14 +56,15 @@ export class GrownUpsScene extends Phaser.Scene {
       { label: () => `Load a backup into ${this.profile() ? name() : 'a new player'}`, run: () => this.restore() },
       { label: () => `Start ${name()} over  (hold)`, hold: true, run: () => this.startOver() },
       { label: () => `Remove ${name()}  (hold)`, hold: true, run: () => this.remove() },
+      { label: () => `Puzzle levels for ${name()}…`, run: () => this.openSkills() },
       { label: () => `Sound: ${isMuted() ? 'Off' : 'On'}`, run: () => { toggleSound(); sfx.select(); } },
       { label: () => `Read-aloud voice: ${isVoiceOn() ? 'On' : 'Off'}`, run: () => toggleVoice() },
       { label: () => 'Done', run: () => this.close() },
     ];
     rows.forEach((r, i) => {
-      const y = 150 + i * 62;
-      r.box = this.add.rectangle(width / 2, y, 760, 52, 0xffffff).setStrokeStyle(4, COLORS.paperEdge);
-      r.fill = this.add.rectangle(width / 2 - 380, y, 0, 52, 0xffb3b3, 0.7).setOrigin(0, 0.5);
+      const y = 146 + i * 56;
+      r.box = this.add.rectangle(width / 2, y, 760, 48, 0xffffff).setStrokeStyle(4, COLORS.paperEdge);
+      r.fill = this.add.rectangle(width / 2 - 380, y, 0, 48, 0xffb3b3, 0.7).setOrigin(0, 0.5);
       r.text = this.add.text(width / 2, y, '', textStyle(26)).setOrigin(0.5);
       r.box.setInteractive({ useHandCursor: true })
         .on('pointerdown', (p: Phaser.Input.Pointer) => {
@@ -118,6 +119,15 @@ export class GrownUpsScene extends Phaser.Scene {
         this.refresh();
       })
       .catch(() => this.say("That file isn't an Alicorn Adventures backup."));
+  }
+
+  private openSkills() {
+    const p = this.profile();
+    if (!p) return this.say('Add a player first.');
+    GameState.selectProfile(p.id);
+    sfx.whoosh();
+    this.scene.launch('Skills');
+    this.scene.pause();
   }
 
   private startOver() {

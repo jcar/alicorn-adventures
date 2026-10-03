@@ -15,7 +15,7 @@ describe('kingdom registry', () => {
   });
 
   it('no dialogue line id is defined twice', () => {
-    const files = ['src/core/content/dialogue.json', 'src/home/dialogue.json', ...KINGDOMS.map((k) => `src/kingdoms/${k.id}/dialogue.json`)];
+    const files = ['src/core/content/dialogue.json', 'src/core/puzzles/dialogue.json', 'src/home/dialogue.json', ...KINGDOMS.map((k) => `src/kingdoms/${k.id}/dialogue.json`)];
     const seen = new Map<string, string>();
     for (const f of files) {
       for (const id of Object.keys(JSON.parse(fs.readFileSync(path.resolve(f), 'utf8')))) {

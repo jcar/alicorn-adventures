@@ -25,10 +25,10 @@ await h.page.mouse.move(1224, 56); await h.page.mouse.down(); await h.wait(2400)
 check('holding ⚙ opens the Grown-up Corner', await active('GrownUps'));
 await h.shot(out, 'grownups-1');
 
-// Sound off (row 6), then pick player 2 (row 1 → right), then hold "Remove" (row 5).
-await h.tap('ArrowDown', 5); await h.tap('Space'); await h.wait(300);
+// Sound off (row 7), then pick player 2 (row 1 → right), then hold "Remove" (row 5).
+await h.tap('ArrowDown', 6); await h.tap('Space'); await h.wait(300);
 check('sound turns off and is remembered', (await h.page.evaluate(() => JSON.parse(localStorage.getItem('alicorn-adventures-settings')))).muted === true);
-await h.tap('ArrowUp', 5); await h.tap('ArrowRight'); await h.wait(300);
+await h.tap('ArrowUp', 6); await h.tap('ArrowRight'); await h.wait(300);
 await h.tap('ArrowDown', 4);
 await h.tap('Space'); await h.wait(500);
 check('a tap on "Remove" removes nothing', (await store()).profiles.length === 2);

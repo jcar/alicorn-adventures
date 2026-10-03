@@ -69,7 +69,7 @@ export class Favors {
       case 'puzzle':
         this.say(f, step.line);
         s.time.delayedCall(2600, () =>
-          this.w.openPuzzle(step.puzzle, () => {
+          this.w.openPuzzle(step, () => {
             if (step.gives) GameState.setFlag(`has:${step.gives}`);
             s.time.delayedCall(300, () => this.say(f, step.done));
             this.advance(favor, f);

@@ -63,22 +63,6 @@
     "speaker": "narrator",
     "text": "Dragon taught you Warm Breath! Press down near ice to melt it."
   },
-  "woods-lock": {
-    "speaker": "narrator",
-    "text": "Bunny planted 2 carrots. Then she planted 3 more. How many carrots in all?"
-  },
-  "meadow-lock": {
-    "speaker": "narrator",
-    "text": "Fox has 4 berries. Fox wants 9 berries. How many more does Fox need?"
-  },
-  "waterfall-lock": {
-    "speaker": "narrator",
-    "text": "There are 3 nests. Each nest has 2 eggs. How many eggs are there?"
-  },
-  "clouds-lock": {
-    "speaker": "narrator",
-    "text": "There were 12 stars. 5 stars flew away. How many stars are left?"
-  },
   "frost-lock": {
     "speaker": "narrator",
     "text": "How many snowmen did you see in Frosty Peaks? Go back and count if you need to!"
@@ -141,7 +125,7 @@
   },
   "fox-math-thanks": {
     "speaker": "fox",
-    "text": "Yes! 5 berries left. You are so good at numbers!"
+    "text": "You got it! You are so good at numbers!"
   },
   "fox-favor-ask": {
     "speaker": "fox",
@@ -190,9 +174,5 @@
   "dragon-favor-thanks": {
     "speaker": "dragon",
     "text": "A Moon Shell! My nest is perfect now. Thank you!"
-  },
-  "fox-math": {
-    "speaker": "fox",
-    "text": "I had 9 berries. I ate 4. How many berries do I have now?"
   }
 }

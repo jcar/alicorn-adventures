@@ -3,6 +3,7 @@ import { MAX_PROFILES, SaveManager, type Profile, type SaveData } from './SaveMa
 import { grantUnlocks, isUnlocked } from './UnlockManager';
 import type { Unlock, UnlockKind } from '../content';
 import type { PowerId } from '../content';
+import { adapt, levelFor, maxLevel, pickQuestion, type SkillId } from '../puzzles/engine';
 
 /**
  * One shared game state for every scene. Scenes listen to `events`:
@@ -69,6 +70,30 @@ class GameStateImpl {
   markSeen(id: string) {
     if (this.data.seen.includes(id)) return;
     this.data.seen.push(id);
+    this.store.save();
+  }
+
+  // ------------------------------------------------------------ puzzles
+
+  skillLevel(skill: SkillId, offset = 0) { return levelFor(this.data.skills, skill, offset); }
+
+  /** A question for this player, at their level (plus the spot's offset). */
+  question(skill: Exclude<SkillId, 'memory'>, offset = 0) {
+    const q = pickQuestion(skill, this.skillLevel(skill, offset), this.data.recentQuestions);
+    this.data.recentQuestions = [...this.data.recentQuestions, q.id].slice(-20);
+    this.store.save();
+    return q;
+  }
+
+  /** After a puzzle: nudge that skill's level up or down. */
+  recordPuzzle(skill: SkillId, result: { firstTry: boolean; misses: number }) {
+    this.data.skills[skill] = adapt(this.data.skills[skill], result, maxLevel(skill));
+    this.store.save();
+  }
+
+  /** Grown-up dial: set a skill's level directly. */
+  setSkillLevel(skill: SkillId, level: number) {
+    this.data.skills[skill] = { level: Math.max(1, Math.min(maxLevel(skill), level)), streak: 0 };
     this.store.save();
   }
 

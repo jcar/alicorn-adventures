@@ -71,7 +71,7 @@ export class Barriers {
       this.w.addSpot({
         x: signX, y: GROUND_Y, verb: 'to try the lock', promptY: GROUND_Y - 170,
         enabled: () => !open,
-        use: () => this.w.openPuzzle(g.puzzle, () => {
+        use: () => this.w.openPuzzle(g, () => {
           open = true;
           GameState.setFlag(`puzzle:${g.id}`);
           (zone.body as Phaser.Physics.Arcade.StaticBody).enable = false;

@@ -19,6 +19,13 @@ export interface Theme {
 }
 
 export interface Point { x: number; y: number }
+
+/**
+ * What a gate or favor asks:
+ *   { skill: 'math', offset: -1 }  a question from the bank, one level easier than the player's
+ *   { puzzle: 'frost-lock' }      a fixed, hand-written puzzle (for story moments)
+ */
+export interface PuzzleSpec { puzzle?: string; skill?: 'math' | 'reading' | 'logic'; offset?: number }
 /** Something that stays invisible until Sniff finds it. */
 export interface Hideable extends Point { hidden?: boolean }
 
@@ -53,9 +60,10 @@ export interface LevelDef {
   /** Too dark to see without Glow. */
   darks?: { x: number; y: number; w: number; h: number }[];
   /** Full-height stone gate with a number lock. */
-  gates?: { id: string; x: number; puzzle: string }[];
+  gates?: ({ id: string; x: number } & PuzzleSpec)[];
   /** Crystals that chime a tune to copy. Solving it reveals the chest with the same id. */
-  patterns?: { id: string; x: number; crystals: Point[]; length: number }[];
+  /** Tune length follows the player's memory level; offset makes this one easier (-) or harder (+). */
+  patterns?: { id: string; x: number; crystals: Point[]; offset?: number }[];
   chests?: (Hideable & { id: string; reward: Reward; byPattern?: string })[];
   /** Clue notes (secret: true) and helpful signs. `line` is a dialogue id. */
   notes?: (Hideable & { id: string; line: string; secret?: boolean })[];
@@ -143,7 +151,7 @@ export type Puzzle =
   | { kind: 'number'; line: string; answer: number }
   | { kind: 'choice'; line: string; choices: string[]; answer: number };
 
-export const NUMBER_MAX = 20;
+export const NUMBER_MAX = 30;
 
 // ------------------------------------------------------------ favors
 
@@ -157,7 +165,7 @@ export const NUMBER_MAX = 20;
  */
 export type FavorStep =
   | { npc: string; kind: 'talk'; line: string }
-  | { npc: string; kind: 'puzzle'; puzzle: string; line: string; done: string; gives?: string }
+  | ({ npc: string; kind: 'puzzle'; line: string; done: string; gives?: string } & PuzzleSpec)
   | { npc: string; kind: 'bring'; item: string; wait: string; done: string };
 
 export interface FavorDef {

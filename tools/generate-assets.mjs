@@ -542,7 +542,7 @@ async function convertAll() {
 
 /** Every line in the game: core, Home, and each kingdom pack's dialogue.json. */
 async function loadDialogue() {
-  const files = ['src/core/content/dialogue.json', 'src/home/dialogue.json'];
+  const files = ['src/core/content/dialogue.json', 'src/core/puzzles/dialogue.json', 'src/home/dialogue.json'];
   const kingdoms = path.join(ROOT, 'src/kingdoms');
   for (const k of existsSync(kingdoms) ? await readdir(kingdoms) : [])
     if (existsSync(path.join(kingdoms, k, 'dialogue.json'))) files.push(`src/kingdoms/${k}/dialogue.json`);

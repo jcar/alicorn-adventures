@@ -43,8 +43,12 @@ async function helpFriend(area) {
   // Bloom quests: sniff, then bloom each flower.
   for (const k of Object.keys(m).filter((k) => k.startsWith('bloom-'))) { await tp(k); await press(2); }
   // Then go to the friend (fetch completes on arrival; wake needs horn magic; Pip just needs finding).
-  await tp('friend'); await h.wait(800); await press(1);
-  for (let i = 0; i < 20 && (await helped()).length === friendBefore; i++) await h.wait(500);
+  // A missed keypress under load shouldn't fail the run: try the action again a few times.
+  await tp('friend'); await h.wait(800);
+  for (let attempt = 0; attempt < 4 && (await helped()).length === friendBefore; attempt++) {
+    await press(1);
+    for (let i = 0; i < 8 && (await helped()).length === friendBefore; i++) await h.wait(500);
+  }
   await h.wait(5500); // thanks, confetti, moving home
   return (await helped()).length > friendBefore;
 }
