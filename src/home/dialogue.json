@@ -1,7 +1,7 @@
 {
   "glade-hello": {
     "speaker": "narrator",
-    "text": "This is your Home Glade. Walk to a glowing door to go on an adventure!"
+    "text": "This is your Home Glade. Walk to the Star Gate to fly off on an adventure!"
   },
   "mirror": {
     "speaker": "narrator",
@@ -46,5 +46,9 @@
   "crystal-done": {
     "speaker": "narrator",
     "text": "The Heart Crystal is shining bright, thanks to you!"
+  },
+  "star-gate-hint": {
+    "speaker": "narrator",
+    "text": "Look! A Star Gate! Step inside to fly to the Sky Map."
   }
 }

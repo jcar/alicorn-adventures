@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { LEVELS, GROUND_Y, WORLD_HEIGHT, type Hideable, type LevelDef } from '../content';
+import { LEVELS, GROUND_Y, SKY_MAP, WORLD_HEIGHT, kingdomOfArea, type Hideable, type LevelDef } from '../content';
 import { FRIENDS, findFriend, type FriendDef } from '../content';
 import { powerFromFriend } from '../content';
 import { goldIds, secretIds } from '../content';
@@ -134,6 +134,10 @@ export class WorldScene extends Phaser.Scene implements World {
     this.startMusic();
 
     if (this.firstTime) this.time.delayedCall(900, () => this.hint('glade-hello'));
+    else if (L.id === 'glade' && !GameState.data.seen.includes('star-gate')) {
+      GameState.markSeen('star-gate');
+      this.time.delayedCall(1200, () => this.hint('star-gate-hint'));
+    }
 
     this.events.on(Phaser.Scenes.Events.RESUME, () => this.input.keyboard?.resetKeys());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -265,12 +269,14 @@ export class WorldScene extends Phaser.Scene implements World {
   private buildPortalsAndStations() {
     const L = this.level;
     for (const p of L.portals) {
-      const locked = p.target !== 'glade' && !GameState.has('area', p.target);
-      const art = this.add.image(p.x, GROUND_Y + 4, 'portal').setOrigin(0.5, 1).setDepth(4);
+      const sky = p.target === SKY_MAP;
+      const isArea = !!kingdomOfArea(p.target);
+      const locked = isArea && !GameState.has('area', p.target);
+      const art = this.add.image(p.x, GROUND_Y + 4, sky ? 'star-gate' : 'portal').setOrigin(0.5, 1).setDepth(4);
       const target = LEVELS[p.target];
-      const label = p.target === 'glade' ? 'Home' : target?.name ?? p.target;
+      const label = sky ? (L.id === 'glade' ? 'Star Gate' : 'Sky Map') : p.target === 'glade' ? 'Home' : target?.name ?? p.target;
       this.add.text(p.x, GROUND_Y - 262, label, titleStyle(26, { align: 'center', wordWrap: { width: 220 } })).setOrigin(0.5, 1).setDepth(4);
-      if (target && p.target !== 'glade' && !locked) this.addDoorCounts(p.x, target);
+      if (target && isArea && !locked) this.addDoorCounts(p.x, target);
       if (locked) {
         art.setTint(0x9990b0);
         this.add.image(p.x, GROUND_Y - 90, 'icon-lock').setDepth(4);
@@ -488,7 +494,10 @@ export class WorldScene extends Phaser.Scene implements World {
     sfx.whoosh();
     this.tweens.add({ targets: this.player, scale: 0.2, alpha: 0, angle: 360, duration: 500 });
     this.cameras.main.fadeOut(500, 255, 255, 255);
-    this.cameras.main.once('camerafadeoutcomplete', () => this.scene.restart({ levelId: target, from: this.level.id }));
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      if (target === SKY_MAP) this.scene.start('SkyMap', { from: this.level.id });
+      else this.scene.restart({ levelId: target, from: this.level.id });
+    });
   }
 
   private openOverlay(key: 'Wardrobe' | 'StickerBook') {

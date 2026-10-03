@@ -607,6 +607,46 @@ export function makePlaceholders(scene: Phaser.Scene) {
     poly(c, [45, 4, 55, 80, 45, 260, 35, 80], 'rgba(255,255,255,0.7)');
   });
 
+  // ---------------------------------------------------------- Sky Map & Star Gate
+  const island = (c: Ctx, top: string, side: string, extra: (c: Ctx) => void) => {
+    c.fillStyle = side;
+    c.beginPath(); c.moveTo(20, 90); c.quadraticCurveTo(130, 230, 240, 90); c.closePath(); c.fill();
+    for (let i = 0; i < 5; i++) circle(c, 70 + i * 30, 130 + (i % 2) * 18, 10, 'rgba(0,0,0,0.08)');
+    ellipse(c, 130, 88, 112, 30, top, 'rgba(0,0,0,0.12)', 3);
+    extra(c);
+  };
+  make(scene, 'island-home', 260, 200, (c) => island(c, '#7cd992', '#9a6b4a', (c) => {
+    roundRect(c, 100, 40, 60, 40, 6, '#fff3e0', '#c4854a');
+    poly(c, [92, 44, 130, 14, 168, 44], '#ff7eb9', '#c93a73', 3);
+    roundRect(c, 122, 56, 16, 24, 4, '#c4854a');
+    circle(c, 60, 66, 18, '#5fae73'); circle(c, 200, 70, 14, '#5fae73');
+    star(c, 130, 6, 8, 3, '#ffe14c');
+  }));
+  make(scene, 'island-forest', 260, 200, (c) => island(c, '#5fae73', '#7a5236', (c) => {
+    for (const [x, r] of [[60, 26], [100, 34], [150, 30], [195, 24]] as const) {
+      roundRect(c, x - 5, 70, 10, 20, 3, '#6b4229');
+      circle(c, x, 62 - r * 0.4, r, '#3f8f5a', '#2f6b55', 3);
+    }
+    for (let i = 0; i < 6; i++) circle(c, 50 + i * 30, 40 + (i % 3) * 10, 3, '#fff6a0');
+  }));
+  make(scene, 'island-mystery', 260, 200, (c) => island(c, '#c9c2dc', '#8f86a8', () => undefined));
+  make(scene, 'star-gate', 150, 220, (c) => {
+    const g = c.createLinearGradient(0, 30, 0, 220);
+    g.addColorStop(0, '#fff8d6'); g.addColorStop(1, '#ffc93c');
+    c.beginPath(); c.moveTo(22, 220); c.lineTo(22, 86); c.arc(75, 86, 53, Math.PI, 0); c.lineTo(128, 220); c.closePath();
+    c.fillStyle = '#2b1f4a'; c.fill();
+    c.lineWidth = 14; c.strokeStyle = g; c.stroke();
+    c.lineWidth = 4; c.strokeStyle = '#ffffff'; c.stroke();
+    for (let i = 0; i < 14; i++) star(c, 36 + ((i * 37) % 80), 60 + ((i * 53) % 150), 3 + (i % 3) * 2, 1.5 + (i % 3), '#fff6a0');
+    star(c, 75, 20, 14, 6, '#ffe14c', '#e09a10', 2);
+  });
+  make(scene, 'bg-skymap', 16, 720, (c) => {
+    const g = c.createLinearGradient(0, 0, 0, 720);
+    g.addColorStop(0, '#5b4b9a'); g.addColorStop(0.55, '#c7a8e8'); g.addColorStop(1, '#ffd9ec');
+    c.fillStyle = g;
+    c.fillRect(0, 0, 16, 720);
+  });
+
   // Per-level scenery
   for (const lvl of Object.values(LEVELS)) {
     const t = lvl.theme;

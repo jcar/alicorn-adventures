@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "assets": "node tools/generate-assets.mjs",
-    "playtest": "node tools/playtest/debugkit.mjs && node tools/playtest/backup.mjs && node tools/playtest/profiles.mjs"
+    "playtest": "node tools/playtest/debugkit.mjs && node tools/playtest/backup.mjs && node tools/playtest/profiles.mjs && node tools/playtest/skymap.mjs"
   },
   "dependencies": {
     "phaser": "^3.90.0"

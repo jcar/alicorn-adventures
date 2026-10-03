@@ -65,6 +65,13 @@ class GameStateImpl {
     this.store.save();
   }
 
+  /** Remember she's seen something new, so it stops sparkling "NEW!". */
+  markSeen(id: string) {
+    if (this.data.seen.includes(id)) return;
+    this.data.seen.push(id);
+    this.store.save();
+  }
+
   visit(areaId: string) {
     if (this.data.visited.includes(areaId)) return;
     this.data.visited.push(areaId);

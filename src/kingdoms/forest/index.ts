@@ -1,5 +1,6 @@
 import type { KingdomDef } from '../../core/content/types';
 import { AREAS, AREA_COLORS, AREA_ORDER } from './areas';
+import { HUB } from './hub';
 import { FRIENDS } from './friends';
 import { POWERS } from './powers';
 import { PUZZLES } from './puzzles';
@@ -12,6 +13,9 @@ const forest: KingdomDef = {
   id: 'forest',
   name: 'The Enchanted Forest',
   order: 1,
+  hub: HUB,
+  map: { x: 0.38, y: 0.42 },
+  island: 'island-forest',
   areaOrder: AREA_ORDER,
   areas: AREAS,
   areaColors: AREA_COLORS,

@@ -1,4 +1,4 @@
-import { GROUND_Y, arc, type HomeDef, type LevelDef } from '../core/content/types';
+import { GROUND_Y, SKY_MAP, arc, type HomeDef, type LevelDef } from '../core/content/types';
 import { AREA_ORDER } from '../kingdoms/forest/areas';
 import dialogue from './dialogue.json';
 
@@ -18,13 +18,8 @@ const level: LevelDef = {
     items: [],
     blooms: [{ x: 360, y: G }, { x: 1600, y: G }],
     bouncers: [],
-    portals: [
-      { x: 480, target: 'woods' },
-      { x: 800, target: 'meadow' },
-      { x: 1120, target: 'waterfall' },
-      { x: 1440, target: 'clouds' },
-      { x: 1760, target: 'frost' },
-    ],
+    // One Star Gate instead of a door per area: it opens the Sky Map.
+    portals: [{ x: 460, target: SKY_MAP }],
     stations: [
       { x: 2250, kind: 'mirror' },
       { x: 2550, kind: 'tree' },

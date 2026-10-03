@@ -60,6 +60,13 @@ export function installDebug(game: Phaser.Game) {
       return `going to ${levelId}${where !== undefined ? ` @ ${where}` : ''}`;
     },
 
+    /** Open the Sky Map. */
+    sky(from = 'glade') {
+      for (const k of ['Title', 'NamePicker', 'Wardrobe', 'StickerBook', 'Puzzle', 'World']) if (running(k)) game.scene.stop(k);
+      game.scene.start('SkyMap', { from });
+      return 'flying to the Sky Map';
+    },
+
     /** Move the hero to an x (and y), or to a named marker in the current level. */
     teleport(where: string | number, y?: number) {
       const w = world();

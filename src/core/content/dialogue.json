@@ -110,5 +110,9 @@
   "puzzle-wrong-friend": {
     "speaker": "narrator",
     "text": "Hmm, not that one. Think again!"
+  },
+  "skymap-hello": {
+    "speaker": "narrator",
+    "text": "This is the Sky Map! Fly to an island and press down to land."
   }
 }

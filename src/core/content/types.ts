@@ -209,6 +209,14 @@ export interface KingdomDef {
   name: string;
   /** Story and Sky Map order. */
   order: number;
+  /** The kingdom's hub: a small place with at most 6 exits (its areas, and the Sky Map). */
+  hub: LevelDef;
+  /** Where its island floats on the Sky Map, as fractions of the screen. */
+  map: { x: number; y: number };
+  /** Island picture on the Sky Map. */
+  island: string;
+  /** Friends who must be helped before this kingdom opens (none = open). */
+  needs?: string[];
   /** Areas in the order they open. The friend in each teaches its power. */
   areaOrder: string[];
   areas: Record<string, LevelDef>;
@@ -229,3 +237,9 @@ export interface HomeDef {
   /** Areas whose color sparks the Heart Crystal is waiting for. */
   heartCrystalSparks: string[];
 }
+
+/** A kingdom that's coming later: shown on the Sky Map as a mystery island. */
+export interface Teaser { id: string; name: string; map: { x: number; y: number } }
+
+/** Doors with this target open the Sky Map. */
+export const SKY_MAP = 'skymap';
