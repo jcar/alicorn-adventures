@@ -56,10 +56,25 @@ export class Patterns {
       pos = 0;
       tune.forEach((n, k) => s.time.delayedCall(600 + k * STEP_MS, () => flash(n)));
       s.time.delayedCall(600 + tune.length * STEP_MS + 200, () => {
+        if (state === 'done') return;
         state = 'turn';
         this.w.hint('pattern-turn');
       });
     };
+
+    const win = () => {
+      if (state === 'done') return;
+      state = 'done';
+      GameState.setFlag(`puzzle:${def.id}`);
+      crystals.forEach((c) => c.setAlpha(1));
+      s.time.delayedCall(400, () => {
+        sfx.yay();
+        this.w.confetti(def.x, GROUND_Y - 200, 60);
+        this.w.hint('pattern-win');
+        this.onSolved(def.id);
+      });
+    };
+    this.w.registerSolver?.(def.x, win);
 
     this.w.addSpot({
       x: def.x, y: GROUND_Y, verb: 'to play', promptY: GROUND_Y - 150,
@@ -87,15 +102,7 @@ export class Patterns {
           }
           pos++;
           if (pos < tune.length) return;
-          state = 'done';
-          GameState.setFlag(`puzzle:${def.id}`);
-          crystals.forEach((c) => c.setAlpha(1));
-          s.time.delayedCall(400, () => {
-            sfx.yay();
-            this.w.confetti(def.x, GROUND_Y - 200, 60);
-            this.w.hint('pattern-win');
-            this.onSolved(def.id);
-          });
+          win();
         },
       }),
     );

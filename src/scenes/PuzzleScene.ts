@@ -101,6 +101,15 @@ export class PuzzleScene extends Phaser.Scene {
     });
   }
 
+  /** Debug kit: answer correctly. */
+  debugSolve() {
+    if (this.puzzle.kind === 'number') this.value = this.puzzle.answer;
+    else this.choice = this.puzzle.answer;
+    this.refresh();
+    this.check();
+    return 'solved';
+  }
+
   update() {
     if (this.busy) return;
     const c = this.controls;

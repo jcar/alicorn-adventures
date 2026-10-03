@@ -54,6 +54,8 @@ export class WorldScene extends Phaser.Scene implements World {
   private hidden: HiddenThing[] = [];
   private shownHints = new Map<string, number>();
   private lastShimmer = 0;
+  private solvers: { x: number; solve: () => void }[] = [];
+  private overlayGfx?: Phaser.GameObjects.Graphics;
   private friend?: Friend;
   private gladeFriends: Friend[] = [];
   private questHave = 0;
@@ -78,6 +80,8 @@ export class WorldScene extends Phaser.Scene implements World {
     this.bouncers = [];
     this.spots = [];
     this.hidden = [];
+    this.solvers = [];
+    this.overlayGfx = undefined;
     this.shownHints = new Map();
     this.friend = undefined;
     this.gladeFriends = [];
@@ -191,6 +195,43 @@ export class WorldScene extends Phaser.Scene implements World {
     sfx.whoosh();
     this.scene.pause();
     this.scene.launch('Puzzle', { puzzleId, onSolved: () => this.time.delayedCall(50, onSolved) });
+  }
+
+  // ------------------------------------------------------------ debug kit (see src/debug/debug.ts)
+
+  registerSolver(x: number, solve: () => void) {
+    this.solvers.push({ x, solve });
+  }
+
+  debugSolvePattern() {
+    const near = [...this.solvers].sort((a, b) => Math.abs(a.x - this.player.x) - Math.abs(b.x - this.player.x))[0];
+    if (!near) return 'nothing to solve here';
+    near.solve();
+    return `solved the pattern at x=${near.x}`;
+  }
+
+  /** Draw barriers, zones, spots and hidden things on top of the level. */
+  debugOverlay(on?: boolean) {
+    const show = on ?? !this.overlayGfx;
+    this.overlayGfx?.destroy();
+    this.overlayGfx = undefined;
+    if (!show) return 'overlay off';
+    const g = (this.overlayGfx = this.add.graphics().setDepth(100));
+    const L = this.level;
+    const box = (x: number, y: number, w: number, h: number, color: number) => {
+      g.fillStyle(color, 0.18).fillRect(x, y, w, h).lineStyle(3, color, 0.9).strokeRect(x, y, w, h);
+    };
+    for (const w of L.winds ?? []) box(w.x, 0, w.w, WORLD_HEIGHT, 0x3fa9ff);
+    for (const d of L.darks ?? []) box(d.x, d.y, d.w, d.h, 0x8a4bff);
+    for (const i of L.ice ?? []) box(i.x, 0, 64, WORLD_HEIGHT, 0x7ff6ff);
+    for (const gt of L.gates ?? []) box(gt.x, 0, 72, WORLD_HEIGHT, 0xc4854a);
+    for (const b of L.blocks ?? []) box(b.x, b.y, b.w, b.h, 0x9a92b0);
+    for (const s of this.spots) {
+      g.lineStyle(2, 0x34d058, 0.9).strokeRect(s.x - (s.reachX ?? 80), s.y - (s.reachY ?? 200), (s.reachX ?? 80) * 2, (s.reachY ?? 200) * 2);
+      g.fillStyle(0x34d058, 1).fillCircle(s.x, s.y, 6);
+    }
+    for (const h of this.hidden) g.fillStyle(h.revealed ? 0x999999 : 0xffd23c, 1).fillCircle(h.x, h.y, 10);
+    return 'overlay on: blue wind · purple dark · cyan ice · brown gate · green spots · yellow hidden';
   }
 
   // ------------------------------------------------------------ building

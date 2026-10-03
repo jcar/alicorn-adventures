@@ -43,4 +43,6 @@ export interface World {
   giveStardust(n: number, x: number, y: number): void;
   confetti(x: number, y: number, count?: number): void;
   openPuzzle(puzzleId: string, onSolved: () => void): void;
+  /** Debug kit: lets alicorn.solve() finish a puzzle at this x. */
+  registerSolver?(x: number, solve: () => void): void;
 }

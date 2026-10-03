@@ -8,6 +8,7 @@ import { UIScene } from './scenes/UIScene';
 import { WardrobeScene } from './scenes/WardrobeScene';
 import { StickerBookScene } from './scenes/StickerBookScene';
 import { PuzzleScene } from './scenes/PuzzleScene';
+import { installDebug } from './debug/debug';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -20,5 +21,4 @@ const game = new Phaser.Game({
   scene: [BootScene, PreloadScene, TitleScene, NamePickerScene, WorldScene, UIScene, WardrobeScene, StickerBookScene, PuzzleScene],
 });
 
-// Handy for poking at the game from the browser console while developing.
-if (import.meta.env.DEV) (window as unknown as { game: Phaser.Game }).game = game;
+installDebug(game);
