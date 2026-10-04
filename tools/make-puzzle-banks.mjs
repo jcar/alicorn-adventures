@@ -45,6 +45,27 @@ const MATH = {
     if (rnd() < 0.5) { const a = 2 * int(3, 12); return { text: `${f} has ${a} stars and shares them equally with one friend. How many does each get?`, answer: a / 2 }; }
     const a = int(4, 15); return { text: `${f} picked ${a} flowers in the morning and the same number again after lunch. How many flowers in all?`, answer: a * 2 };
   },
+  // Tens and ones (bigger numbers: the lock goes to 99, and ↑ ↓ jump by ten).
+  9: () => {
+    const f = pick(FRIENDS); const t = pick(THINGS); const r = rnd();
+    if (r < 0.4) { const tens = int(1, 6), ones = int(0, 9); return { text: `${f} has ${tens} ${tens === 1 ? 'bag' : 'bags'} of 10 ${t[1]} and ${ones} more. How many ${t[1]} is that?`, answer: tens * 10 + ones, max: 99 }; }
+    if (r < 0.7) { const a = 10 * int(1, 5), b = 10 * int(1, 4); return { text: `${f} has ${a} ${t[1]} and finds ${b} more. How many ${t[1]} now?`, answer: a + b, max: 99 }; }
+    const ones = int(0, 5), a = 10 * int(2, 6) + ones, b = int(1, 9 - ones); return { text: `What is ${a} plus ${b}?`, answer: a + b, max: 99 };
+  },
+  10: () => {
+    const f = pick(FRIENDS); const t = pick(THINGS); const r = rnd();
+    if (r < 0.4) {
+      let a, b;
+      do { a = int(12, 39); b = int(11, 39); } while ((a % 10) + (b % 10) < 10 || a + b > 80);
+      return { text: `${f} has ${a} ${t[1]}. ${f} finds ${b} more. How many ${t[1]} now?`, answer: a + b, max: 99 };
+    }
+    if (r < 0.7) {
+      const a = int(35, 89); const b = 10 * int(1, Math.floor(a / 10) - 1) + int(0, a % 10);
+      return { text: `There were ${a} ${t[1]}. ${f} gave away ${b}. How many are left?`, answer: a - b, max: 99 };
+    }
+    const g = int(2, 9), each = pick([5, 10]); const [p, th] = pick([['boxes', 'cupcakes'], ['jars', 'candies'], ['bags', 'gumdrops'], ['trays', 'cookies']]);
+    return { text: `There are ${g} ${p} with ${each} ${th} in each. How many ${th} in all?`, answer: g * each, max: 99 };
+  },
 };
 
 // ------------------------------------------------------------------ reading (choices; the first choice is right, then shuffled)
@@ -104,6 +125,32 @@ const READING = {
     ['Bunny had five carrots. She gave one to each of her four friends. How many did Bunny keep?', 'one', 'five', 'none'],
     ['It was Dragon\'s birthday. Everyone sang and there was cake. What were they celebrating?', 'Dragon\'s birthday', 'the first snow', 'a new house'],
   ],
+  // Short stories: find the detail, or notice what is NOT there.
+  7: [
+    ['Bunny planted three seeds. She watered them every day. Soon, tall sunflowers grew. What did Bunny plant?', 'seeds', 'carrots', 'trees'],
+    ['Fox lost his red scarf at the lake. Owl found it in the reeds and brought it back. Where did Owl find the scarf?', 'in the reeds', 'in a tree', 'at the market'],
+    ['It was raining, so Pip stayed inside. Pip read a book about the moon. Why did Pip stay inside?', 'it was raining', 'Pip was sleepy', 'it was dark'],
+    ['Marina swam to the reef. She saw a crab, a starfish and a little blue fish. Which one did Marina NOT see?', 'a whale', 'a crab', 'a starfish'],
+    ['Dragon baked a cake for Owl. He put pink frosting and seven candles on top. What color was the frosting?', 'pink', 'blue', 'yellow'],
+    ['Otto dropped his shiny pebble in the river, and it sank. Grandma Tide helped him find it. What did Otto drop?', 'a shiny pebble', 'a shell', 'a fish'],
+    ['The snowman had a carrot nose and a green hat. Then the sun came out, and the snowman melted. What made the snowman melt?', 'the sun', 'the wind', 'the rain'],
+    ['Fox and Bunny went to the meadow. Fox picked berries. Bunny picked flowers for her mom. Who were the flowers for?', "Bunny's mom", 'Fox', 'Owl'],
+    ['Captain Crab looked for his hat under his bed and in his chest. At last he found it on his own head! Where was the hat?', 'on his head', 'under the bed', 'in the chest'],
+    ['Pip saw three stars. Then a cloud covered one of them. How many stars could Pip still see?', 'two', 'three', 'one'],
+  ],
+  // What happened first, last, or next? And what probably happened?
+  8: [
+    ['Owl woke up, ate breakfast, and then flew to school. What did Owl do first?', 'woke up', 'ate breakfast', 'flew to school'],
+    ['Bunny dug a hole, put in a seed, and then watered it. What did Bunny do last?', 'watered it', 'dug a hole', 'put in a seed'],
+    ['Before the party, Dragon blew up balloons. After the party, he swept the floor. When did Dragon sweep?', 'after the party', 'before the party', 'at breakfast'],
+    ['Marina found a pearl. First she showed Otto, and then she gave it to Grandma Tide. Who saw the pearl first?', 'Otto', 'Grandma Tide', 'Captain Crab'],
+    ['Fox put on his boots and his raincoat, and took his umbrella. What was the weather probably like?', 'rainy', 'sunny and hot', 'very windy'],
+    ['Pip yawned and rubbed her eyes. The moon was high in the sky. What will Pip probably do next?', 'go to sleep', 'eat lunch', 'go swimming'],
+    ['The ice cream sat in the sun for too long. Now there is a sticky puddle. What happened to the ice cream?', 'it melted', 'it froze', 'it flew away'],
+    ['First the caterpillar ate lots of leaves. Then it made a cocoon. What came out of the cocoon at the end?', 'a butterfly', 'a bird', 'a frog'],
+    ['Owl read the map, crossed the bridge, and then climbed the hill. What did Owl do just before climbing the hill?', 'crossed the bridge', 'read the map', 'took a nap'],
+    ['Bunny had ten carrots in her basket. At lunch she shared them all with her friends. How many carrots were left in the basket?', 'none', 'ten', 'five'],
+  ],
 };
 
 // ------------------------------------------------------------------ logic (choices; first is right)
@@ -159,6 +206,32 @@ const LOGIC = {
     ['Bunny sits left of Fox. Owl sits right of Fox. Who is in the middle?', 'Fox', 'Bunny', 'Owl'],
     ['A blue bird sang before a red bird. A yellow bird sang after the red bird. Which bird sang first?', 'the blue bird', 'the red bird', 'the yellow bird'],
   ],
+  // Two clues: rule things out.
+  7: [
+    ['I am a bird. I hoot at night. Who am I?', 'an owl', 'a fox', 'a fish'],
+    ['The boxes are red, blue and green. My box is not red. It is not blue. What color is my box?', 'green', 'red', 'blue'],
+    ["Pip's pet is a cat, a dog or a fish. It is not a cat. It does not bark. What is Pip's pet?", 'a fish', 'a cat', 'a dog'],
+    ['My number is bigger than 5 and smaller than 7. What is my number?', '6', '5', '8'],
+    ['Someone ate the berries. It was not Bunny. It was not Owl. Only Bunny, Owl and Fox were there. Who ate the berries?', 'Fox', 'Bunny', 'Owl'],
+    ['It is round. It is not a ball. It is a fruit. What is it?', 'an orange', 'a ball', 'a banana'],
+    ['My number is between 3 and 5. What is my number?', '4', '3', '5'],
+    ['Dragon has more than 2 stars but fewer than 4. How many stars does Dragon have?', '3', '2', '4'],
+    ['The cakes are chocolate, lemon and strawberry. My cake is not chocolate. It is not lemon. Which cake is mine?', 'strawberry', 'chocolate', 'lemon'],
+    ['Fox lives in the house on the left, the middle or the right. It is not on the left. It is not in the middle. Where does Fox live?', 'on the right', 'on the left', 'in the middle'],
+  ],
+  // Three clues, and if-then thinking.
+  8: [
+    ['Owl, Fox and Bunny each have one fruit: an apple, a pear or a plum. Owl has the apple. Fox does not have the plum. What does Bunny have?', 'the plum', 'the pear', 'the apple'],
+    ['Bunny, Fox and Pip stand in a line. Fox is first. Pip is not last. Who is last?', 'Bunny', 'Pip', 'Fox'],
+    ['When it rains, the frogs sing. Today the frogs are not singing. Is it raining?', 'no', 'yes', 'it is snowing'],
+    ['Every dragon in the cave is green. Sparky is a dragon in the cave. What color is Sparky?', 'green', 'red', 'blue'],
+    ['My number is bigger than 10 and smaller than 15. It is even, and it is not 12. What is my number?', '14', '12', '13'],
+    ['Marina, Otto and Crab each have a shell: pink, white or striped. Marina has the pink one. Crab does not have the white one. Which shell does Otto have?', 'the white one', 'the striped one', 'the pink one'],
+    ['Fox is taller than Bunny. Owl is taller than Fox. Pip is shorter than Bunny. Who is the tallest?', 'Owl', 'Fox', 'Pip'],
+    ['All the stars in the jar are gold. Pip takes one star out of the jar. What color is it?', 'gold', 'silver', 'blue'],
+    ['Owl, Dragon and Fox sit on a bench. Dragon is in the middle. Owl is on the left. Who is on the right?', 'Fox', 'Owl', 'Dragon'],
+    ['Bunny has 2 more carrots than Fox. Fox has 3 carrots. How many carrots does Bunny have?', '5', '3', '1'],
+  ],
 };
 
 // ------------------------------------------------------------------ build
@@ -170,26 +243,33 @@ const shuffle = (right, wrong) => {
   return { choices, answer: choices.indexOf(right) };
 };
 
-for (const [lvl, make] of Object.entries(MATH)) {
+// Levels added later are built in a second pass, so the seeded randomness of
+// everything before stays exactly the same (same questions, same answer order).
+const ORIGINAL = { math: 8, reading: 6, logic: 6 };
+const mathLevel = (lvl, make) => {
   const seen = new Set();
   banks.math[lvl] = [];
   for (let tries = 0; banks.math[lvl].length < 10 && tries < 500; tries++) {
     const q = make();
-    if (seen.has(q.text) || q.answer > 30 || q.answer < 0) continue;
+    if (seen.has(q.text) || q.answer > (q.max ?? 30) || q.answer < 0) continue;
     seen.add(q.text);
     const id = `pz-math-${lvl}-${banks.math[lvl].length + 1}`;
     banks.math[lvl].push({ id, kind: 'number', ...q });
     lines[id] = { speaker: 'narrator', text: q.text };
   }
-}
-for (const [skill, table] of [['reading', READING], ['logic', LOGIC]]) {
-  for (const [lvl, rows] of Object.entries(table)) {
-    banks[skill][lvl] = rows.map(([text, right, ...wrong], i) => {
-      const id = `pz-${skill}-${lvl}-${i + 1}`;
-      lines[id] = { speaker: 'narrator', text };
-      return { id, kind: 'choice', text, ...shuffle(right, wrong) };
-    });
-  }
+};
+const choiceLevel = (skill, lvl, rows) => {
+  banks[skill][lvl] = rows.map(([text, right, ...wrong], i) => {
+    const id = `pz-${skill}-${lvl}-${i + 1}`;
+    lines[id] = { speaker: 'narrator', text };
+    return { id, kind: 'choice', text, ...shuffle(right, wrong) };
+  });
+};
+for (const later of [false, true]) {
+  const isNew = (skill, lvl) => Number(lvl) > ORIGINAL[skill];
+  for (const [lvl, make] of Object.entries(MATH)) if (isNew('math', lvl) === later) mathLevel(lvl, make);
+  for (const [skill, table] of [['reading', READING], ['logic', LOGIC]])
+    for (const [lvl, rows] of Object.entries(table)) if (isNew(skill, lvl) === later) choiceLevel(skill, lvl, rows);
 }
 
 await writeFile(path.join(ROOT, 'src/core/puzzles/banks.json'), JSON.stringify(banks, null, 2) + '\n');

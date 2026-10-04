@@ -8,7 +8,7 @@ import { COLORS, textStyle, titleStyle } from '../ui/style';
 import { sfx } from '../audio/sfx';
 import { toggleSound, toggleVoice } from '../systems/Settings';
 import { speak } from '../audio/voice';
-import type { Quest } from './WorldScene';
+import type { Quest, QuestShown } from './WorldScene';
 
 /** The heads-up display over the world: stardust jar, quest, hints and celebrations. */
 export class UIScene extends Phaser.Scene {
@@ -64,6 +64,9 @@ export class UIScene extends Phaser.Scene {
     GameState.events.on('unlock', this.queueToast, this);
     GameState.events.on('flag', this.refreshFinds, this);
     GameState.events.on('unlock', this.refreshFinds, this);
+    // Phaser only sends "changedata" for keys that already exist, so make sure
+    // they do: otherwise the first quest (or hint) of a session never shows.
+    for (const k of ['quest', 'hint']) if (!this.registry.has(k)) this.registry.set(k, null);
     this.registry.events.on('changedata-quest', this.onQuest, this);
     this.registry.events.on('changedata-levelName', this.onLevel, this);
     this.registry.events.on('changedata-hint', this.onHint, this);
@@ -82,9 +85,9 @@ export class UIScene extends Phaser.Scene {
     kb.on('keydown-V', () => this.showHint(toggleVoice() ? 'Voice on' : 'Voice off'));
   }
 
-  private onQuest(_p: unknown, q: Quest | null) { this.showQuest(q); }
+  private onQuest(_p: unknown, q: QuestShown) { this.showQuest(q); }
   private onLevel(_p: unknown, v: { name: string }) { this.showBanner(v.name); }
-  private onHint(_p: unknown, v: { text: string }) { this.showHint(v.text); }
+  private onHint(_p: unknown, v: { text: string } | null) { if (v) this.showHint(v.text); }
 
   private refreshStardust() {
     const d = GameState.data;
@@ -113,20 +116,31 @@ export class UIScene extends Phaser.Scene {
     });
   }
 
-  private showQuest(q: Quest | null | undefined) {
+  /** The quest card, top right: one row (carrots ●●○), or a recipe card with a row per ingredient. */
+  private showQuest(shown: QuestShown | undefined) {
     this.questBox.removeAll(true);
-    if (!q) return;
-    const w = 90 + q.need * 50;
+    if (!shown) return;
+    const rows: Quest[] = Array.isArray(shown) ? shown : [shown];
+    const rowH = rows.length > 1 ? 62 : 84;
+    const pad = rows.length > 1 ? 10 : 0;
+    const w = 90 + Math.max(...rows.map((q) => q.need)) * 50;
+    const h = rows.length * rowH + pad * 2;
     const g = this.add.graphics();
-    g.fillStyle(COLORS.paper, 0.92).lineStyle(4, COLORS.paperEdge).fillRoundedRect(-w, 0, w, 84, 24).strokeRoundedRect(-w, 0, w, 84, 24);
-    const icon = this.add.image(-w + 44, 42, q.texture);
-    icon.setScale(56 / Math.max(icon.width, icon.height));
-    this.questBox.add([g, icon]);
-    for (let i = 0; i < q.need; i++) {
-      const on = i < q.have;
-      this.questBox.add(this.add.circle(-w + 100 + i * 50, 42, 17, on ? 0xffc93c : 0xe9e0f7).setStrokeStyle(3, on ? 0xffb31a : COLORS.paperEdge));
-    }
-    if (q.have > 0) this.tweens.add({ targets: this.questBox, scale: 1.1, duration: 120, yoyo: true });
+    g.fillStyle(COLORS.paper, 0.92).lineStyle(4, COLORS.paperEdge).fillRoundedRect(-w, 0, w, h, 24).strokeRoundedRect(-w, 0, w, h, 24);
+    this.questBox.add(g);
+    rows.forEach((q, r) => {
+      const y = pad + r * rowH + rowH / 2;
+      const done = q.have >= q.need;
+      const icon = this.add.image(-w + 44, y, q.texture);
+      icon.setScale((rowH - 28) / Math.max(icon.width, icon.height));
+      this.questBox.add(icon);
+      for (let i = 0; i < q.need; i++) {
+        const on = i < q.have;
+        this.questBox.add(this.add.circle(-w + 100 + i * 50, y, rows.length > 1 ? 15 : 17, on ? 0xffc93c : 0xe9e0f7).setStrokeStyle(3, on ? 0xffb31a : COLORS.paperEdge));
+      }
+      if (done && rows.length > 1) this.questBox.add(this.add.text(-12, y, '✓', titleStyle(30, { color: '#3fbf6f' })).setOrigin(1, 0.5));
+    });
+    if (rows.some((q) => q.have > 0)) this.tweens.add({ targets: this.questBox, scale: 1.1, duration: 120, yoyo: true });
   }
 
   private showBanner(name: string) {

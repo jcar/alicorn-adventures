@@ -798,5 +798,245 @@
   "pz-logic-6-10": {
     "speaker": "narrator",
     "text": "A blue bird sang before a red bird. A yellow bird sang after the red bird. Which bird sang first?"
+  },
+  "pz-math-9-1": {
+    "speaker": "narrator",
+    "text": "Bunny has 10 stars and finds 30 more. How many stars now?"
+  },
+  "pz-math-9-2": {
+    "speaker": "narrator",
+    "text": "Bunny has 40 stars and finds 20 more. How many stars now?"
+  },
+  "pz-math-9-3": {
+    "speaker": "narrator",
+    "text": "Dragon has 1 bag of 10 stars and 3 more. How many stars is that?"
+  },
+  "pz-math-9-4": {
+    "speaker": "narrator",
+    "text": "Fox has 4 bags of 10 acorns and 9 more. How many acorns is that?"
+  },
+  "pz-math-9-5": {
+    "speaker": "narrator",
+    "text": "Bunny has 2 bags of 10 flowers and 1 more. How many flowers is that?"
+  },
+  "pz-math-9-6": {
+    "speaker": "narrator",
+    "text": "Bunny has 6 bags of 10 carrots and 2 more. How many carrots is that?"
+  },
+  "pz-math-9-7": {
+    "speaker": "narrator",
+    "text": "What is 32 plus 4?"
+  },
+  "pz-math-9-8": {
+    "speaker": "narrator",
+    "text": "Bunny has 20 carrots and finds 40 more. How many carrots now?"
+  },
+  "pz-math-9-9": {
+    "speaker": "narrator",
+    "text": "Bunny has 3 bags of 10 carrots and 1 more. How many carrots is that?"
+  },
+  "pz-math-9-10": {
+    "speaker": "narrator",
+    "text": "What is 32 plus 1?"
+  },
+  "pz-math-10-1": {
+    "speaker": "narrator",
+    "text": "There are 8 bags with 5 gumdrops in each. How many gumdrops in all?"
+  },
+  "pz-math-10-2": {
+    "speaker": "narrator",
+    "text": "There are 8 bags with 10 gumdrops in each. How many gumdrops in all?"
+  },
+  "pz-math-10-3": {
+    "speaker": "narrator",
+    "text": "There were 65 acorns. Bunny gave away 34. How many are left?"
+  },
+  "pz-math-10-4": {
+    "speaker": "narrator",
+    "text": "Pip has 18 flowers. Pip finds 29 more. How many flowers now?"
+  },
+  "pz-math-10-5": {
+    "speaker": "narrator",
+    "text": "There were 87 acorns. Fox gave away 22. How many are left?"
+  },
+  "pz-math-10-6": {
+    "speaker": "narrator",
+    "text": "There were 40 stars. Fox gave away 30. How many are left?"
+  },
+  "pz-math-10-7": {
+    "speaker": "narrator",
+    "text": "Pip has 19 acorns. Pip finds 13 more. How many acorns now?"
+  },
+  "pz-math-10-8": {
+    "speaker": "narrator",
+    "text": "There were 85 flowers. Fox gave away 53. How many are left?"
+  },
+  "pz-math-10-9": {
+    "speaker": "narrator",
+    "text": "There are 4 trays with 5 cookies in each. How many cookies in all?"
+  },
+  "pz-math-10-10": {
+    "speaker": "narrator",
+    "text": "There are 2 bags with 5 gumdrops in each. How many gumdrops in all?"
+  },
+  "pz-reading-7-1": {
+    "speaker": "narrator",
+    "text": "Bunny planted three seeds. She watered them every day. Soon, tall sunflowers grew. What did Bunny plant?"
+  },
+  "pz-reading-7-2": {
+    "speaker": "narrator",
+    "text": "Fox lost his red scarf at the lake. Owl found it in the reeds and brought it back. Where did Owl find the scarf?"
+  },
+  "pz-reading-7-3": {
+    "speaker": "narrator",
+    "text": "It was raining, so Pip stayed inside. Pip read a book about the moon. Why did Pip stay inside?"
+  },
+  "pz-reading-7-4": {
+    "speaker": "narrator",
+    "text": "Marina swam to the reef. She saw a crab, a starfish and a little blue fish. Which one did Marina NOT see?"
+  },
+  "pz-reading-7-5": {
+    "speaker": "narrator",
+    "text": "Dragon baked a cake for Owl. He put pink frosting and seven candles on top. What color was the frosting?"
+  },
+  "pz-reading-7-6": {
+    "speaker": "narrator",
+    "text": "Otto dropped his shiny pebble in the river, and it sank. Grandma Tide helped him find it. What did Otto drop?"
+  },
+  "pz-reading-7-7": {
+    "speaker": "narrator",
+    "text": "The snowman had a carrot nose and a green hat. Then the sun came out, and the snowman melted. What made the snowman melt?"
+  },
+  "pz-reading-7-8": {
+    "speaker": "narrator",
+    "text": "Fox and Bunny went to the meadow. Fox picked berries. Bunny picked flowers for her mom. Who were the flowers for?"
+  },
+  "pz-reading-7-9": {
+    "speaker": "narrator",
+    "text": "Captain Crab looked for his hat under his bed and in his chest. At last he found it on his own head! Where was the hat?"
+  },
+  "pz-reading-7-10": {
+    "speaker": "narrator",
+    "text": "Pip saw three stars. Then a cloud covered one of them. How many stars could Pip still see?"
+  },
+  "pz-reading-8-1": {
+    "speaker": "narrator",
+    "text": "Owl woke up, ate breakfast, and then flew to school. What did Owl do first?"
+  },
+  "pz-reading-8-2": {
+    "speaker": "narrator",
+    "text": "Bunny dug a hole, put in a seed, and then watered it. What did Bunny do last?"
+  },
+  "pz-reading-8-3": {
+    "speaker": "narrator",
+    "text": "Before the party, Dragon blew up balloons. After the party, he swept the floor. When did Dragon sweep?"
+  },
+  "pz-reading-8-4": {
+    "speaker": "narrator",
+    "text": "Marina found a pearl. First she showed Otto, and then she gave it to Grandma Tide. Who saw the pearl first?"
+  },
+  "pz-reading-8-5": {
+    "speaker": "narrator",
+    "text": "Fox put on his boots and his raincoat, and took his umbrella. What was the weather probably like?"
+  },
+  "pz-reading-8-6": {
+    "speaker": "narrator",
+    "text": "Pip yawned and rubbed her eyes. The moon was high in the sky. What will Pip probably do next?"
+  },
+  "pz-reading-8-7": {
+    "speaker": "narrator",
+    "text": "The ice cream sat in the sun for too long. Now there is a sticky puddle. What happened to the ice cream?"
+  },
+  "pz-reading-8-8": {
+    "speaker": "narrator",
+    "text": "First the caterpillar ate lots of leaves. Then it made a cocoon. What came out of the cocoon at the end?"
+  },
+  "pz-reading-8-9": {
+    "speaker": "narrator",
+    "text": "Owl read the map, crossed the bridge, and then climbed the hill. What did Owl do just before climbing the hill?"
+  },
+  "pz-reading-8-10": {
+    "speaker": "narrator",
+    "text": "Bunny had ten carrots in her basket. At lunch she shared them all with her friends. How many carrots were left in the basket?"
+  },
+  "pz-logic-7-1": {
+    "speaker": "narrator",
+    "text": "I am a bird. I hoot at night. Who am I?"
+  },
+  "pz-logic-7-2": {
+    "speaker": "narrator",
+    "text": "The boxes are red, blue and green. My box is not red. It is not blue. What color is my box?"
+  },
+  "pz-logic-7-3": {
+    "speaker": "narrator",
+    "text": "Pip's pet is a cat, a dog or a fish. It is not a cat. It does not bark. What is Pip's pet?"
+  },
+  "pz-logic-7-4": {
+    "speaker": "narrator",
+    "text": "My number is bigger than 5 and smaller than 7. What is my number?"
+  },
+  "pz-logic-7-5": {
+    "speaker": "narrator",
+    "text": "Someone ate the berries. It was not Bunny. It was not Owl. Only Bunny, Owl and Fox were there. Who ate the berries?"
+  },
+  "pz-logic-7-6": {
+    "speaker": "narrator",
+    "text": "It is round. It is not a ball. It is a fruit. What is it?"
+  },
+  "pz-logic-7-7": {
+    "speaker": "narrator",
+    "text": "My number is between 3 and 5. What is my number?"
+  },
+  "pz-logic-7-8": {
+    "speaker": "narrator",
+    "text": "Dragon has more than 2 stars but fewer than 4. How many stars does Dragon have?"
+  },
+  "pz-logic-7-9": {
+    "speaker": "narrator",
+    "text": "The cakes are chocolate, lemon and strawberry. My cake is not chocolate. It is not lemon. Which cake is mine?"
+  },
+  "pz-logic-7-10": {
+    "speaker": "narrator",
+    "text": "Fox lives in the house on the left, the middle or the right. It is not on the left. It is not in the middle. Where does Fox live?"
+  },
+  "pz-logic-8-1": {
+    "speaker": "narrator",
+    "text": "Owl, Fox and Bunny each have one fruit: an apple, a pear or a plum. Owl has the apple. Fox does not have the plum. What does Bunny have?"
+  },
+  "pz-logic-8-2": {
+    "speaker": "narrator",
+    "text": "Bunny, Fox and Pip stand in a line. Fox is first. Pip is not last. Who is last?"
+  },
+  "pz-logic-8-3": {
+    "speaker": "narrator",
+    "text": "When it rains, the frogs sing. Today the frogs are not singing. Is it raining?"
+  },
+  "pz-logic-8-4": {
+    "speaker": "narrator",
+    "text": "Every dragon in the cave is green. Sparky is a dragon in the cave. What color is Sparky?"
+  },
+  "pz-logic-8-5": {
+    "speaker": "narrator",
+    "text": "My number is bigger than 10 and smaller than 15. It is even, and it is not 12. What is my number?"
+  },
+  "pz-logic-8-6": {
+    "speaker": "narrator",
+    "text": "Marina, Otto and Crab each have a shell: pink, white or striped. Marina has the pink one. Crab does not have the white one. Which shell does Otto have?"
+  },
+  "pz-logic-8-7": {
+    "speaker": "narrator",
+    "text": "Fox is taller than Bunny. Owl is taller than Fox. Pip is shorter than Bunny. Who is the tallest?"
+  },
+  "pz-logic-8-8": {
+    "speaker": "narrator",
+    "text": "All the stars in the jar are gold. Pip takes one star out of the jar. What color is it?"
+  },
+  "pz-logic-8-9": {
+    "speaker": "narrator",
+    "text": "Owl, Dragon and Fox sit on a bench. Dragon is in the middle. Owl is on the left. Who is on the right?"
+  },
+  "pz-logic-8-10": {
+    "speaker": "narrator",
+    "text": "Bunny has 2 more carrots than Fox. Fox has 3 carrots. How many carrots does Bunny have?"
   }
 }

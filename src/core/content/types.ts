@@ -42,8 +42,8 @@ export interface LevelDef {
   ground: { x: number; w: number }[];
   platforms: { x: number; y: number; w: number }[];
   stardust: Point[];
-  /** The friend's quest items (carrots, berries). */
-  items: Hideable[];
+  /** The friend's quest items (carrots, berries). For a recipe, `item` says which ingredient each one is. */
+  items: (Hideable & { item?: string })[];
   blooms: Hideable[];
   bouncers: Point[];
   friend?: { id: string; x: number; y: number };
@@ -60,11 +60,19 @@ export interface LevelDef {
   /** 'swim': underwater (floaty, same keys). Default is 'explore'. */
   mode?: 'explore' | 'swim';
   /** Swap the shared pictures for this area's own (flower bud, flower, pattern crystal, the catch-you cloud). */
-  art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string };
+  art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string; shrinker?: string; tunnel?: string; ceiling?: string };
+  /** Rock from the sky down to a low gap: only a tiny (Shrink) alicorn fits through. */
+  tunnels?: { x: number; w: number; gap?: number }[];
+  /** Shrink mushrooms: ↓ here to become tiny (needs Shrink). ↓ anywhere with room grows her back. */
+  shrinkers?: { x: number }[];
+  /** Candy-glass ceilings sealing a little sky room above them (walls on both sides). Fizz Pop breaks through. */
+  ceilings?: { id: string; x: number; w: number; y: number }[];
   /** Full-height ice wall. Needs Warm Breath. */
   ice?: { id: string; x: number }[];
   /** Too dark to see without Glow. */
   darks?: { x: number; y: number; w: number; h: number }[];
+  /** Full-height doors that open with a story item found in the same area (`has:<item>`), like a spoon for the cocoa door. `need` is what she's told without it. */
+  doors?: { id: string; x: number; item: string; need: string; texture?: string }[];
   /** Full-height stone gate with a number lock. */
   gates?: ({ id: string; x: number } & PuzzleSpec)[];
   /** Crystals that chime a tune to copy. Solving it reveals the chest with the same id. */
@@ -120,6 +128,8 @@ export function tunnel(x: number, w: number, starId: string) {
 
 export type FriendRequest =
   | { kind: 'fetch'; item: string; count: number }
+  /** Exactly these, read off a recipe card. Extras in the level (or one too many) are kindly left behind. */
+  | { kind: 'recipe'; items: { item: string; count: number }[] }
   | { kind: 'wake' }
   | { kind: 'bloom' }
   /** Just find them. (Pip is hiding.) */
@@ -139,7 +149,7 @@ export interface FriendDef {
 
 /** Every friend you help teaches a power. Each one opens up secrets everywhere. */
 export interface PowerDef {
-  id: 'sniff' | 'dash' | 'glow' | 'warmth' | 'jet' | 'song';
+  id: 'sniff' | 'dash' | 'glow' | 'warmth' | 'jet' | 'song' | 'shrink' | 'fizz';
   name: string;
   friend: string;
   icon: string;

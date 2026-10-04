@@ -2,9 +2,10 @@ import { AREA_ORDER, FRIENDS, HOME, KINGDOMS, LEVELS, POWERS } from './registry'
 import type { Hideable, KingdomDef, LevelDef, PowerId } from './types';
 
 /**
- * Which powers you need to reach a spot in a level. Winds and ice walls are
- * full height, so anything past one needs that power; dark places need Glow
- * to see; hidden things need Sniff.
+ * Which powers you need to reach a spot in a level. Winds, ice walls and
+ * tiny tunnels are full height, so anything past one needs that power; dark
+ * places need Glow to see; hidden things need Sniff; a sky room sealed by
+ * candy glass needs Fizz Pop.
  */
 export function powersNeeded(level: LevelDef, p: Hideable): Set<PowerId> {
   const need = new Set<PowerId>();
@@ -12,6 +13,8 @@ export function powersNeeded(level: LevelDef, p: Hideable): Set<PowerId> {
   for (const w of level.winds ?? []) if (p.x >= w.x) need.add(w.power ?? 'dash');
   for (const w of level.walls ?? []) if (p.x >= w.x) need.add(w.power);
   for (const i of level.ice ?? []) if (p.x >= i.x) need.add('warmth');
+  for (const t of level.tunnels ?? []) if (p.x >= t.x) need.add('shrink');
+  for (const c of level.ceilings ?? []) if (p.x >= c.x && p.x <= c.x + c.w && p.y < c.y) need.add('fizz');
   for (const d of level.darks ?? [])
     if (p.x >= d.x && p.x <= d.x + d.w && p.y >= d.y && p.y <= d.y + d.h) need.add('glow');
   return need;

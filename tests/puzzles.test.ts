@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SKILLS, adapt, bankOf, defaultSkills, levelFor, pickQuestion, tuneLength } from '../src/core/puzzles/engine';
+import { SKILLS, adapt, bankOf, defaultSkills, levelFor, maxLevel, pickQuestion, tuneLength } from '../src/core/puzzles/engine';
 import { DIALOGUE, NUMBER_MAX } from '../src/core/content';
 import { migrate } from '../src/core/systems/SaveManager';
 
@@ -15,7 +15,9 @@ describe('question banks', () => {
           if (q.kind === 'number') {
             expect(Number.isInteger(q.answer), q.id).toBe(true);
             expect(q.answer, q.id).toBeGreaterThanOrEqual(0);
-            expect(q.answer, q.id).toBeLessThanOrEqual(NUMBER_MAX);
+            // The number lock goes to NUMBER_MAX, or to the question's own max (tens and ones go to 99).
+            expect(q.answer, q.id).toBeLessThanOrEqual(q.max ?? NUMBER_MAX);
+            if (q.max !== undefined) expect(q.max, q.id).toBeLessThanOrEqual(99);
           } else {
             expect(q.choices?.[q.answer], q.id).toBeDefined();
             expect(new Set(q.choices).size, `${q.id} has duplicate choices`).toBe(q.choices!.length);
@@ -56,7 +58,7 @@ describe('adapting to the player', () => {
     expect(adapt({ level: 1, streak: 0 }, { firstTry: false, misses: 5 }, 8).level).toBe(1);
     expect(adapt({ level: 8, streak: 1 }, { firstTry: true, misses: 0 }, 8).level).toBe(8);
     expect(levelFor(defaultSkills(), 'math', -5)).toBe(1);
-    expect(levelFor(defaultSkills(true), 'logic', 10)).toBe(6);
+    expect(levelFor(defaultSkills(true), 'logic', 10)).toBe(maxLevel('logic'));
   });
 
   it('crystal tunes grow from 3 notes to 8', () => {
@@ -75,7 +77,7 @@ describe('save v4', () => {
   it('keeps existing skill levels and repairs bad ones', () => {
     const m = migrate({ skills: { math: { level: 6, streak: 1 }, reading: { level: 99 }, logic: 'oops' } });
     expect(m.skills.math).toEqual({ level: 6, streak: 1 });
-    expect(m.skills.reading.level).toBe(6);
+    expect(m.skills.reading.level).toBe(maxLevel('reading'));
     expect(m.skills.logic.level).toBeGreaterThanOrEqual(1);
     expect(m.skills.memory.level).toBeGreaterThanOrEqual(1);
   });

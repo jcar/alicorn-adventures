@@ -695,6 +695,150 @@
         "text": "Dragon picked 13 flowers in the morning and the same number again after lunch. How many flowers in all?",
         "answer": 26
       }
+    ],
+    "9": [
+      {
+        "id": "pz-math-9-1",
+        "kind": "number",
+        "text": "Bunny has 10 stars and finds 30 more. How many stars now?",
+        "answer": 40,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-2",
+        "kind": "number",
+        "text": "Bunny has 40 stars and finds 20 more. How many stars now?",
+        "answer": 60,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-3",
+        "kind": "number",
+        "text": "Dragon has 1 bag of 10 stars and 3 more. How many stars is that?",
+        "answer": 13,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-4",
+        "kind": "number",
+        "text": "Fox has 4 bags of 10 acorns and 9 more. How many acorns is that?",
+        "answer": 49,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-5",
+        "kind": "number",
+        "text": "Bunny has 2 bags of 10 flowers and 1 more. How many flowers is that?",
+        "answer": 21,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-6",
+        "kind": "number",
+        "text": "Bunny has 6 bags of 10 carrots and 2 more. How many carrots is that?",
+        "answer": 62,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-7",
+        "kind": "number",
+        "text": "What is 32 plus 4?",
+        "answer": 36,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-8",
+        "kind": "number",
+        "text": "Bunny has 20 carrots and finds 40 more. How many carrots now?",
+        "answer": 60,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-9",
+        "kind": "number",
+        "text": "Bunny has 3 bags of 10 carrots and 1 more. How many carrots is that?",
+        "answer": 31,
+        "max": 99
+      },
+      {
+        "id": "pz-math-9-10",
+        "kind": "number",
+        "text": "What is 32 plus 1?",
+        "answer": 33,
+        "max": 99
+      }
+    ],
+    "10": [
+      {
+        "id": "pz-math-10-1",
+        "kind": "number",
+        "text": "There are 8 bags with 5 gumdrops in each. How many gumdrops in all?",
+        "answer": 40,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-2",
+        "kind": "number",
+        "text": "There are 8 bags with 10 gumdrops in each. How many gumdrops in all?",
+        "answer": 80,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-3",
+        "kind": "number",
+        "text": "There were 65 acorns. Bunny gave away 34. How many are left?",
+        "answer": 31,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-4",
+        "kind": "number",
+        "text": "Pip has 18 flowers. Pip finds 29 more. How many flowers now?",
+        "answer": 47,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-5",
+        "kind": "number",
+        "text": "There were 87 acorns. Fox gave away 22. How many are left?",
+        "answer": 65,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-6",
+        "kind": "number",
+        "text": "There were 40 stars. Fox gave away 30. How many are left?",
+        "answer": 10,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-7",
+        "kind": "number",
+        "text": "Pip has 19 acorns. Pip finds 13 more. How many acorns now?",
+        "answer": 32,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-8",
+        "kind": "number",
+        "text": "There were 85 flowers. Fox gave away 53. How many are left?",
+        "answer": 32,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-9",
+        "kind": "number",
+        "text": "There are 4 trays with 5 cookies in each. How many cookies in all?",
+        "answer": 20,
+        "max": 99
+      },
+      {
+        "id": "pz-math-10-10",
+        "kind": "number",
+        "text": "There are 2 bags with 5 gumdrops in each. How many gumdrops in all?",
+        "answer": 10,
+        "max": 99
+      }
     ]
   },
   "reading": {
@@ -1369,6 +1513,230 @@
         ],
         "answer": 2
       }
+    ],
+    "7": [
+      {
+        "id": "pz-reading-7-1",
+        "kind": "choice",
+        "text": "Bunny planted three seeds. She watered them every day. Soon, tall sunflowers grew. What did Bunny plant?",
+        "choices": [
+          "carrots",
+          "trees",
+          "seeds"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-7-2",
+        "kind": "choice",
+        "text": "Fox lost his red scarf at the lake. Owl found it in the reeds and brought it back. Where did Owl find the scarf?",
+        "choices": [
+          "in the reeds",
+          "at the market",
+          "in a tree"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-7-3",
+        "kind": "choice",
+        "text": "It was raining, so Pip stayed inside. Pip read a book about the moon. Why did Pip stay inside?",
+        "choices": [
+          "Pip was sleepy",
+          "it was dark",
+          "it was raining"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-7-4",
+        "kind": "choice",
+        "text": "Marina swam to the reef. She saw a crab, a starfish and a little blue fish. Which one did Marina NOT see?",
+        "choices": [
+          "a whale",
+          "a crab",
+          "a starfish"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-7-5",
+        "kind": "choice",
+        "text": "Dragon baked a cake for Owl. He put pink frosting and seven candles on top. What color was the frosting?",
+        "choices": [
+          "yellow",
+          "pink",
+          "blue"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-7-6",
+        "kind": "choice",
+        "text": "Otto dropped his shiny pebble in the river, and it sank. Grandma Tide helped him find it. What did Otto drop?",
+        "choices": [
+          "a shiny pebble",
+          "a fish",
+          "a shell"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-7-7",
+        "kind": "choice",
+        "text": "The snowman had a carrot nose and a green hat. Then the sun came out, and the snowman melted. What made the snowman melt?",
+        "choices": [
+          "the sun",
+          "the rain",
+          "the wind"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-7-8",
+        "kind": "choice",
+        "text": "Fox and Bunny went to the meadow. Fox picked berries. Bunny picked flowers for her mom. Who were the flowers for?",
+        "choices": [
+          "Owl",
+          "Fox",
+          "Bunny's mom"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-7-9",
+        "kind": "choice",
+        "text": "Captain Crab looked for his hat under his bed and in his chest. At last he found it on his own head! Where was the hat?",
+        "choices": [
+          "on his head",
+          "under the bed",
+          "in the chest"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-7-10",
+        "kind": "choice",
+        "text": "Pip saw three stars. Then a cloud covered one of them. How many stars could Pip still see?",
+        "choices": [
+          "one",
+          "three",
+          "two"
+        ],
+        "answer": 2
+      }
+    ],
+    "8": [
+      {
+        "id": "pz-reading-8-1",
+        "kind": "choice",
+        "text": "Owl woke up, ate breakfast, and then flew to school. What did Owl do first?",
+        "choices": [
+          "flew to school",
+          "woke up",
+          "ate breakfast"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-8-2",
+        "kind": "choice",
+        "text": "Bunny dug a hole, put in a seed, and then watered it. What did Bunny do last?",
+        "choices": [
+          "put in a seed",
+          "watered it",
+          "dug a hole"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-8-3",
+        "kind": "choice",
+        "text": "Before the party, Dragon blew up balloons. After the party, he swept the floor. When did Dragon sweep?",
+        "choices": [
+          "before the party",
+          "after the party",
+          "at breakfast"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-8-4",
+        "kind": "choice",
+        "text": "Marina found a pearl. First she showed Otto, and then she gave it to Grandma Tide. Who saw the pearl first?",
+        "choices": [
+          "Otto",
+          "Captain Crab",
+          "Grandma Tide"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-8-5",
+        "kind": "choice",
+        "text": "Fox put on his boots and his raincoat, and took his umbrella. What was the weather probably like?",
+        "choices": [
+          "sunny and hot",
+          "rainy",
+          "very windy"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-8-6",
+        "kind": "choice",
+        "text": "Pip yawned and rubbed her eyes. The moon was high in the sky. What will Pip probably do next?",
+        "choices": [
+          "go swimming",
+          "eat lunch",
+          "go to sleep"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-8-7",
+        "kind": "choice",
+        "text": "The ice cream sat in the sun for too long. Now there is a sticky puddle. What happened to the ice cream?",
+        "choices": [
+          "it melted",
+          "it flew away",
+          "it froze"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-reading-8-8",
+        "kind": "choice",
+        "text": "First the caterpillar ate lots of leaves. Then it made a cocoon. What came out of the cocoon at the end?",
+        "choices": [
+          "a bird",
+          "a butterfly",
+          "a frog"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-reading-8-9",
+        "kind": "choice",
+        "text": "Owl read the map, crossed the bridge, and then climbed the hill. What did Owl do just before climbing the hill?",
+        "choices": [
+          "read the map",
+          "took a nap",
+          "crossed the bridge"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-reading-8-10",
+        "kind": "choice",
+        "text": "Bunny had ten carrots in her basket. At lunch she shared them all with her friends. How many carrots were left in the basket?",
+        "choices": [
+          "five",
+          "none",
+          "ten"
+        ],
+        "answer": 1
+      }
     ]
   },
   "logic": {
@@ -2042,6 +2410,230 @@
           "the blue bird"
         ],
         "answer": 2
+      }
+    ],
+    "7": [
+      {
+        "id": "pz-logic-7-1",
+        "kind": "choice",
+        "text": "I am a bird. I hoot at night. Who am I?",
+        "choices": [
+          "an owl",
+          "a fox",
+          "a fish"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-7-2",
+        "kind": "choice",
+        "text": "The boxes are red, blue and green. My box is not red. It is not blue. What color is my box?",
+        "choices": [
+          "green",
+          "red",
+          "blue"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-7-3",
+        "kind": "choice",
+        "text": "Pip's pet is a cat, a dog or a fish. It is not a cat. It does not bark. What is Pip's pet?",
+        "choices": [
+          "a fish",
+          "a cat",
+          "a dog"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-7-4",
+        "kind": "choice",
+        "text": "My number is bigger than 5 and smaller than 7. What is my number?",
+        "choices": [
+          "8",
+          "6",
+          "5"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-7-5",
+        "kind": "choice",
+        "text": "Someone ate the berries. It was not Bunny. It was not Owl. Only Bunny, Owl and Fox were there. Who ate the berries?",
+        "choices": [
+          "Fox",
+          "Bunny",
+          "Owl"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-7-6",
+        "kind": "choice",
+        "text": "It is round. It is not a ball. It is a fruit. What is it?",
+        "choices": [
+          "an orange",
+          "a banana",
+          "a ball"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-7-7",
+        "kind": "choice",
+        "text": "My number is between 3 and 5. What is my number?",
+        "choices": [
+          "5",
+          "4",
+          "3"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-7-8",
+        "kind": "choice",
+        "text": "Dragon has more than 2 stars but fewer than 4. How many stars does Dragon have?",
+        "choices": [
+          "4",
+          "2",
+          "3"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-7-9",
+        "kind": "choice",
+        "text": "The cakes are chocolate, lemon and strawberry. My cake is not chocolate. It is not lemon. Which cake is mine?",
+        "choices": [
+          "lemon",
+          "strawberry",
+          "chocolate"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "pz-logic-7-10",
+        "kind": "choice",
+        "text": "Fox lives in the house on the left, the middle or the right. It is not on the left. It is not in the middle. Where does Fox live?",
+        "choices": [
+          "on the right",
+          "on the left",
+          "in the middle"
+        ],
+        "answer": 0
+      }
+    ],
+    "8": [
+      {
+        "id": "pz-logic-8-1",
+        "kind": "choice",
+        "text": "Owl, Fox and Bunny each have one fruit: an apple, a pear or a plum. Owl has the apple. Fox does not have the plum. What does Bunny have?",
+        "choices": [
+          "the plum",
+          "the apple",
+          "the pear"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-8-2",
+        "kind": "choice",
+        "text": "Bunny, Fox and Pip stand in a line. Fox is first. Pip is not last. Who is last?",
+        "choices": [
+          "Pip",
+          "Fox",
+          "Bunny"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-8-3",
+        "kind": "choice",
+        "text": "When it rains, the frogs sing. Today the frogs are not singing. Is it raining?",
+        "choices": [
+          "yes",
+          "it is snowing",
+          "no"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-8-4",
+        "kind": "choice",
+        "text": "Every dragon in the cave is green. Sparky is a dragon in the cave. What color is Sparky?",
+        "choices": [
+          "green",
+          "blue",
+          "red"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-8-5",
+        "kind": "choice",
+        "text": "My number is bigger than 10 and smaller than 15. It is even, and it is not 12. What is my number?",
+        "choices": [
+          "14",
+          "13",
+          "12"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-8-6",
+        "kind": "choice",
+        "text": "Marina, Otto and Crab each have a shell: pink, white or striped. Marina has the pink one. Crab does not have the white one. Which shell does Otto have?",
+        "choices": [
+          "the striped one",
+          "the pink one",
+          "the white one"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-8-7",
+        "kind": "choice",
+        "text": "Fox is taller than Bunny. Owl is taller than Fox. Pip is shorter than Bunny. Who is the tallest?",
+        "choices": [
+          "Pip",
+          "Fox",
+          "Owl"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "pz-logic-8-8",
+        "kind": "choice",
+        "text": "All the stars in the jar are gold. Pip takes one star out of the jar. What color is it?",
+        "choices": [
+          "gold",
+          "blue",
+          "silver"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-8-9",
+        "kind": "choice",
+        "text": "Owl, Dragon and Fox sit on a bench. Dragon is in the middle. Owl is on the left. Who is on the right?",
+        "choices": [
+          "Fox",
+          "Owl",
+          "Dragon"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "pz-logic-8-10",
+        "kind": "choice",
+        "text": "Bunny has 2 more carrots than Fox. Fox has 3 carrots. How many carrots does Bunny have?",
+        "choices": [
+          "5",
+          "1",
+          "3"
+        ],
+        "answer": 0
       }
     ]
   }

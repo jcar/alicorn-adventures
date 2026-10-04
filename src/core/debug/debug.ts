@@ -7,6 +7,8 @@ import { migrate } from '../systems/SaveManager';
 import { stopVoice } from '../audio/voice';
 import { PRESETS } from './presets';
 import { markersFor } from './markers';
+import { installLab, isLab } from './lab';
+import type { PowerId } from '../content';
 import type { WorldScene } from '../scenes/WorldScene';
 import type { PuzzleScene } from '../scenes/PuzzleScene';
 
@@ -21,6 +23,7 @@ import type { PuzzleScene } from '../scenes/PuzzleScene';
  *   alicorn.overlay()                    show barriers, zones and secret spots
  *   alicorn.state()  alicorn.markers()   look around
  *   alicorn.canReach('woods-gold-2')     could she get there with the powers she has now?
+ *   alicorn.go('lab'); alicorn.power('shrink', 'fizz')   try new engine pieces (recipes, tunnels, candy glass)
  */
 export function debugEnabled() {
   try {
@@ -32,6 +35,7 @@ export function debugEnabled() {
 
 export function installDebug(game: Phaser.Game) {
   if (!debugEnabled()) return;
+  installLab();
   const world = () => game.scene.getScene('World') as WorldScene;
   const running = (key: string) => game.scene.isActive(key) || game.scene.isPaused(key);
 
@@ -44,6 +48,7 @@ export function installDebug(game: Phaser.Game) {
       const make = PRESETS[name];
       if (!make) throw new Error(`Unknown preset. Try: ${Object.keys(PRESETS).join(', ')}`);
       GameState.restore(migrate(make()));
+      GameState.debugPowers.clear();
       api.go('glade');
       return api.state();
     },
@@ -141,6 +146,23 @@ export function installDebug(game: Phaser.Game) {
       return AREA_ORDER;
     },
 
+    /** Try a power without earning it, for this session only (never saved). No arguments: list them. */
+    power(...ids: PowerId[]) {
+      for (const id of ids) GameState.debugPowers.add(id);
+      return [...GameState.debugPowers];
+    },
+
+    /** Is the hero tiny? Is there room to grow? */
+    hero() {
+      const p = world().player;
+      return { x: Math.round(p.x), y: Math.round(p.y), tiny: p.tiny, scale: +p.scaleX.toFixed(2), bodyH: Math.round(p.body.height) };
+    },
+
+    /** The quest card as the HUD sees it. */
+    quest() {
+      return game.registry.get('quest');
+    },
+
     /** Each kingdom's hub and areas, in story order. */
     kingdoms() {
       return KINGDOMS.map((k) => ({ id: k.id, hub: k.hub.id, areas: k.areaOrder, saga: !!k.saga }));
@@ -171,7 +193,7 @@ export function installDebug(game: Phaser.Game) {
       const count = (ids: string[], prefix: string) => `${ids.filter((id) => d.flags.includes(`${prefix}${id}`)).length}/${ids.length}`;
       const areas = AREA_ORDER.map((a) => LEVELS[a]);
       return {
-        friends: `${d.friendsHelped.length}/${FRIENDS.length}`,
+        friends: `${d.friendsHelped.filter((f) => !isLab(f)).length}/${FRIENDS.filter((f) => !isLab(f.id)).length}`,
         secrets: count(areas.flatMap(secretIds), 'secret:'),
         golds: count(areas.flatMap(goldIds), 'gold:'),
         sparks: count(AREA_ORDER, 'spark:'),

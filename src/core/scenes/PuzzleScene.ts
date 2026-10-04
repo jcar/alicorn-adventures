@@ -76,7 +76,7 @@ export class PuzzleScene extends Phaser.Scene {
     }
     this.feedback = this.add.text(width / 2, 528, '', textStyle(32, { color: '#7a4fd6' })).setOrigin(0.5);
     this.panel.add(this.feedback);
-    const how = isNumber ? '← → change by 1 · ↑ ↓ change by 5 · SPACE try it · ESC look around' : '← → choose · SPACE answer · ESC look around';
+    const how = isNumber ? `← → change by 1 · ↑ ↓ change by ${this.bigStep()} · SPACE try it · ESC look around` : '← → choose · SPACE answer · ESC look around';
     this.panel.add(this.add.text(width / 2, height - 92, how, textStyle(22, { color: '#8f86a8' })).setOrigin(0.5));
     this.refresh();
   }
@@ -147,13 +147,18 @@ export class PuzzleScene extends Phaser.Scene {
     return 'solved';
   }
 
+  /** ↑ ↓ jump by 5, or by 10 for tens-and-ones locks that go up to 99. */
+  private bigStep() {
+    return this.q.kind === 'number' && (this.q.max ?? NUMBER_MAX) > NUMBER_MAX ? 10 : 5;
+  }
+
   update() {
     if (this.busy) return;
     const c = this.controls;
     const dx = (c.menuRight() ? 1 : 0) - (c.menuLeft() ? 1 : 0);
     const dy = (c.menuUp() ? 1 : 0) - (c.menuDown() ? 1 : 0);
     if (dx || dy) {
-      if (this.q.kind === 'number') this.value = Phaser.Math.Wrap(this.value + dx + dy * 5, 0, NUMBER_MAX + 1);
+      if (this.q.kind === 'number') this.value = Phaser.Math.Wrap(this.value + dx + dy * this.bigStep(), 0, (this.q.max ?? NUMBER_MAX) + 1);
       else if (dx) this.choice = Phaser.Math.Wrap(this.choice + dx, 0, this.q.choices.length);
       sfx.select();
       if (!this.hint || this.misses < 2) this.feedback.setText('');

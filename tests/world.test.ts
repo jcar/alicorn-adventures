@@ -68,8 +68,15 @@ describe('every barrier she cannot pass yet really hides a bonus ("a bonus is hi
       const have = powersFirstPass(L);
       const things = findables(L);
       const empty: string[] = [];
-      for (const b of [...(L.winds ?? []).map((w) => ({ x: w.x, power: w.power ?? 'dash' })), ...(L.walls ?? []), ...(L.ice ?? []).map((i) => ({ x: i.x, power: 'warmth' as const }))])
+      for (const b of [
+        ...(L.winds ?? []).map((w) => ({ x: w.x, power: w.power ?? 'dash' })),
+        ...(L.walls ?? []),
+        ...(L.ice ?? []).map((i) => ({ x: i.x, power: 'warmth' as const })),
+        ...(L.tunnels ?? []).map((t) => ({ x: t.x, power: 'shrink' as const })),
+      ])
         if (!have.has(b.power) && !things.some((t) => t.x >= b.x)) empty.push(`${b.power} @${b.x}`);
+      for (const c of L.ceilings ?? [])
+        if (!have.has('fizz') && !things.some((t) => t.x >= c.x && t.x <= c.x + c.w && t.y < c.y)) empty.push(`sky room ${c.id}`);
       for (const d of L.darks ?? [])
         if (!have.has('glow') && !things.some((t) => t.x >= d.x && t.x <= d.x + d.w)) empty.push(`dark @${d.x}`);
       expect(empty, id).toEqual([]);
@@ -164,4 +171,26 @@ describe('secrets, puzzles and favors fit together', () => {
   it('every area except Frosty Peaks hides a color spark (Pip has the last one)', () => {
     for (const id of AREA_ORDER) expect(!!LEVELS[id].spark, id).toBe(id !== 'frost');
   });
+});
+
+describe('tiny tunnels and candy-glass sky rooms (the lab level)', () => {
+  it('past a tunnel needs Shrink; inside a sky room needs Fizz Pop; under it does not', async () => {
+    const { LAB } = await import('../src/core/debug/lab');
+    expect([...powersNeeded(LAB, { x: 2800, y: 575 })]).toEqual(['shrink']);
+    expect([...powersNeeded(LAB, { x: 1500, y: 560 })]).toEqual([]);
+    expect([...powersNeeded(LAB, { x: 3600, y: 150 })]).toEqual(['shrink', 'fizz']);
+    expect(powersNeeded(LAB, { x: 3600, y: 500 }).has('fizz')).toBe(false);
+  });
+});
+
+describe('doors open with something found earlier in the same area', () => {
+  for (const L of Object.values(LEVELS))
+    for (const d of L.doors ?? [])
+      it(`${L.id}: ${d.id}`, () => {
+        const item = (L.storyItems ?? []).find((s) => s.id === d.item);
+        expect(item, `${d.item} must be a story item in ${L.id}`).toBeDefined();
+        expect(item!.x, 'the item must be in front of its door').toBeLessThan(d.x);
+        expect(reachableFirstPass(L, item!), 'and reachable on the first pass').toBe(true);
+        expect(dialogue[d.need], `line ${d.need}`).toBeDefined();
+      });
 });

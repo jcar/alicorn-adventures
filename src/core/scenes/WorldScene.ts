@@ -17,6 +17,8 @@ import { playGeneratedMusic, stopGeneratedMusic } from '../audio/music';
 import { lineText, speak } from '../audio/voice';
 import { Barriers } from '../world/Barriers';
 import { Darkness } from '../world/Darkness';
+import { Tunnels } from '../world/Tunnels';
+import { Ceilings } from '../world/Ceilings';
 import { Secrets } from '../world/Secrets';
 import { Patterns } from '../world/Patterns';
 import { Favors } from '../world/Favors';
@@ -32,6 +34,8 @@ interface WorldData { levelId: string; from?: string; firstTime?: boolean }
 interface Bloom { img: Phaser.GameObjects.Image; open: boolean; available: boolean }
 
 export interface Quest { texture: string; have: number; need: number }
+/** One row per ingredient for a recipe, or a single row. */
+export type QuestShown = Quest | Quest[] | null;
 
 const PASTELS = [0xffb3d1, 0xfff0b3, 0xc4f7df, 0xbfeaff, 0xd9c6ff, 0xffd1a8];
 const TALK_GAP_MS = 7000;
@@ -58,8 +62,10 @@ export class WorldScene extends Phaser.Scene implements World {
   private bouncers: Phaser.GameObjects.Image[] = [];
   private spots: Spot[] = [];
   private hidden: HiddenThing[] = [];
-  /** Quest items that start hidden (e.g. Marina's fourth pearl). */
-  private questHidden: HiddenThing[] = [];
+  /** Quest items that start hidden (e.g. Marina's fourth pearl), and which ingredient each is. */
+  private questHidden: (HiddenThing & { item?: string })[] = [];
+  /** Recipe quests: how many of each ingredient she has. */
+  private questGot: Record<string, number> = {};
   private shownHints = new Map<string, number>();
   private lastShimmer = 0;
   private solvers: { x: number; solve: () => void; info?: () => Record<string, unknown> }[] = [];
@@ -75,6 +81,8 @@ export class WorldScene extends Phaser.Scene implements World {
   private music?: Phaser.Sound.BaseSound;
   private barriers!: Barriers;
   private darkness!: Darkness;
+  private tunnels!: Tunnels;
+  private ceilings!: Ceilings;
   private secrets!: Secrets;
   private favors?: Favors;
 
@@ -97,6 +105,7 @@ export class WorldScene extends Phaser.Scene implements World {
     this.gladeFriends = [];
     this.favors = undefined;
     this.questHave = 0;
+    this.questGot = {};
     this.talkedOnce = false;
     this.lastTalk = -Infinity;
     this.cloudBusy = false;
@@ -141,9 +150,14 @@ export class WorldScene extends Phaser.Scene implements World {
 
     this.barriers = new Barriers(this);
     this.barriers.build();
+    this.tunnels = new Tunnels(this);
+    this.tunnels.build();
+    this.ceilings = new Ceilings(this);
+    this.ceilings.build();
     this.secrets = new Secrets(this);
     this.secrets.build();
     new Patterns(this, (id) => this.secrets.patternSolved(id)).build();
+    this.registry.set('quest', null); // a new place: no leftover quest card from the last one
     this.buildPickups();
     this.buildFriends();
     this.darkness = new Darkness(this);
@@ -280,12 +294,15 @@ export class WorldScene extends Phaser.Scene implements World {
     for (const i of L.ice ?? []) box(i.x, 0, 64, WORLD_HEIGHT, 0x7ff6ff);
     for (const gt of L.gates ?? []) box(gt.x, 0, 72, WORLD_HEIGHT, 0xc4854a);
     for (const b of L.blocks ?? []) box(b.x, b.y, b.w, b.h, 0x9a92b0);
+    for (const t of L.tunnels ?? []) box(t.x, 0, t.w, GROUND_Y - (t.gap ?? 80), 0xc79bff);
+    for (const c of L.ceilings ?? []) box(c.x, 0, c.w, c.y, 0xff6fc8);
+    for (const d of L.doors ?? []) box(d.x, 0, 72, WORLD_HEIGHT, 0xe0b0ff);
     for (const s of this.spots) {
       g.lineStyle(2, 0x34d058, 0.9).strokeRect(s.x - (s.reachX ?? 80), s.y - (s.reachY ?? 200), (s.reachX ?? 80) * 2, (s.reachY ?? 200) * 2);
       g.fillStyle(0x34d058, 1).fillCircle(s.x, s.y, 6);
     }
     for (const h of this.hidden) g.fillStyle(h.revealed ? 0x999999 : 0xffd23c, 1).fillCircle(h.x, h.y, 10);
-    return 'overlay on: blue wind · purple dark · cyan ice · brown gate · green spots · yellow hidden';
+    return 'overlay on: blue wind · purple dark · cyan ice · brown gate · lilac tunnel · pink sky room · green spots · yellow hidden';
   }
 
   // ------------------------------------------------------------ building
@@ -401,13 +418,15 @@ export class WorldScene extends Phaser.Scene implements World {
     this.physics.add.overlap(this.player, stardust, (_p, s) => this.collectStardust(s as Phaser.Physics.Arcade.Image));
 
     const def = L.friend && findFriend(L.friend.id);
-    if (def && def.request.kind === 'fetch' && !GameState.hasHelped(def.id)) {
+    const r = def?.request;
+    if (def && r && (r.kind === 'fetch' || r.kind === 'recipe') && !GameState.hasHelped(def.id)) {
       const items = this.physics.add.staticGroup();
       for (const p of L.items) {
-        const it = items.create(p.x, p.y, `item-${def.request.item}`) as Phaser.Physics.Arcade.Image;
-        it.setDepth(7);
+        const kind = r.kind === 'fetch' ? r.item : p.item ?? '';
+        const it = items.create(p.x, p.y, `item-${kind}`) as Phaser.Physics.Arcade.Image;
+        it.setDepth(7).setData('item', kind);
         this.tweens.add({ targets: it, angle: { from: -10, to: 10 }, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
-        if (p.hidden) this.questHidden.push(this.hideThing(it, p));
+        if (p.hidden) this.questHidden.push(Object.assign(this.hideThing(it, p), { item: kind }));
         else this.add.particles(p.x, p.y, 'fx-star', { lifespan: 900, frequency: 250, speed: 30, scale: { start: 0.6, end: 0 }, tint: 0xfff6a0 }).setDepth(6);
       }
       this.physics.add.overlap(this.player, items, (_p, it) => this.collectItem(it as Phaser.Physics.Arcade.Image, def));
@@ -444,9 +463,23 @@ export class WorldScene extends Phaser.Scene implements World {
   /** True when every quest item still missing is hidden (so she needs to sniff, not keep going). */
   private onlyHiddenLeft() {
     const r = this.friend?.def.request;
-    if (!r || r.kind !== 'fetch' || this.friend?.helped) return false;
-    const missing = r.count - this.questHave;
-    return missing > 0 && missing <= this.questHidden.filter((h) => !h.revealed).length;
+    if (!r || this.friend?.helped) return false;
+    const stillHidden = (item?: string) => this.questHidden.filter((h) => !h.revealed && (item === undefined || h.item === item)).length;
+    if (r.kind === 'fetch') {
+      const missing = r.count - this.questHave;
+      return missing > 0 && missing <= stillHidden();
+    }
+    if (r.kind !== 'recipe') return false;
+    const missing = r.items.map((i) => ({ ...i, left: i.count - (this.questGot[i.item] ?? 0) })).filter((i) => i.left > 0);
+    return missing.length > 0 && missing.every((i) => i.left <= stillHidden(i.item));
+  }
+
+  /** Has she got everything the friend asked for? */
+  private questDone() {
+    const r = this.friend?.def.request;
+    if (r?.kind === 'fetch') return this.questHave >= r.count;
+    if (r?.kind === 'recipe') return r.items.every((i) => (this.questGot[i.item] ?? 0) >= i.count);
+    return false;
   }
 
   private popIn(obj: Phaser.GameObjects.Image) {
@@ -545,6 +578,8 @@ export class WorldScene extends Phaser.Scene implements World {
     if (this.player.control(c, dt, cast)) this.onMagic();
 
     this.barriers.update(time);
+    this.tunnels.update();
+    this.ceilings.update();
     this.darkness.update();
     this.secrets.update();
     this.checkBouncers();
@@ -611,22 +646,41 @@ export class WorldScene extends Phaser.Scene implements World {
   }
 
   private collectItem(it: Phaser.Physics.Arcade.Image, def: FriendDef) {
+    const r = def.request;
+    const kind = it.getData('item') as string;
+    if (r.kind === 'recipe') {
+      // Read the card: only what's on it, and only as many as it says. Anything else stays put.
+      const need = r.items.find((i) => i.item === kind)?.count ?? 0;
+      if ((this.questGot[kind] ?? 0) >= need) return this.leaveItem(it, need ? 'recipe-enough' : 'recipe-not-on-card');
+      this.questGot[kind] = (this.questGot[kind] ?? 0) + 1;
+    }
     (it.body as Phaser.Physics.Arcade.StaticBody).enable = false;
     sfx.item();
     this.questHave++;
     this.setQuest(def);
     this.tweens.killTweensOf(it);
     this.tweens.add({ targets: it, y: it.y - 80, scale: 2, alpha: 0, duration: 500, onComplete: () => it.destroy() });
-    if (this.friend && def.request.kind === 'fetch' && this.questHave >= def.request.count)
+    if (this.friend && this.questDone())
       this.time.delayedCall(700, () => this.hint('fetch-done'));
     else if (this.onlyHiddenLeft() && GameState.hasPower('sniff'))
       this.time.delayedCall(700, () => this.hintOnce('only-hidden', 'last-one-hiding', 30000));
   }
 
+  /** Not on the recipe, or she has enough: a little wiggle, and a kind word now and then. */
+  private leaveItem(it: Phaser.Physics.Arcade.Image, lineId: string) {
+    const kind = it.getData('item') as string;
+    if (this.time.now - ((it.getData('wiggled') as number) ?? -Infinity) < 900) return;
+    it.setData('wiggled', this.time.now);
+    sfx.soft();
+    this.tweens.add({ targets: it, x: it.x + 8, duration: 60, yoyo: true, repeat: 3 });
+    this.hintOnce(`leave-${kind}`, lineId, 9000);
+  }
+
   private setQuest(def: FriendDef) {
     const r = def.request;
-    const q: Quest | null =
-      r.kind === 'fetch' ? { texture: `item-${r.item}`, have: this.questHave, need: r.count }
+    const q: Quest | Quest[] | null =
+      r.kind === 'recipe' ? r.items.map((i) => ({ texture: `item-${i.item}`, have: this.questGot[i.item] ?? 0, need: i.count }))
+      : r.kind === 'fetch' ? { texture: `item-${r.item}`, have: this.questHave, need: r.count }
         : r.kind === 'bloom' ? { texture: this.level.art?.flower ?? 'bloom-flower', have: this.questHave, need: this.blooms.length }
           : null;
     this.registry.set('quest', q);
@@ -636,6 +690,8 @@ export class WorldScene extends Phaser.Scene implements World {
     const p = this.player;
     // Sniff first, so a hidden flower pops up and the next ↓ blooms it.
     if (GameState.hasPower('sniff')) this.sniff();
+    this.tunnels.onMagic();
+    this.ceilings.onMagic();
     this.barriers.onMagic();
     this.darkness.onMagic();
 
@@ -739,7 +795,7 @@ export class WorldScene extends Phaser.Scene implements World {
     const f = this.friend;
     if (f && !f.helped && Math.abs(p.x - f.x) < 170 && Math.abs(p.y - f.y) < 260) {
       const r = f.def.request;
-      if (r.kind === 'fetch' && this.questHave >= r.count) {
+      if (this.questDone()) {
         this.helped(f);
       } else if (!this.talkedOnce) {
         this.talkedOnce = true;
@@ -747,7 +803,7 @@ export class WorldScene extends Phaser.Scene implements World {
         if (f.def.lines.hint) this.time.delayedCall(2200, () => this.hint(f.def.lines.hint!));
         if (r.kind === 'found') this.time.delayedCall(4200, () => this.helped(f));
       } else if (r.kind !== 'found' && now - this.lastTalk > TALK_GAP_MS) {
-        this.friendSay(f, r.kind === 'fetch' && this.questHave > 0 ? f.def.lines.progress! : f.def.lines.ask);
+        this.friendSay(f, (r.kind === 'fetch' || r.kind === 'recipe') && this.questHave > 0 ? f.def.lines.progress! : f.def.lines.ask);
       }
     }
     for (const gf of this.gladeFriends) {

@@ -8,6 +8,8 @@ const WALK = 230;
 const TROT = 360;
 const TROT_AFTER_MS = 700;
 const FLAP_VELOCITY = -430;
+/** Tiny wings can't fly: a tiny alicorn only hops, from the ground. */
+const HOP_VELOCITY = -380;
 const MAX_FALL = 280; // wings make every fall a gentle float
 
 /** Underwater: the same keys, just floatier. Space swims up, she drifts down slowly. */
@@ -16,6 +18,8 @@ const MAGIC_COOLDOWN = 450;
 const DASH_SPEED = 980;
 const DASH_MS = 380;
 const DASH_MAX_MS = 2000;
+/** Shrink: small enough for the tiny tunnels. */
+export const TINY = 0.45;
 
 /**
  * The hero. One sprite carries the physics body. The accessory, trail and
@@ -96,6 +100,20 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
 
   /** True in underwater areas. */
   swimming = false;
+  /** 1, or TINY after a shrink mushroom. Squash-and-stretch is relative to it. */
+  size = 1;
+
+  /** Shrink or grow (the physics body follows the picture's scale). */
+  setTiny(on: boolean) {
+    const to = on ? TINY : 1;
+    if (to === this.size) return;
+    this.size = to;
+    this.scene.tweens.add({ targets: this, scaleX: to, scaleY: to, duration: 320, ease: on ? 'Sine.in' : 'Back.out' });
+    sfx.magic();
+    this.magicFx.explode(18, this.x, this.y - 30 * to);
+  }
+
+  get tiny() { return this.size < 1; }
 
   setSwimming(on: boolean) {
     this.swimming = on;
@@ -164,19 +182,26 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
       this.body.setVelocityY(SWIM.stroke);
       sfx.bubble();
       this.bubbles.explode(5, this.x + 50 * this.facing, this.y - 40);
-      this.scene.tweens.add({ targets: this, scaleY: 0.9, scaleX: 1.06, duration: 140, yoyo: true, ease: 'Sine.out' });
+      this.scene.tweens.add({ targets: this, scaleY: 0.9 * this.size, scaleX: 1.06 * this.size, duration: 140, yoyo: true, ease: 'Sine.out' });
+      return;
+    }
+    if (this.tiny) {
+      if (!(this.body.blocked.down || this.body.touching.down)) return;
+      this.body.setVelocityY(HOP_VELOCITY);
+      sfx.bounce();
+      this.scene.tweens.add({ targets: this, scaleY: 1.15 * this.size, scaleX: 0.9 * this.size, duration: 90, yoyo: true, ease: 'Sine.out' });
       return;
     }
     this.body.setVelocityY(FLAP_VELOCITY);
     sfx.flap();
     this.feathers.explode(3, this.x - 10 * this.facing, this.y - 10);
-    this.scene.tweens.add({ targets: this, scaleY: 0.85, scaleX: 1.1, duration: 90, yoyo: true, ease: 'Sine.out' });
+    this.scene.tweens.add({ targets: this, scaleY: 0.85 * this.size, scaleX: 1.1 * this.size, duration: 90, yoyo: true, ease: 'Sine.out' });
   }
 
   bounce(power = -820) {
     this.body.setVelocityY(power);
     sfx.bounce();
-    this.scene.tweens.add({ targets: this, scaleY: 1.2, scaleX: 0.85, duration: 140, yoyo: true });
+    this.scene.tweens.add({ targets: this, scaleY: 1.2 * this.size, scaleX: 0.85 * this.size, duration: 140, yoyo: true });
   }
 
   /**
@@ -210,7 +235,7 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
   }
 
   hornTip() {
-    return new Phaser.Math.Vector2(this.x + 52 * this.facing, this.y - 60);
+    return new Phaser.Math.Vector2(this.x + 52 * this.size * this.facing, this.y - 60 * this.size);
   }
 
   castMagic() {
@@ -225,8 +250,8 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
     if (!this.accessory) return;
     const acc = findAccessory(GameState.data.equipped.accessory);
     const rot = Phaser.Math.DegToRad(this.angle);
-    const ox = acc.offsetX * this.facing;
-    const oy = acc.offsetY;
+    const ox = acc.offsetX * this.facing * this.size;
+    const oy = acc.offsetY * this.size;
     this.accessory.setPosition(
       this.x + ox * Math.cos(rot) - oy * Math.sin(rot),
       this.y + ox * Math.sin(rot) + oy * Math.cos(rot),

@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
-import { GROUND_Y, POWERS, WORLD_HEIGHT, type PowerId } from '../content';
+import { GROUND_Y, WORLD_HEIGHT, type PowerId } from '../content';
 import { GameState } from '../systems/GameState';
 import { sfx } from '../audio/sfx';
 import type { World } from './types';
+import { blockedLine } from './blocked';
 
 const WIND_PUSH = -320;
 const DASH_REACH = 220;
@@ -34,7 +35,40 @@ export class Barriers {
     this.buildIce();
     this.buildWalls();
     this.buildGates();
+    this.buildDoors();
     this.buildBumpers();
+  }
+
+  /** Doors that open with something found in this area (has:<item>). */
+  private buildDoors() {
+    const s = this.w.view;
+    for (const d of this.w.level.doors ?? []) {
+      if (GameState.hasFlag(`opened:${d.id}`)) continue;
+      const art = s.add.image(d.x + 36, WORLD_HEIGHT, d.texture && s.textures.exists(d.texture) ? d.texture : 'gate').setOrigin(0.5, 1).setDepth(6);
+      art.setDisplaySize(art.width * (WORLD_HEIGHT / art.height), WORLD_HEIGHT);
+      if (!d.texture) art.setTint(0xe0b0ff);
+      const zone = s.add.zone(d.x, 0, 72, WORLD_HEIGHT).setOrigin(0);
+      s.physics.add.existing(zone, true);
+      this.w.solids.add(zone);
+      let open = false;
+      this.w.addSpot({
+        x: d.x - 70, y: GROUND_Y, verb: 'to open the door', promptY: GROUND_Y - 170,
+        enabled: () => !open,
+        use: () => {
+          if (!GameState.hasFlag(`has:${d.item}`)) {
+            sfx.soft();
+            s.tweens.add({ targets: art, x: art.x + 6, duration: 60, yoyo: true, repeat: 3 });
+            return this.w.hint(d.need);
+          }
+          open = true;
+          GameState.setFlag(`opened:${d.id}`);
+          (zone.body as Phaser.Physics.Arcade.StaticBody).enable = false;
+          sfx.yay();
+          this.w.hint('door-opened');
+          s.tweens.add({ targets: art, y: art.y - WORLD_HEIGHT, duration: 1600, ease: 'Sine.in', onComplete: () => art.destroy() });
+        },
+      });
+    }
   }
 
   private buildWinds() {
@@ -117,15 +151,8 @@ export class Barriers {
     }
   }
 
-  /**
-   * What to say at a barrier she can't pass yet. If the friend who teaches
-   * that power lives in this very area and is still waiting for help, point
-   * her back to them ("come back later" would send her the wrong way).
-   */
   private blockedLine(power: PowerId, otherwise: string) {
-    const teacher = POWERS.find((p) => p.id === power)?.friend;
-    const friendHere = this.w.level.friend?.id;
-    return teacher && teacher === friendHere && !GameState.hasHelped(teacher) ? 'help-friend-first' : otherwise;
+    return blockedLine(this.w, power, otherwise);
   }
 
   /** The wind or current the hero is at (or inside), where ↓ should dash. */

@@ -73,17 +73,18 @@ Winds, ice, sea-glass and dark caves that need a **later** power only guard opti
 
 | Skill | Levels | From → to |
 | --- | --- | --- |
-| Math | 1–8 | "2 + 1" → subtraction → "how many more?" → groups → two-step problems → halves and doubles |
-| Reading | 1–6 | "which one is a color?" → rhymes → one-sentence details → inference → riddles → short stories |
-| Logic | 1–6 | simple patterns → number sequences → odd-one-out → skip counting → if-then → who is tallest/shortest |
+| Math | 1–10 | "2 + 1" → subtraction → "how many more?" → groups → two-step problems → halves and doubles → tens and ones → two-digit adding and taking away |
+| Reading | 1–8 | "which one is a color?" → rhymes → one-sentence details → inference → riddles → short stories → story details ("which did she NOT see?") → what happened first, last, next |
+| Logic | 1–8 | simple patterns → number sequences → odd-one-out → skip counting → if-then → who is tallest/shortest → two clues → three clues and if-then |
 | Memory | 1–6 | crystal tunes from 3 notes up to 8 |
 
 - Gates and favors ask questions from the banks at her level. A spot can be a little easier or harder (`offset`). Whispering Woods is math, Mushroom Meadow reading, Crystal Waterfall logic, and Rainbow Cloud Kingdom harder math. The crystals' tune length follows her memory level.
+- Math 9–10 locks go up to 99, and there ↑ ↓ jump by **ten**, which practices tens and ones too.
 - **Adapting:** two first-try wins move a skill up a level, and a puzzle that took several tries moves it down. Wrong answers just say "try again", and after two misses on a sum, stars appear to count.
 - **Grown-up dial:** Grown-up Corner → *Puzzle levels* shows and sets each skill's level per player. The game keeps adjusting from there.
 - Story puzzles stay hand-written: Owl's and Bunny's riddles, and counting the snowmen in Frosty Peaks.
 - **Favors:** friends in the Glade ask for help. Fox has a berry sum. Fox also wants Owl's lantern, but Owl has a riddle first. Dragon wants a Moon Shell, and Bunny knows where it is if she solves a riddle.
-- The banks (200 questions, all voiced) are built by `node tools/make-puzzle-banks.mjs`. Edit that file to add questions, then run `npm run assets` to record them.
+- The banks (260 questions, all voiced) are built by `node tools/make-puzzle-banks.mjs`. Edit that file to add questions, then run `npm run assets` to record them. New levels are built in a second pass, so adding them never reshuffles existing questions.
 
 **The mystery.** The Heart Crystal in the Glade has lost its colors. The eight clue notes tell the story of Pip, a tiny star who fell from the sky and is hiding in Frosty Peaks. She solves the mystery by bringing home all five color sparks and finding Pip.
 
@@ -124,11 +125,13 @@ src/kingdoms/forest/  The Enchanted Forest pack: areas, friends, powers, puzzles
 tools/                Gemini asset pipeline, headless playtests
 ```
 
-**Adding a kingdom:** copy the shape of `src/kingdoms/coral/` (the best example). Make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds` (wind or water `current`, each needing a power), `ice`, `walls` (any power opens them, like sea-glass and Shell Song), `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. `mode: 'swim'` makes an area underwater, and `art` swaps the shared flower, crystal, bumper or catch-you-cloud pictures for the area's own. A kingdom's `saga` gives its hub a Guardian Star altar (one shard per area). The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, that sparks and clues need no backtracking, that every barrier she can't pass yet really hides a bonus, and that every puzzle, favor and clue fits together.
+**Adding a kingdom:** copy the shape of `src/kingdoms/coral/` (the best example). Make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds` (wind or water `current`, each needing a power), `ice`, `walls` (any power opens them, like sea-glass and Shell Song), `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. Newer pieces: `tunnels` (rock down to a low gap, only a tiny alicorn fits) with `shrinkers` (Shrink mushrooms: ↓ to shrink; ↓ anywhere with room grows her back), `ceilings` (candy glass sealing a little sky room; Fizz Pop bursts through), and friend requests of `kind: 'recipe'` (exactly the ingredients on the card; extras stay put). `mode: 'swim'` makes an area underwater, and `art` swaps the shared flower, crystal, bumper or catch-you-cloud pictures for the area's own. A kingdom's `saga` gives its hub a Guardian Star altar (one shard per area). The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, that sparks and clues need no backtracking, that every barrier she can't pass yet really hides a bonus, and that every puzzle, favor and clue fits together.
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)
 npm run playtest   # headless-browser playtests against the dev server (start it with npm run dev)
+                   # (the debug-only lab level tries engine pieces before any kingdom uses them:
+                   #  alicorn.go('lab'), alicorn.power('shrink', 'fizz'), alicorn.hero(), alicorn.quest())
 npm run bot        # the playthrough bot: a new player finishes each kingdom in one forward pass, then sweeps up bonuses (~15 min)
 npm run build      # type-check and production build into dist/
 ```

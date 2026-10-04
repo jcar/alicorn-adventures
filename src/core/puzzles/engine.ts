@@ -8,9 +8,9 @@ import banksJson from './banks.json';
 export type SkillId = 'math' | 'reading' | 'logic' | 'memory';
 
 export const SKILLS: { id: SkillId; name: string; max: number; about: string }[] = [
-  { id: 'math', name: 'Math', max: 8, about: 'adding, taking away, groups, two steps' },
-  { id: 'reading', name: 'Reading', max: 6, about: 'words, rhymes, stories, riddles' },
-  { id: 'logic', name: 'Logic', max: 6, about: 'patterns, odd-one-out, if-then, ordering' },
+  { id: 'math', name: 'Math', max: 10, about: 'adding, taking away, groups, two steps, tens and ones' },
+  { id: 'reading', name: 'Reading', max: 8, about: 'words, rhymes, stories, riddles, what happened first' },
+  { id: 'logic', name: 'Logic', max: 8, about: 'patterns, odd-one-out, if-then, ordering, clues' },
   { id: 'memory', name: 'Memory', max: 6, about: 'crystal tunes from 3 to 8 notes' },
 ];
 
@@ -19,10 +19,11 @@ export type Skills = Record<SkillId, SkillState>;
 
 /** One question, ready for the puzzle screen. `line` is its voice line id. */
 export type Question =
-  | { kind: 'number'; id: string; text: string; line: string; answer: number; visual?: { a: number; b: number; op: '+' | '-' } }
+  /** `max`: how high the number lock goes, for bigger numbers (default NUMBER_MAX). */
+  | { kind: 'number'; id: string; text: string; line: string; answer: number; max?: number; visual?: { a: number; b: number; op: '+' | '-' } }
   | { kind: 'choice'; id: string; text: string; line: string; choices: string[]; answer: number };
 
-type BankItem = { id: string; kind: 'number' | 'choice'; text: string; answer: number; choices?: string[]; visual?: { a: number; b: number; op: '+' | '-' } };
+type BankItem = { id: string; kind: 'number' | 'choice'; text: string; answer: number; max?: number; choices?: string[]; visual?: { a: number; b: number; op: '+' | '-' } };
 const BANKS = banksJson as unknown as Record<'math' | 'reading' | 'logic', Record<string, BankItem[]>>;
 
 export const maxLevel = (skill: SkillId) => SKILLS.find((s) => s.id === skill)!.max;
@@ -47,7 +48,7 @@ export function pickQuestion(skill: Exclude<SkillId, 'memory'>, level: number, r
   const fresh = bank.filter((q) => !recent.includes(q.id));
   const q = (fresh.length ? fresh : bank)[Math.floor(rand() * (fresh.length || bank.length))];
   return q.kind === 'number'
-    ? { kind: 'number', id: q.id, text: q.text, line: q.id, answer: q.answer, visual: q.visual }
+    ? { kind: 'number', id: q.id, text: q.text, line: q.id, answer: q.answer, max: q.max, visual: q.visual }
     : { kind: 'choice', id: q.id, text: q.text, line: q.id, choices: q.choices!, answer: q.answer };
 }
 

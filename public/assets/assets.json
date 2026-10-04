@@ -563,6 +563,16 @@
       "kind": "voice"
     },
     {
+      "key": "vo-ceiling-blocked",
+      "url": "assets/audio/vo-ceiling-blocked.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-ceiling-fizz",
+      "url": "assets/audio/vo-ceiling-fizz.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-chest-open",
       "url": "assets/audio/vo-chest-open.mp3",
       "kind": "voice"
@@ -718,6 +728,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-door-opened",
+      "url": "assets/audio/vo-door-opened.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-dragon-ask",
       "url": "assets/audio/vo-dragon-ask.mp3",
       "kind": "voice"
@@ -845,6 +860,11 @@
     {
       "key": "vo-gold-star",
       "url": "assets/audio/vo-gold-star.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-grow-no-room",
+      "url": "assets/audio/vo-grow-no-room.mp3",
       "kind": "voice"
     },
     {
@@ -1398,6 +1418,106 @@
       "kind": "voice"
     },
     {
+      "key": "vo-pz-logic-7-1",
+      "url": "assets/audio/vo-pz-logic-7-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-10",
+      "url": "assets/audio/vo-pz-logic-7-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-2",
+      "url": "assets/audio/vo-pz-logic-7-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-3",
+      "url": "assets/audio/vo-pz-logic-7-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-4",
+      "url": "assets/audio/vo-pz-logic-7-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-5",
+      "url": "assets/audio/vo-pz-logic-7-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-6",
+      "url": "assets/audio/vo-pz-logic-7-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-7",
+      "url": "assets/audio/vo-pz-logic-7-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-8",
+      "url": "assets/audio/vo-pz-logic-7-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-7-9",
+      "url": "assets/audio/vo-pz-logic-7-9.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-1",
+      "url": "assets/audio/vo-pz-logic-8-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-10",
+      "url": "assets/audio/vo-pz-logic-8-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-2",
+      "url": "assets/audio/vo-pz-logic-8-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-3",
+      "url": "assets/audio/vo-pz-logic-8-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-4",
+      "url": "assets/audio/vo-pz-logic-8-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-5",
+      "url": "assets/audio/vo-pz-logic-8-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-6",
+      "url": "assets/audio/vo-pz-logic-8-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-7",
+      "url": "assets/audio/vo-pz-logic-8-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-8",
+      "url": "assets/audio/vo-pz-logic-8-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-logic-8-9",
+      "url": "assets/audio/vo-pz-logic-8-9.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-pz-math-1-1",
       "url": "assets/audio/vo-pz-math-1-1.mp3",
       "kind": "voice"
@@ -1445,6 +1565,56 @@
     {
       "key": "vo-pz-math-1-9",
       "url": "assets/audio/vo-pz-math-1-9.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-1",
+      "url": "assets/audio/vo-pz-math-10-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-10",
+      "url": "assets/audio/vo-pz-math-10-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-2",
+      "url": "assets/audio/vo-pz-math-10-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-3",
+      "url": "assets/audio/vo-pz-math-10-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-4",
+      "url": "assets/audio/vo-pz-math-10-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-5",
+      "url": "assets/audio/vo-pz-math-10-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-6",
+      "url": "assets/audio/vo-pz-math-10-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-7",
+      "url": "assets/audio/vo-pz-math-10-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-8",
+      "url": "assets/audio/vo-pz-math-10-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-10-9",
+      "url": "assets/audio/vo-pz-math-10-9.mp3",
       "kind": "voice"
     },
     {
@@ -1798,6 +1968,56 @@
       "kind": "voice"
     },
     {
+      "key": "vo-pz-math-9-1",
+      "url": "assets/audio/vo-pz-math-9-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-10",
+      "url": "assets/audio/vo-pz-math-9-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-2",
+      "url": "assets/audio/vo-pz-math-9-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-3",
+      "url": "assets/audio/vo-pz-math-9-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-4",
+      "url": "assets/audio/vo-pz-math-9-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-5",
+      "url": "assets/audio/vo-pz-math-9-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-6",
+      "url": "assets/audio/vo-pz-math-9-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-7",
+      "url": "assets/audio/vo-pz-math-9-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-8",
+      "url": "assets/audio/vo-pz-math-9-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-math-9-9",
+      "url": "assets/audio/vo-pz-math-9-9.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-pz-reading-1-1",
       "url": "assets/audio/vo-pz-reading-1-1.mp3",
       "kind": "voice"
@@ -2098,6 +2318,126 @@
       "kind": "voice"
     },
     {
+      "key": "vo-pz-reading-7-1",
+      "url": "assets/audio/vo-pz-reading-7-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-10",
+      "url": "assets/audio/vo-pz-reading-7-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-2",
+      "url": "assets/audio/vo-pz-reading-7-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-3",
+      "url": "assets/audio/vo-pz-reading-7-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-4",
+      "url": "assets/audio/vo-pz-reading-7-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-5",
+      "url": "assets/audio/vo-pz-reading-7-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-6",
+      "url": "assets/audio/vo-pz-reading-7-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-7",
+      "url": "assets/audio/vo-pz-reading-7-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-8",
+      "url": "assets/audio/vo-pz-reading-7-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-7-9",
+      "url": "assets/audio/vo-pz-reading-7-9.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-1",
+      "url": "assets/audio/vo-pz-reading-8-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-10",
+      "url": "assets/audio/vo-pz-reading-8-10.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-2",
+      "url": "assets/audio/vo-pz-reading-8-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-3",
+      "url": "assets/audio/vo-pz-reading-8-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-4",
+      "url": "assets/audio/vo-pz-reading-8-4.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-5",
+      "url": "assets/audio/vo-pz-reading-8-5.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-6",
+      "url": "assets/audio/vo-pz-reading-8-6.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-7",
+      "url": "assets/audio/vo-pz-reading-8-7.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-8",
+      "url": "assets/audio/vo-pz-reading-8-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pz-reading-8-9",
+      "url": "assets/audio/vo-pz-reading-8-9.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-recipe-enough",
+      "url": "assets/audio/vo-recipe-enough.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-recipe-not-on-card",
+      "url": "assets/audio/vo-recipe-not-on-card.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-shrink-blocked",
+      "url": "assets/audio/vo-shrink-blocked.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-shrink-tiny",
+      "url": "assets/audio/vo-shrink-tiny.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-skymap-hello",
       "url": "assets/audio/vo-skymap-hello.mp3",
       "kind": "voice"
@@ -2145,6 +2485,11 @@
     {
       "key": "vo-tree",
       "url": "assets/audio/vo-tree.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-tunnel-tiny",
+      "url": "assets/audio/vo-tunnel-tiny.mp3",
       "kind": "voice"
     },
     {

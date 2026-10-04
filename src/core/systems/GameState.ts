@@ -15,6 +15,9 @@ class GameStateImpl {
 
   get data() { return this.store.data; }
 
+  /** Debug kit only: powers to try out without earning them (never saved). */
+  readonly debugPowers = new Set<PowerId>();
+
   init() {
     grantUnlocks(this.data); // starter kit, plus anything new added since the last save
     this.store.save();
@@ -39,7 +42,7 @@ class GameStateImpl {
   }
 
   hasHelped(id: string) { return this.data.friendsHelped.includes(id); }
-  hasPower(id: PowerId) { return this.has('power', id); }
+  hasPower(id: PowerId) { return this.debugPowers.has(id) || this.has('power', id); }
 
   hasFlag(flag: string) { return this.data.flags.includes(flag); }
   countFlags(prefix: string) { return this.data.flags.filter((f) => f.startsWith(prefix)).length; }

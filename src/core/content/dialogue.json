@@ -134,5 +134,41 @@
   "help-friend-first": {
     "speaker": "narrator",
     "text": "You can't get through yet. Finish helping the friend here first, and they will teach you how!"
+  },
+  "recipe-not-on-card": {
+    "speaker": "narrator",
+    "text": "Hmm, that one is not on the recipe card. Let's leave it here."
+  },
+  "recipe-enough": {
+    "speaker": "narrator",
+    "text": "You already have enough of those! Look at the recipe card."
+  },
+  "shrink-blocked": {
+    "speaker": "narrator",
+    "text": "Ooh, a shrink mushroom! Bea the baker bee can teach you to shrink. Come back any time, there's no hurry!"
+  },
+  "shrink-tiny": {
+    "speaker": "narrator",
+    "text": "You're tiny! Now you can fit through little tunnels. Press down when there's room, and you'll grow big again."
+  },
+  "tunnel-tiny": {
+    "speaker": "narrator",
+    "text": "Only a tiny alicorn fits through there. Find a shrink mushroom!"
+  },
+  "grow-no-room": {
+    "speaker": "narrator",
+    "text": "Not enough room to grow here! Go where there's more space."
+  },
+  "ceiling-blocked": {
+    "speaker": "narrator",
+    "text": "A bonus is up there, behind the candy glass! Fluff the lamb can teach you to Fizz Pop. Come back any time, there's no hurry!"
+  },
+  "ceiling-fizz": {
+    "speaker": "narrator",
+    "text": "Candy glass! Press down to Fizz Pop right through it!"
+  },
+  "door-opened": {
+    "speaker": "narrator",
+    "text": "It fits! The door is open."
   }
 }

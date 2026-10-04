@@ -57,8 +57,10 @@ export async function start(save, { url = process.env.GAME_URL ?? 'http://localh
   await page.goto(url ?? process.env.GAME_URL ?? 'http://localhost:5173/');
 
   const wait = (ms) => page.waitForTimeout(ms);
+  // Hold each tap a little longer than one slow frame: Phaser forgets a press that
+  // starts and ends between two frames, and a busy machine runs headless at ~15 fps.
   const tap = async (key, n = 1) => {
-    for (let i = 0; i < n; i++) { await page.keyboard.down(key); await wait(90); await page.keyboard.up(key); await wait(220); }
+    for (let i = 0; i < n; i++) { await page.keyboard.down(key); await wait(160); await page.keyboard.up(key); await wait(220); }
   };
   const hold = async (key, ms) => { await page.keyboard.down(key); await wait(ms); await page.keyboard.up(key); };
   const tp = (x, y) => page.evaluate(([x, y]) => window.game.scene.getScene('World').player.body.reset(x, y), [x, y]);
