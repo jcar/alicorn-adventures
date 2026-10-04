@@ -37,9 +37,16 @@ async function helpFriend(area) {
   await go(area, 'start');
   const m = await markers(area);
   const friendBefore = (await helped()).length;
-  // Fetch quests: collect each item (sniffing first, in case it's hidden).
+  // Doors first: find what opens each one (it's in this area, in front of it), then open it.
+  for (const k of Object.keys(m).filter((k) => k.endsWith('-door'))) {
+    const key = m[m[k].item];
+    if (key) { await tp(key.x - 40); await press(1); await tp(key.x, key.y); await h.wait(500); }
+    await tp(k); await press(1); await h.wait(900);
+  }
+  // Fetch and recipe quests: collect each item (sniffing first, in case it's hidden).
+  // A recipe's extras (not on the card, or one too many) just stay put.
   for (const k of Object.keys(m).filter((k) => k.startsWith('item-'))) {
-    await tp(m[k].x - 40); await press(1); await tp(m[k].x, m[k].y); await h.wait(300);
+    await tp(m[k].x - 40, m[k].y); await press(1); await tp(m[k].x, m[k].y); await h.wait(300);
   }
   // Bloom quests: sniff, then bloom each flower.
   for (const k of Object.keys(m).filter((k) => k.startsWith('bloom-'))) { await tp(k); await press(2); }

@@ -103,12 +103,24 @@ export class Alicorn extends Phaser.Physics.Arcade.Sprite {
   /** 1, or TINY after a shrink mushroom. Squash-and-stretch is relative to it. */
   size = 1;
 
-  /** Shrink or grow (the physics body follows the picture's scale). */
+  /**
+   * Shrink or grow, keeping her feet exactly where they are. The physics body
+   * follows the picture's scale, and scaling around her middle would push her
+   * feet into the floor (too deep for the physics to push back, so she'd drop
+   * through). So the size changes in one step, with a little pop on top.
+   */
   setTiny(on: boolean) {
     const to = on ? TINY : 1;
     if (to === this.size) return;
+    const from = this.size;
     this.size = to;
-    this.scene.tweens.add({ targets: this, scaleX: to, scaleY: to, duration: 320, ease: on ? 'Sine.in' : 'Back.out' });
+    const b = this.body;
+    const feet = b.offset.y - this.displayOriginY + b.sourceHeight; // body bottom below her middle, at scale 1
+    this.scene.tweens.killTweensOf(this);
+    this.setScale(to).setAngle(0);
+    b.reset(this.x, this.y + feet * (from - to));
+    this.scene.tweens.add({ targets: this, scaleX: { from: to * 1.2, to }, scaleY: { from: to * 0.8, to }, duration: 260, ease: 'Back.out' });
+    if (this.swimming) this.setSwimming(true); // the gentle bob was a tween too
     sfx.magic();
     this.magicFx.explode(18, this.x, this.y - 30 * to);
   }

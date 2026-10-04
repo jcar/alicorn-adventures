@@ -8,11 +8,11 @@ const G = GROUND_Y;
 const level: LevelDef = {
     id: 'glade',
     name: 'Home Glade',
-    width: 4300,
+    width: 5450, // room for every friend who moves in (Sweet Treat Valley's live past 4300)
     theme: { skyTop: 0x9ad8ff, skyBottom: 0xffe3f3, far: 0xb7e4c7, near: 0x7cc995, ground: 0x8a5a3c, groundTop: 0x6fd08c, deco: 'glade' },
     music: { bpm: 84, root: 60 },
     start: { x: 260, y: G - 80 },
-    ground: [{ x: 0, w: 4300 }],
+    ground: [{ x: 0, w: 5450 }],
     platforms: [{ x: 1920, y: 380, w: 160 }],
     stardust: [...arc(2000, 340, 7, 150)],
     items: [],

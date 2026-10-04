@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { LEVELS, GROUND_Y, SKY_MAP, WORLD_HEIGHT, kingdomOfArea, kingdomOfLevel, type Hideable, type LevelDef } from '../content';
+import { KINGDOMS, LEVELS, GROUND_Y, SKY_MAP, WORLD_HEIGHT, kingdomOfArea, kingdomOfLevel, type Hideable, type LevelDef } from '../content';
 import { imagesIn, lateImageKeys, loadAudio, queueBundle } from '../assets';
 import { makePlaceholders } from '../art/placeholders';
 import { FRIENDS, findFriend, type FriendDef } from '../content';
@@ -515,6 +515,7 @@ export class WorldScene extends Phaser.Scene implements World {
       clouds: { tex: 'fx-star', tint: [0xfff6a0, 0xffffff], scale: 0.6 },
       frost: { tex: 'fx-dot', tint: [0xffffff, 0xe6f4ff], scale: 0.55 },
       beach: { tex: 'fx-dot', tint: [0xffffff, 0xfff0b3], scale: 0.4 },
+      sweets: { tex: 'fx-heart', tint: [0xff9fd6, 0x9fe3c0, 0xfff0b3, 0xc79bff], scale: 0.45 },
     };
     if (this.level.mode === 'swim') return this.addWater();
     const a = cfg[this.level.theme.deco] ?? cfg.glade;
@@ -530,7 +531,7 @@ export class WorldScene extends Phaser.Scene implements World {
   /** Underwater: a soft blue tint, light rays, rising bubbles and little drifting sparkles like fish. */
   private addWater() {
     const { width, height } = this.scale;
-    this.add.rectangle(0, 0, width, height, 0x3fa9ff, 0.12).setOrigin(0).setScrollFactor(0).setDepth(20);
+    this.add.rectangle(0, 0, width, height, this.level.water ?? 0x3fa9ff, this.level.water ? 0.2 : 0.12).setOrigin(0).setScrollFactor(0).setDepth(20);
     for (let i = 0; i < 4; i++) {
       const ray = this.add.rectangle(200 + i * 300, -40, 90, height * 1.4, 0xffffff, 0.06).setOrigin(0.5, 0).setScrollFactor(0.3, 0).setAngle(12).setDepth(-4);
       this.tweens.add({ targets: ray, alpha: 0.02, duration: 2400 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
@@ -811,6 +812,12 @@ export class WorldScene extends Phaser.Scene implements World {
       // The big saga begins: once the Heart Crystal shines, Pip has news.
       if (gf.def.id === 'pip' && Math.abs(p.x - gf.x) < 160 && GameState.hasFlag('mystery:solved') && GameState.setFlag('saga:intro')) {
         this.friendSay(gf, 'pip-sky-family', 9000);
+        continue;
+      }
+      // ...and news of each family member as their kingdom opens.
+      const news = gf.def.id === 'pip' && Math.abs(p.x - gf.x) < 160 && KINGDOMS.find((k) => k.saga?.news && GameState.hasHelped(k.saga.news.after) && !GameState.hasFlag(`saga:news:${k.id}`));
+      if (news && GameState.setFlag(`saga:news:${news.id}`)) {
+        this.friendSay(gf, news.saga!.news!.line, 9000);
         continue;
       }
       if (Math.abs(p.x - gf.x) < 120 && now - this.lastTalk > TALK_GAP_MS + 3000)

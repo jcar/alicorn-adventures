@@ -36,7 +36,7 @@ export class Ceilings {
       if (!GameState.hasFlag(`opened:${def.id}`)) {
         const tex = L.art?.ceiling;
         const glass = (tex && s.textures.exists(tex)
-          ? s.add.tileSprite(def.x, def.y, def.w, GLASS_H, tex)
+          ? s.add.image(def.x, def.y, tex).setDisplaySize(def.w, GLASS_H)
           : s.add.rectangle(def.x, def.y, def.w, GLASS_H, 0xff9fd6, 0.55).setStrokeStyle(4, 0xffffff, 0.9)
         ).setOrigin(0).setDepth(6);
         s.physics.add.existing(glass, true);

@@ -22,6 +22,8 @@ function everythingIn(...kingdoms: KingdomDef[]): string[] {
       for (const p of L.patterns ?? []) flags.push(`puzzle:${p.id}`);
       for (const i of L.ice ?? []) flags.push(`melted:${i.id}`);
       for (const w of L.walls ?? []) flags.push(`opened:${w.id}`);
+      for (const c of L.ceilings ?? []) flags.push(`opened:${c.id}`);
+      for (const d of L.doors ?? []) flags.push(`opened:${d.id}`, `has:${d.item}`);
     }
     for (const a of k.areaOrder) flags.push(`spark:${a}`);
     const friends = friendsOf(k);
@@ -60,6 +62,16 @@ export const PRESETS: Record<string, () => SaveData> = {
   'coral-friends': () => {
     const flags = [...everythingIn(forest()), 'mystery:solved', 'saga:intro'];
     return save([...forestFriends(), ...friendsOf(kingdom('coral'))], { stardust: 520, flags, favors: favorsDone(flags) });
+  },
+  /** Forest and Coral finished (Luma restored): Sweet Treat Valley is open, nothing there done yet. */
+  'coral-done': () => {
+    const flags = [...everythingIn(forest(), kingdom('coral')), 'mystery:solved', 'saga:intro'];
+    return save([...forestFriends(), ...friendsOf(kingdom('coral'))], { stardust: 560, flags, favors: favorsDone(flags) });
+  },
+  /** Coral done, plus every Sweet Treat Valley friend helped (all powers); Sol's sparkles still to find. */
+  'sweets-friends': () => {
+    const flags = [...everythingIn(forest(), kingdom('coral')), 'mystery:solved', 'saga:intro'];
+    return save([...forestFriends(), ...friendsOf(kingdom('coral')), ...friendsOf(kingdom('sweets'))], { stardust: 640, flags, favors: favorsDone(flags) });
   },
   /** Everything everywhere. */
   'all-done': () => {

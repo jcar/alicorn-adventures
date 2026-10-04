@@ -6,7 +6,7 @@
 export const WORLD_HEIGHT = 720;
 export const GROUND_Y = 620;
 
-export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost' | 'beach' | 'reef' | 'kelp' | 'ship' | 'trench';
+export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost' | 'beach' | 'reef' | 'kelp' | 'ship' | 'trench' | 'sweets';
 
 export interface Theme {
   skyTop: number;
@@ -59,6 +59,8 @@ export interface LevelDef {
   walls?: { id: string; x: number; power: PowerId; texture: string; blocked: string; can: string }[];
   /** 'swim': underwater (floaty, same keys). Default is 'explore'. */
   mode?: 'explore' | 'swim';
+  /** Swim mode: the color of the water (default sea blue; Chocolate River is cocoa). */
+  water?: number;
   /** Swap the shared pictures for this area's own (flower bud, flower, pattern crystal, the catch-you cloud). */
   art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string; shrinker?: string; tunnel?: string; ceiling?: string };
   /** Rock from the sky down to a low gap: only a tiny (Shrink) alicorn fits through. */
@@ -267,6 +269,8 @@ export interface Saga {
   lines: { status: string[]; finale: string; done: string };
   /** Who signs this kingdom's clue notes (shown in the Adventure Book). */
   clueTitle: string;
+  /** Pip's news in the Glade once this kingdom opens (after helping `after`): said once. */
+  news?: { line: string; after: string };
 }
 
 /** Home: the player's own place (the Glade). */

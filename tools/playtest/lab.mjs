@@ -64,7 +64,10 @@ await h.shot(out, 'lab-3-in-tunnel');
 await h.hold('ArrowRight', 2600);
 check('she comes out the other side, picking up the tunnel star', (await hero()).x > 2850 && (await flags()).includes('gold:lab-gold-tunnel'));
 await h.wait(400); await h.tap('ArrowDown'); await h.wait(900);
-check('with room again, ↓ grows her back', !(await hero()).tiny);
+const grown = await hero();
+check('with room again, ↓ grows her back, feet still on the ground', !grown.tiny && grown.y < 600);
+await h.wait(800);
+check('...and she stays standing (no falling through the floor)', (await hero()).y < 600);
 
 // ---- Fizz Pop through candy glass
 await tp(3600, 520); await h.wait(600);

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { AREA_COLORS, GROUND_Y } from '../content';
+import { AREA_COLORS, GROUND_Y, kingdomOfLevel } from '../content';
 import { GameState } from '../systems/GameState';
 import { sfx } from '../audio/sfx';
 import type { World } from './types';
@@ -157,7 +157,8 @@ export class Secrets {
         GameState.setFlag(`spark:${id}`);
         sfx.yay();
         this.w.confetti(sp.x, sp.y, 70);
-        this.w.hint('spark-found');
+        // The forest's sparks go to the Heart Crystal; other kingdoms' are pieces of a Guardian Star.
+        this.w.hint(kingdomOfLevel(id)?.saga ? 'shard-found' : 'spark-found');
         s.tweens.killTweensOf([img, glow]);
         s.tweens.add({ targets: [img, glow], scale: 3, alpha: 0, duration: 900, onComplete: () => { img.destroy(); glow.destroy(); } });
       },

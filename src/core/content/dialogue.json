@@ -170,5 +170,9 @@
   "door-opened": {
     "speaker": "narrator",
     "text": "It fits! The door is open."
+  },
+  "shard-found": {
+    "speaker": "narrator",
+    "text": "You found a piece of a Guardian Star! The star altar is waiting for it."
   }
 }

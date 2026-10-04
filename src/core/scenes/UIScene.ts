@@ -40,11 +40,15 @@ export class UIScene extends Phaser.Scene {
     this.goalIcon = this.add.image(310, 58, 'fx-dot');
 
     // Golden stars and powers, under the jar.
+    // The row grows with the powers (one per kingdom friend who teaches one).
     const row = this.add.graphics();
-    row.fillStyle(COLORS.paper, 0.92).lineStyle(4, COLORS.paperEdge).fillRoundedRect(16, 108, 330, 58, 20).strokeRoundedRect(16, 108, 330, 58, 20);
+    const step = POWERS.length > 6 ? 42 : 50;
+    const rowW = Math.max(330, 150 + POWERS.length * step);
+    row.fillStyle(COLORS.paper, 0.92).lineStyle(4, COLORS.paperEdge).fillRoundedRect(16, 108, rowW, 58, 20).strokeRoundedRect(16, 108, rowW, 58, 20);
     this.add.image(46, 137, 'gold-star').setScale(0.7);
     this.goldText = this.add.text(70, 118, '0', textStyle(28));
-    this.powerIcons = POWERS.map((pw, i) => this.add.image(160 + i * 50, 137, pw.icon).setDisplaySize(40, 40));
+    const size = POWERS.length > 6 ? 36 : 40;
+    this.powerIcons = POWERS.map((pw, i) => this.add.image(160 + i * step, 137, pw.icon).setDisplaySize(size, size));
 
     this.questBox = this.add.container(width - 16, 16);
     this.banner = this.add.text(width / 2, 140, '', titleStyle(64)).setOrigin(0.5).setAlpha(0);

@@ -23,13 +23,17 @@ export class Tunnels {
     const L = this.w.level;
     for (const t of L.tunnels ?? []) {
       const h = GROUND_Y - (t.gap ?? TUNNEL_GAP);
-      const tex = L.art?.tunnel && s.textures.exists(L.art.tunnel) ? L.art.tunnel : `ground-${L.id}`;
-      const rock = s.add.tileSprite(t.x, 0, t.w, h, tex).setOrigin(0).setDepth(5);
-      if (!L.art?.tunnel) rock.setTint(0xd8c4e8);
+      const art = L.art?.tunnel && s.textures.exists(L.art.tunnel) ? L.art.tunnel : undefined;
+      const rock = art
+        ? s.add.image(t.x, 0, art).setOrigin(0).setDisplaySize(t.w, h + 12)
+        : s.add.tileSprite(t.x, 0, t.w, h, `ground-${L.id}`).setOrigin(0).setTint(0xd8c4e8);
+      rock.setDepth(5);
       s.physics.add.existing(rock, true);
+      const body = rock.body as Phaser.Physics.Arcade.StaticBody;
+      body.setSize(t.w, h).setOffset(0, 0);
       this.w.solids.add(rock);
-      // A little arch at the mouth on each side, so the way in is easy to spot.
-      for (const x of [t.x, t.x + t.w]) s.add.ellipse(x, GROUND_Y - 34, 70, 70, 0x2b1f4a, 0.55).setDepth(4);
+      // A soft shadow in the low gap, so the way through is easy to see.
+      s.add.rectangle(t.x, h, t.w, GROUND_Y - h, 0x2b1f4a, 0.28).setOrigin(0).setDepth(4);
     }
     for (const m of L.shrinkers ?? []) {
       const tex = L.art?.shrinker && s.textures.exists(L.art.shrinker) ? L.art.shrinker : 'bouncer';

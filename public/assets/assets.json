@@ -21,6 +21,11 @@
       "bundle": "core"
     },
     {
+      "key": "acc-sugarcrown",
+      "url": "assets/images/acc-sugarcrown.webp",
+      "bundle": "core"
+    },
+    {
       "key": "acc-tiara",
       "url": "assets/images/acc-tiara.webp",
       "bundle": "core"
@@ -28,6 +33,11 @@
     {
       "key": "alicorn-blue",
       "url": "assets/images/alicorn-blue.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "alicorn-candy",
+      "url": "assets/images/alicorn-candy.webp",
       "bundle": "core"
     },
     {
@@ -71,6 +81,11 @@
       "bundle": "coral"
     },
     {
+      "key": "altar-sweets",
+      "url": "assets/images/altar-sweets.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "anemone",
       "url": "assets/images/anemone.webp",
       "bundle": "coral"
@@ -81,6 +96,11 @@
       "bundle": "coral"
     },
     {
+      "key": "bg-chocolate-far",
+      "url": "assets/images/bg-chocolate-far.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "bg-clouds-far",
       "url": "assets/images/bg-clouds-far.webp",
       "bundle": "forest"
@@ -89,6 +109,11 @@
       "key": "bg-coral-hub-far",
       "url": "assets/images/bg-coral-hub-far.webp",
       "bundle": "coral"
+    },
+    {
+      "key": "bg-cottoncandy-far",
+      "url": "assets/images/bg-cottoncandy-far.webp",
+      "bundle": "sweets"
     },
     {
       "key": "bg-forest-hub-far",
@@ -106,9 +131,19 @@
       "bundle": "core"
     },
     {
+      "key": "bg-gumdrop-far",
+      "url": "assets/images/bg-gumdrop-far.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "bg-kelp-far",
       "url": "assets/images/bg-kelp-far.webp",
       "bundle": "coral"
+    },
+    {
+      "key": "bg-lollipop-far",
+      "url": "assets/images/bg-lollipop-far.webp",
+      "bundle": "sweets"
     },
     {
       "key": "bg-meadow-far",
@@ -129,6 +164,11 @@
       "key": "bg-skymap",
       "url": "assets/images/bg-skymap.webp",
       "bundle": "core"
+    },
+    {
+      "key": "bg-sweets-hub-far",
+      "url": "assets/images/bg-sweets-hub-far.webp",
+      "bundle": "sweets"
     },
     {
       "key": "bg-trench-far",
@@ -166,6 +206,26 @@
       "bundle": "core"
     },
     {
+      "key": "candy-cave",
+      "url": "assets/images/candy-cave.webp",
+      "bundle": "sweets"
+    },
+    {
+      "key": "candy-chime",
+      "url": "assets/images/candy-chime.webp",
+      "bundle": "sweets"
+    },
+    {
+      "key": "candy-glass",
+      "url": "assets/images/candy-glass.webp",
+      "bundle": "sweets"
+    },
+    {
+      "key": "candy-rock",
+      "url": "assets/images/candy-rock.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "cave",
       "url": "assets/images/cave.webp",
       "bundle": "core"
@@ -184,6 +244,16 @@
       "key": "cloud",
       "url": "assets/images/cloud.webp",
       "bundle": "core"
+    },
+    {
+      "key": "cocoa-door",
+      "url": "assets/images/cocoa-door.webp",
+      "bundle": "sweets"
+    },
+    {
+      "key": "cotton-cloud",
+      "url": "assets/images/cotton-cloud.webp",
+      "bundle": "sweets"
     },
     {
       "key": "crystal",
@@ -206,6 +276,11 @@
       "bundle": "coral"
     },
     {
+      "key": "deco-candy-cane",
+      "url": "assets/images/deco-candy-cane.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "deco-coral",
       "url": "assets/images/deco-coral.webp",
       "bundle": "coral"
@@ -216,9 +291,24 @@
       "bundle": "core"
     },
     {
+      "key": "deco-gingerbread-house",
+      "url": "assets/images/deco-gingerbread-house.webp",
+      "bundle": "sweets"
+    },
+    {
+      "key": "deco-gumdrop",
+      "url": "assets/images/deco-gumdrop.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "deco-lanterns",
       "url": "assets/images/deco-lanterns.webp",
       "bundle": "core"
+    },
+    {
+      "key": "deco-lollipop",
+      "url": "assets/images/deco-lollipop.webp",
+      "bundle": "sweets"
     },
     {
       "key": "deco-seaweed",
@@ -236,6 +326,11 @@
       "bundle": "forest"
     },
     {
+      "key": "friend-bea",
+      "url": "assets/images/friend-bea.webp",
+      "bundle": "core"
+    },
+    {
       "key": "friend-bunny",
       "url": "assets/images/friend-bunny.webp",
       "bundle": "core"
@@ -251,6 +346,16 @@
       "bundle": "core"
     },
     {
+      "key": "friend-duck",
+      "url": "assets/images/friend-duck.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "friend-fluff",
+      "url": "assets/images/friend-fluff.webp",
+      "bundle": "core"
+    },
+    {
       "key": "friend-fox",
       "url": "assets/images/friend-fox.webp",
       "bundle": "core"
@@ -258,6 +363,11 @@
     {
       "key": "friend-marina",
       "url": "assets/images/friend-marina.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "friend-millie",
+      "url": "assets/images/friend-millie.webp",
       "bundle": "core"
     },
     {
@@ -296,6 +406,11 @@
       "bundle": "core"
     },
     {
+      "key": "gumdrop",
+      "url": "assets/images/gumdrop.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "ice-wall",
       "url": "assets/images/ice-wall.webp",
       "bundle": "core"
@@ -321,13 +436,43 @@
       "bundle": "core"
     },
     {
+      "key": "island-sweets",
+      "url": "assets/images/island-sweets.webp",
+      "bundle": "core"
+    },
+    {
       "key": "item-berry",
       "url": "assets/images/item-berry.webp",
       "bundle": "core"
     },
     {
+      "key": "item-button",
+      "url": "assets/images/item-button.webp",
+      "bundle": "core"
+    },
+    {
       "key": "item-carrot",
       "url": "assets/images/item-carrot.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-cocoa",
+      "url": "assets/images/item-cocoa.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-cupcake",
+      "url": "assets/images/item-cupcake.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-egg",
+      "url": "assets/images/item-egg.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-hot-cocoa",
+      "url": "assets/images/item-hot-cocoa.webp",
       "bundle": "core"
     },
     {
@@ -341,6 +486,11 @@
       "bundle": "core"
     },
     {
+      "key": "item-lemon",
+      "url": "assets/images/item-lemon.webp",
+      "bundle": "core"
+    },
+    {
       "key": "item-pearl",
       "url": "assets/images/item-pearl.webp",
       "bundle": "core"
@@ -351,8 +501,23 @@
       "bundle": "core"
     },
     {
+      "key": "item-spoon",
+      "url": "assets/images/item-spoon.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-strawberry",
+      "url": "assets/images/item-strawberry.webp",
+      "bundle": "core"
+    },
+    {
       "key": "item-treasure-map",
       "url": "assets/images/item-treasure-map.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-wool",
+      "url": "assets/images/item-wool.webp",
       "bundle": "core"
     },
     {
@@ -381,6 +546,11 @@
       "bundle": "core"
     },
     {
+      "key": "power-fizz",
+      "url": "assets/images/power-fizz.webp",
+      "bundle": "core"
+    },
+    {
       "key": "power-glow",
       "url": "assets/images/power-glow.webp",
       "bundle": "core"
@@ -388,6 +558,11 @@
     {
       "key": "power-jet",
       "url": "assets/images/power-jet.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "power-shrink",
+      "url": "assets/images/power-shrink.webp",
       "bundle": "core"
     },
     {
@@ -431,6 +606,11 @@
       "bundle": "coral"
     },
     {
+      "key": "shrink-mushroom",
+      "url": "assets/images/shrink-mushroom.webp",
+      "bundle": "sweets"
+    },
+    {
       "key": "sign",
       "url": "assets/images/sign.webp",
       "bundle": "core"
@@ -468,6 +648,11 @@
   ],
   "audio": [
     {
+      "key": "music-chocolate",
+      "url": "assets/audio/music-chocolate.mp3",
+      "kind": "music"
+    },
+    {
       "key": "music-clouds",
       "url": "assets/audio/music-clouds.mp3",
       "kind": "music"
@@ -475,6 +660,11 @@
     {
       "key": "music-coral-hub",
       "url": "assets/audio/music-coral-hub.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-cottoncandy",
+      "url": "assets/audio/music-cottoncandy.mp3",
       "kind": "music"
     },
     {
@@ -493,8 +683,18 @@
       "kind": "music"
     },
     {
+      "key": "music-gumdrop",
+      "url": "assets/audio/music-gumdrop.mp3",
+      "kind": "music"
+    },
+    {
       "key": "music-kelp",
       "url": "assets/audio/music-kelp.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-lollipop",
+      "url": "assets/audio/music-lollipop.mp3",
       "kind": "music"
     },
     {
@@ -518,6 +718,11 @@
       "kind": "music"
     },
     {
+      "key": "music-sweets-hub",
+      "url": "assets/audio/music-sweets-hub.mp3",
+      "kind": "music"
+    },
+    {
       "key": "music-trench",
       "url": "assets/audio/music-trench.mp3",
       "kind": "music"
@@ -531,6 +736,36 @@
       "key": "music-woods",
       "url": "assets/audio/music-woods.mp3",
       "kind": "music"
+    },
+    {
+      "key": "vo-bea-ask",
+      "url": "assets/audio/vo-bea-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-bea-favor-ask",
+      "url": "assets/audio/vo-bea-favor-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-bea-favor-thanks",
+      "url": "assets/audio/vo-bea-favor-thanks.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-bea-hint",
+      "url": "assets/audio/vo-bea-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-bea-progress",
+      "url": "assets/audio/vo-bea-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-bea-thanks",
+      "url": "assets/audio/vo-bea-thanks.mp3",
+      "kind": "voice"
     },
     {
       "key": "vo-bunny-ask",
@@ -728,6 +963,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-door-needs-spoon",
+      "url": "assets/audio/vo-door-needs-spoon.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-door-opened",
       "url": "assets/audio/vo-door-opened.mp3",
       "kind": "voice"
@@ -763,8 +1003,58 @@
       "kind": "voice"
     },
     {
+      "key": "vo-duck-ask",
+      "url": "assets/audio/vo-duck-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-duck-hint",
+      "url": "assets/audio/vo-duck-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-duck-progress",
+      "url": "assets/audio/vo-duck-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-duck-thanks",
+      "url": "assets/audio/vo-duck-thanks.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-fetch-done",
       "url": "assets/audio/vo-fetch-done.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-ask",
+      "url": "assets/audio/vo-fluff-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-favor-ask",
+      "url": "assets/audio/vo-fluff-favor-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-favor-thanks",
+      "url": "assets/audio/vo-fluff-favor-thanks.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-favor-wait",
+      "url": "assets/audio/vo-fluff-favor-wait.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-progress",
+      "url": "assets/audio/vo-fluff-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-fluff-thanks",
+      "url": "assets/audio/vo-fluff-thanks.mp3",
       "kind": "voice"
     },
     {
@@ -923,6 +1213,41 @@
       "kind": "voice"
     },
     {
+      "key": "vo-millie-ask",
+      "url": "assets/audio/vo-millie-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-favor-ask",
+      "url": "assets/audio/vo-millie-favor-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-favor-give",
+      "url": "assets/audio/vo-millie-favor-give.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-hint",
+      "url": "assets/audio/vo-millie-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-progress",
+      "url": "assets/audio/vo-millie-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-riddle",
+      "url": "assets/audio/vo-millie-riddle.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-millie-thanks",
+      "url": "assets/audio/vo-millie-thanks.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-mirror",
       "url": "assets/audio/vo-mirror.mp3",
       "kind": "voice"
@@ -1078,6 +1403,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-pip-sol",
+      "url": "assets/audio/vo-pip-sol.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-pip-thanks",
       "url": "assets/audio/vo-pip-thanks.mp3",
       "kind": "voice"
@@ -1088,6 +1418,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-power-fizz",
+      "url": "assets/audio/vo-power-fizz.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-power-glow",
       "url": "assets/audio/vo-power-glow.mp3",
       "kind": "voice"
@@ -1095,6 +1430,11 @@
     {
       "key": "vo-power-jet",
       "url": "assets/audio/vo-power-jet.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-power-shrink",
+      "url": "assets/audio/vo-power-shrink.mp3",
       "kind": "voice"
     },
     {
@@ -2428,6 +2768,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-shard-found",
+      "url": "assets/audio/vo-shard-found.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-shrink-blocked",
       "url": "assets/audio/vo-shrink-blocked.mp3",
       "kind": "voice"
@@ -2455,6 +2800,56 @@
     {
       "key": "vo-star-gate-hint",
       "url": "assets/audio/vo-star-gate-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-0",
+      "url": "assets/audio/vo-sweets-altar-0.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-1",
+      "url": "assets/audio/vo-sweets-altar-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-2",
+      "url": "assets/audio/vo-sweets-altar-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-3",
+      "url": "assets/audio/vo-sweets-altar-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-done",
+      "url": "assets/audio/vo-sweets-altar-done.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-altar-finale",
+      "url": "assets/audio/vo-sweets-altar-finale.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-note-1",
+      "url": "assets/audio/vo-sweets-note-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-note-2",
+      "url": "assets/audio/vo-sweets-note-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-note-3",
+      "url": "assets/audio/vo-sweets-note-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-sweets-note-4",
+      "url": "assets/audio/vo-sweets-note-4.mp3",
       "kind": "voice"
     },
     {

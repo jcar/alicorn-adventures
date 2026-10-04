@@ -1,0 +1,150 @@
+{
+  "bea-ask": {
+    "speaker": "bea",
+    "text": "Bzzz! Hello! I'm Bea, the baker bee. I'm baking a cake, but I need my ingredients. Here is my recipe: three strawberries, two lemons, and one egg. Exactly that, please!"
+  },
+  "bea-hint": {
+    "speaker": "narrator",
+    "text": "Look at the recipe card at the top of the screen. Bring Bea exactly what it says!"
+  },
+  "bea-progress": {
+    "speaker": "bea",
+    "text": "Bzzz, lovely! Check the recipe card. What else do we need?"
+  },
+  "bea-thanks": {
+    "speaker": "bea",
+    "text": "Exactly right! You read my recipe perfectly. Bzzz! Now let me teach you a little bee trick."
+  },
+  "power-shrink": {
+    "speaker": "narrator",
+    "text": "Bea taught you to Shrink! Press down at a shrink mushroom to become tiny. Tiny alicorns fit through little tunnels, but tiny wings can only hop. Press down where there's room to grow big again."
+  },
+  "millie-ask": {
+    "speaker": "millie",
+    "text": "Squeak! I'm Millie. I dropped my three sugar buttons in the tunnels. Can you find them? You'll have to be tiny!"
+  },
+  "millie-hint": {
+    "speaker": "narrator",
+    "text": "Plan your path! Shrink to fit through the tunnels, and grow big again to fly up high."
+  },
+  "millie-progress": {
+    "speaker": "millie",
+    "text": "Squeak! You found some! The tunnels go deep, so keep going."
+  },
+  "millie-thanks": {
+    "speaker": "millie",
+    "text": "My sugar buttons! You are a wonderful tunnel explorer. Squeak!"
+  },
+  "duck-ask": {
+    "speaker": "duck",
+    "text": "Quack! I'm Duck, the chocolatier. My cocoa beans are behind the cocoa door, but I lost the big spoon that opens it. Can you help?"
+  },
+  "duck-hint": {
+    "speaker": "narrator",
+    "text": "First find the spoon. Then open the cocoa door. Then bring Duck three cocoa beans."
+  },
+  "duck-progress": {
+    "speaker": "duck",
+    "text": "Quack quack! Yummy cocoa beans! Are there more?"
+  },
+  "duck-thanks": {
+    "speaker": "duck",
+    "text": "Three cocoa beans! Now I can make the best chocolate in the valley. Thank you!"
+  },
+  "door-needs-spoon": {
+    "speaker": "narrator",
+    "text": "The cocoa door has a spoon-shaped lock. Duck's big spoon must be somewhere nearby!"
+  },
+  "fluff-ask": {
+    "speaker": "fluff",
+    "text": "Baa! I'm Fluff. The wind blew my five wool puffs all over the clouds. Will you find them for me?"
+  },
+  "fluff-progress": {
+    "speaker": "fluff",
+    "text": "Baa! So soft! More wool, please!"
+  },
+  "fluff-thanks": {
+    "speaker": "fluff",
+    "text": "All five wool puffs! Thank you! Now let me teach you my favorite fizzy trick!"
+  },
+  "power-fizz": {
+    "speaker": "narrator",
+    "text": "Fluff taught you Fizz Pop! Stand under candy glass and press down to pop right through it."
+  },
+  "sweets-note-1": {
+    "speaker": "sol",
+    "text": "Hi! I'm Sol, Pip's little brother. I tumbled into this sweet valley, and my light broke into four sugar sparkles. Can you find them? From, S."
+  },
+  "sweets-note-2": {
+    "speaker": "sol",
+    "text": "One sparkle of me is deep in the gumdrop tunnels. You'll have to be tiny to reach it! From, S."
+  },
+  "sweets-note-3": {
+    "speaker": "sol",
+    "text": "Duck's river is warm and chocolatey. One sparkle of me floats past the cocoa door. From, S."
+  },
+  "sweets-note-4": {
+    "speaker": "sol",
+    "text": "My last sparkle is way up high, behind candy glass in the clouds. Fluff knows a fizzy way in! From, S."
+  },
+  "sweets-altar-0": {
+    "speaker": "narrator",
+    "text": "The candy altar is waiting for Sol's four sugar sparkles."
+  },
+  "sweets-altar-1": {
+    "speaker": "narrator",
+    "text": "One sparkle is home. Three more to find!"
+  },
+  "sweets-altar-2": {
+    "speaker": "narrator",
+    "text": "Two sparkles are home. Two more to find!"
+  },
+  "sweets-altar-3": {
+    "speaker": "narrator",
+    "text": "Three sparkles are home. Just one more!"
+  },
+  "sweets-altar-finale": {
+    "speaker": "narrator",
+    "text": "Sol shines again! Pip's little brother is back in the sky. You did it!"
+  },
+  "sweets-altar-done": {
+    "speaker": "narrator",
+    "text": "Sol twinkles happily over the valley."
+  },
+  "pip-sol": {
+    "speaker": "pip",
+    "text": "Luma is home! And I can feel my little brother Sol. He's somewhere in Sweet Treat Valley. Can you find him?"
+  },
+  "bea-favor-ask": {
+    "speaker": "bea",
+    "text": "I baked cupcakes for everyone! Can you help me count them?"
+  },
+  "bea-favor-thanks": {
+    "speaker": "bea",
+    "text": "Bzzz! Perfect counting!"
+  },
+  "fluff-favor-ask": {
+    "speaker": "fluff",
+    "text": "Brrr, it's chilly down here. I wish I had a mug of hot cocoa. Millie knows Duck's secret recipe!"
+  },
+  "millie-favor-ask": {
+    "speaker": "millie",
+    "text": "I'll make hot cocoa for Fluff if you answer my riddle! Squeak!"
+  },
+  "millie-riddle": {
+    "speaker": "millie",
+    "text": "I am warm and sweet. You sip me from a mug on a cold day. What am I?"
+  },
+  "millie-favor-give": {
+    "speaker": "millie",
+    "text": "Yes! Here is a mug of hot cocoa. Take it to Fluff!"
+  },
+  "fluff-favor-wait": {
+    "speaker": "fluff",
+    "text": "Baa... is the hot cocoa ready yet?"
+  },
+  "fluff-favor-thanks": {
+    "speaker": "fluff",
+    "text": "Mmm, hot cocoa! I'm warm and cozy now. Thank you!"
+  }
+}

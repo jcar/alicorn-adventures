@@ -194,3 +194,26 @@ describe('doors open with something found earlier in the same area', () => {
         expect(dialogue[d.need], `line ${d.need}`).toBeDefined();
       });
 });
+
+describe("hidden things aren't right next to something else ↓ does", () => {
+  // Standing at a twinkle and pressing ↓ should sniff, not play a tune or open a gate.
+  for (const L of Object.values(LEVELS))
+    it(L.id, () => {
+      const spots = [
+        ...(L.patterns ?? []).map((p) => ({ what: p.id, x: p.x })),
+        ...(L.gates ?? []).map((g) => ({ what: g.id, x: g.x - 90 })),
+        ...(L.doors ?? []).map((d) => ({ what: d.id, x: d.x - 70 })),
+        ...(L.shrinkers ?? []).map((m) => ({ what: 'shrink mushroom', x: m.x })),
+        ...L.portals.map((p) => ({ what: `door to ${p.target}`, x: p.x })),
+        ...L.stations.map((s) => ({ what: s.kind, x: s.x })),
+      ];
+      const hidden = [
+        ...L.items.filter((i) => i.hidden).map((i) => ({ what: 'quest item', ...i })),
+        ...L.blooms.filter((b) => b.hidden).map((b) => ({ what: 'bloom', ...b })),
+        ...(L.notes ?? []).filter((n) => n.hidden).map((n) => ({ what: n.id, ...n })),
+        ...(L.storyItems ?? []).filter((s) => s.hidden).map((s) => ({ what: s.id, ...s })),
+      ];
+      const close = hidden.flatMap((h) => spots.filter((s) => Math.abs(s.x - h.x) < 130).map((s) => `${h.what} @${h.x} is next to ${s.what} @${s.x}`));
+      expect(close).toEqual([]);
+    });
+});

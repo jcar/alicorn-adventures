@@ -59,6 +59,17 @@ Nothing hurts and nothing is timed. If she falls, a smiling cloud floats her bac
 
 Luma's four shards are all on the way: one in each area, reachable on the first visit. Bring them to the altar to restore Luma. That unlocks the Sea Shell Crown and the Ocean mane. Marina and Otto have favors at Home too.
 
+**Sweet Treat Valley** opens on the Sky Map once Grandma Tide is helped, and Pip has news: little brother Sol tumbled into the valley, and his light broke into four sugar sparkles. Its hub is **Candy Square**, a gingerbread village with Sol's altar. This world is about **thinking in two steps**, and its puzzle locks are one level above hers.
+
+| Area | Friend | Their request | Power they teach |
+| --- | --- | --- | --- |
+| Lollipop Lane | Bea the baker bee | A **recipe**: exactly 3 strawberries, 2 lemons and 1 egg. There are extras, and a berry that isn't on the card; those just stay put | **Shrink**: ↓ at a shrink mushroom to fit through tiny tunnels. Tiny wings only hop, so grow back (↓ where there's room) to fly |
+| Gumdrop Caves | Millie the mouse | Three sugar buttons, deep in tiny tunnels and up on a high ledge: plan when to be tiny and when to be big | — |
+| Chocolate River | Duck the chocolatier | Find his spoon, which opens the cocoa door, then bring three cocoa beans (a swim, with a current) | — |
+| Cotton Candy Clouds | Fluff the lamb | Five wool puffs over the clouds, two harder puzzle locks | **Fizz Pop**: ↓ under candy glass to pop up through it |
+
+Sol's last sparkle is in a candy-glass sky room right past Fluff. The sky rooms in the other three areas hold bonus treasure, to come back for with Fizz Pop. Restoring Sol unlocks the Sugar Crown and the Candy Swirl mane. Bea and Fluff have favors at Home too.
+
 **One forward pass.** Everything needed to finish a world (each friend, every color spark or shard, every clue note, the finale) can be reached the first time through, with the powers she has by then. Her own area's friend counts, since she can turn around and walk back. She never has to go back to an earlier area.
 
 Winds, ice, sea-glass and dark caves that need a **later** power only guard optional bonuses (treasure chests and golden stars). The narrator says so ("A bonus is hiding behind this ice… come back any time, there's no hurry!"). When everything left in an area is that kind of bonus, its door counter turns pink with a 🎁: done for now.

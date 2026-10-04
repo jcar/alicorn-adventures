@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { AREA_ORDER, FAVORS, FRIENDS, KINGDOMS, LEVELS, goldIds, powersNeeded, secretIds } from '../content';
+import { AREA_ORDER, FAVORS, FRIENDS, GROUND_Y, KINGDOMS, LEVELS, goldIds, powersNeeded, secretIds } from '../content';
 import { activeFavorFor } from '../world/Favors';
 import type { SkillId } from '../puzzles/engine';
 import { GameState } from '../systems/GameState';
@@ -85,6 +85,13 @@ export function installDebug(game: Phaser.Game) {
         if (!m) throw new Error(`No marker "${where}" here. Try: ${Object.keys(markersFor(w.level)).join(', ')}`);
         pos = m;
       }
+      // Into a tiny tunnel: shrink first (if she can), or a full-size alicorn lands inside the rock.
+      // Anywhere else with room: grow back, the way ↓ would.
+      const inTunnel = (w.level.tunnels ?? []).some((t) => pos.x >= t.x - 50 && pos.x <= t.x + t.w + 50);
+      if (inTunnel && GameState.hasPower('shrink')) {
+        w.player.setTiny(true);
+        pos = { ...pos, y: Math.min(Math.max(pos.y, GROUND_Y - 45), GROUND_Y - 30) };
+      } else if (!inTunnel && w.player.tiny) w.player.setTiny(false);
       w.player.body.reset(pos.x, pos.y);
       return pos;
     },
