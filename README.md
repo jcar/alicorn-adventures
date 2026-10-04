@@ -1,6 +1,6 @@
 # Alicorn Adventures
 
-A gentle side-scrolling game for 5–6 year olds. You play a little alicorn exploring an enchanted forest, helping forest friends and collecting stardust. Nobody wins or loses, nothing hurts you, and nothing is timed.
+A gentle side-scrolling game for 5–8 year olds. You play a little alicorn exploring four magical worlds (an enchanted forest, a coral sea, a candy valley and a moonbeam kingdom), helping friends, solving puzzles that grow with her, and bringing Pip's star family home. Nobody wins or loses, nothing hurts you, and nothing is timed.
 
 ## Play
 
@@ -69,6 +69,17 @@ Luma's four shards are all on the way: one in each area, reachable on the first 
 | Cotton Candy Clouds | Fluff the lamb | Five wool puffs over the clouds, two harder puzzle locks | **Fizz Pop**: ↓ under candy glass to pop up through it |
 
 Sol's last sparkle is in a candy-glass sky room right past Fluff. The sky rooms in the other three areas hold bonus treasure, to come back for with Fizz Pop. Restoring Sol unlocks the Sugar Crown and the Candy Swirl mane. Bea and Fluff have favors at Home too.
+
+**Moonbeam Kingdom**, the last world, opens once Fluff is helped. Pip's mama and papa, the last Guardian Stars, fell asleep there and their light became four moon shards. Its hub is the **Moonlight Observatory**. This world is about **planning ahead**, and its puzzle locks are two levels above hers.
+
+| Area | Friend | Their request | Power they teach |
+| --- | --- | --- | --- |
+| Starlit Meadow | Nyx the night-moth | Draw her three **constellations**: look at the star sign, then fly to the stars and touch them in order | **Moon Phase**: ↓ at a moon dial switches day and night. Sun walls are only there by day, shadow walls only at night |
+| Mirror Lake | Selene the swan | Four moon feathers past sun walls and shadow walls: read the wall, then choose day or night | — |
+| Lantern Library | Professor Hoot (Owl's cousin) | Three books behind **lantern doors**. Each clue says which lanterns to light ("the red one and the one next to it, but not the blue one") | — |
+| Moon Palace | Mochi the moon cat | Four moonstones, using everything: night, a lantern door, a tiny tunnel, a sky room, two hard locks | — |
+
+Restoring Mama Nova and Papa Orion unlocks the Moonlight mane. Then visit Pip at Home: **the whole star family comes home** for a reunion, and they stay in the Glade. That unlocks the Moon Crown and the Starfall trail. Every Guardian Star she restores also twinkles in the Glade sky. Hoot and Nyx have favors at Home.
 
 **One forward pass.** Everything needed to finish a world (each friend, every color spark or shard, every clue note, the finale) can be reached the first time through, with the powers she has by then. Her own area's friend counts, since she can turn around and walk back. She never has to go back to an earlier area.
 

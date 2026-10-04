@@ -40,7 +40,9 @@ describe('every area can be finished with the powers you have when you arrive', 
       const spots = [...(L.chests ?? []), ...(L.notes ?? []).filter((n) => n.secret)];
       const needs = spots.map((s) => subset(powersNeeded(L, s), have).length);
       expect(needs.some((n) => n === 0), `${id}: something findable now`).toBe(true);
-      if (id !== 'frost') expect(needs.some((n) => n > 0), `${id}: something to come back for`).toBe(true);
+      // Something to come back for, unless there's no later power left to come back with.
+      const later = POWERS.some((pw) => !have.has(pw.id));
+      if (id !== 'frost' && later) expect(needs.some((n) => n > 0), `${id}: something to come back for`).toBe(true);
     }
   });
 });
@@ -102,9 +104,9 @@ describe('secrets, puzzles and favors fit together', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('pattern chests point at a real pattern, and tunes are long enough', () => {
+  it('pattern chests point at a real pattern (or constellation), and tunes are long enough', () => {
     for (const L of Object.values(LEVELS)) {
-      const patterns = new Set((L.patterns ?? []).map((p) => p.id));
+      const patterns = new Set([...(L.patterns ?? []), ...(L.constellations ?? [])].map((p) => p.id));
       for (const c of L.chests ?? []) if (c.byPattern) expect(patterns.has(c.byPattern), c.id).toBe(true);
       for (const p of L.patterns ?? []) expect(p.crystals.length).toBeGreaterThanOrEqual(3);
     }

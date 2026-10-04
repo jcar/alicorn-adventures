@@ -11,6 +11,11 @@
       "bundle": "core"
     },
     {
+      "key": "acc-mooncrown",
+      "url": "assets/images/acc-mooncrown.webp",
+      "bundle": "core"
+    },
+    {
       "key": "acc-saddle",
       "url": "assets/images/acc-saddle.webp",
       "bundle": "core"
@@ -51,6 +56,11 @@
       "bundle": "core"
     },
     {
+      "key": "alicorn-moonlight",
+      "url": "assets/images/alicorn-moonlight.webp",
+      "bundle": "core"
+    },
+    {
       "key": "alicorn-ocean",
       "url": "assets/images/alicorn-ocean.webp",
       "bundle": "core"
@@ -79,6 +89,11 @@
       "key": "altar-coral",
       "url": "assets/images/altar-coral.webp",
       "bundle": "coral"
+    },
+    {
+      "key": "altar-moonbeam",
+      "url": "assets/images/altar-moonbeam.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "altar-sweets",
@@ -141,6 +156,11 @@
       "bundle": "coral"
     },
     {
+      "key": "bg-library-far",
+      "url": "assets/images/bg-library-far.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "bg-lollipop-far",
       "url": "assets/images/bg-lollipop-far.webp",
       "bundle": "sweets"
@@ -149,6 +169,21 @@
       "key": "bg-meadow-far",
       "url": "assets/images/bg-meadow-far.webp",
       "bundle": "forest"
+    },
+    {
+      "key": "bg-mirror-far",
+      "url": "assets/images/bg-mirror-far.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "bg-moonbeam-hub-far",
+      "url": "assets/images/bg-moonbeam-hub-far.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "bg-palace-far",
+      "url": "assets/images/bg-palace-far.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "bg-shallows-far",
@@ -164,6 +199,11 @@
       "key": "bg-skymap",
       "url": "assets/images/bg-skymap.webp",
       "bundle": "core"
+    },
+    {
+      "key": "bg-starlit-far",
+      "url": "assets/images/bg-starlit-far.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "bg-sweets-hub-far",
@@ -246,9 +286,19 @@
       "bundle": "core"
     },
     {
+      "key": "clue-sign",
+      "url": "assets/images/clue-sign.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "cocoa-door",
       "url": "assets/images/cocoa-door.webp",
       "bundle": "sweets"
+    },
+    {
+      "key": "constellation-star",
+      "url": "assets/images/constellation-star.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "cotton-cloud",
@@ -274,6 +324,11 @@
       "key": "deco-beach-hut",
       "url": "assets/images/deco-beach-hut.webp",
       "bundle": "coral"
+    },
+    {
+      "key": "deco-bookshelf",
+      "url": "assets/images/deco-bookshelf.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "deco-candy-cane",
@@ -311,6 +366,16 @@
       "bundle": "sweets"
     },
     {
+      "key": "deco-moonflower",
+      "url": "assets/images/deco-moonflower.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "deco-palace-pillar",
+      "url": "assets/images/deco-palace-pillar.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "deco-seaweed",
       "url": "assets/images/deco-seaweed.webp",
       "bundle": "coral"
@@ -324,6 +389,11 @@
       "key": "deco-tall-crystal",
       "url": "assets/images/deco-tall-crystal.webp",
       "bundle": "forest"
+    },
+    {
+      "key": "deco-telescope",
+      "url": "assets/images/deco-telescope.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "friend-bea",
@@ -361,6 +431,11 @@
       "bundle": "core"
     },
     {
+      "key": "friend-hoot",
+      "url": "assets/images/friend-hoot.webp",
+      "bundle": "core"
+    },
+    {
       "key": "friend-marina",
       "url": "assets/images/friend-marina.webp",
       "bundle": "core"
@@ -368,6 +443,16 @@
     {
       "key": "friend-millie",
       "url": "assets/images/friend-millie.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "friend-mochi",
+      "url": "assets/images/friend-mochi.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "friend-nyx",
+      "url": "assets/images/friend-nyx.webp",
       "bundle": "core"
     },
     {
@@ -383,6 +468,11 @@
     {
       "key": "friend-pip",
       "url": "assets/images/friend-pip.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "friend-selene",
+      "url": "assets/images/friend-selene.webp",
       "bundle": "core"
     },
     {
@@ -431,6 +521,11 @@
       "bundle": "core"
     },
     {
+      "key": "island-moonbeam",
+      "url": "assets/images/island-moonbeam.webp",
+      "bundle": "core"
+    },
+    {
       "key": "island-mystery",
       "url": "assets/images/island-mystery.webp",
       "bundle": "core"
@@ -443,6 +538,11 @@
     {
       "key": "item-berry",
       "url": "assets/images/item-berry.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-book",
+      "url": "assets/images/item-book.webp",
       "bundle": "core"
     },
     {
@@ -471,6 +571,11 @@
       "bundle": "core"
     },
     {
+      "key": "item-feather",
+      "url": "assets/images/item-feather.webp",
+      "bundle": "core"
+    },
+    {
       "key": "item-hot-cocoa",
       "url": "assets/images/item-hot-cocoa.webp",
       "bundle": "core"
@@ -488,6 +593,16 @@
     {
       "key": "item-lemon",
       "url": "assets/images/item-lemon.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-moon-lantern",
+      "url": "assets/images/item-moon-lantern.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "item-moonstone",
+      "url": "assets/images/item-moonstone.webp",
       "bundle": "core"
     },
     {
@@ -526,6 +641,46 @@
       "bundle": "coral"
     },
     {
+      "key": "lantern-door",
+      "url": "assets/images/lantern-door.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "library-cave",
+      "url": "assets/images/library-cave.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-chime",
+      "url": "assets/images/moon-chime.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-cloud",
+      "url": "assets/images/moon-cloud.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-dial",
+      "url": "assets/images/moon-dial.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-lantern",
+      "url": "assets/images/moon-lantern.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-mushroom",
+      "url": "assets/images/moon-mushroom.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "moon-rock",
+      "url": "assets/images/moon-rock.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "note",
       "url": "assets/images/note.webp",
       "bundle": "core"
@@ -558,6 +713,11 @@
     {
       "key": "power-jet",
       "url": "assets/images/power-jet.webp",
+      "bundle": "core"
+    },
+    {
+      "key": "power-moon",
+      "url": "assets/images/power-moon.webp",
       "bundle": "core"
     },
     {
@@ -596,6 +756,11 @@
       "bundle": "coral"
     },
     {
+      "key": "shadow-wall",
+      "url": "assets/images/shadow-wall.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "shell-chime",
       "url": "assets/images/shell-chime.webp",
       "bundle": "coral"
@@ -621,9 +786,24 @@
       "bundle": "core"
     },
     {
+      "key": "star-bumper",
+      "url": "assets/images/star-bumper.webp",
+      "bundle": "moonbeam"
+    },
+    {
       "key": "star-gate",
       "url": "assets/images/star-gate.webp",
       "bundle": "core"
+    },
+    {
+      "key": "star-glass",
+      "url": "assets/images/star-glass.webp",
+      "bundle": "moonbeam"
+    },
+    {
+      "key": "star-sign",
+      "url": "assets/images/star-sign.webp",
+      "bundle": "moonbeam"
     },
     {
       "key": "stardust",
@@ -644,6 +824,11 @@
       "key": "station-tree",
       "url": "assets/images/station-tree.webp",
       "bundle": "core"
+    },
+    {
+      "key": "sun-wall",
+      "url": "assets/images/sun-wall.webp",
+      "bundle": "moonbeam"
     }
   ],
   "audio": [
@@ -693,6 +878,11 @@
       "kind": "music"
     },
     {
+      "key": "music-library",
+      "url": "assets/audio/music-library.mp3",
+      "kind": "music"
+    },
+    {
       "key": "music-lollipop",
       "url": "assets/audio/music-lollipop.mp3",
       "kind": "music"
@@ -700,6 +890,21 @@
     {
       "key": "music-meadow",
       "url": "assets/audio/music-meadow.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-mirror",
+      "url": "assets/audio/music-mirror.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-moonbeam-hub",
+      "url": "assets/audio/music-moonbeam-hub.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-palace",
+      "url": "assets/audio/music-palace.mp3",
       "kind": "music"
     },
     {
@@ -715,6 +920,11 @@
     {
       "key": "music-skymap",
       "url": "assets/audio/music-skymap.mp3",
+      "kind": "music"
+    },
+    {
+      "key": "music-starlit",
+      "url": "assets/audio/music-starlit.mp3",
       "kind": "music"
     },
     {
@@ -1053,6 +1263,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-family-home",
+      "url": "assets/audio/vo-family-home.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-fetch-done",
       "url": "assets/audio/vo-fetch-done.mp3",
       "kind": "voice"
@@ -1193,6 +1408,46 @@
       "kind": "voice"
     },
     {
+      "key": "vo-hoot-ask",
+      "url": "assets/audio/vo-hoot-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-favor-ask",
+      "url": "assets/audio/vo-hoot-favor-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-favor-thanks",
+      "url": "assets/audio/vo-hoot-favor-thanks.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-hint",
+      "url": "assets/audio/vo-hoot-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-lantern-ask",
+      "url": "assets/audio/vo-hoot-lantern-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-lantern-give",
+      "url": "assets/audio/vo-hoot-lantern-give.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-progress",
+      "url": "assets/audio/vo-hoot-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-hoot-thanks",
+      "url": "assets/audio/vo-hoot-thanks.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-ice-blocked",
       "url": "assets/audio/vo-ice-blocked.mp3",
       "kind": "voice"
@@ -1220,6 +1475,21 @@
     {
       "key": "vo-last-one-hiding",
       "url": "assets/audio/vo-last-one-hiding.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-library-clue-1",
+      "url": "assets/audio/vo-library-clue-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-library-clue-2",
+      "url": "assets/audio/vo-library-clue-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-library-clue-3",
+      "url": "assets/audio/vo-library-clue-3.mp3",
       "kind": "voice"
     },
     {
@@ -1293,6 +1563,76 @@
       "kind": "voice"
     },
     {
+      "key": "vo-mochi-ask",
+      "url": "assets/audio/vo-mochi-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-mochi-hint",
+      "url": "assets/audio/vo-mochi-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-mochi-progress",
+      "url": "assets/audio/vo-mochi-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-mochi-thanks",
+      "url": "assets/audio/vo-mochi-thanks.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-0",
+      "url": "assets/audio/vo-moonbeam-altar-0.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-1",
+      "url": "assets/audio/vo-moonbeam-altar-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-2",
+      "url": "assets/audio/vo-moonbeam-altar-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-3",
+      "url": "assets/audio/vo-moonbeam-altar-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-done",
+      "url": "assets/audio/vo-moonbeam-altar-done.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-altar-finale",
+      "url": "assets/audio/vo-moonbeam-altar-finale.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-note-1",
+      "url": "assets/audio/vo-moonbeam-note-1.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-note-2",
+      "url": "assets/audio/vo-moonbeam-note-2.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-note-3",
+      "url": "assets/audio/vo-moonbeam-note-3.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-moonbeam-note-4",
+      "url": "assets/audio/vo-moonbeam-note-4.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-new-clue",
       "url": "assets/audio/vo-new-clue.mp3",
       "kind": "voice"
@@ -1345,6 +1685,41 @@
     {
       "key": "vo-note-8",
       "url": "assets/audio/vo-note-8.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-ask",
+      "url": "assets/audio/vo-nyx-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-favor-ask",
+      "url": "assets/audio/vo-nyx-favor-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-favor-thanks",
+      "url": "assets/audio/vo-nyx-favor-thanks.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-favor-wait",
+      "url": "assets/audio/vo-nyx-favor-wait.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-hint",
+      "url": "assets/audio/vo-nyx-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-progress",
+      "url": "assets/audio/vo-nyx-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-nyx-thanks",
+      "url": "assets/audio/vo-nyx-thanks.mp3",
       "kind": "voice"
     },
     {
@@ -1408,6 +1783,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-palace-clue",
+      "url": "assets/audio/vo-palace-clue.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-pattern-oops",
       "url": "assets/audio/vo-pattern-oops.mp3",
       "kind": "voice"
@@ -1448,6 +1828,11 @@
       "kind": "voice"
     },
     {
+      "key": "vo-pip-family-home",
+      "url": "assets/audio/vo-pip-family-home.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-pip-found",
       "url": "assets/audio/vo-pip-found.mp3",
       "kind": "voice"
@@ -1455,6 +1840,11 @@
     {
       "key": "vo-pip-glade",
       "url": "assets/audio/vo-pip-glade.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-pip-parents",
+      "url": "assets/audio/vo-pip-parents.mp3",
       "kind": "voice"
     },
     {
@@ -1490,6 +1880,11 @@
     {
       "key": "vo-power-jet",
       "url": "assets/audio/vo-power-jet.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-power-moon",
+      "url": "assets/audio/vo-power-moon.mp3",
       "kind": "voice"
     },
     {
@@ -2828,6 +3223,26 @@
       "kind": "voice"
     },
     {
+      "key": "vo-selene-ask",
+      "url": "assets/audio/vo-selene-ask.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-selene-hint",
+      "url": "assets/audio/vo-selene-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-selene-progress",
+      "url": "assets/audio/vo-selene-progress.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-selene-thanks",
+      "url": "assets/audio/vo-selene-thanks.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-shard-found",
       "url": "assets/audio/vo-shard-found.mp3",
       "kind": "voice"
@@ -2850,6 +3265,11 @@
     {
       "key": "vo-sniff-hint",
       "url": "assets/audio/vo-sniff-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-solve-done",
+      "url": "assets/audio/vo-solve-done.mp3",
       "kind": "voice"
     },
     {

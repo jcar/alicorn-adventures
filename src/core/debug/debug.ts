@@ -194,6 +194,11 @@ export function installDebug(game: Phaser.Game) {
       return missing.length ? { ok: false, missing } : { ok: true };
     },
 
+    /** Everyone living at Home, and where they stand. */
+    friendsHome() {
+      return FRIENDS.filter((f) => GameState.hasHelped(f.id)).map((f) => ({ id: f.id, x: f.gladeX }));
+    },
+
     /** Friends at Home waiting to talk about a favor, and where they stand. */
     favorsTodo() {
       return FRIENDS.filter((f) => GameState.hasHelped(f.id) && activeFavorFor(f.id)).map((f) => ({ id: f.id, x: f.gladeX }));

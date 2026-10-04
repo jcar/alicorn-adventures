@@ -61,8 +61,6 @@ export class Phases {
       const tex = L.art?.dial && s.textures.exists(L.art.dial) ? L.art.dial : 'pedestal';
       const img = s.add.image(d.x, GROUND_Y + 4, tex).setOrigin(0.5, 1).setDepth(5);
       if (!L.art?.dial) img.setTint(0xc9b8ff);
-      const moon = s.add.image(d.x, GROUND_Y - img.displayHeight - 30, 'fx-light').setScale(0.6).setDepth(5).setBlendMode(Phaser.BlendModes.ADD);
-      this.onChange((p) => moon.setTint(p === 'night' ? 0xbfd0ff : 0xfff0a0));
       this.w.addSpot({
         x: d.x, y: GROUND_Y, promptY: GROUND_Y - img.displayHeight - 70,
         get verb() { return GameState.hasPower('moon') ? 'to change day and night' : 'to look'; },

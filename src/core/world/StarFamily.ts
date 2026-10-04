@@ -16,7 +16,7 @@ const SKY = [{ x: 0.2, y: 110 }, { x: 0.42, y: 70 }, { x: 0.64, y: 100 }, { x: 0
  */
 export class StarFamily {
   private members: { name: string; tint: number }[] = [];
-  private sky: Phaser.GameObjects.Image[] = [];
+  private sky: Phaser.GameObjects.GameObject[] = [];
 
   constructor(private w: World, private pipX: number) {}
 
@@ -41,9 +41,9 @@ export class StarFamily {
       const x = width * at.x;
       const glow = s.add.image(x, at.y, 'fx-light').setTint(m.tint).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.6).setScrollFactor(0.15, 0).setDepth(-8);
       const star = s.add.image(x, at.y, 'friend-pip').setScale(0.55).setTint(m.tint).setScrollFactor(0.15, 0).setDepth(-7);
-      s.add.text(x, at.y + 44, m.name, textStyle(18, { color: '#ffffff', stroke: '#2b1f4a', strokeThickness: 4 })).setOrigin(0.5, 0).setScrollFactor(0.15, 0).setDepth(-7);
+      const label = s.add.text(x, at.y + 44, m.name, textStyle(18, { color: '#ffffff', stroke: '#2b1f4a', strokeThickness: 4 })).setOrigin(0.5, 0).setScrollFactor(0.15, 0).setDepth(-7);
       s.tweens.add({ targets: [star, glow], y: at.y - 8, duration: 1500 + i * 200, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
-      this.sky.push(star, glow);
+      this.sky.push(star, glow, label);
     });
   }
 
@@ -70,15 +70,18 @@ export class StarFamily {
     return true;
   }
 
-  /** The family, standing (well, floating) beside Pip. */
+  /** The family, floating in a little arc above Pip (clear of the tree and the Heart Crystal). */
   private standBesidePip(arrive: boolean) {
     const s = this.w.view;
+    const n = this.members.length;
     this.members.forEach((m, i) => {
-      const side = i % 2 === 0 ? -1 : 1;
-      const x = this.pipX + side * (110 + Math.floor(i / 2) * 100);
-      const y = GROUND_Y - 70 - (i % 3) * 14;
+      const t = n === 1 ? 0 : i / (n - 1) - 0.5; // -0.5 .. 0.5 across the arc
+      const x = this.pipX + t * 420;
+      const y = GROUND_Y - 480 + Math.abs(t) * 40; // above the tree and the Heart Crystal (and their labels), under the sky
       const glow = s.add.image(x, y, 'fx-light').setTint(m.tint).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0.55).setDepth(3);
-      const star = s.add.image(x, y, 'friend-pip').setScale(0.9).setTint(m.tint).setDepth(4);
+      const star = s.add.image(x, y, 'friend-pip').setScale(0.75).setTint(m.tint).setDepth(4);
+      const name = s.add.text(x, y + 46, m.name, textStyle(16, { color: '#ffffff', stroke: '#2b1f4a', strokeThickness: 4 })).setOrigin(0.5, 0).setDepth(4).setAlpha(arrive ? 0 : 1);
+      if (arrive) s.tweens.add({ targets: name, alpha: 1, delay: 1400 + i * 350, duration: 600 });
       if (arrive) {
         star.y = glow.y = -120;
         sfx.chime();

@@ -42,7 +42,9 @@ export class Constellations {
     const lines = s.add.graphics().setDepth(DEPTH);
     const preview = s.add.graphics().setDepth(DEPTH).setAlpha(0);
     const stars = def.stars.map((p, i) => {
-      const img = s.add.image(p.x, p.y, 'gold-star').setScale(0.75).setDepth(DEPTH + 1).setTint(done ? 0xfff6a0 : 0xe6ecff).setAlpha(done ? 1 : 0.9);
+      // Its own twinkle (not the golden-star collectible), so it never looks like something to pick up.
+      const tex = s.textures.exists('constellation-star') ? 'constellation-star' : 'gold-star';
+      const img = s.add.image(p.x, p.y, tex).setScale(tex === 'gold-star' ? 0.75 : 0.9).setDepth(DEPTH + 1).setTint(done ? 0xfff6a0 : 0xe6ecff).setAlpha(done ? 1 : 0.9);
       s.tweens.add({ targets: img, angle: { from: -8, to: 8 }, duration: 1300 + i * 70, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
       return img;
     });
@@ -89,7 +91,7 @@ export class Constellations {
       GameState.setFlag(`puzzle:${def.id}`);
       GameState.recordPuzzle('memory', { firstTry: misses === 0, misses });
       drawLines(lines, def.stars.length, 0.9);
-      stars.forEach((img) => img.setTint(0xfff6a0).setAlpha(1).setScale(0.75));
+      stars.forEach((img) => img.setTint(0xfff6a0).setAlpha(1));
       pointAt();
       preview.setAlpha(0);
       s.time.delayedCall(300, () => {

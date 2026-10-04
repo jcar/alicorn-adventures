@@ -43,6 +43,10 @@ async function helpFriend(area) {
     if (key) { await tp(key.x - 40); await press(1); await tp(key.x, key.y); await h.wait(500); }
     await tp(k); await press(1); await h.wait(900);
   }
+  // Lantern doors: work out the clue (the debug solver lights the right ones).
+  for (const k of Object.keys(m).filter((k) => /-lanterns(-\d+)?$/.test(k))) {
+    await tp(k); await A(() => window.alicorn.solve()); await h.wait(1500);
+  }
   // Fetch and recipe quests: collect each item (sniffing first, in case it's hidden).
   // A recipe's extras (not on the card, or one too many) just stay put.
   for (const k of Object.keys(m).filter((k) => k.startsWith('item-'))) {
@@ -79,6 +83,8 @@ async function sweep(area, firstPass) {
   };
   for (const k of await of(/-gate$/)) { await tp(k); await press(1); await h.wait(800); await solveIfOpen(); }
   for (const k of await of(/-pattern$/)) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1600); }
+  for (const k of (await of(/-stars(-\d+)?$/)).filter((k) => !k.includes('-chest-'))) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1800); }
+  for (const k of await of(/-lanterns(-\d+)?$/)) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1500); }
   for (const k of await of(/-ice|-glass$/)) { await tp(k); await press(2); await h.wait(600); }
   for (const k of await of(/-chest-|note-|-sign$/)) { await tp(k); await press(2); await h.wait(400); }
   for (const k of await of(/-gold-/)) { await tp(m[k].x, m[k].y); await h.wait(500); }
@@ -105,7 +111,12 @@ for (const k of kingdoms) {
     // (Pip only comes out once the clues are read, so a friend may need the sweep first.)
     let helpedHere = await helpFriend(area);
     await sweep(area, true);
-    if (!helpedHere) helpedHere = await helpFriend(area);
+    if (!helpedHere) {
+      // This friend needed something from the sweep first (Pip's clues, Nyx's star pictures);
+      // once they're helped, their power opens more of the same area: same visit, look again.
+      helpedHere = await helpFriend(area);
+      if (helpedHere) await sweep(area, true);
+    }
     check(`${k.id}: helped the friend in ${area}`, helpedHere);
   }
   const f = await flags();
@@ -129,6 +140,13 @@ for (const k of kingdoms) {
     check(`${k.id}: Guardian Star restored without going back`, (await flags()).includes(`star:${k.id}`));
   }
 }
+
+// ---- every Guardian Star is home: Pip's family reunion, in the Glade
+await go('glade', 'start');
+const pip = (await A(() => window.alicorn.friendsHome())).find((f) => f.id === 'pip');
+await tp(pip.x - 120); await h.wait(12000);
+await h.shot(out, 'bot-4-family');
+check("Pip's whole family comes home", (await flags()).includes('family:home'));
 
 // ---- the optional bonus sweep: chests and golden stars behind later powers
 for (const area of areas) { await sweep(area, false); log(area, JSON.stringify(await progress())); }

@@ -1,0 +1,166 @@
+{
+  "nyx-ask": {
+    "speaker": "nyx",
+    "text": "Flutter flutter! I'm Nyx. My three favorite star pictures have gone dark. Will you draw them in the sky with me?"
+  },
+  "nyx-hint": {
+    "speaker": "narrator",
+    "text": "Press down at a star sign to see a shape. Then fly to the stars and touch them in order."
+  },
+  "nyx-progress": {
+    "speaker": "nyx",
+    "text": "Oh, it's glowing again! Keep drawing!"
+  },
+  "nyx-thanks": {
+    "speaker": "nyx",
+    "text": "My star pictures! The night is beautiful again. Let me share my moon magic with you."
+  },
+  "power-moon": {
+    "speaker": "narrator",
+    "text": "Nyx taught you Moon Phase! Press down at a moon dial to change night into day, or day into night. Sun walls fade at night, and shadow walls fade in the day."
+  },
+  "selene-ask": {
+    "speaker": "selene",
+    "text": "Hello, dear. I'm Selene. My four moon feathers drifted across Mirror Lake, past the sun walls and shadow walls. Will you bring them to me?"
+  },
+  "selene-hint": {
+    "speaker": "narrator",
+    "text": "When a wall is in the way, look at it. Is it a sun wall or a shadow wall? Then use a moon dial to choose day or night!"
+  },
+  "selene-progress": {
+    "speaker": "selene",
+    "text": "How lovely! There are more across the lake."
+  },
+  "selene-thanks": {
+    "speaker": "selene",
+    "text": "All four feathers! You think so carefully. Thank you, dear."
+  },
+  "hoot-ask": {
+    "speaker": "hoot",
+    "text": "Hoo hoo! I'm Professor Hoot, Owl's cousin. My three favorite books are locked behind the lantern doors. Each door has a clue. Can you solve them?"
+  },
+  "hoot-hint": {
+    "speaker": "narrator",
+    "text": "Listen to each clue. Press down at a lantern to light it, or to blow it out."
+  },
+  "hoot-progress": {
+    "speaker": "hoot",
+    "text": "Splendid! Another book. Keep reading those clues!"
+  },
+  "hoot-thanks": {
+    "speaker": "hoot",
+    "text": "My books! You are a true clue solver. Hoo hoo!"
+  },
+  "library-clue-1": {
+    "speaker": "narrator",
+    "text": "Light the yellow lantern and the green lantern."
+  },
+  "library-clue-2": {
+    "speaker": "narrator",
+    "text": "Light the red lantern and the one next to it, but not the blue one."
+  },
+  "library-clue-3": {
+    "speaker": "narrator",
+    "text": "Light every lantern except the purple one and the one right after it."
+  },
+  "mochi-ask": {
+    "speaker": "mochi",
+    "text": "Mrrow! I'm Mochi, the palace cat. I scattered my four moonstones all over the palace. You'll need every trick you know!"
+  },
+  "mochi-hint": {
+    "speaker": "narrator",
+    "text": "Day and night, lanterns, shrinking and fizzing. You know them all. Plan your way!"
+  },
+  "mochi-progress": {
+    "speaker": "mochi",
+    "text": "Purr! A moonstone! Keep going, you can find them all!"
+  },
+  "mochi-thanks": {
+    "speaker": "mochi",
+    "text": "All four moonstones! The palace shines again. Purrr!"
+  },
+  "palace-clue": {
+    "speaker": "narrator",
+    "text": "Light two lanterns: the one right after the purple lantern, and the one right before the green lantern."
+  },
+  "moonbeam-note-1": {
+    "speaker": "nova",
+    "text": "Hello, sweet alicorn. We are Pip's mama and papa. We fell asleep in the Moonbeam Kingdom, and our light became four moon shards. From, Mama and Papa."
+  },
+  "moonbeam-note-2": {
+    "speaker": "nova",
+    "text": "One of our shards rests by Mirror Lake. Day and night will help you find the way. From, Mama and Papa."
+  },
+  "moonbeam-note-3": {
+    "speaker": "nova",
+    "text": "Professor Hoot's library hides a shard. Read every clue carefully! From, Mama and Papa."
+  },
+  "moonbeam-note-4": {
+    "speaker": "nova",
+    "text": "Our last shard is deep in the Moon Palace. Bring all four to the observatory, and we can go home to Pip. From, Mama and Papa."
+  },
+  "moonbeam-altar-0": {
+    "speaker": "narrator",
+    "text": "The moon altar is waiting for four moon shards."
+  },
+  "moonbeam-altar-1": {
+    "speaker": "narrator",
+    "text": "One shard is home. Three more to find!"
+  },
+  "moonbeam-altar-2": {
+    "speaker": "narrator",
+    "text": "Two shards are home. Two more to find!"
+  },
+  "moonbeam-altar-3": {
+    "speaker": "narrator",
+    "text": "Three shards are home. Just one more!"
+  },
+  "moonbeam-altar-finale": {
+    "speaker": "narrator",
+    "text": "Mama Nova and Papa Orion shine again! Now Pip's whole family can go home. Go and see Pip!"
+  },
+  "moonbeam-altar-done": {
+    "speaker": "narrator",
+    "text": "Mama and Papa twinkle over the observatory."
+  },
+  "pip-parents": {
+    "speaker": "pip",
+    "text": "Sol is home too! There's just one more thing. My mama and papa are lost in the Moonbeam Kingdom. Will you find them?"
+  },
+  "pip-family-home": {
+    "speaker": "pip",
+    "text": "Mama! Papa! Luma! Sol! We're all together again! Thank you, my best friend. You brought my whole family home!"
+  },
+  "family-home": {
+    "speaker": "narrator",
+    "text": "The whole star family is home! Pip's family will shine over your glade forever."
+  },
+  "hoot-favor-ask": {
+    "speaker": "hoot",
+    "text": "Would you like to hear a story? First, answer my question!"
+  },
+  "hoot-favor-thanks": {
+    "speaker": "hoot",
+    "text": "Wonderful reading! Hoo hoo!"
+  },
+  "nyx-favor-ask": {
+    "speaker": "nyx",
+    "text": "I'd love to read Professor Hoot's books at night, but it's so dark. He has a moon lantern!"
+  },
+  "hoot-lantern-ask": {
+    "speaker": "hoot",
+    "text": "My moon lantern? Of course! Just solve my puzzle first."
+  },
+  "hoot-lantern-give": {
+    "speaker": "hoot",
+    "text": "Here is my moon lantern. Take it to Nyx!"
+  },
+  "nyx-favor-wait": {
+    "speaker": "nyx",
+    "text": "Do you have the moon lantern yet?"
+  },
+  "nyx-favor-thanks": {
+    "speaker": "nyx",
+    "text": "The moon lantern! Now I can read all night long. Thank you!"
+  }
+}

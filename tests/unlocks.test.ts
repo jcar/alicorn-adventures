@@ -49,6 +49,7 @@ describe('UnlockManager', () => {
       ...FAVORS.map((f) => `favor:${f.id}`),
       'mystery:solved',
       ...KINGDOMS.flatMap((k) => (k.saga ? [k.saga.flag] : [])),
+      'family:home', // the reunion at Home, once every Guardian Star is restored
     ];
     grantUnlocks(s);
     expect(s.unlocked.sort()).toEqual(UNLOCKS.map((u) => u.id).sort());

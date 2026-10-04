@@ -24,11 +24,13 @@ function everythingIn(...kingdoms: KingdomDef[]): string[] {
       for (const w of L.walls ?? []) flags.push(`opened:${w.id}`);
       for (const c of L.ceilings ?? []) flags.push(`opened:${c.id}`);
       for (const d of L.doors ?? []) flags.push(`opened:${d.id}`, `has:${d.item}`);
+      for (const c of L.constellations ?? []) flags.push(`puzzle:${c.id}`);
+      for (const d of L.lanternDoors ?? []) flags.push(`opened:${d.id}`);
     }
     for (const a of k.areaOrder) flags.push(`spark:${a}`);
     const friends = friendsOf(k);
     for (const f of FAVORS) if (f.needs.every((n) => friends.includes(n))) flags.push(`favor:${f.id}`);
-    if (k.saga) flags.push(k.saga.flag);
+    if (k.saga) flags.push(k.saga.flag, `saga:news:${k.id}`);
   }
   return flags;
 }
@@ -73,9 +75,24 @@ export const PRESETS: Record<string, () => SaveData> = {
     const flags = [...everythingIn(forest(), kingdom('coral')), 'mystery:solved', 'saga:intro'];
     return save([...forestFriends(), ...friendsOf(kingdom('coral')), ...friendsOf(kingdom('sweets'))], { stardust: 640, flags, favors: favorsDone(flags) });
   },
-  /** Everything everywhere. */
-  'all-done': () => {
+  /** Forest, Coral and Sweets finished (Sol restored): the Moonbeam Kingdom is open. */
+  'sweets-done': () => {
+    const flags = [...everythingIn(forest(), kingdom('coral'), kingdom('sweets')), 'mystery:solved', 'saga:intro'];
+    return save(['forest', 'coral', 'sweets'].flatMap((k) => friendsOf(kingdom(k))), { stardust: 700, flags, favors: favorsDone(flags) });
+  },
+  /** Sweets done, plus every Moonbeam friend helped; Mama and Papa's shards still to find. */
+  'moonbeam-friends': () => {
+    const flags = [...everythingIn(forest(), kingdom('coral'), kingdom('sweets')), 'mystery:solved', 'saga:intro'];
+    return save(KINGDOMS.flatMap(friendsOf), { stardust: 800, flags, favors: favorsDone(flags) });
+  },
+  /** Every Guardian Star restored; walk up to Pip in the Glade for the family reunion. */
+  'ready-for-family': () => {
     const flags = [...everythingIn(...KINGDOMS), 'mystery:solved', 'saga:intro'];
+    return save(KINGDOMS.flatMap(friendsOf), { stardust: 900, flags, favors: favorsDone(flags) });
+  },
+  /** Everything everywhere, reunion included. */
+  'all-done': () => {
+    const flags = [...everythingIn(...KINGDOMS), 'mystery:solved', 'saga:intro', 'family:home'];
     return save(KINGDOMS.flatMap(friendsOf), { stardust: 700, flags, favors: favorsDone(flags) });
   },
 };

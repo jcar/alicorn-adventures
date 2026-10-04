@@ -6,7 +6,7 @@
 export const WORLD_HEIGHT = 720;
 export const GROUND_Y = 620;
 
-export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost' | 'beach' | 'reef' | 'kelp' | 'ship' | 'trench' | 'sweets';
+export type Deco = 'glade' | 'trees' | 'mushrooms' | 'crystals' | 'clouds' | 'frost' | 'beach' | 'reef' | 'kelp' | 'ship' | 'trench' | 'sweets' | 'moonbeam';
 
 export interface Theme {
   skyTop: number;
@@ -144,6 +144,8 @@ export type FriendRequest =
   | { kind: 'fetch'; item: string; count: number }
   /** Exactly these, read off a recipe card. Extras in the level (or one too many) are kindly left behind. */
   | { kind: 'recipe'; items: { item: string; count: number }[] }
+  /** Solve these puzzles in the area (patterns or constellations, by id). */
+  | { kind: 'solve'; puzzles: string[] }
   | { kind: 'wake' }
   | { kind: 'bloom' }
   /** Just find them. (Pip is hiding.) */

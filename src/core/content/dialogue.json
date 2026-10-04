@@ -222,5 +222,9 @@
   "lantern-right": {
     "speaker": "narrator",
     "text": "Exactly right! The lantern door opens."
+  },
+  "solve-done": {
+    "speaker": "narrator",
+    "text": "You did them all! Go back to your friend!"
   }
 }

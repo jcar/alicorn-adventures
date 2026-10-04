@@ -33,6 +33,7 @@ export const MANES: ManeColor[] = [
   { id: 'starlight', name: 'Starlight', color: 0xdfe8ff, accent: 0xffffff },
   { id: 'ocean', name: 'Ocean', color: 0x2fc8c8, accent: 0xbff4f0 },
   { id: 'candy', name: 'Candy Swirl', color: 0xff6fb0, accent: 0x9fe3c0 },
+  { id: 'moonlight', name: 'Moonlight', color: 0xb8b0ff, accent: 0xeef0ff },
 ];
 
 export const TRAILS: Trail[] = [
@@ -45,6 +46,7 @@ export const TRAILS: Trail[] = [
   { id: 'superstar', name: 'Superstar', texture: 'fx-star', tints: [0xff5e5e, 0xffa24c, 0xffe14c, 0x6fe36f, 0x5ec8ff, 0xa77bff, 0xffffff] },
   { id: 'tides', name: 'Tide Bubbles', texture: 'fx-bubble', tints: [0x5ec8ff, 0x7fe0d6, 0xffffff] },
   { id: 'sprinkles', name: 'Sprinkles', texture: 'fx-dot', tints: [0xff7eb9, 0x9fe3c0, 0xfff0b3, 0xa77bff, 0x7ed6ff] },
+  { id: 'starfall', name: 'Starfall', texture: 'fx-star', tints: [0xffffff, 0xe0c8ff, 0xa8d4ff, 0xfff6a0] },
 ];
 
 export const ACCESSORIES: Accessory[] = [
@@ -55,6 +57,7 @@ export const ACCESSORIES: Accessory[] = [
   { id: 'tiara', name: 'Star Tiara', texture: 'acc-tiara', offsetX: 40, offsetY: -46 },
   { id: 'shellcrown', name: 'Sea Shell Crown', texture: 'acc-shellcrown', offsetX: 40, offsetY: -46 },
   { id: 'sugarcrown', name: 'Sugar Crown', texture: 'acc-sugarcrown', offsetX: 40, offsetY: -46 },
+  { id: 'mooncrown', name: 'Moon Crown', texture: 'acc-mooncrown', offsetX: 40, offsetY: -46 },
 ];
 
 export const findMane = (id: string) => MANES.find((m) => m.id === id) ?? MANES[0];

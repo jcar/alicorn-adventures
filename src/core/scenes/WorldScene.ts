@@ -169,8 +169,8 @@ export class WorldScene extends Phaser.Scene implements World {
     this.lanterns.build();
     this.secrets = new Secrets(this);
     this.secrets.build();
-    new Patterns(this, (id) => this.secrets.patternSolved(id)).build();
-    this.constellations = new Constellations(this, this.phases, (id) => this.secrets.patternSolved(id));
+    new Patterns(this, (id) => this.puzzleSolved(id)).build();
+    this.constellations = new Constellations(this, this.phases, (id) => this.puzzleSolved(id));
     this.constellations.build();
     this.registry.set('quest', null); // a new place: no leftover quest card from the last one
     this.buildPickups();
@@ -497,11 +497,21 @@ export class WorldScene extends Phaser.Scene implements World {
     return missing.length > 0 && missing.every((i) => i.left <= stillHidden(i.item));
   }
 
+  /** A pattern or constellation was solved: its chest appears, and a 'solve' quest moves along. */
+  private puzzleSolved(id: string) {
+    this.secrets.patternSolved(id);
+    const f = this.friend;
+    if (!f || f.helped || f.def.request.kind !== 'solve') return;
+    this.setQuest(f.def);
+    if (this.questDone()) this.time.delayedCall(1500, () => this.hint('solve-done'));
+  }
+
   /** Has she got everything the friend asked for? */
   private questDone() {
     const r = this.friend?.def.request;
     if (r?.kind === 'fetch') return this.questHave >= r.count;
     if (r?.kind === 'recipe') return r.items.every((i) => (this.questGot[i.item] ?? 0) >= i.count);
+    if (r?.kind === 'solve') return r.puzzles.every((id) => GameState.hasFlag(`puzzle:${id}`));
     return false;
   }
 
@@ -544,6 +554,7 @@ export class WorldScene extends Phaser.Scene implements World {
       frost: { tex: 'fx-dot', tint: [0xffffff, 0xe6f4ff], scale: 0.55 },
       beach: { tex: 'fx-dot', tint: [0xffffff, 0xfff0b3], scale: 0.4 },
       sweets: { tex: 'fx-heart', tint: [0xff9fd6, 0x9fe3c0, 0xfff0b3, 0xc79bff], scale: 0.45 },
+      moonbeam: { tex: 'fx-star', tint: [0xffffff, 0xd9c6ff, 0xbfeaff], scale: 0.4 },
     };
     if (this.level.mode === 'swim') return this.addWater();
     const a = cfg[this.level.theme.deco] ?? cfg.glade;
@@ -713,6 +724,7 @@ export class WorldScene extends Phaser.Scene implements World {
     const q: Quest | Quest[] | null =
       r.kind === 'recipe' ? r.items.map((i) => ({ texture: `item-${i.item}`, have: this.questGot[i.item] ?? 0, need: i.count }))
       : r.kind === 'fetch' ? { texture: `item-${r.item}`, have: this.questHave, need: r.count }
+      : r.kind === 'solve' ? { texture: 'gold-star', have: r.puzzles.filter((id) => GameState.hasFlag(`puzzle:${id}`)).length, need: r.puzzles.length }
         : r.kind === 'bloom' ? { texture: this.level.art?.flower ?? 'bloom-flower', have: this.questHave, need: this.blooms.length }
           : null;
     this.registry.set('quest', q);
@@ -835,7 +847,8 @@ export class WorldScene extends Phaser.Scene implements World {
         if (f.def.lines.hint) this.time.delayedCall(2200, () => this.hint(f.def.lines.hint!));
         if (r.kind === 'found') this.time.delayedCall(4200, () => this.helped(f));
       } else if (r.kind !== 'found' && now - this.lastTalk > TALK_GAP_MS) {
-        this.friendSay(f, (r.kind === 'fetch' || r.kind === 'recipe') && this.questHave > 0 ? f.def.lines.progress! : f.def.lines.ask);
+        const started = r.kind === 'solve' ? r.puzzles.some((id) => GameState.hasFlag(`puzzle:${id}`)) : (r.kind === 'fetch' || r.kind === 'recipe') && this.questHave > 0;
+        this.friendSay(f, started && f.def.lines.progress ? f.def.lines.progress : f.def.lines.ask);
       }
     }
     for (const gf of this.gladeFriends) {
