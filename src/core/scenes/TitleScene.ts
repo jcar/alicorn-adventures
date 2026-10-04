@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { TouchScene } from './TouchScene';
 import { Controls } from '../systems/Controls';
 import { GameState } from '../systems/GameState';
 import { addBackdrop } from '../ui/backdrop';
@@ -90,7 +91,7 @@ export class TitleScene extends Phaser.Scene {
     const hero = this.add.image(width / 2, 400, 'alicorn-pink').setScale(1.6);
     this.tweens.add({ targets: hero, y: 370, angle: -4, duration: 1200, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
     this.trail(hero);
-    const prompt = this.add.text(width / 2, 560, 'Press SPACE to play!', titleStyle(44)).setOrigin(0.5);
+    const prompt = this.add.text(width / 2, 560, TouchScene.touchFirst() ? 'Tap ★ to play!' : 'Press SPACE to play!', titleStyle(44)).setOrigin(0.5);
     this.tweens.add({ targets: prompt, scale: 1.06, duration: 700, yoyo: true, repeat: -1 });
     this.cards = [{ box: this.add.rectangle(0, 0, 1, 1).setVisible(false) }];
   }
@@ -124,7 +125,7 @@ export class TitleScene extends Phaser.Scene {
     const active = GameState.activeProfile();
     this.sel = Math.max(0, slots.findIndex((p) => p && p.id === active?.id));
     this.highlight();
-    const prompt = this.add.text(width / 2, 580, '← → pick a player · SPACE to play!', titleStyle(34)).setOrigin(0.5);
+    const prompt = this.add.text(width / 2, 580, TouchScene.touchFirst() ? 'Tap a player, then ★ to play!' : '← → pick a player · SPACE to play!', titleStyle(34)).setOrigin(0.5);
     this.tweens.add({ targets: prompt, scale: 1.04, duration: 700, yoyo: true, repeat: -1 });
   }
 

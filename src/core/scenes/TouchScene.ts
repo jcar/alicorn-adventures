@@ -26,7 +26,8 @@ export class TouchScene extends Phaser.Scene {
       { key: 'up', x: pad + 150, y: height - pad - 200, r: 46, label: '▲' },
       { key: 'space', x: width - pad - 90, y: height - pad - 150, r: 74, label: '★', caption: 'fly / OK' },
       { key: 'down', x: width - pad - 250, y: height - pad - 70, r: 60, label: '⬇', caption: 'do it' },
-      { key: 'esc', x: width - pad - 50, y: pad + 140, r: 40, label: '✕', caption: 'book' },
+      // Left side, under the stardust jar: the quest card can grow tall in the top-right corner.
+      { key: 'esc', x: pad + 50, y: 226, r: 40, label: '✕', caption: 'book' },
     ];
     for (const b of buttons) this.addButton(b);
 

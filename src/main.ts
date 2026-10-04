@@ -13,6 +13,8 @@ import { TouchScene } from './core/scenes/TouchScene';
 import { GrownUpsScene } from './core/scenes/GrownUpsScene';
 import { SkillsScene } from './core/scenes/SkillsScene';
 import { installDebug } from './core/debug/debug';
+import { registerServiceWorker } from './core/systems/offline';
+import { wakeAudio } from './core/audio/sfx';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -27,3 +29,12 @@ const game = new Phaser.Game({
 });
 
 installDebug(game);
+registerServiceWorker();
+
+// Coming back to the app (iPad lock screen, app switcher): wake the sound up again.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+  wakeAudio();
+  const ctx = (game.sound as Phaser.Sound.WebAudioSoundManager).context;
+  if (ctx && ctx.state !== 'running') void ctx.resume().catch(() => {});
+});

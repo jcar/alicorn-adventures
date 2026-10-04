@@ -8,7 +8,7 @@ const out = process.argv[2] ?? fs.mkdtempSync(path.join(os.tmpdir(), 'alicorn-to
 const h = await start(undefined, { touch: true });
 let ok = true;
 const check = (label, cond) => { console.log(`${cond ? '✓' : '✗'} ${label}`); ok &&= !!cond; };
-const BTN = { left: [94, 626], right: [254, 626], up: [174, 496], star: [1166, 546], down: [1006, 626], esc: [1206, 164] };
+const BTN = { left: [94, 626], right: [254, 626], up: [174, 496], star: [1166, 546], down: [1006, 626], esc: [74, 226] };
 const tap = async (b) => { await h.page.touchscreen.tap(...BTN[b]); await h.wait(450); };
 const hold = async (b, ms) => { await h.page.mouse.move(...BTN[b]); await h.page.mouse.down(); await h.wait(ms); await h.page.mouse.up(); };
 const active = (k) => h.page.evaluate((k) => window.game.scene.isActive(k), k);

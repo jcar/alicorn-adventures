@@ -21,6 +21,11 @@ export function audio(): { ctx: AudioContext; out: GainNode } | undefined {
   return { ctx, out: master! };
 }
 
+/** Wake the sound back up (iPads suspend it when the app goes to the background). */
+export function wakeAudio() {
+  if (ctx && ctx.state !== 'running') void ctx.resume().catch(() => {});
+}
+
 export function setMuted(m: boolean) {
   muted = m;
   if (master) master.gain.value = m ? 0 : 0.5;
