@@ -19,6 +19,10 @@ import { Barriers } from '../world/Barriers';
 import { Darkness } from '../world/Darkness';
 import { Tunnels } from '../world/Tunnels';
 import { Ceilings } from '../world/Ceilings';
+import { Phases } from '../world/Phases';
+import { Constellations } from '../world/Constellations';
+import { Lanterns } from '../world/Lanterns';
+import { StarFamily } from '../world/StarFamily';
 import { Secrets } from '../world/Secrets';
 import { Patterns } from '../world/Patterns';
 import { Favors } from '../world/Favors';
@@ -83,6 +87,10 @@ export class WorldScene extends Phaser.Scene implements World {
   private darkness!: Darkness;
   private tunnels!: Tunnels;
   private ceilings!: Ceilings;
+  private phases!: Phases;
+  private constellations!: Constellations;
+  private lanterns!: Lanterns;
+  private family?: StarFamily;
   private secrets!: Secrets;
   private favors?: Favors;
 
@@ -102,6 +110,7 @@ export class WorldScene extends Phaser.Scene implements World {
     this.overlayGfx = undefined;
     this.shownHints = new Map();
     this.friend = undefined;
+    this.family = undefined;
     this.gladeFriends = [];
     this.favors = undefined;
     this.questHave = 0;
@@ -154,9 +163,15 @@ export class WorldScene extends Phaser.Scene implements World {
     this.tunnels.build();
     this.ceilings = new Ceilings(this);
     this.ceilings.build();
+    this.phases = new Phases(this);
+    this.phases.build();
+    this.lanterns = new Lanterns(this);
+    this.lanterns.build();
     this.secrets = new Secrets(this);
     this.secrets.build();
     new Patterns(this, (id) => this.secrets.patternSolved(id)).build();
+    this.constellations = new Constellations(this, this.phases, (id) => this.secrets.patternSolved(id));
+    this.constellations.build();
     this.registry.set('quest', null); // a new place: no leftover quest card from the last one
     this.buildPickups();
     this.buildFriends();
@@ -265,6 +280,12 @@ export class WorldScene extends Phaser.Scene implements World {
     this.solvers.push({ x, solve, info });
   }
 
+  /** Debug kit: day or night here (and switch it). */
+  debugPhase(p?: 'day' | 'night') {
+    if (p) this.phases.set(p);
+    return this.phases.active ? this.phases.phase : 'no day and night here';
+  }
+
   /** Debug kit: what the nearest pattern is doing. */
   debugPatternInfo() {
     const near = [...this.solvers].sort((a, b) => Math.abs(a.x - this.player.x) - Math.abs(b.x - this.player.x))[0];
@@ -297,6 +318,8 @@ export class WorldScene extends Phaser.Scene implements World {
     for (const t of L.tunnels ?? []) box(t.x, 0, t.w, GROUND_Y - (t.gap ?? 80), 0xc79bff);
     for (const c of L.ceilings ?? []) box(c.x, 0, c.w, c.y, 0xff6fc8);
     for (const d of L.doors ?? []) box(d.x, 0, 72, WORLD_HEIGHT, 0xe0b0ff);
+    for (const d of L.lanternDoors ?? []) box(d.x, 0, 72, WORLD_HEIGHT, 0xffd23c);
+    for (const pw of L.phaseWalls ?? []) box(pw.x, 0, 64, WORLD_HEIGHT, pw.phase === 'day' ? 0xffe680 : 0x4a3f9a);
     for (const s of this.spots) {
       g.lineStyle(2, 0x34d058, 0.9).strokeRect(s.x - (s.reachX ?? 80), s.y - (s.reachY ?? 200), (s.reachX ?? 80) * 2, (s.reachY ?? 200) * 2);
       g.fillStyle(0x34d058, 1).fillCircle(s.x, s.y, 6);
@@ -489,6 +512,11 @@ export class WorldScene extends Phaser.Scene implements World {
 
   private buildFriends() {
     const L = this.level;
+    const pip = findFriend('pip');
+    if (L.id === 'glade' && pip && GameState.hasHelped('pip')) {
+      this.family = new StarFamily(this, pip.gladeX);
+      this.family.build();
+    }
     if (L.id === 'glade') {
       for (const def of FRIENDS.filter((f) => GameState.hasHelped(f.id)))
         this.gladeFriends.push(new Friend(this, def.gladeX, GROUND_Y + 4, def));
@@ -581,6 +609,9 @@ export class WorldScene extends Phaser.Scene implements World {
     this.barriers.update(time);
     this.tunnels.update();
     this.ceilings.update();
+    this.phases.update();
+    this.constellations.update();
+    this.lanterns.update();
     this.darkness.update();
     this.secrets.update();
     this.checkBouncers();
@@ -809,6 +840,8 @@ export class WorldScene extends Phaser.Scene implements World {
     }
     for (const gf of this.gladeFriends) {
       if (this.favors?.hasFavor(gf.def.id)) continue; // they'll talk when you press ⬇
+      // The very end: Pip's whole family comes home.
+      if (gf.def.id === 'pip' && this.family?.maybeReunite()) continue;
       // The big saga begins: once the Heart Crystal shines, Pip has news.
       if (gf.def.id === 'pip' && Math.abs(p.x - gf.x) < 160 && GameState.hasFlag('mystery:solved') && GameState.setFlag('saga:intro')) {
         this.friendSay(gf, 'pip-sky-family', 9000);

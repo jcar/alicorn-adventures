@@ -818,6 +818,26 @@
       "kind": "voice"
     },
     {
+      "key": "vo-constellation-day",
+      "url": "assets/audio/vo-constellation-day.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-constellation-look",
+      "url": "assets/audio/vo-constellation-look.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-constellation-oops",
+      "url": "assets/audio/vo-constellation-oops.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-constellation-win",
+      "url": "assets/audio/vo-constellation-win.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-coral-altar-0",
       "url": "assets/audio/vo-coral-altar-0.mp3",
       "kind": "voice"
@@ -955,6 +975,16 @@
     {
       "key": "vo-dark-glow",
       "url": "assets/audio/vo-dark-glow.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-day-wall-hint",
+      "url": "assets/audio/vo-day-wall-hint.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-dial-blocked",
+      "url": "assets/audio/vo-dial-blocked.mp3",
       "kind": "voice"
     },
     {
@@ -1178,6 +1208,16 @@
       "kind": "voice"
     },
     {
+      "key": "vo-lantern-not-yet",
+      "url": "assets/audio/vo-lantern-not-yet.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-lantern-right",
+      "url": "assets/audio/vo-lantern-right.mp3",
+      "kind": "voice"
+    },
+    {
       "key": "vo-last-one-hiding",
       "url": "assets/audio/vo-last-one-hiding.mp3",
       "kind": "voice"
@@ -1260,6 +1300,11 @@
     {
       "key": "vo-new-unlock",
       "url": "assets/audio/vo-new-unlock.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-night-wall-hint",
+      "url": "assets/audio/vo-night-wall-hint.mp3",
       "kind": "voice"
     },
     {
@@ -1380,6 +1425,21 @@
     {
       "key": "vo-pattern-win",
       "url": "assets/audio/vo-pattern-win.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-phase-blocked",
+      "url": "assets/audio/vo-phase-blocked.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-phase-day",
+      "url": "assets/audio/vo-phase-day.mp3",
+      "kind": "voice"
+    },
+    {
+      "key": "vo-phase-night",
+      "url": "assets/audio/vo-phase-night.mp3",
       "kind": "voice"
     },
     {

@@ -20,6 +20,8 @@ export interface Theme {
 
 export interface Point { x: number; y: number }
 
+export type LanternColor = 'red' | 'yellow' | 'green' | 'blue' | 'purple';
+
 /**
  * What a gate or favor asks:
  *   { skill: 'math', offset: -1 }  a question from the bank, one level easier than the player's
@@ -62,7 +64,7 @@ export interface LevelDef {
   /** Swim mode: the color of the water (default sea blue; Chocolate River is cocoa). */
   water?: number;
   /** Swap the shared pictures for this area's own (flower bud, flower, pattern crystal, the catch-you cloud). */
-  art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string; shrinker?: string; tunnel?: string; ceiling?: string };
+  art?: { bud?: string; flower?: string; crystal?: string; catcher?: string; bumper?: string; cave?: string; shrinker?: string; tunnel?: string; ceiling?: string; dayWall?: string; nightWall?: string; dial?: string; lantern?: string; lanternDoor?: string };
   /** Rock from the sky down to a low gap: only a tiny (Shrink) alicorn fits through. */
   tunnels?: { x: number; w: number; gap?: number }[];
   /** Shrink mushrooms: ↓ here to become tiny (needs Shrink). ↓ anywhere with room grows her back. */
@@ -73,6 +75,16 @@ export interface LevelDef {
   ice?: { id: string; x: number }[];
   /** Too dark to see without Glow. */
   darks?: { x: number; y: number; w: number; h: number }[];
+  /** Day and night (Moon Phase): which one the area starts in. Without this, there's no night here. */
+  phases?: { start: 'day' | 'night' };
+  /** Full-height walls that are only there by day (sunbeams) or only at night (shadows). */
+  phaseWalls?: { x: number; phase: 'day' | 'night' }[];
+  /** Moon dials: ↓ to switch between day and night (needs Moon Phase). */
+  moonDials?: { x: number }[];
+  /** Star pictures to draw: touch the stars in order. Night-only in an area with phases. Solving reveals the chest with the same id. */
+  constellations?: { id: string; x: number; stars: Point[] }[];
+  /** Doors that open when exactly the right lanterns are lit. `clue` is a dialogue line; `answer` lists the lit lanterns. */
+  lanternDoors?: { id: string; x: number; clue: string; lanterns: (Point & { color: LanternColor })[]; answer: number[] }[];
   /** Full-height doors that open with a story item found in the same area (`has:<item>`), like a spoon for the cocoa door. `need` is what she's told without it. */
   doors?: { id: string; x: number; item: string; need: string; texture?: string }[];
   /** Full-height stone gate with a number lock. */
@@ -151,7 +163,7 @@ export interface FriendDef {
 
 /** Every friend you help teaches a power. Each one opens up secrets everywhere. */
 export interface PowerDef {
-  id: 'sniff' | 'dash' | 'glow' | 'warmth' | 'jet' | 'song' | 'shrink' | 'fizz';
+  id: 'sniff' | 'dash' | 'glow' | 'warmth' | 'jet' | 'song' | 'shrink' | 'fizz' | 'moon';
   name: string;
   friend: string;
   icon: string;
@@ -271,6 +283,10 @@ export interface Saga {
   clueTitle: string;
   /** Pip's news in the Glade once this kingdom opens (after helping `after`): said once. */
   news?: { line: string; after: string };
+  /** Who comes home when this star is restored (Pip's family), and their color in the Glade sky. */
+  family?: { name: string; tint: number }[];
+  /** The last of Pip's family: with this one restored (and all the others), the family reunion happens at Home. */
+  finale?: boolean;
 }
 
 /** Home: the player's own place (the Glade). */

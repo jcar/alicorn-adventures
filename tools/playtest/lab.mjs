@@ -52,7 +52,7 @@ check('with Shrink she becomes tiny (and so does her body)', small.tiny && small
 await h.shot(out, 'lab-2-tiny');
 const groundY = small.y;
 await h.tap('Space', 4); await h.wait(200);
-check("tiny wings can't fly: she only hops", (await hero()).y > groundY - 160);
+const hopY = (await hero()).y; check(`tiny wings can't fly: she only hops (${groundY} → ${hopY})`, hopY > groundY - 160);
 await A(() => { window.game.scene.getScene('World').player.facing = 1; });
 await h.hold('ArrowRight', 1500);
 const inside = await hero();
@@ -99,6 +99,36 @@ check('without the key the door stays shut, and she is told why', !(await flags(
 await tp('key'); await h.wait(800);
 await tp('lab-door'); await h.tap('ArrowDown'); await h.wait(1200);
 check('with the key the door opens', (await flags()).includes('opened:lab-door'));
+
+// ---- day and night: a sun wall, moon dials
+await tp(5150); await h.wait(300);
+await A(() => { window.game.scene.getScene('World').player.facing = 1; });
+await h.hold('ArrowRight', 1200);
+check('by day the sun wall is in the way', (await hero()).x < 5300 && (await A(() => window.alicorn.phase())) === 'day');
+await tp(5050); await h.tap('ArrowDown'); await h.wait(900);
+check('without Moon Phase the dial does nothing', (await A(() => window.alicorn.phase())) === 'day');
+await A(() => window.alicorn.power('moon'));
+await h.tap('ArrowDown'); await h.wait(1200);
+check('with Moon Phase the dial makes it night', (await A(() => window.alicorn.phase())) === 'night');
+await h.shot(out, 'lab-6-night');
+await h.hold('ArrowRight', 1800);
+check('at night the sun wall is gone', (await hero()).x > 5400);
+
+// ---- a constellation: night-only stars, touched in order
+await tp(5900, 400); await h.wait(300);
+await tp(6100, 400); await h.wait(500); // the wrong one next (star 3 before star 2)
+check('a star out of order shows the shape again', /Not that star yet/.test(await hint()));
+await tp(6000, 280); await h.wait(300); await tp(6100, 400); await h.wait(300); await tp(6000, 500); await h.wait(1200);
+check('touching the stars in order draws the picture', (await flags()).includes('puzzle:lab-stars'));
+await h.shot(out, 'lab-7-constellation');
+
+// ---- a lantern door: "the red one and the one next to it, but not the blue one"
+const lantern = async (x) => { await tp(x, 520); await h.wait(300); await h.tap('ArrowDown'); await h.wait(400); };
+await lantern(6450); await lantern(6670);
+check('red and blue: not quite, and the door stays shut', !(await flags()).includes('opened:lab-lanterns') && /not quite/.test(await hint()));
+await lantern(6670); await lantern(6560);
+check('red and yellow (next to it): the lantern door opens', (await flags()).includes('opened:lab-lanterns'));
+await h.shot(out, 'lab-8-lanterns');
 
 console.log('screens in', out);
 console.log('ERRORS', h.errors.join('\n') || 'none');

@@ -159,6 +159,11 @@ export function installDebug(game: Phaser.Game) {
       return [...GameState.debugPowers];
     },
 
+    /** Day or night in this area; pass 'day' or 'night' to switch. */
+    phase(p?: 'day' | 'night') {
+      return world().debugPhase(p);
+    },
+
     /** Is the hero tiny? Is there room to grow? */
     hero() {
       const p = world().player;

@@ -15,6 +15,9 @@ export function powersNeeded(level: LevelDef, p: Hideable): Set<PowerId> {
   for (const i of level.ice ?? []) if (p.x >= i.x) need.add('warmth');
   for (const t of level.tunnels ?? []) if (p.x >= t.x) need.add('shrink');
   for (const c of level.ceilings ?? []) if (p.x >= c.x && p.x <= c.x + c.w && p.y < c.y) need.add('fizz');
+  // A wall that's there in the phase the area starts in needs Moon Phase to get past.
+  const start = level.phases?.start ?? 'day';
+  for (const w of level.phaseWalls ?? []) if (w.phase === start && p.x >= w.x) need.add('moon');
   for (const d of level.darks ?? [])
     if (p.x >= d.x && p.x <= d.x + d.w && p.y >= d.y && p.y <= d.y + d.h) need.add('glow');
   return need;

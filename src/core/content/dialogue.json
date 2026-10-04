@@ -174,5 +174,53 @@
   "shard-found": {
     "speaker": "narrator",
     "text": "You found a piece of a Guardian Star! The star altar is waiting for it."
+  },
+  "dial-blocked": {
+    "speaker": "narrator",
+    "text": "A moon dial! Nyx the night-moth can teach you to change day into night. Come back any time, there's no hurry!"
+  },
+  "phase-blocked": {
+    "speaker": "narrator",
+    "text": "A bonus is waiting past this wall. Nyx the night-moth can teach you to change day and night. Come back any time, there's no hurry!"
+  },
+  "phase-night": {
+    "speaker": "narrator",
+    "text": "Night time! The sun walls are gone, and the stars are out."
+  },
+  "phase-day": {
+    "speaker": "narrator",
+    "text": "Good morning! The shadow walls are gone."
+  },
+  "day-wall-hint": {
+    "speaker": "narrator",
+    "text": "This sun wall is only here in the daytime. Find a moon dial and make it night!"
+  },
+  "night-wall-hint": {
+    "speaker": "narrator",
+    "text": "This shadow wall is only here at night. Find a moon dial and make it day!"
+  },
+  "constellation-day": {
+    "speaker": "narrator",
+    "text": "The stars are sleeping. Come back at night to see them!"
+  },
+  "constellation-look": {
+    "speaker": "narrator",
+    "text": "Look at the shape! Now fly to the stars and touch them in order, starting with the bright one."
+  },
+  "constellation-oops": {
+    "speaker": "narrator",
+    "text": "Not that star yet. Look at the shape again, and find the bright one."
+  },
+  "constellation-win": {
+    "speaker": "narrator",
+    "text": "You drew the whole picture in the stars!"
+  },
+  "lantern-not-yet": {
+    "speaker": "narrator",
+    "text": "Hmm, not quite. Listen to the clue again, and change a lantern."
+  },
+  "lantern-right": {
+    "speaker": "narrator",
+    "text": "Exactly right! The lantern door opens."
   }
 }

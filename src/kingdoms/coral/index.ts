@@ -40,6 +40,7 @@ const coral: KingdomDef = {
       done: 'coral-altar-done',
     },
     clueTitle: 'Clues from Luma',
+    family: [{ name: 'Luma', tint: 0x7fe8ff }],
   },
 };
 

@@ -217,3 +217,34 @@ describe("hidden things aren't right next to something else ↓ does", () => {
       expect(close).toEqual([]);
     });
 });
+
+describe('day and night never trap her: a moon dial in every stretch between day/night walls', () => {
+  const levels = async () => {
+    const { LAB } = await import('../src/core/debug/lab');
+    return [...Object.values(LEVELS), LAB].filter((L) => (L.phaseWalls ?? []).length);
+  };
+  it('every stretch has a dial', async () => {
+    for (const L of await levels()) {
+      const walls = (L.phaseWalls ?? []).map((w) => w.x).sort((a, b) => a - b);
+      const edges = [0, ...walls, L.width];
+      for (let i = 0; i < edges.length - 1; i++) {
+        const [a, b] = [edges[i] + (i ? 64 : 0), edges[i + 1]];
+        expect((L.moonDials ?? []).some((d) => d.x > a && d.x < b), `${L.id}: a dial between ${a} and ${b}`).toBe(true);
+      }
+    }
+  });
+});
+
+describe('lantern doors make sense', () => {
+  it('answers point at real lanterns, and every clue is a line', async () => {
+    const { LAB } = await import('../src/core/debug/lab');
+    for (const L of [...Object.values(LEVELS), LAB])
+      for (const d of L.lanternDoors ?? []) {
+        expect(d.answer.length, d.id).toBeGreaterThan(0);
+        for (const i of d.answer) expect(d.lanterns[i], `${d.id} lantern ${i}`).toBeDefined();
+        expect(new Set(d.answer).size, d.id).toBe(d.answer.length);
+        if (L !== LAB) expect(dialogue[d.clue], `${d.id}: clue ${d.clue}`).toBeDefined(); // the lab's lines exist only at runtime
+        for (const l of d.lanterns) expect(l.x, `${d.id}: lanterns are in front of the door`).toBeLessThan(d.x - 100);
+      }
+  });
+});

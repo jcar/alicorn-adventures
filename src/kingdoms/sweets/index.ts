@@ -42,6 +42,7 @@ const sweets: KingdomDef = {
     },
     clueTitle: 'Clues from Sol',
     news: { line: 'pip-sol', after: 'tide' },
+    family: [{ name: 'Sol', tint: 0xffd36a }],
   },
 };
 
