@@ -4,7 +4,7 @@ import { FRIENDS } from '../src/core/content';
 import { FAVORS } from '../src/core/content';
 import { NUMBER_MAX, PUZZLES } from '../src/core/content';
 import { POWERS } from '../src/core/content';
-import { allClues, goldIds, powersNeeded, powersOnArrival, secretIds } from '../src/core/content';
+import { allClues, findables, goldIds, powersFirstPass, powersNeeded, powersOnArrival, reachableFirstPass, secretIds } from '../src/core/content';
 import { DIALOGUE as dialogue } from '../src/core/content';
 
 const lines = dialogue as Record<string, unknown>;
@@ -43,6 +43,38 @@ describe('every area can be finished with the powers you have when you arrive', 
       if (id !== 'frost') expect(needs.some((n) => n > 0), `${id}: something to come back for`).toBe(true);
     }
   });
+});
+
+describe('no forced backtracking: everything needed to finish a world is reachable on the first pass', () => {
+  for (const id of AREA_ORDER) {
+    it(id, () => {
+      const L = LEVELS[id];
+      const needed = [
+        ...(L.spark ? [{ what: 'spark', ...L.spark }] : []),
+        ...(L.notes ?? []).filter((n) => n.secret).map((n) => ({ what: n.id, ...n })),
+        ...L.items.map((it, i) => ({ what: `item-${i + 1}`, ...it })),
+        ...(L.storyItems ?? []).map((s) => ({ what: s.id, ...s })),
+      ];
+      const stuck = needed.filter((p) => !reachableFirstPass(L, p)).map((p) => `${p.what} @${p.x} needs ${[...powersNeeded(L, p)].join('+')}`);
+      expect(stuck, id).toEqual([]);
+    });
+  }
+});
+
+describe('every barrier she cannot pass yet really hides a bonus ("a bonus is hiding behind this…")', () => {
+  for (const id of AREA_ORDER) {
+    it(id, () => {
+      const L = LEVELS[id];
+      const have = powersFirstPass(L);
+      const things = findables(L);
+      const empty: string[] = [];
+      for (const b of [...(L.winds ?? []).map((w) => ({ x: w.x, power: w.power ?? 'dash' })), ...(L.walls ?? []), ...(L.ice ?? []).map((i) => ({ x: i.x, power: 'warmth' as const }))])
+        if (!have.has(b.power) && !things.some((t) => t.x >= b.x)) empty.push(`${b.power} @${b.x}`);
+      for (const d of L.darks ?? [])
+        if (!have.has('glow') && !things.some((t) => t.x >= d.x && t.x <= d.x + d.w)) empty.push(`dark @${d.x}`);
+      expect(empty, id).toEqual([]);
+    });
+  }
 });
 
 describe('secrets, puzzles and favors fit together', () => {

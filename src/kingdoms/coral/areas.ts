@@ -46,7 +46,7 @@ export const AREAS: Record<string, LevelDef> = {
     notes: [{ id: 'coral-note-1', x: 1300, y: G, line: 'coral-note-1', secret: true }],
     winds: [current(4450, 260)],
     walls: [glass('shallows-glass', 4950)],
-    spark: { x: 5060, y: 450 },
+    spark: { x: 4180, y: 300 },
     decos: [{ texture: 'deco-coral', x: 560 }, { texture: 'deco-seaweed', x: 1480 }, { texture: 'deco-coral', x: 3450 }, { texture: 'deco-seaweed', x: 4300 }],
   },
 

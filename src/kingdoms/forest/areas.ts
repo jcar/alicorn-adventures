@@ -43,7 +43,7 @@ export const AREAS: Record<string, LevelDef> = {
     stations: [],
     blocks: woodsTunnel.blocks,
     bumpers: woodsTunnel.bumpers,
-    golds: [woodsTunnel.gold, { id: 'woods-gold-2', x: 5020, y: 300 }],
+    golds: [woodsTunnel.gold, { id: 'woods-gold-2', x: 5300, y: 450 }],
     gates: [{ id: 'woods-gate', x: 3300, skill: 'math', offset: -1 }],
     patterns: [{ id: 'woods-pattern', x: 1850, crystals: [{ x: 1960, y: 500 }, { x: 2070, y: 440 }, { x: 2180, y: 500 }], offset: -1 }],
     chests: [
@@ -57,7 +57,7 @@ export const AREAS: Record<string, LevelDef> = {
     darks: [{ x: 3900, y: 250, w: 440, h: 470 }],
     winds: [{ x: 4700, w: 260 }],
     ice: [{ id: 'woods-ice', x: 5150 }],
-    spark: { x: 5300, y: 450 },
+    spark: { x: 4560, y: 330 },
   },
 
   meadow: {
@@ -101,16 +101,17 @@ export const AREAS: Record<string, LevelDef> = {
     chests: [
       { id: 'meadow-chest-pattern', x: 4150, y: G, reward: { stardust: 10 }, byPattern: 'meadow-pattern' },
       { id: 'meadow-chest-ice', x: 5700, y: G, reward: { stardust: 20 } },
+      { id: 'meadow-chest-cave', x: 2230, y: G, reward: { stardust: 15 } },
     ],
     notes: [
       { id: 'meadow-sign', x: 4500, y: G, line: 'meadow-sign' },
-      { id: 'note-3', x: 2380, y: G, line: 'note-3', secret: true },
-      { id: 'note-4', x: 5850, y: G, line: 'note-4', secret: true },
+      { id: 'note-3', x: 2650, y: G, line: 'note-3', secret: true },
+      { id: 'note-4', x: 4330, y: G, line: 'note-4', secret: true },
     ],
     darks: [{ x: 2050, y: 240, w: 380, h: 480 }],
     winds: [{ x: 5000, w: 260 }],
     ice: [{ id: 'meadow-ice', x: 5550 }],
-    spark: { x: 2230, y: 470 },
+    spark: { x: 3390, y: 400 },
   },
 
   waterfall: {
@@ -145,7 +146,7 @@ export const AREAS: Record<string, LevelDef> = {
     stations: [],
     blocks: waterfallTunnel.blocks,
     bumpers: waterfallTunnel.bumpers,
-    golds: [{ id: 'waterfall-gold-1', x: 5100, y: 200 }, waterfallTunnel.gold],
+    golds: [{ id: 'waterfall-gold-1', x: 5550, y: 300 }, waterfallTunnel.gold],
     gates: [{ id: 'waterfall-gate', x: 3330, skill: 'logic' }],
     patterns: [{
       id: 'waterfall-pattern', x: 2500,
@@ -164,7 +165,7 @@ export const AREAS: Record<string, LevelDef> = {
     darks: [{ x: 700, y: 240, w: 360, h: 480 }],
     winds: [{ x: 2100, w: 300 }, { x: 4800, w: 260 }],
     ice: [{ id: 'waterfall-ice', x: 5250 }],
-    spark: { x: 5500, y: 450 },
+    spark: { x: 4680, y: 300 },
     storyItems: [{ id: 'moon-shell', x: 4300, y: 580, hidden: true }],
     decos: [{ texture: 'deco-tall-crystal', x: 4300 }],
   },

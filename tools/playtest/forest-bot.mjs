@@ -1,6 +1,7 @@
-// The playthrough bot: a brand-new player finishes every kingdom (the Enchanted Forest, the Coral Kingdom),
-// every friend, power, gate, pattern, chest, clue, golden star, spark and favor,
-// ending with the Heart Crystal finale. It moves around with the debug kit but
+// The playthrough bot: a brand-new player finishes every kingdom, each in ONE
+// forward pass (friends, sparks, clues, favors and the finale, never going back
+// to an earlier area), then an optional bonus sweep for chests and golden stars
+// behind later powers. It moves around with the debug kit but
 // does every interaction with real key presses, and checks progress at each step.
 import { start } from './harness.mjs';
 import fs from 'node:fs';
@@ -31,7 +32,7 @@ await h.tap('Space'); await h.wait(2500);
 check('fresh player starts at Home', (await A(() => window.alicorn.state().level)) === 'glade');
 const areas = await A(() => window.alicorn.areas());
 
-// ---- pass 1: help each friend, in story order, with only the powers earned so far
+// Help an area's friend, with only the powers earned so far.
 async function helpFriend(area) {
   await go(area, 'start');
   const m = await markers(area);
@@ -52,46 +53,80 @@ async function helpFriend(area) {
   await h.wait(5500); // thanks, confetti, moving home
   return (await helped()).length > friendBefore;
 }
-for (const area of areas.filter((a) => a !== 'frost')) check(`helped the friend in ${area}`, await helpFriend(area));
-const powers = await A(() => ['sniff', 'dash', 'glow', 'warmth'].filter((p) => window.alicorn.game.scene.getScene('UI') && JSON.parse(localStorage.getItem('alicorn-adventures-profiles')).profiles[0].save.unlocked.includes(`power-${p}`)));
-check('learned all four powers', powers.length === 4);
+const powers = () => A(() => JSON.parse(localStorage.getItem('alicorn-adventures-profiles')).profiles[0].save.unlocked.filter((u) => u.startsWith('power-')));
+const flags = () => A(() => JSON.parse(localStorage.getItem('alicorn-adventures-profiles')).profiles[0].save.flags);
+const reach = (k) => A((k) => window.alicorn.canReach(k).ok, k);
 
-// ---- pass 2: every secret everywhere, now that every power is known
-async function sweep(area) {
+// Collect what's in an area. On the first pass she only goes where the powers
+// she has right now can take her (teleporting would skip walls, so ask first).
+async function sweep(area, firstPass) {
   await go(area, 'start');
   const m = await markers(area);
   const keys = Object.keys(m);
-  const of = (re) => keys.filter((k) => re.test(k));
-  for (const k of of(/-gate$/)) { await tp(k); await press(1); await h.wait(800); await solveIfOpen(); }
-  for (const k of of(/-pattern$/)) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1600); }
-  for (const k of of(/-ice|-glass$/)) { await tp(k); await press(2); await h.wait(600); }
-  for (const k of of(/-chest-|note-|-sign$/)) { await tp(k); await press(2); await h.wait(400); }
-  for (const k of of(/-gold-/)) { await tp(m[k].x, m[k].y); await h.wait(500); }
-  for (const k of of(/^spark$/)) { await tp(m[k].x, m[k].y); await h.wait(700); }
-  for (const k of of(/^moon-shell$/)) { await tp(m[k].x - 40); await press(1); await tp(m[k].x, m[k].y - 20); await h.wait(600); }
+  const of = async (re) => {
+    const ks = keys.filter((k) => re.test(k));
+    if (!firstPass) return ks;
+    const ok = [];
+    for (const k of ks) if (await reach(k)) ok.push(k);
+    return ok;
+  };
+  for (const k of await of(/-gate$/)) { await tp(k); await press(1); await h.wait(800); await solveIfOpen(); }
+  for (const k of await of(/-pattern$/)) { await tp(k); await A(() => window.alicorn.solve()); await h.wait(1600); }
+  for (const k of await of(/-ice|-glass$/)) { await tp(k); await press(2); await h.wait(600); }
+  for (const k of await of(/-chest-|note-|-sign$/)) { await tp(k); await press(2); await h.wait(400); }
+  for (const k of await of(/-gold-/)) { await tp(m[k].x, m[k].y); await h.wait(500); }
+  for (const k of await of(/^spark$/)) { await tp(m[k].x, m[k].y); await h.wait(700); }
+  for (const k of await of(/^moon-shell$/)) { await tp(m[k].x - 40); await press(1); await tp(m[k].x, m[k].y - 20); await h.wait(600); }
 }
-for (const area of areas) { await sweep(area); log(area, JSON.stringify(await progress())); }
 
-// ---- pass 3: find Pip in Frosty Peaks
-check('found Pip', await helpFriend('frost'));
-
-// ---- pass 4: every favor at Home
-await go('glade', 'start');
-for (let i = 0; i < 20; i++) {
-  const todo = await A(() => window.alicorn.favorsTodo());
-  if (!todo.length) break;
-  await tp(todo[0].x); await h.wait(300); await press(1);
-  await h.wait(3200); await solveIfOpen(); await h.wait(1500);
+async function doFavors() {
+  await go('glade', 'start');
+  for (let i = 0; i < 20; i++) {
+    const todo = await A(() => window.alicorn.favorsTodo());
+    if (!todo.length) break;
+    await tp(todo[0].x); await h.wait(300); await press(1);
+    await h.wait(3200); await solveIfOpen(); await h.wait(1500);
+  }
 }
-await h.shot(out, 'bot-1-favors-done');
 
-// ---- pass 5: the Heart Crystal finale, then each kingdom's Guardian Star
-await tp('crystal'); await press(1); await h.wait(4500);
-await h.shot(out, 'bot-2-finale');
-for (const hub of ['coral-hub']) {
-  await go(hub, 'altar'); await press(1); await h.wait(4500);
-  await h.shot(out, `bot-3-${hub}-altar`);
+// ---- each world in ONE forward pass: help the friend, then take everything
+// reachable with the powers known so far. Sparks, shards and clues must all be
+// found this way: finishing a world never means going back to an earlier area.
+const kingdoms = await A(() => window.alicorn.kingdoms());
+for (const k of kingdoms) {
+  for (const area of k.areas) {
+    // (Pip only comes out once the clues are read, so a friend may need the sweep first.)
+    let helpedHere = await helpFriend(area);
+    await sweep(area, true);
+    if (!helpedHere) helpedHere = await helpFriend(area);
+    check(`${k.id}: helped the friend in ${area}`, helpedHere);
+  }
+  const f = await flags();
+  const sparksLeft = k.areas.filter((a) => a !== 'frost' && !f.includes(`spark:${a}`));
+  const cluesLeft = (await Promise.all(k.areas.map(async (a) => Object.keys(await markers(a)).filter((id) => /note-\d+$/.test(id)))))
+    .flat().filter((id) => !f.includes(`secret:${id}`));
+  check(`${k.id}: every spark found in one forward pass ${sparksLeft.join(' ')}`, !sparksLeft.length);
+  check(`${k.id}: every clue found in one forward pass ${cluesLeft.join(' ')}`, !cluesLeft.length);
+  log(k.id, (await powers()).join(' '), JSON.stringify(await progress()));
+
+  // the world's finale, straight away
+  await doFavors();
+  if (k.id === 'forest') {
+    await tp('crystal'); await press(1); await h.wait(4500);
+    await h.shot(out, 'bot-1-forest-finale');
+    check('forest: the mystery is solved without going back', (await progress()).mystery === true);
+  }
+  if (k.saga) {
+    await go(k.hub, 'altar'); await press(1); await h.wait(4500);
+    await h.shot(out, `bot-2-${k.id}-altar`);
+    check(`${k.id}: Guardian Star restored without going back`, (await flags()).includes(`star:${k.id}`));
+  }
 }
+
+// ---- the optional bonus sweep: chests and golden stars behind later powers
+for (const area of areas) { await sweep(area, false); log(area, JSON.stringify(await progress())); }
+await doFavors();
+await h.shot(out, 'bot-3-all-done');
 
 const p = await progress();
 log(JSON.stringify(p));

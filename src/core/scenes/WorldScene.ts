@@ -4,7 +4,7 @@ import { imagesIn, lateImageKeys, loadAudio, queueBundle } from '../assets';
 import { makePlaceholders } from '../art/placeholders';
 import { FRIENDS, findFriend, type FriendDef } from '../content';
 import { powerFromFriend } from '../content';
-import { goldIds, secretIds } from '../content';
+import { findables, goldIds, powersNeeded, secretIds } from '../content';
 import { Alicorn } from '../objects/Alicorn';
 import { Friend } from '../objects/Friend';
 import { Controls } from '../systems/Controls';
@@ -366,8 +366,10 @@ export class WorldScene extends Phaser.Scene implements World {
     const g = golds.filter((id) => GameState.hasFlag(`gold:${id}`)).length;
     const spark = GameState.hasFlag(`spark:${target.id}`) ? '  💎' : '';
     const all = s === secrets.length && g === golds.length && spark;
-    this.add.text(x, GROUND_Y - 226, `✨${s}/${secrets.length}  ⭐${g}/${golds.length}${spark}`,
-      textStyle(20, { color: all ? '#ffe14c' : '#ffffff', stroke: '#2b1f4a', strokeThickness: 5 })).setOrigin(0.5, 1).setDepth(4);
+    // 🎁 in pink: all done for now, and what's left is a bonus for later powers.
+    const later = !all && onlyLaterBonuses(target);
+    this.add.text(x, GROUND_Y - 226, `✨${s}/${secrets.length}  ⭐${g}/${golds.length}${spark}${later ? '  🎁' : ''}`,
+      textStyle(20, { color: all ? '#ffe14c' : later ? '#ffc6ea' : '#ffffff', stroke: '#2b1f4a', strokeThickness: 5 })).setOrigin(0.5, 1).setDepth(4);
   }
 
   private buildPrompt() {
@@ -802,4 +804,13 @@ export class WorldScene extends Phaser.Scene implements World {
       },
     });
   }
+}
+
+/**
+ * Is everything left in an area an optional bonus behind a power she hasn't
+ * learned yet? Then the door says "done for now" instead of looking unfinished.
+ */
+function onlyLaterBonuses(level: LevelDef): boolean {
+  const left = findables(level).filter((f) => !GameState.hasFlag(f.flag));
+  return left.length > 0 && left.every((f) => [...powersNeeded(level, f)].some((pw) => !GameState.hasPower(pw)));
 }

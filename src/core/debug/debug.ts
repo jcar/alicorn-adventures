@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { AREA_ORDER, FAVORS, FRIENDS, KINGDOMS, LEVELS, goldIds, secretIds } from '../content';
+import { AREA_ORDER, FAVORS, FRIENDS, KINGDOMS, LEVELS, goldIds, powersNeeded, secretIds } from '../content';
 import { activeFavorFor } from '../world/Favors';
 import type { SkillId } from '../puzzles/engine';
 import { GameState } from '../systems/GameState';
@@ -20,6 +20,7 @@ import type { PuzzleScene } from '../scenes/PuzzleScene';
  *   alicorn.solve()                      solve the open puzzle, or a nearby pattern
  *   alicorn.overlay()                    show barriers, zones and secret spots
  *   alicorn.state()  alicorn.markers()   look around
+ *   alicorn.canReach('woods-gold-2')     could she get there with the powers she has now?
  */
 export function debugEnabled() {
   try {
@@ -138,6 +139,25 @@ export function installDebug(game: Phaser.Game) {
     /** Every area, in story order. */
     areas() {
       return AREA_ORDER;
+    },
+
+    /** Each kingdom's hub and areas, in story order. */
+    kingdoms() {
+      return KINGDOMS.map((k) => ({ id: k.id, hub: k.hub.id, areas: k.areaOrder, saga: !!k.saga }));
+    },
+
+    /**
+     * Could she reach this spot with the powers she has right now? (Walls,
+     * winds, ice, dark and hidden things, by the same rule the tests use.)
+     * Teleporting skips walls, so the bot asks this first to play fair.
+     */
+    canReach(where: string | number, y = 0) {
+      const level = world().level;
+      const spot = typeof where === 'number' ? { x: where, y } : markersFor(level)[where];
+      if (!spot) throw new Error(`No marker "${where}" here.`);
+      const need = [...powersNeeded(level, spot)];
+      const missing = need.filter((p) => !GameState.hasPower(p));
+      return missing.length ? { ok: false, missing } : { ok: true };
     },
 
     /** Friends at Home waiting to talk about a favor, and where they stand. */

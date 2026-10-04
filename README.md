@@ -57,9 +57,11 @@ Nothing hurts and nothing is timed. If she falls, a smiling cloud floats her bac
 | Sunken Ship | Captain Crab | Find his key in the dark cabin, behind a lock | — |
 | Moonlit Trench | Grandma Tide the whale | Wake her (currents on the way need Bubble Jet) | **Shell Song**: sings sea-glass walls open |
 
-Sea-glass walls in every Coral area hide treasure, golden stars and Luma's shards, so Shell Song sends her back through the sea. Bring all four shards to the altar to restore Luma. That unlocks the Sea Shell Crown and the Ocean mane. Marina and Otto have favors at Home too.
+Luma's four shards are all on the way: one in each area, reachable on the first visit. Bring them to the altar to restore Luma. That unlocks the Sea Shell Crown and the Ocean mane. Marina and Otto have favors at Home too.
 
-Each area's main path only needs powers she already has. Every area also hides secrets behind **later** powers, so going back to old places pays off.
+**One forward pass.** Everything needed to finish a world (each friend, every color spark or shard, every clue note, the finale) can be reached the first time through, with the powers she has by then. Her own area's friend counts, since she can turn around and walk back. She never has to go back to an earlier area.
+
+Winds, ice, sea-glass and dark caves that need a **later** power only guard optional bonuses (treasure chests and golden stars). The narrator says so ("A bonus is hiding behind this ice… come back any time, there's no hurry!"). When everything left in an area is that kind of bonus, its door counter turns pink with a 🎁: done for now.
 
 **Secrets.** Each door shows `✨ secrets found  ⭐ golden stars found`, plus 💎 once that area's color spark is found. Hidden things include:
 - Treasure chests
@@ -122,11 +124,11 @@ src/kingdoms/forest/  The Enchanted Forest pack: areas, friends, powers, puzzles
 tools/                Gemini asset pipeline, headless playtests
 ```
 
-**Adding a kingdom:** copy the shape of `src/kingdoms/coral/` (the best example). Make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds` (wind or water `current`, each needing a power), `ice`, `walls` (any power opens them, like sea-glass and Shell Song), `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. `mode: 'swim'` makes an area underwater, and `art` swaps the shared flower, crystal, bumper or catch-you-cloud pictures for the area's own. A kingdom's `saga` gives its hub a Guardian Star altar (one shard per area). The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, and that every puzzle, favor and clue fits together.
+**Adding a kingdom:** copy the shape of `src/kingdoms/coral/` (the best example). Make `src/kingdoms/<id>/index.ts` default-export a `KingdomDef` (see `src/core/content/types.ts` and the forest pack). The registry finds it automatically. IDs (areas, friends, lines, puzzles, unlocks) must be unique across the whole game, and `tests/registry.test.ts` checks that. Levels can hold `winds` (wind or water `current`, each needing a power), `ice`, `walls` (any power opens them, like sea-glass and Shell Song), `darks`, `gates`, `patterns`, `chests`, `notes`, `golds`, `bumpers`, a `spark` and `storyItems`. `mode: 'swim'` makes an area underwater, and `art` swaps the shared flower, crystal, bumper or catch-you-cloud pictures for the area's own. A kingdom's `saga` gives its hub a Guardian Star altar (one shard per area). The tests in `tests/world.test.ts` check that every area can be finished with the powers she has on arrival, that sparks and clues need no backtracking, that every barrier she can't pass yet really hides a bonus, and that every puzzle, favor and clue fits together.
 
 ```bash
 npm test           # save/unlock logic plus data sanity checks (no dead ends)
 npm run playtest   # headless-browser playtests against the dev server (start it with npm run dev)
-npm run bot        # the playthrough bot: a new player finishes every kingdom (~15 min)
+npm run bot        # the playthrough bot: a new player finishes each kingdom in one forward pass, then sweeps up bonuses (~15 min)
 npm run build      # type-check and production build into dist/
 ```

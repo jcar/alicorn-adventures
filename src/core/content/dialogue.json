@@ -29,7 +29,7 @@
   },
   "wind-blocked": {
     "speaker": "narrator",
-    "text": "Whoosh! The wind is too strong. Fox can teach you to dash through it. Come back later!"
+    "text": "Whoosh! A bonus is waiting past this wind. Fox can teach you to dash through it. Come back any time, there's no hurry!"
   },
   "wind-dash": {
     "speaker": "narrator",
@@ -37,7 +37,7 @@
   },
   "ice-blocked": {
     "speaker": "narrator",
-    "text": "Brrr! This ice is too thick. Baby Dragon can teach you to melt it. Come back later!"
+    "text": "Brrr! A bonus is hiding behind this ice. Baby Dragon can teach you to melt it. Come back any time, there's no hurry!"
   },
   "ice-melt": {
     "speaker": "narrator",
@@ -45,7 +45,7 @@
   },
   "dark-blocked": {
     "speaker": "narrator",
-    "text": "It is too dark in here. Owl can teach you to glow. Come back later!"
+    "text": "It is too dark in here, but a bonus is hiding inside. Owl can teach you to glow. Come back any time, there's no hurry!"
   },
   "dark-glow": {
     "speaker": "narrator",
@@ -117,7 +117,7 @@
   },
   "current-blocked": {
     "speaker": "narrator",
-    "text": "Whoosh! This water current is too strong. Marina the sea pony can teach you to jet through it. Come back later!"
+    "text": "Whoosh! A bonus is waiting past this current. Marina the sea pony can teach you to jet through it. Come back any time, there's no hurry!"
   },
   "current-dash": {
     "speaker": "narrator",
