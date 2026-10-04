@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const out = fs.mkdtempSync(path.join(os.tmpdir(), 'alicorn-backup-'));
 const h = await start(baseSave({ stardust: 412, friendsHelped: ['bunny', 'fox', 'owl', 'dragon', 'pip'], flags: ['mystery:solved', 'spark:frost'], favors: { lantern: 3 } }));
-await h.wait(3000); await h.page.mouse.click(640, 690); // empty space, just to focus the page
+await h.wait(3000); await h.page.mouse.click(640, 360);
 const [dl] = await Promise.all([h.page.waitForEvent('download'), h.tap('b')]);
 const file = path.join(out, dl.suggestedFilename());
 await dl.saveAs(file);
@@ -19,14 +19,8 @@ await h.page.evaluate((k) => {
   p.save.stardust = 1; p.save.name = 'Oops';
   localStorage.setItem(k, JSON.stringify(store));
 }, PROFILES_KEY);
-await h.page.reload(); await h.page.waitForFunction(() => window.game?.scene.isActive('Title'), null, { timeout: 20000 }); await h.wait(1000); await h.page.mouse.click(640, 690); // empty space, just to focus the page
-// Headless Chrome occasionally ignores the first file-picker request; try a few times.
-let chooser;
-for (let i = 0; i < 3 && !chooser; i++) {
-  await h.page.mouse.click(640, 690);
-  [chooser] = await Promise.all([h.page.waitForEvent('filechooser', { timeout: 6000 }).catch(() => undefined), h.tap('l')]);
-}
-if (!chooser) throw new Error('L never opened the file picker');
+await h.page.reload(); await h.wait(3000); await h.page.mouse.click(640, 360);
+const [chooser] = await Promise.all([h.page.waitForEvent('filechooser'), h.tap('l')]);
 await chooser.setFiles(file);
 await h.wait(2500);
 const after = { save: await h.save(), kept: await h.page.evaluate(() => Object.keys(localStorage).some((k) => k.startsWith('alicorn-adventures-before-restore-'))) };

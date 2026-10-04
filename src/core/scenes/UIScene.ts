@@ -142,6 +142,9 @@ export class UIScene extends Phaser.Scene {
   }
 
   private showHint(text: string) {
+    // Narrower on tablets, so the hint sits between the on-screen buttons.
+    const touch = (this.scene.get('Touch') as unknown as { layer?: Phaser.GameObjects.Container })?.layer?.visible;
+    this.hintText.setWordWrapWidth(touch ? 540 : 900);
     this.hintText.setText(text);
     const g = this.hintBox.getData('bg') as Phaser.GameObjects.Graphics;
     const w = this.hintText.width + 60;

@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "assets": "node tools/generate-assets.mjs",
-    "playtest": "node tools/playtest/debugkit.mjs && node tools/playtest/backup.mjs && node tools/playtest/profiles.mjs && node tools/playtest/skymap.mjs && node tools/playtest/loading.mjs && node tools/playtest/grownups.mjs && node tools/playtest/puzzles.mjs && node tools/playtest/coral.mjs && node tools/playtest/hidden-quest.mjs",
+    "playtest": "node tools/playtest/debugkit.mjs && node tools/playtest/backup.mjs && node tools/playtest/profiles.mjs && node tools/playtest/skymap.mjs && node tools/playtest/loading.mjs && node tools/playtest/touch.mjs && node tools/playtest/grownups.mjs && node tools/playtest/puzzles.mjs && node tools/playtest/coral.mjs && node tools/playtest/hidden-quest.mjs",
     "bot": "node tools/playtest/forest-bot.mjs"
   },
   "dependencies": {
